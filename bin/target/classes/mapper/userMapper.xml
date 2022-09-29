@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.mycompany.demo_2.mapper.userMapper">
+    
+     
+    <select id="getAllUser" resultMap="result">
+        SELECT * FROM user_demo;
+    </select>
+     
+    <resultMap id = "result" type = "com.mycompany.demo_2.models.user">
+       <result property = "user" column = "usermame"/>
+       <result property = "pass" column = "pass"/>
+    </resultMap>
+</mapper>
+
