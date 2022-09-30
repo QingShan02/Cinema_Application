@@ -50,14 +50,14 @@ public class ChucVuDao {
         return list;
     }
 
-    public static void UpdateChucVu(String MaCV, String TenCV) throws SQLException {
+    public void Update(String MaCV, String TenCV) throws SQLException {
         PreparedStatement st = con.prepareStatement("update ChucVu set TenCV = ? where MaCV =?");
         st.setString(1, TenCV);
         st.setString(2, MaCV);
         st.executeUpdate();
     }
 
-    public static void DeleteChucVu(String MaCV) {
+    public void Delete(String MaCV) {
         try {
             PreparedStatement pt = con.prepareStatement("delete from ChucVu where MaCV = ?");
             pt.setString(1, MaCV);

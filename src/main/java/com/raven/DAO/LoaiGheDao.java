@@ -50,7 +50,7 @@ public class LoaiGheDao {
         return list;
     }
 
-    public static void UpdateLoaiGhe(String TenLoai, long PhuThu, int MaLoaiGhe) throws SQLException {
+    public void Update(String TenLoai, long PhuThu, int MaLoaiGhe) throws SQLException {
         PreparedStatement st = con.prepareStatement("update LoaiGhe set TenLoai = ?, PhuThu = ? where MaLoaiGhe =?");
         st.setString(1, TenLoai);
         st.setLong(2, PhuThu);
@@ -58,7 +58,7 @@ public class LoaiGheDao {
         st.executeUpdate();
     }
 
-    public static void DeleteLoaiGhe(int MaLoaiGhe) {
+    public void Delete(int MaLoaiGhe) {
         try {
             PreparedStatement pt = con.prepareStatement("delete from LoaiGhe where MaLoaiGhe = ?");
             pt.setInt(1, MaLoaiGhe);

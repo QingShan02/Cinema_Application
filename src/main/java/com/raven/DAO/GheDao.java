@@ -51,7 +51,7 @@ public class GheDao {
         return list;
     }
 
-    public static void UpdateGhe(String TenGhe, int MaLoai, String MaGhe) throws SQLException {
+    public void Update(String TenGhe, int MaLoai, String MaGhe) throws SQLException {
         PreparedStatement st = con.prepareStatement("update Phim set TenGhe = ?, MaLoai = ?  where MaGhe =?");
         st.setString(1, TenGhe);
         st.setInt(2, MaLoai);
@@ -59,7 +59,7 @@ public class GheDao {
         st.executeUpdate();
     }
 
-    public static void DeletePhim(String MaGhe) {
+    public void Delete(String MaGhe) {
         try {
             PreparedStatement pt = con.prepareStatement("delete from Ghe where MaGhe = ?");
             pt.setString(1, MaGhe);

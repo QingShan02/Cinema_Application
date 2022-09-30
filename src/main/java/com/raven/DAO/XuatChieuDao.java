@@ -50,7 +50,7 @@ public class XuatChieuDao {
         return list;
     }
 
-    public static void UpdateXuatChieu(int STT, String MaPhong, String MaPhim, double GiaXuatChieu, String Ngay) throws SQLException {
+    public void Update(int STT, String MaPhong, String MaPhim, double GiaXuatChieu, String Ngay) throws SQLException {
         PreparedStatement st = con.prepareStatement("update XuatChieu set STT = ?, MaPhong = ?, MaPhim = ?, GiaXuatChieu = ? where Ngay =?");
         st.setInt(1, STT);
         st.setString(2, MaPhong);
@@ -60,7 +60,7 @@ public class XuatChieuDao {
         st.executeUpdate();
     }
 
-    public static void DeleteXuatChieu(String Ngay) {
+    public void Delete(String Ngay) {
         try {
             PreparedStatement pt = con.prepareStatement("delete from XuatChieu where Ngay = ?");
             pt.setString(1, Ngay);

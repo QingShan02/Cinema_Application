@@ -50,18 +50,22 @@ public class VeDao {
         return list;
     }
 
-    public static void UpdateVe(double TongGiaVe, double ThueVAT, int MaKH, int MaCTGhe, String MaNV, int IdVe) throws SQLException {
-        PreparedStatement st = con.prepareStatement("update Ve set TongGiaVe = ?, ThueVAT = ?, MaKH = ?, MaCTGhe = ?, MaNV = ? where IdVe =?");
-        st.setDouble(1, TongGiaVe);
-        st.setDouble(2, ThueVAT);
-        st.setInt(3, MaKH);
-        st.setInt(4, MaCTGhe);
-        st.setString(5, MaNV);
-        st.setInt(6, IdVe);
-        st.executeUpdate();
+    public void Update(double TongGiaVe, double ThueVAT, int MaKH, int MaCTGhe, String MaNV, int IdVe) {
+        try {
+            PreparedStatement st = con.prepareStatement("update Ve set TongGiaVe = ?, ThueVAT = ?, MaKH = ?, MaCTGhe = ?, MaNV = ? where IdVe =?");
+            st.setDouble(1, TongGiaVe);
+            st.setDouble(2, ThueVAT);
+            st.setInt(3, MaKH);
+            st.setInt(4, MaCTGhe);
+            st.setString(5, MaNV);
+            st.setInt(6, IdVe);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(VeDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static void DeleteNhanVien(int IdVe) {
+    public void Delete(int IdVe) {
         try {
             PreparedStatement pt = con.prepareStatement("delete from Ve where IdVe = ?");
             pt.setInt(1, IdVe);
