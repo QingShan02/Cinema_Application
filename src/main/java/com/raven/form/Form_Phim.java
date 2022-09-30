@@ -4,8 +4,13 @@
  */
 package com.raven.form;
 
+import com.raven.DAO.PhimDao;
+import com.raven.model.Phim;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,14 +21,30 @@ public class Form_Phim extends javax.swing.JPanel {
     /**
      * Creates new form Form_Phim
      */
+    DefaultTableModel model;
+    PhimDao dao;
+    List<Phim> list = new ArrayList<>();
     public Form_Phim() {
         initComponents();
-        jTable1.getTableHeader().setOpaque(false);
-        jTable1.getTableHeader().setBackground(Color.white);
+        tblPhim.getTableHeader().setOpaque(false);
+        tblPhim.getTableHeader().setBackground(Color.white);
         Font font = new Font(Font.SANS_SERIF,  Font.BOLD, 15);
-        jTable1.getTableHeader().setFont(font);
+                Font font1 = new Font(Font.SANS_SERIF,  Font.ITALIC, 12);
+        tblPhim.setFont(font1);
+        tblPhim.getTableHeader().setFont(font);
+        dao = new PhimDao();
+        FillTable();
     }
+    public void FillTable(){
+        list.clear();
+        list = dao.Select();
+        model = (DefaultTableModel) tblPhim.getModel();
 
+        model.setRowCount(0);
+        list.stream().forEach(s->{
+            model.addRow(new Object[]{s.getMaPhim(),s.getTenPhim(),s.getDienVien(),s.getNamSX(),s.getDaoDien(),s.getThoiLuong()});
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,7 +55,7 @@ public class Form_Phim extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblPhim = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -60,7 +81,7 @@ public class Form_Phim extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPhim.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -71,9 +92,9 @@ public class Form_Phim extends javax.swing.JPanel {
                 "Mã Phim", "Tên Phim", "Diễn Viên", "Năm sản xuất", "Đạo diễn", "Thời lượng"
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        tblPhim.setGridColor(new java.awt.Color(255, 255, 255));
+        tblPhim.setShowGrid(true);
+        jScrollPane1.setViewportView(tblPhim);
 
         jLabel1.setText("Mã phim");
 
@@ -273,7 +294,6 @@ public class Form_Phim extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -282,5 +302,6 @@ public class Form_Phim extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTable tblPhim;
     // End of variables declaration//GEN-END:variables
 }

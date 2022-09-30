@@ -23,7 +23,7 @@ public class Phim {
    private String Hinh;
    private String DaoDien;
    private String QuocGia;
-   private int ThoiLuong;
+   private String ThoiLuong;
    private String MoTa;
    private String Traller;
 }

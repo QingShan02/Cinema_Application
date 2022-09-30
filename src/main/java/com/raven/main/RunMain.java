@@ -4,13 +4,17 @@
  */
 package com.raven.main;
 
+import com.raven.DAO.NhanVienDao;
+import java.util.Arrays;
+
+
 /**
  *
  * @author Daokh
  */
 public class RunMain {
     public static void main(String[] args) {
-        Main main = new Main();
-        main.show();
+        DangNhap dn = new DangNhap();
+        dn.show();
     }
 }

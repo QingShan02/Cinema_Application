@@ -23,4 +23,8 @@ public class NhanVien {
     private String NgaySinh;
     private String SoDT;
     private String MaCV;
+    @Override
+    public String toString(){
+        return "NhanVien{"+getMaNV()+","+getHoTen()+"}";
+    }
 }
