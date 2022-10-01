@@ -5,12 +5,14 @@
 package com.raven.DAO;
 
 import com.raven.model.PhongChieu;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,14 +53,14 @@ public class PhongDao {
         return list;
     }
 
-    public static void UpdatePhongChieu(String TenPhong, String MaPhong) throws SQLException {
+    public void Update(String TenPhong, String MaPhong) throws SQLException {
         PreparedStatement st = con.prepareStatement("update PhongChieu set TenPhong = ? where MaPhong =?");
         st.setString(1, TenPhong);
         st.setString(2, MaPhong);
         st.executeUpdate();
     }
 
-    public static void DeletePhongChieu(String MaPhong) {
+    public void Delete(String MaPhong) {
         try {
             PreparedStatement pt = con.prepareStatement("delete from PhongChieu where MaPhong = ?");
             pt.setString(1, MaPhong);
@@ -67,5 +69,20 @@ public class PhongDao {
             e.printStackTrace();
         }
     }
+    public List<Object[]> fillCard(){
+        List<Object[]> list = new ArrayList<>();
+        Object[] arr;
+        try {
+            pst = con.prepareCall("{ call fillcard(?)}");
+            pst.setDate(1, java.sql.Date.valueOf("2022-09-01"));
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Object[]{rs.getString("TenPhong"),rs.getInt("soGhe"),rs.getInt("soVe")});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
 
+        }
+        return list;
+    }
 }
