@@ -112,6 +112,7 @@ public class DangNhap extends javax.swing.JFrame {
         lblEmailSDT.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblEmailSDT.setText("Email hoặc số điện thoại ");
 
+        txtEmailSDT.setText("0123456778");
         txtEmailSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailSDTActionPerformed(evt);
@@ -129,6 +130,7 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
 
+        tkMK.setText("11111111");
         tkMK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tkMKActionPerformed(evt);
