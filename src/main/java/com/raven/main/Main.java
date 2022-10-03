@@ -6,6 +6,7 @@
 package com.raven.main;
 
 import com.raven.event.EventMenuSelected;
+import com.raven.form.Form_ChoNgoi;
 
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
@@ -24,12 +25,12 @@ public class Main extends javax.swing.JFrame {
     private Form_Home home;
 
     private Form_Phim form_phim;
-
+    private Form_ChoNgoi ChoNgoi;
     public Main() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
-
+        ChoNgoi = new Form_ChoNgoi();
         form_phim = new Form_Phim();
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
@@ -41,10 +42,9 @@ public class Main extends javax.swing.JFrame {
                 //                    setForm(form1);
                 //                } else if (index == 2) {
                 //                    setForm(form2);
-                //                } else if (index == 3) {
-                //                    setForm(form3);
-                //                }
-                else if (index == 4) {
+                else if (index == 3) {
+                    setForm(ChoNgoi);
+                } else if (index == 4) {
                     setForm(form_phim);
                 }
             }
@@ -89,7 +89,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE)
+                    .addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
                     .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelBorder1Layout.setVerticalGroup(
@@ -98,7 +98,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

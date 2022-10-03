@@ -5,6 +5,7 @@
 package com.raven.DAO;
 
 
+import com.raven.model.ChiTietGhe;
 import com.raven.model.Ghe;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,13 +38,13 @@ public class GheDao {
         }
     }
 
-    public List<Ghe> Select() {
-        List<Ghe> list = new ArrayList<>();
+    public List<ChiTietGhe> Select() {
+        List<ChiTietGhe> list = new ArrayList<>();
         try {
             st = con.createStatement();
-            rs = st.executeQuery("select * from Ghe");
+            rs = st.executeQuery("select MaPhong,TenGhe from ChiTietGhe join Ghe on Ghe.MaGhe=ChiTietGhe.MaGhe");
             while (rs.next()) {
-                list.add(new Ghe(rs.getString(1), rs.getString(2), rs.getInt(3)));
+                list.add(new ChiTietGhe(rs.getString(1), rs.getString(2)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GheDao.class.getName()).log(Level.SEVERE, null, ex);
