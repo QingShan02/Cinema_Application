@@ -127,12 +127,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbRemember" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="lblMK" min="-2" pref="190" max="-2" attributes="0"/>
                                   <Component id="txtEmailSDT" alignment="0" pref="263" max="32767" attributes="0"/>
                                   <Component id="lblEmailSDT" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
-                                  <Component id="tkMK" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtPass" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -151,9 +151,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblMK" min="-2" pref="27" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="tkMK" min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="txtPass" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbRemember" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="28" max="32767" attributes="0"/>
                   <Component id="btnDN" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -179,9 +179,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmailSDT">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="0123456778"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailSDTActionPerformed"/>
           </Events>
@@ -206,15 +203,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDNActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="tkMK">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="11111111"/>
-          </Properties>
+        <Component class="javax.swing.JPasswordField" name="txtPass">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tkMKActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPassActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="cbRemember">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="c9" green="ef" red="f2" type="rgb"/>
@@ -225,7 +219,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbRememberActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

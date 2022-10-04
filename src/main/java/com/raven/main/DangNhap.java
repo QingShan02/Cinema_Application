@@ -6,6 +6,11 @@ package com.raven.main;
 
 import com.raven.DAO.NhanVienDao;
 import com.raven.helper.ThongBao;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  *
@@ -24,6 +29,7 @@ public class DangNhap extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         dao = new NhanVienDao();
+        showTk();
     }
 
     /**
@@ -43,8 +49,8 @@ public class DangNhap extends javax.swing.JFrame {
         lblEmailSDT = new javax.swing.JLabel();
         txtEmailSDT = new javax.swing.JTextField();
         btnDN = new javax.swing.JButton();
-        tkMK = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        txtPass = new javax.swing.JPasswordField();
+        cbRemember = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -112,7 +118,6 @@ public class DangNhap extends javax.swing.JFrame {
         lblEmailSDT.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblEmailSDT.setText("Email hoặc số điện thoại ");
 
-        txtEmailSDT.setText("0123456778");
         txtEmailSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailSDTActionPerformed(evt);
@@ -130,19 +135,18 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
 
-        tkMK.setText("11111111");
-        tkMK.addActionListener(new java.awt.event.ActionListener() {
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tkMKActionPerformed(evt);
+                txtPassActionPerformed(evt);
             }
         });
 
-        jCheckBox1.setBackground(new java.awt.Color(242, 239, 201));
-        jCheckBox1.setText("Nhớ mật khẩu?");
-        jCheckBox1.setBorder(null);
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbRemember.setBackground(new java.awt.Color(242, 239, 201));
+        cbRemember.setText("Nhớ mật khẩu?");
+        cbRemember.setBorder(null);
+        cbRemember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                cbRememberActionPerformed(evt);
             }
         });
 
@@ -158,12 +162,12 @@ public class DangNhap extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(99, 99, 99)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
+                            .addComponent(cbRemember)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lblMK, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtEmailSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                                 .addComponent(lblEmailSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tkMK)))))
+                                .addComponent(txtPass)))))
                 .addContainerGap(132, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -176,9 +180,9 @@ public class DangNhap extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMK, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tkMK, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(cbRemember)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnDN, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
@@ -205,7 +209,7 @@ public class DangNhap extends javax.swing.JFrame {
     private void btnDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDNActionPerformed
         // TODO add your handling code here:
         String username= txtEmailSDT.getText();
-        String pass = tkMK.getText();
+        String pass = txtPass.getText();
         tb  = new ThongBao("",0);
         dao.Select().stream().forEach(s->{
             if(username.equalsIgnoreCase(s.getSoDT()) && pass.equalsIgnoreCase(s.getMatKhau())){
@@ -249,14 +253,47 @@ public class DangNhap extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void tkMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tkMKActionPerformed
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tkMKActionPerformed
+    }//GEN-LAST:event_txtPassActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void cbRememberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRememberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+                if(cbRemember.isSelected()){
+             savetk(txtEmailSDT.getText(),txtPass.getText());
+        }else{
+            savetk("","");
+        }
+           
+    }//GEN-LAST:event_cbRememberActionPerformed
 
+       public void savetk(String username,String pass) {
+        try ( FileOutputStream fout = new FileOutputStream("savetk.txt");  ObjectOutputStream oos = new ObjectOutputStream(fout);) {
+            oos.writeObject(username);
+            oos.writeObject(pass);
+        } catch (Exception e) {
+            System.out.println(e);
+        }        
+        
+    }
+        public void showTk() {
+        File f = new File("savetk.txt");
+        if(f.exists()){
+            try ( FileInputStream fin = new FileInputStream(f);  ObjectInputStream ois = new ObjectInputStream(fin);) {
+            
+            String username = (String) ois.readObject();
+            String pass = (String) ois.readObject();
+            txtEmailSDT.setText(username);
+            txtPass.setText(pass);
+            if(txtEmailSDT.getText().length() > 0){
+                cbRemember.setSelected(true);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -294,14 +331,14 @@ public class DangNhap extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDN;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox cbRemember;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblDN;
     private javax.swing.JLabel lblEmailSDT;
     private javax.swing.JLabel lblMK;
-    private javax.swing.JPasswordField tkMK;
     private javax.swing.JTextField txtEmailSDT;
+    private javax.swing.JPasswordField txtPass;
     // End of variables declaration//GEN-END:variables
 }
