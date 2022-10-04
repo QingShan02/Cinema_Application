@@ -43,6 +43,10 @@ public class Model_Card {
         this.description = description;
     }
 
+    public Model_Card(String values) {
+        this.values = values;
+    }
+    
     public Model_Card() {
     }
 

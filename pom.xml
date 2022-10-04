@@ -33,6 +33,11 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE150</version>
+        </dependency>
     </dependencies>
     <name>App</name>
 </project>

@@ -19,4 +19,11 @@ public class ChiTietGhe {
     private int MaCTGhe;
     private String MaPhong;
     private String MaGhe;
+    private String TenGhe;
+
+    public ChiTietGhe(String MaPhong, String TenGhe) {
+        this.MaPhong = MaPhong;
+        this.TenGhe = TenGhe;
+    }
+    
 }
