@@ -29,6 +29,8 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void init() {
+        System.out.println(listMenu1.getParent().getParent());
+        
         listMenu1.addItem(new Model_Menu("1", "Quản lý khách hàng", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("2", "Quản lý nhân viên", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("3", "Quản lý lịch chiếu", Model_Menu.MenuType.MENU));

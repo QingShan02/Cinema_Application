@@ -4,6 +4,8 @@
  */
 package com.raven.main;
 
+import com.raven.sendEmail.CheckMail;
+
 /**
  *
  * @author Ngoc Han
@@ -254,6 +256,8 @@ public class DangKy extends javax.swing.JFrame {
 
     private void btnDKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDKActionPerformed
         // TODO add your handling code here:
+        CheckMail chkMail = new CheckMail();
+        chkMail.setVisible(true);
     }//GEN-LAST:event_btnDKActionPerformed
 
     /**

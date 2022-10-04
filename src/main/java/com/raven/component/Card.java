@@ -1,6 +1,5 @@
 package com.raven.component;
 
-import com.raven.form.Form_ChoNgoi;
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
 import com.raven.main.DangNhap;
@@ -20,7 +19,7 @@ public class Card extends javax.swing.JPanel {
     public Color getColor1() {
         return color1;
     }
-    Form_ChoNgoi cn;
+    
     public void setColor1(Color color1) {
         this.color1 = color1;
     }
@@ -41,19 +40,6 @@ public class Card extends javax.swing.JPanel {
         setOpaque(false);
         color1 = Color.BLACK;
         color2 = Color.WHITE;
-        cn = new Form_ChoNgoi();
-    }
-    JPanel panel;
-
-    public Card(JPanel panel) {
-        this.panel = panel;
-        lbIcon = new JLabel();
-        lbTitle = new JLabel();
-        lbValues = new JLabel();
-        lbDescription = new JLabel();
-                color1 = Color.BLACK;
-        color2 = Color.WHITE;
-        cn = new Form_ChoNgoi();
     }
     
     public void setData(Model_Card data) {
@@ -122,16 +108,8 @@ public class Card extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-//        Form_Phim frm_phim = new Form_Phim();
-        setForm(cn);
     }//GEN-LAST:event_formMouseClicked
 
-    private void setForm(JComponent com) {
-        panel.removeAll();
-        panel.add(com);
-        panel.repaint();
-        panel.revalidate();
-    }
 @Override
 protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;

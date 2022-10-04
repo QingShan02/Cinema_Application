@@ -33,41 +33,25 @@ public class Form_Home extends javax.swing.JPanel {
         list = dao.fillCard();
         cn = new Form_ChoNgoi();
 //        list.stream().forEach(s->System.out.println(s[0]));
-//        card1.setData(new Model_Card( new ImageIcon("src/main/resources/icon/stock.png"), (String) list.get(0)[0], list.get(0)[1]+" số ghế",list.get(0)[2]+" số vé"));
-//        card3.setData(new Model_Card( new ImageIcon("src/main/resources/icon/profit.png"),"b", "$15000", "Increased by 25%"));
-//        card3.setData(new Model_Card( new ImageIcon("src/main/resources/icon/flag.png"), "c", "$300000", "Increased by 70%"));
         Color cl[] = new Color[]{Color.RED, Color.BLUE, Color.GRAY};;
         Card card = null;
         for (int i = 0; i <= list.size() - 1; i++) {
-            card = new Card(pn);
-//Check if configurations is good
+            card = new Card();
             panel1.add(card);
             card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) list.get(i)[0], list.get(i)[1] + " số ghế", list.get(i)[2] + " số vé"));
             card.setColor1(cl[i]);
-
-        }
-        }
-    
-    JPanel pn;
-
-    public Form_Home(JPanel pn) {
-        this.pn = pn;
-               dao = new PhongDao();
-        list = dao.fillCard();
-        cn = new Form_ChoNgoi();
-//        list.stream().forEach(s->System.out.println(s[0]));
-//        card1.setData(new Model_Card( new ImageIcon("src/main/resources/icon/stock.png"), (String) list.get(0)[0], list.get(0)[1]+" số ghế",list.get(0)[2]+" số vé"));
-//        card3.setData(new Model_Card( new ImageIcon("src/main/resources/icon/profit.png"),"b", "$15000", "Increased by 25%"));
-//        card3.setData(new Model_Card( new ImageIcon("src/main/resources/icon/flag.png"), "c", "$300000", "Increased by 70%"));
-        Color cl[] = new Color[]{Color.RED, Color.BLUE, Color.GRAY};;
-        Card card = null;
-        for (int i = 0; i <= list.size() - 1; i++) {
-            card = new Card(pn);
-//Check if configurations is good
-            panel1.add(card);
-            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) list.get(i)[0], list.get(i)[1] + " số ghế", list.get(i)[2] + " số vé"));
-            card.setColor1(cl[i]);
-
+            card.setColor2(Color.BLACK);
+//            System.out.println(card.getParent());
+            card.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    System.out.println(1);
+                    panel1.removeAll();
+                    panel1.add(cn);
+                    panel1.repaint();
+                    panel1.revalidate();
+                }
+            });
         }
     }
 
