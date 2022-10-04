@@ -8,12 +8,12 @@ package com.raven.form;
  *
  * @author TRA
  */
-public class From_Topping extends javax.swing.JPanel {
+public class Form_Topping extends javax.swing.JPanel {
 
     /**
      * Creates new form From_Topping
      */
-    public From_Topping() {
+    public Form_Topping() {
         initComponents();
     }
 

@@ -10,6 +10,7 @@ import com.raven.form.Form_ChoNgoi;
 
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
+import com.raven.form.Form_XacThuc;
 import java.awt.Color;
 import javax.swing.JComponent;
 
@@ -26,12 +27,14 @@ public class Main extends javax.swing.JFrame {
 
     private Form_Phim form_phim;
     private Form_ChoNgoi ChoNgoi;
+    private Form_XacThuc form_xacthuc;
     public Main() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
         ChoNgoi = new Form_ChoNgoi();
         form_phim = new Form_Phim();
+//        form_xacthuc = new Form_XacThuc();
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -47,6 +50,20 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 4) {
                     setForm(form_phim);
                 }
+//                else if (index == 5){
+//                    setForm(form_5);
+//                }else if (index ==6){
+//                    setForm(form_6);
+//                }else if (index==7){
+//                    setForm(form_7);
+//                }
+//                else if (index == 8){
+//                    setForm(form_8);
+//                }
+                else if (index==9){
+                    setForm(new Form_XacThuc());
+                }
+
             }
         });
         //  set when system open start with home form
@@ -76,6 +93,12 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        menu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuMouseClicked(evt);
+            }
+        });
 
         header2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
 
@@ -117,6 +140,10 @@ public class Main extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuMouseClicked
 
     /**
      * @param args the command line arguments

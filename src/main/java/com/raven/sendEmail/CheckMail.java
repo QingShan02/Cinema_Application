@@ -84,13 +84,13 @@ public class CheckMail extends javax.swing.JFrame {
 
     private void btnXacThucMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacThucMailActionPerformed
         // TODO add your handling code here:
-        if(txtXacThucMail.equals(email.maxt)) {
-            Form_Home frm_home = new Form_Home();
-            this.setVisible(false);
-            frm_home.setVisible(true);
-        } else {
-            //JOptionPane.showMessageDialog(rootPane, evt);
-        }
+//        if(txtXacThucMail.equals(email.maxt)) {
+//            Form_Home frm_home = new Form_Home();
+//            this.setVisible(false);
+//            frm_home.setVisible(true);
+//        } else {
+//            //JOptionPane.showMessageDialog(rootPane, evt);
+//        }
         
     }//GEN-LAST:event_btnXacThucMailActionPerformed
 
