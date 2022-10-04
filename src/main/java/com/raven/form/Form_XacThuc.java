@@ -4,7 +4,7 @@
  */
 package com.raven.form;
 
-import com.raven.SendEmail.Email;
+import com.raven.sendEmail.EmailMain;
 import java.awt.Color;
 
 /**
@@ -18,7 +18,7 @@ public class Form_XacThuc extends javax.swing.JPanel {
      */
     public Form_XacThuc() {
         initComponents();
-        Email.GuiEmail("");
+        EmailMain.GuiEmail("");
     }
 
 //    public boolean checkVailidate(int index) {

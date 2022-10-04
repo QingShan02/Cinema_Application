@@ -36,14 +36,14 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
   
     }
      public static void DoiMatKhau(){
-        com.raven.SendEmail.Email.GuiEmail("khaiminh0401@gmail.com");
+        com.raven.sendEmail.EmailMain.GuiEmail("khaiminh0401@gmail.com");
 
         String maXacThuc = JOptionPane.showInputDialog(null, "Nhập mã xác thực email");
 
         if (maXacThuc.equals("")) {
             JOptionPane.showMessageDialog(null, "Chưa nhập mã xác thực");
         } else {
-            if (maXacThuc.equals(com.raven.SendEmail.Email.maxt)) {
+            if (maXacThuc.equals(com.raven.sendEmail.EmailMain.maxt)) {
                 JOptionPane.showMessageDialog(null, "Đã nhập chính xác!");
                 Form_DoiMatKhau doimk = new Form_DoiMatKhau();
                 doimk.setVisible(true);
