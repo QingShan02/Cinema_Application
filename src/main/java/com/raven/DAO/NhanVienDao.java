@@ -25,7 +25,12 @@ public class NhanVienDao {
     static Statement st = null;
     static PreparedStatement pst = null;
     static ResultSet rs;
+    private static String SoDT;
 
+    public static void setSoDT(String SoDT){
+        NhanVienDao.SoDT = SoDT;
+        }
+    
     public void Insert(NhanVien nv) {
         try {
             pst = con.prepareStatement("insert into NhanVien values(?,?,?,?,?,?,?)");
@@ -71,5 +76,11 @@ public class NhanVienDao {
             e.printStackTrace();
         }
     }
+  public static void UpdateNhanVien(String MatKhau) throws SQLException {
 
+        PreparedStatement pt = con.prepareStatement("update NhanVien set MatKhau = ? where SoDT = '" + SoDT + "'");
+        pt.setString(1, MatKhau);
+        pt.executeUpdate();
+        System.out.println(SoDT);
+    }
 }

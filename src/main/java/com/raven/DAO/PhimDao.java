@@ -26,6 +26,10 @@ public class PhimDao {
     static PreparedStatement pst = null;
     static ResultSet rs;
 
+    public static void DeletePhim() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public void Insert(Phim p) {
         try {
             pst = con.prepareStatement("insert into Phim values(?,?,?,?,?,?,?,?,?,?)");
@@ -73,6 +77,19 @@ public class PhimDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static void InsertPhim(String MaPhim,String TenPhim,String DienVien,String NamSX,String DaoDien,String QuocGia,String ThoiLuong,String MoTa,String Hinh,String Traller) throws SQLException{
+        PreparedStatement p = con.prepareStatement("Insert into Phim values(?,?,?,?,?,?,?,?,?,?)");
+        p.setString(1,MaPhim);
+        p.setString(2, TenPhim);
+        p.setString(3, DienVien);
+        p.setString(4, NamSX);
+        p.setString(5, DaoDien);
+        p.setString(6, QuocGia);
+        p.setString(7, ThoiLuong);
+        p.setString(8, MoTa);
+        p.setString(9, Hinh);
+        p.setString(10, Traller);
     }
 
 }

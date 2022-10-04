@@ -64,6 +64,9 @@
       </Layout>
       <SubComponents>
         <Component class="com.raven.component.Menu" name="menu">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuMouseClicked"/>
+          </Events>
         </Component>
         <Component class="com.raven.component.Header" name="header2">
           <Properties>

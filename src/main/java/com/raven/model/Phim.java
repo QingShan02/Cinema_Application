@@ -16,14 +16,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Phim {
-   private String MaPhim;
-   private String TenPhim;
-   private String DienVien;
-   private String NamSX;
-   private String Hinh;
-   private String DaoDien;
-   private String QuocGia;
-   private String ThoiLuong;
-   private String MoTa;
-   private String Traller;
+
+    private String MaPhim;
+    private String TenPhim;
+    private String DienVien;
+    private String NamSX;
+    private String DaoDien;
+    private String QuocGia;
+    private String ThoiLuong;
+    private String MoTa;
+    private String Hinh;
+    private String Traller;
 }
