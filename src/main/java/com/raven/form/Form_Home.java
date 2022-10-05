@@ -3,6 +3,7 @@ package com.raven.form;
 import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
 import com.raven.component.Card;
+import com.raven.component.Menu;
 import com.raven.model.Model_Card;
 import com.raven.model.PhongChieu;
 import com.raven.model.StatusType;
@@ -53,6 +54,7 @@ public class Form_Home extends javax.swing.JPanel {
                 }
             });
         }
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -71,15 +73,15 @@ public class Form_Home extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(panel1)
+                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(247, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
