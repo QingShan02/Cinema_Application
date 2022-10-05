@@ -216,6 +216,7 @@ public class DangNhap extends javax.swing.JFrame {
                 tb  = new ThongBao("Đăng nhập thành công",0);
                 tb.show();
                 Main main = new Main();
+                NhanVienDao.setMaNV(s.getMaNV());
                 main.show();
                 this.dispose();
                 return;

@@ -61,7 +61,7 @@ public class Main extends javax.swing.JFrame {
 //                    setForm(form_8);
 //                }
                 else if (index==9){
-                    setForm(new Form_XacThuc());
+                    setForm(new Form_XacThuc(mainPanel));
                 }
 
             }

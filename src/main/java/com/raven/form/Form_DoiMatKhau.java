@@ -4,7 +4,6 @@
  */
 package com.raven.form;
 
-
 import com.raven.DAO.NhanVienDao;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -22,62 +21,43 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
     /**
      * Creates^ new form Form_QuenMatKhau
      */
-    
+//    public static boolean index = true;
     public Form_DoiMatKhau() {
         initComponents();
-        lblMat1.setIcon(new ImageIcon("src/com.raven.image/c.eye.png"));
-        lblMat4.setIcon(new ImageIcon("src/com.raven.image/o.eye.png"));
-        lblMat2.setIcon(new ImageIcon("src/com.raven.image/c.eye.png"));
-        lblMat3.setIcon(new ImageIcon("src/com.raven.image/o.eye.png"));
+//        lblMat1.setIcon(new ImageIcon("src/com.raven.image/c.eye.png"));
+//        lblMat4.setIcon(new ImageIcon("src/com.raven.image/o.eye.png"));
+//        lblMat2.setIcon(new ImageIcon("src/com.raven.image/c.eye.png"));
+//        lblMat3.setIcon(new ImageIcon("src/com.raven.image/o.eye.png"));
+//
+//        lblMat1.setVisible(false);
+//        lblMat2.setVisible(false);
 
-        lblMat1.setVisible(false);
-        lblMat2.setVisible(false);
-     
-  
     }
-     public static void DoiMatKhau(){
-        com.raven.sendEmail.EmailMain.GuiEmail("khaiminh0401@gmail.com");
-
-        String maXacThuc = JOptionPane.showInputDialog(null, "Nhập mã xác thực email");
-
-        if (maXacThuc.equals("")) {
-            JOptionPane.showMessageDialog(null, "Chưa nhập mã xác thực");
-        } else {
-            if (maXacThuc.equals(com.raven.sendEmail.EmailMain.maxt)) {
-                JOptionPane.showMessageDialog(null, "Đã nhập chính xác!");
-                Form_DoiMatKhau doimk = new Form_DoiMatKhau();
-                doimk.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Nhập không chính xác!");
-            }
-        }
-    }
-
 
     public boolean checkValidate(String MK, int index) {
         if (index == 1) {
             if (String.valueOf(txtNhapMatKhauMoi.getPassword()).length() == 0) {
+                lblNMKM.setText("Chưa nhập mật khẩu");
                 txtNhapMatKhauMoi.setBackground(Color.yellow);
-                lblMKM.setText("Chưa nhập mật khẩu");
                 return false;
             } else {
+                lblNMKM.setText("");
                 txtNhapMatKhauMoi.setBackground(Color.white);
-                lblMKM.setText("");
             }
         }
 
         if (index == 2) {
             if (String.valueOf(txtXacNhanMatKhau.getPassword()).length() == 0) {
-                txtXacNhanMatKhau.setBackground(Color.yellow);
                 lblXNMK.setText("Chưa nhập mật khẩu");
+                txtXacNhanMatKhau.setBackground(Color.yellow);
                 return false;
             } else if (!String.valueOf(txtXacNhanMatKhau.getPassword()).equals(String.valueOf(txtNhapMatKhauMoi.getPassword()))) {
-                txtXacNhanMatKhau.setBackground(Color.yellow);
                 lblXNMK.setText("Mật khẩu không khớp");
+                txtXacNhanMatKhau.setBackground(Color.yellow);
                 return false;
             } else {
-                txtXacNhanMatKhau.setBackground(Color.white);
                 lblXNMK.setText("");
+                txtXacNhanMatKhau.setBackground(Color.white);
             }
         }
         return true;
@@ -101,8 +81,8 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
         txtNhapMatKhauMoi = new javax.swing.JPasswordField();
         txtXacNhanMatKhau = new javax.swing.JPasswordField();
         btnOk = new javax.swing.JButton();
-        lblMKM = new javax.swing.JLabel();
         lblXNMK = new javax.swing.JLabel();
+        lblNMKM = new javax.swing.JLabel();
         lblMat1 = new javax.swing.JLabel();
         lblMat2 = new javax.swing.JLabel();
         lblMat3 = new javax.swing.JLabel();
@@ -172,6 +152,10 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
             }
         });
 
+        lblXNMK.setForeground(new java.awt.Color(0, 0, 204));
+
+        lblNMKM.setForeground(new java.awt.Color(0, 0, 204));
+
         lblMat1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblMat1MouseClicked(evt);
@@ -201,28 +185,29 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblXacNhanMatKhau)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblMKM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtXacNhanMatKhau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                    .addComponent(lblXacNhanMatKhau, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblMat1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblXNMK, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblNhapMatKhauMoi, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNhapMatKhauMoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(lblMat2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(btnOk)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(111, 111, 111)
+                                .addComponent(btnOk)))
+                        .addGap(129, 129, 129)
+                        .addComponent(lblMat1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblXNMK, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtXacNhanMatKhau, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblNhapMatKhauMoi)
+                                .addGap(0, 175, Short.MAX_VALUE))
+                            .addComponent(txtNhapMatKhauMoi, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNMKM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMat2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(363, Short.MAX_VALUE)
@@ -245,19 +230,22 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
                         .addComponent(txtNhapMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblMat2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblXNMK, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblXacNhanMatKhau)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtXacNhanMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblMat1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblNMKM, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblXacNhanMatKhau)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMKM, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnOk)
-                .addGap(14, 14, 14))
+                .addComponent(txtXacNhanMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addComponent(lblMat1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblXNMK, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(btnOk)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(47, 47, 47)
@@ -289,15 +277,22 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-        if (txtNhapMatKhauMoi.getText().equals(txtXacNhanMatKhau.getText())) {
-            try {
-                NhanVienDao.UpdateNhanVien(txtXacNhanMatKhau.getText());
-                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
-                this.setVisible(false);
-            } catch (SQLException ex) {
-                Logger.getLogger(Form_DoiMatKhau.class.getName()).log(Level.SEVERE, null, ex);
+        if (checkValidate(new String(txtNhapMatKhauMoi.getPassword()), 1) == false) {
+            txtNhapMatKhauMoi.requestFocus();
+            return;
+        }
+        if (checkValidate(new String(txtXacNhanMatKhau.getPassword()), 2) == false) {
+            txtXacNhanMatKhau.requestFocus();
+            return;
+        }
 
-            }
+        try {
+            NhanVienDao.UpdateNV(txtXacNhanMatKhau.getText());
+            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
+            this.setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(Form_DoiMatKhau.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }//GEN-LAST:event_btnOkActionPerformed
 
@@ -324,38 +319,38 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
 
     private void lblMat1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMat1MouseClicked
         // TODO add your handling code here:
-        txtXacNhanMatKhau.setEchoChar((char) 0);
-        lblMat1.setVisible(false);
-        lblMat1.setEnabled(false);
-        lblMat4.setVisible(true);
-        lblMat4.setEnabled(true);
+//        txtXacNhanMatKhau.setEchoChar((char) 0);
+//        lblMat1.setVisible(false);
+//        lblMat1.setEnabled(false);
+//        lblMat4.setVisible(true);
+//        lblMat4.setEnabled(true);
     }//GEN-LAST:event_lblMat1MouseClicked
 
     private void lblMat4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMat4MouseClicked
         // TODO add your handling code here:
-        txtXacNhanMatKhau.setEchoChar((char) 8226);
-        lblMat1.setVisible(true);
-        lblMat1.setEnabled(true);
-        lblMat4.setVisible(false);
-        lblMat4.setEnabled(false);
+//        txtXacNhanMatKhau.setEchoChar((char) 8226);
+//        lblMat1.setVisible(true);
+//        lblMat1.setEnabled(true);
+//        lblMat4.setVisible(false);
+//        lblMat4.setEnabled(false);
     }//GEN-LAST:event_lblMat4MouseClicked
 
     private void lblMat2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMat2MouseClicked
         // TODO add your handling code here:
-        txtXacNhanMatKhau.setEchoChar((char) 0);
-        lblMat2.setVisible(false);
-        lblMat2.setEnabled(false);
-        lblMat3.setVisible(true);
-        lblMat3.setEnabled(true);
+//        txtXacNhanMatKhau.setEchoChar((char) 0);
+//        lblMat2.setVisible(false);
+//        lblMat2.setEnabled(false);
+//        lblMat3.setVisible(true);
+//        lblMat3.setEnabled(true);
     }//GEN-LAST:event_lblMat2MouseClicked
 
     private void lblMat3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMat3MouseClicked
         // TODO add your handling code here:
-        txtXacNhanMatKhau.setEchoChar((char) 8226);
-        lblMat2.setVisible(true);
-        lblMat2.setEnabled(true);
-        lblMat3.setVisible(false);
-        lblMat3.setEnabled(false);
+//        txtXacNhanMatKhau.setEchoChar((char) 8226);
+//        lblMat2.setVisible(true);
+//        lblMat2.setEnabled(true);
+//        lblMat3.setVisible(false);
+//        lblMat3.setEnabled(false);
     }//GEN-LAST:event_lblMat3MouseClicked
 
     /**
@@ -398,11 +393,11 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblDoiMatKhau;
-    private javax.swing.JLabel lblMKM;
     private javax.swing.JLabel lblMat1;
     private javax.swing.JLabel lblMat2;
     private javax.swing.JLabel lblMat3;
     private javax.swing.JLabel lblMat4;
+    private javax.swing.JLabel lblNMKM;
     private javax.swing.JLabel lblNhapMatKhauMoi;
     private javax.swing.JLabel lblXNMK;
     private javax.swing.JLabel lblXacNhanMatKhau;

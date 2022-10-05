@@ -4,6 +4,7 @@
  */
 package com.raven.sendEmail;
 
+import com.raven.form.Form_DoiMatKhau;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -12,12 +13,14 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Daokh
  */
 public class EmailMain {
+
     public static String maxt = "";
 
     public static int RanDom() {
@@ -30,8 +33,8 @@ public class EmailMain {
     }
 
     public static void GuiEmail(String toEmail) {
-        final String username = "thanhson9112@gmail.com";
-        final String password = "oqboegyladaeyitm";
+        final String username = "phamthitra1507@gmail.com";
+        final String password = "jjyrklyiojwipjwk";
 //        final String ToEmail = XacNhanEmail.getEmail();
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -45,24 +48,26 @@ public class EmailMain {
                 return new PasswordAuthentication(username, password);
             }
         });
-
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(toEmail));
-            message.setRecipients(
-                    Message.RecipientType.TO,
-                    InternetAddress.parse(toEmail)
-            );
-            message.setSubject("QUẢN LÝ NHÀ TRỌ_ĐỔI MẬT KHẨU!");
-            message.setText("Ðây là mã xác thuc: " + RanDom() + "\n Vui lòng nhap de xac minh");
-
-            Transport.send(message);
-
-            System.out.println("Done");
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
+        
+            try {
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress("traptps21791@fpt.edu.vn"));
+                message.setRecipients(
+                        Message.RecipientType.TO,
+                        InternetAddress.parse("traptps21791@fpt.edu.vn")
+                );
+                message.setSubject("ĐỔI MẬT KHẨU!");
+                message.setText("Ðây là mã xác thuc: " + RanDom() + "\n Vui lòng nhap de xac minh");
+                
+                Transport.send(message);
+                
+                System.out.println("Done");
+                
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
         }
 
     }
-}
+
+

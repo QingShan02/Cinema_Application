@@ -6,6 +6,8 @@ package com.raven.form;
 
 import com.raven.sendEmail.EmailMain;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,24 +18,47 @@ public class Form_XacThuc extends javax.swing.JPanel {
     /**
      * Creates new form Form_XacThuc
      */
+    String maXacThuc;
     public Form_XacThuc() {
         initComponents();
         EmailMain.GuiEmail("");
     }
+    JPanel mainJPanel;
 
-//    public boolean checkVailidate(int index) {
-//        if(index == 1){
+    public Form_XacThuc(JPanel mainpJPanel) {
+        initComponents();
+        EmailMain.GuiEmail("");
+        this.mainJPanel = mainpJPanel;
+    }
+
+    public static void DoiMatKhau() {
+//        com.raven.sendEmail.EmailMain.GuiEmail("phamthitra1507@gmail.com");
+       
+//        String maXacThuc = JOptionPane.showInputDialog(null, "Nhập mã xác thực email");
+//
+//        if (maXacThuc.equals("")) {
+//            JOptionPane.showMessageDialog(null, "Chưa nhập mã xác thực");
+//        } else {
+//            if (maXacThuc.equals(com.raven.sendEmail.EmailMain.maxt)) {
+//                JOptionPane.showMessageDialog(null, "Đã nhập chính xác!");
+//                Form_DoiMatKhau doimk = new Form_DoiMatKhau();
+//                doimk.setVisible(true);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Nhập không chính xác!");
+//            }
+//        }
+
+    }
+//    public void checkVailidate() {
+//        
 //             if(String.valueOf(txtMaXacThuc).length()==0){
 //                 txtMaXacThuc.setBackground(Color.yellow);
 //                 lblMXT.setText("Chưa nhập mã xác thực");
-//                 return false;
+//                 
 //             }else{
 //                 txtMaXacThuc.setBackground(Color.white);
 //                 lblMaXacThuc.setText("");
 //             }
-//        }
-//       
-//        return false;
 //
 //    }
 
@@ -144,7 +169,12 @@ public class Form_XacThuc extends javax.swing.JPanel {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-      
+        mainJPanel.removeAll();
+        mainJPanel.add(new Form_DoiMatKhau());
+        mainJPanel.repaint();
+        mainJPanel.revalidate();
+        com.raven.sendEmail.EmailMain.GuiEmail(maXacThuc);
+//        DoiMatKhau();
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnOkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseClicked
