@@ -60,19 +60,19 @@ public class PhimDao {
             while (rs.next()) {
                 list.add(new Phim(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10)));
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
 
-    public void Update(Phim p)  {
+    public void Update(Phim p) {
         try {
-            PreparedStatement st = con.prepareStatement("update NhanVien set TenPhim = ?, DienVien = ?, NamSX = ?, Hinh = ?, DaoDien = ?, QuocGia = ?, ThoiLuong = ?, MoTa = ?, Traller = ? where MaPhim =?");
+            PreparedStatement st = con.prepareStatement("update Phim set TenPhim = ?, DienVien = ?, NamSX = ?, Hinh = ?, DaoDien = ?, QuocGia = ?, ThoiLuong = ?, MoTa = ?, Traller = ? where MaPhim =?");
             st.setString(1, p.getTenPhim());
             st.setString(2, p.getDienVien());
-            st.setString(3, p.getNamSX());
+            st.setInt(3, Integer.parseInt(p.getNamSX()));
             st.setString(4, p.getHinh());
             st.setString(5, p.getDaoDien());
             st.setString(6, p.getQuocGia());
@@ -101,7 +101,7 @@ public class PhimDao {
         p.setString(1, MaPhim);
         p.setString(2, TenPhim);
         p.setString(3, DienVien);
-        p.setString(4, NamSX);
+//        p.setInt(4, Integer.parseInt(p.getNamSX()));
         p.setString(5, DaoDien);
         p.setString(6, QuocGia);
         p.setString(7, ThoiLuong);
@@ -124,14 +124,15 @@ public class PhimDao {
         }
         return list;
     }
-    public List<NgayChieu> GioCuaPhim(String maphim, String ngay){
+
+    public List<NgayChieu> GioCuaPhim(String maphim, String ngay) {
         List<NgayChieu> list = new ArrayList<>();
         try {
             pst = con.prepareStatement("select GioBatDau from XuatChieu xc join NgayChieu n on n.STT = xc.STT and n.Ngay = xc.Ngay where maphim = ? and xc.ngay = ?");
             pst.setString(1, maphim);
             pst.setDate(2, java.sql.Date.valueOf(ngay));
             rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 list.add(new NgayChieu(rs.getString(1)));
             }
         } catch (SQLException ex) {
