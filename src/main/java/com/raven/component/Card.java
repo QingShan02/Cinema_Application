@@ -1,21 +1,46 @@
 package com.raven.component;
 
+import com.raven.DAO.PhimDao;
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
 import com.raven.main.DangNhap;
 import com.raven.main.Main;
 import com.raven.model.Model_Card;
+import com.raven.model.NgayChieu;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Card extends javax.swing.JPanel {
+    
+    private JButton btnGioChieu;
+    
+    public Card() {
+        initComponents();
+        setOpaque(false);
+        
+    }
+    
+    public Card(String tenPhim, String ngay, List<NgayChieu> gioChieu) {
+        initComponents();
+        lbTitle.setText(tenPhim);
+        lbValues.setText(ngay);
 
+        for (NgayChieu gc : gioChieu) {
+            btnGioChieu = new JButton();
+            btnGioChieu.setText(gc.getGioBatDau());
+            pnlGioChieu.add(btnGioChieu);
+        }
+        
+    }
+    
     public Color getColor1() {
         return color1;
     }
@@ -35,18 +60,20 @@ public class Card extends javax.swing.JPanel {
     private Color color1;
     private Color color2;
 
-    public Card() {
-        initComponents();
-        setOpaque(false);
-        color1 = Color.BLACK;
-        color2 = Color.WHITE;
-    }
-    
     public void setData(Model_Card data) {
         lbIcon.setIcon(data.getIcon());
         lbTitle.setText(data.getTitle());
         lbValues.setText(data.getValues());
-        lbDescription.setText(data.getDescription());
+        pnlGioChieu.removeAll();
+        data.getNc().stream().forEach(s->{
+            JButton btn = new JButton(s.getGioBatDau());
+            btn.setBackground(Color.GRAY);
+            pnlGioChieu.add(btn);
+            
+                    });
+        pnlGioChieu.repaint();
+        pnlGioChieu.revalidate();
+        //lbDescription.setText(data.getDescription());
     }
 
     @SuppressWarnings("unchecked")
@@ -56,7 +83,7 @@ public class Card extends javax.swing.JPanel {
         lbIcon = new javax.swing.JLabel();
         lbTitle = new javax.swing.JLabel();
         lbValues = new javax.swing.JLabel();
-        lbDescription = new javax.swing.JLabel();
+        pnlGioChieu = new javax.swing.JPanel();
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -74,9 +101,9 @@ public class Card extends javax.swing.JPanel {
         lbValues.setForeground(new java.awt.Color(255, 255, 255));
         lbValues.setText("Values");
 
-        lbDescription.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        lbDescription.setForeground(new java.awt.Color(255, 255, 255));
-        lbDescription.setText("Description");
+        pnlGioChieu.setBackground(new java.awt.Color(51, 51, 51));
+        pnlGioChieu.setForeground(new java.awt.Color(255, 255, 255));
+        pnlGioChieu.setLayout(new java.awt.GridLayout(1, 5));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,11 +112,11 @@ public class Card extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbDescription)
+                    .addComponent(pnlGioChieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbValues)
                     .addComponent(lbTitle)
                     .addComponent(lbIcon))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,9 +127,9 @@ public class Card extends javax.swing.JPanel {
                 .addComponent(lbTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbValues)
-                .addGap(18, 18, 18)
-                .addComponent(lbDescription)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(pnlGioChieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -124,9 +151,9 @@ protected void paintComponent(Graphics grphcs) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lbDescription;
     private javax.swing.JLabel lbIcon;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JLabel lbValues;
+    private javax.swing.JPanel pnlGioChieu;
     // End of variables declaration//GEN-END:variables
 }

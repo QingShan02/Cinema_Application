@@ -179,6 +179,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmailSDT">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0123546778"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailSDTActionPerformed"/>
           </Events>
@@ -204,6 +207,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtPass">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="11111111"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPassActionPerformed"/>
           </Events>

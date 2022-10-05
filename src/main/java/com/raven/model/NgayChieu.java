@@ -24,4 +24,8 @@ public class NgayChieu {
         this.GioBatDau = GioBatDau;
     }
     
+//    public NgayChieu(String maPhim) {
+//        
+//    }
+    
 }

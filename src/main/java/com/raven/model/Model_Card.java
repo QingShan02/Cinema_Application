@@ -1,5 +1,6 @@
 package com.raven.model;
 
+import java.util.List;
 import javax.swing.Icon;
 
 public class Model_Card {
@@ -35,16 +36,20 @@ public class Model_Card {
     public void setDescription(String description) {
         this.description = description;
     }
+List<NgayChieu> nc;
 
-    public Model_Card(Icon icon, String title, String values, String description) {
+    public List<NgayChieu> getNc() {
+        return nc;
+    }
+
+    public void setNc(List<NgayChieu> nc) {
+        this.nc = nc;
+    }
+    public Model_Card(Icon icon, String title, String values, List<NgayChieu> nc) {
         this.icon = icon;
         this.title = title;
         this.values = values;
-        this.description = description;
-    }
-
-    public Model_Card(String values) {
-        this.values = values;
+        this.nc = nc;
     }
     
     public Model_Card() {
