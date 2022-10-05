@@ -5,6 +5,8 @@ import com.raven.DAO.PhongDao;
 import com.raven.component.Card;
 import com.raven.component.Menu;
 import com.raven.model.Model_Card;
+import com.raven.model.NgayChieu;
+import com.raven.model.Phim;
 import com.raven.model.PhongChieu;
 import com.raven.model.StatusType;
 import com.raven.swing.ScrollBar;
@@ -27,32 +29,48 @@ public class Form_Home extends javax.swing.JPanel {
     PhongDao dao;
     List<Object[]> list;
     Form_ChoNgoi cn;
-
+    PhimDao daoPhim;
+    List<Phim> listPhim;
+    List<NgayChieu> listXC;
     public Form_Home() {
         initComponents();
-        dao = new PhongDao();
+//        dao = new PhongDao();
 //        list = dao.fillCard();
-//        cn = new Form_ChoNgoi();
-////        list.stream().forEach(s->System.out.println(s[0]));
+        daoPhim = new PhimDao();
+        listPhim = daoPhim.PhimTrongNgay("2022-09-01");
+        
+        
+        cn = new Form_ChoNgoi();
+//        list.stream().forEach(s->System.out.println(s[0]));
 //        Color cl[] = new Color[]{Color.RED, Color.BLUE, Color.GRAY};;
-//        Card card = null;
-//        for (int i = 0; i <= list.size() - 1; i++) {
-//            card = new Card();
-//            panel1.add(card);
+        Card card = null;
+        for (Phim phim : listPhim) {
+            
+            listXC = daoPhim.GioCuaPhim(phim.getMaPhim(), "2022-09-01");
+            
+            card = new Card();
+            panel1.add(card);
 //            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) list.get(i)[0], list.get(i)[1] + " số ghế", list.get(i)[2] + " số vé"));
 //            card.setColor1(cl[i]);
-//            card.setColor2(Color.BLACK);
-////            System.out.println(card.getParent());
-//            card.addMouseListener(new MouseAdapter() {
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-//                    System.out.println(1);
-//                    panel1.removeAll();
-//                    panel1.add(cn);
-//                    panel1.repaint();
-//                    panel1.revalidate();
-//                }
-//            });
+            //card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01", listXC.stream().forEach((var s) -> s.getNgay()));
+            card.setColor1(Color.BLACK);
+            card.setColor2(Color.BLACK);
+//            System.out.println(card.getParent());
+            card.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    System.out.println(1);
+                    panel1.removeAll();
+                    panel1.add(cn);
+                    panel1.repaint();
+                    panel1.revalidate();
+                }
+            });
+        }
+        
+//        for (Phim n : listPhim) {
+//            System.out.println(n);
+//            n.get
 //        }
         
     }
@@ -65,23 +83,23 @@ public class Form_Home extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        panel1.setLayout(new java.awt.GridLayout(1, 0, 1, 0));
+        panel1.setLayout(new javax.swing.BoxLayout(panel1, javax.swing.BoxLayout.PAGE_AXIS));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                .addContainerGap(339, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
