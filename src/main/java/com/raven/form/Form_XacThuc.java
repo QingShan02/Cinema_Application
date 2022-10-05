@@ -21,7 +21,7 @@ public class Form_XacThuc extends javax.swing.JPanel {
     String maXacThuc;
     public Form_XacThuc() {
         initComponents();
-        EmailMain.GuiEmail("");
+//        EmailMain.GuiEmail("");
     }
     JPanel mainJPanel;
 
