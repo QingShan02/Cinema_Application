@@ -39,7 +39,7 @@ public class Main extends javax.swing.JFrame {
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
-                if (index == 0) {
+                if (index == 0 ) {
                     setForm(home);
                 } //else if (index == 1) {
                 //                    setForm(form1);

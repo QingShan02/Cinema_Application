@@ -50,7 +50,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         List<ChiTietGhe> List = ListGhe.stream().filter(s -> s.getMaPhong().equalsIgnoreCase(ListPhong.get(cboPhong.getSelectedIndex()).getMaPhong())).limit(108).collect(Collectors.toList());
         for (ChiTietGhe s : List) {
             i++;
-            if (Character.compare(s.getTenGhe().charAt(0), 'D') == 0) {
+            if (Character.compare(s.getTenGhe().charAt(0), 'G') == 0) {
                 cl = Color.red;
             } else if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                 cl = Color.PINK;
@@ -64,7 +64,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                 public void mouseClicked(MouseEvent e) {
                    
                     if (e.getComponent().getBackground().equals(Color.GRAY)) {
-                        if (Character.compare(s.getTenGhe().charAt(0), 'D') == 0) {
+                        if (Character.compare(s.getTenGhe().charAt(0), 'G') == 0) {
                             e.getComponent().setBackground(Color.RED);
                         } else if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                             e.getComponent().setBackground(Color.PINK);
@@ -113,7 +113,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         Sodochongoi3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         Sodochongoi3.setFocusCycleRoot(true);
         Sodochongoi3.setPreferredSize(new java.awt.Dimension(3, 3));
-        Sodochongoi3.setLayout(new java.awt.GridLayout(9, 12, 1, 1));
+        Sodochongoi3.setLayout(new java.awt.GridLayout(8, 12, 1, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

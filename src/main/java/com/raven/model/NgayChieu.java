@@ -19,4 +19,9 @@ public class NgayChieu {
     private int Stt;
     private String Ngay;
     private String GioBatDau;
+
+    public NgayChieu(String GioBatDau) {
+        this.GioBatDau = GioBatDau;
+    }
+    
 }

@@ -4,7 +4,9 @@
  */
 package com.raven.DAO;
 
+import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,6 +50,7 @@ public class PhimDao {
             while (rs.next()) {
                 list.add(new Phim(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10)));
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,9 +81,10 @@ public class PhimDao {
             e.printStackTrace();
         }
     }
-    public static void InsertPhim(String MaPhim,String TenPhim,String DienVien,String NamSX,String DaoDien,String QuocGia,String ThoiLuong,String MoTa,String Hinh,String Traller) throws SQLException{
+
+    public static void InsertPhim(String MaPhim, String TenPhim, String DienVien, String NamSX, String DaoDien, String QuocGia, String ThoiLuong, String MoTa, String Hinh, String Traller) throws SQLException {
         PreparedStatement p = con.prepareStatement("Insert into Phim values(?,?,?,?,?,?,?,?,?,?)");
-        p.setString(1,MaPhim);
+        p.setString(1, MaPhim);
         p.setString(2, TenPhim);
         p.setString(3, DienVien);
         p.setString(4, NamSX);
@@ -92,4 +96,33 @@ public class PhimDao {
         p.setString(10, Traller);
     }
 
+    public List<Phim> PhimTrongNgay(String ngay) {
+        List<Phim> list = new ArrayList<>();
+        try {
+            pst = con.prepareStatement("select p.maphim,p.tenphim from XuatChieu xc join Phim p on p.maphim = xc.maphim where xc.ngay = ?;");
+            pst.setDate(1, java.sql.Date.valueOf(ngay));
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Phim(rs.getString(1), rs.getString(2)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    public List<NgayChieu> GioCuaPhim(String maphim, String ngay){
+        List<NgayChieu> list = new ArrayList<>();
+        try {
+            pst = con.prepareStatement("select GioBatDau from XuatChieu xc join NgayChieu n on n.STT = xc.STT and n.Ngay = xc.Ngay where maphim = ? and xc.ngay = ?");
+            pst.setString(1, maphim);
+            pst.setDate(2, java.sql.Date.valueOf(ngay));
+            rs = pst.executeQuery();
+            while(rs.next()){
+                list.add(new NgayChieu(rs.getString(1)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 }

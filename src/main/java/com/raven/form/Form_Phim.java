@@ -55,15 +55,15 @@ public class Form_Phim extends javax.swing.JPanel {
     }
 
     public void showDetails() {
-
-        txtMaPhim.setText(tblPhim.getValueAt(current, 0).toString());
-        txtTenPhim.setText(tblPhim.getValueAt(current, 1).toString());
-        txtDienVien.setText(tblPhim.getValueAt(current, 2).toString());
-        txtNamSX.setText(tblPhim.getValueAt(current, 3).toString());
-        txtDaoDien.setText(tblPhim.getValueAt(current, 5).toString());
-        txtQuocGia.setText(tblPhim.getValueAt(current, 6).toString());
-        txtThoiLuong.setText(tblPhim.getValueAt(current, 7).toString());
-        txtMoTa.setText(tblPhim.getValueAt(current, 8).toString());
+        Phim temp = list.get(current);
+        txtMaPhim.setText(temp.getMaPhim());
+        txtTenPhim.setText(temp.getTenPhim());
+        txtDienVien.setText(temp.getDienVien());
+        txtNamSX.setText(temp.getNamSX());
+        txtDaoDien.setText(temp.getDaoDien());
+        txtQuocGia.setText(temp.getQuocGia());
+        txtThoiLuong.setText(temp.getThoiLuong());
+        txtMoTa.setText(temp.getMoTa());
 
     }
 

@@ -1,6 +1,7 @@
 package com.raven.component;
 
 import com.raven.event.EventMenuSelected;
+import com.raven.form.Form_Home;
 import com.raven.model.Model_Menu;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -11,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Menu extends javax.swing.JPanel {
 
@@ -51,29 +53,34 @@ public class Menu extends javax.swing.JPanel {
     private void initComponents() {
 
         panelMoving = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        Riseofkingdom = new javax.swing.JLabel();
         listMenu1 = new com.raven.swing.ListMenu<>();
 
         panelMoving.setOpaque(false);
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logo2.png"))); // NOI18N
+        Riseofkingdom.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        Riseofkingdom.setForeground(new java.awt.Color(255, 255, 255));
+        Riseofkingdom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logo2.png"))); // NOI18N
+        Riseofkingdom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RiseofkingdomMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelMovingLayout = new javax.swing.GroupLayout(panelMoving);
         panelMoving.setLayout(panelMovingLayout);
         panelMovingLayout.setHorizontalGroup(
             panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMovingLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(55, 55, 55))
+            .addGroup(panelMovingLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(Riseofkingdom)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         panelMovingLayout.setVerticalGroup(
             panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMovingLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1)
+                .addComponent(Riseofkingdom)
                 .addContainerGap())
         );
 
@@ -92,6 +99,11 @@ public class Menu extends javax.swing.JPanel {
                 .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+    private Form_Home home;
+    private void RiseofkingdomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RiseofkingdomMouseClicked
+        home = new Form_Home();
+        
+    }//GEN-LAST:event_RiseofkingdomMouseClicked
 
     @Override
     protected void paintChildren(Graphics grphcs) {
@@ -123,9 +135,11 @@ public class Menu extends javax.swing.JPanel {
             }
         });
     }
-
+        
+    
+            
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel Riseofkingdom;
     private com.raven.swing.ListMenu<String> listMenu1;
     private javax.swing.JPanel panelMoving;
     // End of variables declaration//GEN-END:variables
