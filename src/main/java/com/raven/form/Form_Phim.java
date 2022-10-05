@@ -50,7 +50,7 @@ public class Form_Phim extends javax.swing.JPanel {
 
         model.setRowCount(0);
         list.stream().forEach(s -> {
-            model.addRow(new Object[]{s.getMaPhim(), s.getTenPhim(), s.getDienVien(), s.getNamSX(), s.getDaoDien(), s.getQuocGia(), s.getThoiLuong(), s.getMoTa()});
+            model.addRow(new Object[]{s.getMaPhim(), s.getTenPhim(), s.getDienVien(), s.getNamSX(),s.getHinh(), s.getDaoDien(), s.getQuocGia(), s.getThoiLuong(), s.getMoTa()});
         });
     }
 
@@ -223,7 +223,7 @@ public class Form_Phim extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Phim", "Tên Phim", "Diễn Viên", "Năm sản xuất", "Hình", "Đạo diễn", "Quốc gia", "Thời lượng", "Mo tả"
+                "Mã Phim", "Tên Phim", "Diễn Viên", "Năm sản xuất", "Hình", "Đạo diễn", "Quốc gia", "Thời lượng", "Mô tả"
             }
         ));
         tblPhim.setGridColor(new java.awt.Color(255, 255, 255));

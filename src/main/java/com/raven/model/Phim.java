@@ -21,7 +21,7 @@ public class Phim {
     private String TenPhim;
     private String DienVien;
     private String NamSX;
-        private String Hinh;
+    private String Hinh;
     private String DaoDien;
     private String QuocGia;
     private String ThoiLuong;
@@ -33,6 +33,4 @@ public class Phim {
         this.TenPhim = TenPhim;
     }
 
-  
-    
 }
