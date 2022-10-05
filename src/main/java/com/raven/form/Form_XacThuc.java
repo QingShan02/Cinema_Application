@@ -173,7 +173,7 @@ public class Form_XacThuc extends javax.swing.JPanel {
         mainJPanel.add(new Form_DoiMatKhau());
         mainJPanel.repaint();
         mainJPanel.revalidate();
-        com.raven.sendEmail.EmailMain.GuiEmail(maXacThuc);
+//        com.raven.sendEmail.EmailMain.GuiEmail(maXacThuc);
 //        DoiMatKhau();
     }//GEN-LAST:event_btnOkActionPerformed
 

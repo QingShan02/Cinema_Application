@@ -32,7 +32,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Component id="panel1" min="-2" pref="331" max="-2" attributes="0"/>
+              <Component id="panel1" pref="331" max="32767" attributes="0"/>
               <EmptySpace pref="247" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -41,7 +41,11 @@
   <SubComponents>
     <Container class="javax.swing.JLayeredPane" name="panel1">
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+        <Property name="columns" type="int" value="0"/>
+        <Property name="horizontalGap" type="int" value="1"/>
+        <Property name="rows" type="int" value="1"/>
+      </Layout>
     </Container>
   </SubComponents>
 </Form>

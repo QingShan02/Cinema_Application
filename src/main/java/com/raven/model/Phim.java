@@ -27,4 +27,12 @@ public class Phim {
     private String MoTa;
     private String Hinh;
     private String Traller;
+
+    public Phim(String MaPhim, String TenPhim) {
+        this.MaPhim = MaPhim;
+        this.TenPhim = TenPhim;
+    }
+
+  
+    
 }
