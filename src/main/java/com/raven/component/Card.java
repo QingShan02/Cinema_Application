@@ -6,11 +6,13 @@ import com.raven.form.Form_Phim;
 import com.raven.main.DangNhap;
 import com.raven.main.Main;
 import com.raven.model.Model_Card;
+import com.raven.model.NgayChieu;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -23,18 +25,17 @@ public class Card extends javax.swing.JPanel {
     public Card() {
         initComponents();
         setOpaque(false);
-        color1 = Color.BLACK;
-        color2 = Color.WHITE;
+        
     }
     
-    public Card(String tenPhim, String ngay, String gioChieu[]) {
+    public Card(String tenPhim, String ngay, List<NgayChieu> gioChieu) {
         initComponents();
         lbTitle.setText(tenPhim);
         lbValues.setText(ngay);
 
-        for (String gc : gioChieu) {
+        for (NgayChieu gc : gioChieu) {
             btnGioChieu = new JButton();
-            btnGioChieu.setText(gc);
+            btnGioChieu.setText(gc.getGioBatDau());
             pnlGioChieu.add(btnGioChieu);
         }
         
@@ -63,6 +64,15 @@ public class Card extends javax.swing.JPanel {
         lbIcon.setIcon(data.getIcon());
         lbTitle.setText(data.getTitle());
         lbValues.setText(data.getValues());
+        pnlGioChieu.removeAll();
+        data.getNc().stream().forEach(s->{
+            JButton btn = new JButton(s.getGioBatDau());
+            btn.setBackground(Color.GRAY);
+            pnlGioChieu.add(btn);
+            
+                    });
+        pnlGioChieu.repaint();
+        pnlGioChieu.revalidate();
         //lbDescription.setText(data.getDescription());
     }
 
@@ -91,16 +101,9 @@ public class Card extends javax.swing.JPanel {
         lbValues.setForeground(new java.awt.Color(255, 255, 255));
         lbValues.setText("Values");
 
-        javax.swing.GroupLayout pnlGioChieuLayout = new javax.swing.GroupLayout(pnlGioChieu);
-        pnlGioChieu.setLayout(pnlGioChieuLayout);
-        pnlGioChieuLayout.setHorizontalGroup(
-            pnlGioChieuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnlGioChieuLayout.setVerticalGroup(
-            pnlGioChieuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
+        pnlGioChieu.setBackground(new java.awt.Color(51, 51, 51));
+        pnlGioChieu.setForeground(new java.awt.Color(255, 255, 255));
+        pnlGioChieu.setLayout(new java.awt.GridLayout(1, 5));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,11 +112,11 @@ public class Card extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlGioChieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbValues)
                     .addComponent(lbTitle)
                     .addComponent(lbIcon))
                 .addContainerGap(294, Short.MAX_VALUE))
-            .addComponent(pnlGioChieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +127,7 @@ public class Card extends javax.swing.JPanel {
                 .addComponent(lbTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbValues)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(pnlGioChieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );

@@ -49,12 +49,13 @@ public class Form_Home extends javax.swing.JPanel {
             listXC = daoPhim.GioCuaPhim(phim.getMaPhim(), "2022-09-01");
             
             card = new Card();
-            panel1.add(card);
 //            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) list.get(i)[0], list.get(i)[1] + " số ghế", list.get(i)[2] + " số vé"));
 //            card.setColor1(cl[i]);
-            //card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01", listXC.stream().forEach((var s) -> s.getNgay()));
+    card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01",listXC));
             card.setColor1(Color.BLACK);
             card.setColor2(Color.BLACK);
+                        panel1.add(card);
+
 //            System.out.println(card.getParent());
             card.addMouseListener(new MouseAdapter() {
                 @Override
@@ -91,7 +92,7 @@ public class Form_Home extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
