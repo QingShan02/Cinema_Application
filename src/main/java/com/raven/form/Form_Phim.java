@@ -29,12 +29,12 @@ public class Form_Phim extends javax.swing.JPanel {
     PhimDao dao;
     List<Phim> list = new ArrayList<>();
     int current;
- 
-
+    
     public Form_Phim() {
         initComponents();
         tblPhim.getTableHeader().setOpaque(false);
-        tblPhim.getTableHeader().setBackground(Color.white);
+        tblPhim.getTableHeader().setBackground(Color.RED);
+        tblPhim.getTableHeader().setForeground(Color.white);
         Font font = new Font(Font.SANS_SERIF, Font.BOLD, 15);
         Font font1 = new Font(Font.SANS_SERIF, Font.ITALIC, 12);
         tblPhim.setFont(font1);
@@ -42,18 +42,18 @@ public class Form_Phim extends javax.swing.JPanel {
         dao = new PhimDao();
         FillTable();
     }
-
+    
     public void FillTable() {
         list.clear();
         list = dao.Select();
         model = (DefaultTableModel) tblPhim.getModel();
-
+        
         model.setRowCount(0);
         list.stream().forEach(s -> {
-            model.addRow(new Object[]{s.getMaPhim(), s.getTenPhim(), s.getDienVien(), s.getNamSX(),s.getHinh(), s.getDaoDien(), s.getQuocGia(), s.getThoiLuong(), s.getMoTa()});
+            model.addRow(new Object[]{s.getMaPhim(), s.getTenPhim(), s.getDienVien(), s.getNamSX(), s.getHinh(), s.getDaoDien(), s.getQuocGia(), s.getThoiLuong(), s.getMoTa()});
         });
     }
-
+    
     public void showDetails() {
         Phim temp = list.get(current);
         txtMaPhim.setText(temp.getMaPhim());
@@ -64,10 +64,10 @@ public class Form_Phim extends javax.swing.JPanel {
         txtQuocGia.setText(temp.getQuocGia());
         txtThoiLuong.setText(temp.getThoiLuong());
         txtMoTa.setText(temp.getMoTa());
-
+        
     }
-
-    public boolean checkValidate(String Phim, int index) {
+    
+    public boolean checkValidate(int index) {
         if (index == 1) {
             if (txtMaPhim.getText().length() == 0) {
                 txtMaPhim.setBackground(Color.yellow);
@@ -88,13 +88,13 @@ public class Form_Phim extends javax.swing.JPanel {
                 lblTP.setText("");
             }
         }
-
+        
         if (index == 3) {
             if (txtDienVien.getText().length() == 0) {
                 txtDienVien.setBackground(Color.yellow);
                 lblDV.setText("Chưa nhập tên diễn viên");
                 return false;
-
+                
             } else {
                 txtDienVien.setBackground(Color.white);
                 lblDV.setText("");
@@ -105,7 +105,7 @@ public class Form_Phim extends javax.swing.JPanel {
                 txtNamSX.setBackground(Color.yellow);
                 lblNSX.setText("Chưa nhập năm sản xuât");
                 return false;
-
+                
             } else {
                 txtNamSX.setBackground(Color.white);
                 lblNSX.setText("");
@@ -116,7 +116,7 @@ public class Form_Phim extends javax.swing.JPanel {
                 txtDaoDien.setBackground(Color.yellow);
                 lblDD.setText("Chưa nhập tên đạo diễn");
                 return false;
-
+                
             } else {
                 txtDaoDien.setBackground(Color.white);
                 lblDD.setText("");
@@ -127,7 +127,7 @@ public class Form_Phim extends javax.swing.JPanel {
                 txtQuocGia.setBackground(Color.yellow);
                 lblQG.setText("Chưa nhập tên quốc gia");
                 return false;
-
+                
             } else {
                 txtQuocGia.setBackground(Color.white);
                 lblQG.setText("");
@@ -138,7 +138,7 @@ public class Form_Phim extends javax.swing.JPanel {
                 txtDienVien.setBackground(Color.yellow);
                 lblTL.setText("Chưa nhập thời lượng phim");
                 return false;
-
+                
             } else {
                 txtThoiLuong.setBackground(Color.white);
                 lblTL.setText("");
@@ -149,18 +149,17 @@ public class Form_Phim extends javax.swing.JPanel {
                 txtMoTa.setBackground(Color.yellow);
                 lblMT.setText("Chưa nhập mô tả phim");
                 return false;
-
+                
             } else {
                 txtMoTa.setBackground(Color.white);
                 lblMT.setText("");
             }
         }
-
+        
         return true;
-
+        
     }
-
-
+    
     public void Xoa() {
         txtMaPhim.setText("");
         txtTenPhim.setText("");
@@ -171,7 +170,6 @@ public class Form_Phim extends javax.swing.JPanel {
         txtQuocGia.setText("");
         txtThoiLuong.setText("");
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -185,11 +183,10 @@ public class Form_Phim extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPhim = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        btnTimKiem = new javax.swing.JButton();
+        btnNew = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnCapNhat = new javax.swing.JButton();
-        btnSapXep = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblMaPhim = new javax.swing.JLabel();
         txtMaPhim = new javax.swing.JTextField();
@@ -237,17 +234,17 @@ public class Form_Phim extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnTimKiem.setBackground(new java.awt.Color(153, 0, 0));
-        btnTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnTimKiem.setForeground(new java.awt.Color(255, 255, 255));
-        btnTimKiem.setText("Tìm kiếm");
-        btnTimKiem.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+        btnNew.setBackground(new java.awt.Color(153, 0, 0));
+        btnNew.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnNew.setForeground(new java.awt.Color(255, 255, 255));
+        btnNew.setText("Mới");
+        btnNew.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimKiemActionPerformed(evt);
+                btnNewActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTimKiem);
+        jPanel1.add(btnNew);
 
         btnThem.setBackground(new java.awt.Color(153, 0, 0));
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -284,13 +281,6 @@ public class Form_Phim extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnCapNhat);
-
-        btnSapXep.setBackground(new java.awt.Color(153, 0, 0));
-        btnSapXep.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSapXep.setForeground(new java.awt.Color(255, 255, 255));
-        btnSapXep.setText("Sắp xếp");
-        btnSapXep.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel1.add(btnSapXep);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -431,17 +421,17 @@ public class Form_Phim extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(260, 260, 260)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(15, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -462,17 +452,47 @@ public class Form_Phim extends javax.swing.JPanel {
         showDetails();
     }//GEN-LAST:event_tblPhimMouseClicked
 
-    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTimKiemActionPerformed
+        this.Xoa();
+    }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-       
+        dao.Delete(list.get(current).getMaPhim());
+        this.Xoa();
+        FillTable();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-      
+        if (!this.checkValidate(1)) {
+            return;
+        }
+        if (!this.checkValidate(2)) {
+            return;
+        }
+        if (!this.checkValidate(3)) {
+            return;
+        }
+        if (!this.checkValidate(4)) {
+            return;
+        }
+        if (!this.checkValidate(5)) {
+            return;
+        }
+        if (!this.checkValidate(6)) {
+            return;
+        }
+        if (!this.checkValidate(7)) {
+            return;
+        }
+        if (!this.checkValidate(8)) {
+            return;
+        }
+        Phim p = new Phim(txtMaPhim.getText(), txtTenPhim.getText(), txtDienVien.getText(), txtNamSX.getText(), "", txtDaoDien.getText(), txtQuocGia.getText(), txtThoiLuong.getText(), txtMoTa.getText(), "");
+        dao.Update(p);
+        this.Xoa();
+        FillTable();
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void txtMaPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhimActionPerformed
@@ -481,15 +501,41 @@ public class Form_Phim extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-  
+        if (!this.checkValidate(1)) {
+            return;
+        }
+        if (!this.checkValidate(2)) {
+            return;
+        }
+        if (!this.checkValidate(3)) {
+            return;
+        }
+        if (!this.checkValidate(4)) {
+            return;
+        }
+        if (!this.checkValidate(5)) {
+            return;
+        }
+        if (!this.checkValidate(6)) {
+            return;
+        }
+        if (!this.checkValidate(7)) {
+            return;
+        }
+        if (!this.checkValidate(8)) {
+            return;
+        }
+        Phim p = new Phim(txtMaPhim.getText(), txtTenPhim.getText(), txtDienVien.getText(), txtNamSX.getText(), "", txtDaoDien.getText(), txtQuocGia.getText(), txtThoiLuong.getText(), txtMoTa.getText(), "");
+        dao.Insert(p);
+        this.Xoa();
+        FillTable();
     }//GEN-LAST:event_btnThemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
-    private javax.swing.JButton btnSapXep;
+    private javax.swing.JButton btnNew;
     private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

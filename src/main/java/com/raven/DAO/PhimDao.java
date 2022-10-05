@@ -35,6 +35,16 @@ public class PhimDao {
     public void Insert(Phim p) {
         try {
             pst = con.prepareStatement("insert into Phim values(?,?,?,?,?,?,?,?,?,?)");
+            pst.setString(1, p.getMaPhim());
+            pst.setString(2, p.getTenPhim());
+            pst.setString(3, p.getDienVien());
+            pst.setString(4, p.getNamSX());
+            pst.setString(5, p.getHinh());
+            pst.setString(6, p.getDaoDien());
+            pst.setString(7, p.getQuocGia());
+            pst.setString(8, p.getThoiLuong());
+            pst.setString(9, p.getMoTa());
+            pst.setString(10, p.getTraller());
             int kq = pst.executeUpdate();
             System.out.println(kq);
         } catch (SQLException ex) {
@@ -57,26 +67,30 @@ public class PhimDao {
         return list;
     }
 
-    public static void UpdatePhim(String TenPhim, String DienVien, String NamSX, String Hinh, String DaoDien, String QuocGia, String ThoiLuong, String MoTa, String Traller, String MaPhim) throws SQLException {
-        PreparedStatement st = con.prepareStatement("update NhanVien set TenPhim = ?, DienVien = ?, NamSX = ?, Hinh = ?, DaoDien = ?, QuocGia = ?, ThoiLuong = ?, MoTa = ?, Traller = ? where MaPhim =?");
-        st.setString(1, TenPhim);
-        st.setString(2, DienVien);
-        st.setString(3, NamSX);
-        st.setString(4, Hinh);
-        st.setString(5, DaoDien);
-        st.setString(6, QuocGia);
-        st.setString(7, ThoiLuong);
-        st.setString(8, MoTa);
-        st.setString(9, Traller);
-        st.setString(10, MaPhim);
-        st.executeUpdate();
+    public void Update(Phim p)  {
+        try {
+            PreparedStatement st = con.prepareStatement("update NhanVien set TenPhim = ?, DienVien = ?, NamSX = ?, Hinh = ?, DaoDien = ?, QuocGia = ?, ThoiLuong = ?, MoTa = ?, Traller = ? where MaPhim =?");
+            st.setString(1, p.getTenPhim());
+            st.setString(2, p.getDienVien());
+            st.setString(3, p.getNamSX());
+            st.setString(4, p.getHinh());
+            st.setString(5, p.getDaoDien());
+            st.setString(6, p.getQuocGia());
+            st.setString(7, p.getThoiLuong());
+            st.setString(8, p.getMoTa());
+            st.setString(9, p.getTenPhim());
+            st.setString(10, p.getMaPhim());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static void DeletePhim(String MaPhim) {
+    public void Delete(String MaPhim) {
         try {
             PreparedStatement pt = con.prepareStatement("delete from Phim where MaPhim = ?");
             pt.setString(1, MaPhim);
-            pt.executeQuery();
+            pt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
