@@ -25,10 +25,10 @@ public class NhanVienDao {
     static Statement st = null;
     static PreparedStatement pst = null;
     static ResultSet rs;
-    private static String SoDT;
+    static String MaNV;
 
-    public static void setSoDT(String SoDT){
-        NhanVienDao.SoDT = SoDT;
+    public static void setMaNV(String MaNV){
+        NhanVienDao.MaNV = MaNV;
         }
     
     public void Insert(NhanVien nv) {
@@ -76,11 +76,12 @@ public class NhanVienDao {
             e.printStackTrace();
         }
     }
-  public static void UpdateNhanVien(String MatKhau) throws SQLException {
 
-        PreparedStatement pt = con.prepareStatement("update NhanVien set MatKhau = ? where SoDT = '" + SoDT + "'");
-        pt.setString(1, MatKhau);
+     public static void UpdateNV(String MK) throws SQLException {
+        PreparedStatement pt = con.prepareStatement("UPDATE NhanVien SET MatKhau = ? WHERE MaNV = '" + MaNV + "'");
+        pt.setString(1, MK);
         pt.executeUpdate();
-        System.out.println(SoDT);
+        System.out.println(MaNV);
+
     }
 }
