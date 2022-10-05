@@ -33,8 +33,8 @@ public class Menu extends javax.swing.JPanel {
     private void init() {
         System.out.println(listMenu1.getParent().getParent());
         
-        listMenu1.addItem(new Model_Menu("1", "Quản lý khách hàng", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("2", "Quản lý nhân viên", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("1", "Trang chủ", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("2", "Quản lý khách hàng", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("3", "Quản lý lịch chiếu", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("4", "Quản lý phòng", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("5", "Quản lý phim", Model_Menu.MenuType.MENU));
@@ -43,7 +43,7 @@ public class Menu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("8", "Thanh toán", Model_Menu.MenuType.MENU));
 
         listMenu1.addItem(new Model_Menu("9", "Người dùng", Model_Menu.MenuType.TITLE));
-        listMenu1.addItem(new Model_Menu("10", "Quên mật khẩu", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("10", "Đổi mật khẩu", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("11", "Đăng xuất", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("12", "Thoát", Model_Menu.MenuType.MENU));
     }
@@ -101,7 +101,7 @@ public class Menu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     private Form_Home home;
     private void RiseofkingdomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RiseofkingdomMouseClicked
-        home = new Form_Home();
+//        home = new Form_Home();
         
     }//GEN-LAST:event_RiseofkingdomMouseClicked
 

@@ -126,14 +126,11 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cbRemember" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblMK" min="-2" pref="190" max="-2" attributes="0"/>
-                                  <Component id="txtEmailSDT" alignment="0" pref="263" max="32767" attributes="0"/>
-                                  <Component id="lblEmailSDT" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
-                                  <Component id="txtPass" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lblMK" min="-2" pref="190" max="-2" attributes="0"/>
+                              <Component id="txtEmailSDT" alignment="0" pref="263" max="32767" attributes="0"/>
+                              <Component id="lblEmailSDT" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                              <Component id="txtPass" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -152,9 +149,7 @@
                   <Component id="lblMK" min="-2" pref="27" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtPass" min="-2" pref="33" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="cbRemember" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace pref="58" max="32767" attributes="0"/>
                   <Component id="btnDN" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
@@ -180,7 +175,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmailSDT">
           <Properties>
-            <Property name="text" type="java.lang.String" value="0123546778"/>
+            <Property name="text" type="java.lang.String" value="0123456778"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailSDTActionPerformed"/>
@@ -212,20 +207,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPassActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="cbRemember">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c9" green="ef" red="f2" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Nh&#x1edb; m&#x1ead;t kh&#x1ea9;u?"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbRememberActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

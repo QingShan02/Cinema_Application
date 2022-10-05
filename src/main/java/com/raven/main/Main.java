@@ -5,13 +5,23 @@
  */
 package com.raven.main;
 
+import com.raven.DAO.NhanVienDao;
 import com.raven.event.EventMenuSelected;
 import com.raven.form.Form_ChoNgoi;
 
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
 import com.raven.form.Form_XacThuc;
+import com.raven.model.NhanVien;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 
 /**
@@ -62,6 +72,8 @@ public class Main extends javax.swing.JFrame {
 //                }
                 else if (index==9){
                     setForm(new Form_XacThuc(mainPanel));
+                } else if(index == 10){
+                    DangXuat();
                 }
 
             }
@@ -69,7 +81,22 @@ public class Main extends javax.swing.JFrame {
         //  set when system open start with home form
         setForm(home);
     }
-
+    public void DangXuat(){
+        File f = new File("savetk.txt");
+        
+        if (f.exists()) {
+            try {
+                new FileOutputStream(f).close();
+                DangNhap dn = new DangNhap();
+                dn.show();
+                this.dispose();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     private void setForm(JComponent com) {
         mainPanel.removeAll();
         mainPanel.add(com);

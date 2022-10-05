@@ -4,6 +4,7 @@
  */
 package com.raven.model;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NhanVien {
+public class NhanVien implements Serializable{
     private String MaNV;
     private String HoTen;
     private int GioiTinh;
@@ -27,4 +28,10 @@ public class NhanVien {
     public String toString(){
         return "NhanVien{"+getMaNV()+","+getHoTen()+"}";
     }
+
+    public NhanVien(String MatKhau, String SoDT) {
+        this.MatKhau = MatKhau;
+        this.SoDT = SoDT;
+    }
+    
 }

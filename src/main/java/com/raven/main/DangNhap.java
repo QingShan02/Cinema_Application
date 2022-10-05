@@ -6,11 +6,17 @@ package com.raven.main;
 
 import com.raven.DAO.NhanVienDao;
 import com.raven.helper.ThongBao;
+import com.raven.model.NhanVien;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,14 +28,48 @@ public class DangNhap extends javax.swing.JFrame {
      * Creates new form DangNhap
      */
     NhanVienDao dao;
-    ThongBao tb ;
-    
+    ThongBao tb;
+
+    public Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
+        
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
+        if(ois==null){
+            return null;
+        }
+        return ois.readObject();
+    }
+
+    public static void writeObj(String path, Object data) throws FileNotFoundException, IOException {
+        try (
+                 FileOutputStream fos = new FileOutputStream(path);  ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+            oos.writeObject(data);
+        }
+    }
+
     public DangNhap() {
+//        File f = new File("savetk.txt");
+        dao = new NhanVienDao();
+
+        try {
+//            System.out.println("2");
+            NhanVien list_temp =(NhanVien) readObj("savetk.txt");
+//            System.out.println("1");
+            if(list_temp != null){
+            dao.Select().stream().filter(s -> s.getSoDT().equalsIgnoreCase(list_temp.getSoDT())).forEach(s -> NhanVienDao.setMaNV(s.getMaNV()));
+            Main main = new Main();
+            main.show();
+            this.dispose();
+            return;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         initComponents();
         setLocationRelativeTo(null);
-        
-        dao = new NhanVienDao();
-        showTk();
+//        showTk();
     }
 
     /**
@@ -50,7 +90,6 @@ public class DangNhap extends javax.swing.JFrame {
         txtEmailSDT = new javax.swing.JTextField();
         btnDN = new javax.swing.JButton();
         txtPass = new javax.swing.JPasswordField();
-        cbRemember = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -118,7 +157,7 @@ public class DangNhap extends javax.swing.JFrame {
         lblEmailSDT.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblEmailSDT.setText("Email hoặc số điện thoại ");
 
-        txtEmailSDT.setText("0123546778");
+        txtEmailSDT.setText("0123456778");
         txtEmailSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailSDTActionPerformed(evt);
@@ -143,15 +182,6 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
 
-        cbRemember.setBackground(new java.awt.Color(242, 239, 201));
-        cbRemember.setText("Nhớ mật khẩu?");
-        cbRemember.setBorder(null);
-        cbRemember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbRememberActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -163,13 +193,11 @@ public class DangNhap extends javax.swing.JFrame {
                         .addComponent(btnDN, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(99, 99, 99)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbRemember)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblMK, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtEmailSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                                .addComponent(lblEmailSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPass)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblMK, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmailSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addComponent(lblEmailSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPass))))
                 .addContainerGap(132, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -183,9 +211,7 @@ public class DangNhap extends javax.swing.JFrame {
                 .addComponent(lblMK, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbRemember)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(btnDN, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -210,13 +236,19 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void btnDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDNActionPerformed
         // TODO add your handling code here:
-        String username= txtEmailSDT.getText();
+        String username = txtEmailSDT.getText();
         String pass = txtPass.getText();
-        tb  = new ThongBao("",0);
-        dao.Select().stream().forEach(s->{
-            if(username.equalsIgnoreCase(s.getSoDT()) && pass.equalsIgnoreCase(s.getMatKhau())){
-                tb  = new ThongBao("Đăng nhập thành công",0);
+        System.out.println(username +","+pass);
+        tb = new ThongBao("", 0);
+        dao.Select().stream().forEach(s -> {
+            if (username.equalsIgnoreCase(s.getSoDT()) && pass.equalsIgnoreCase(s.getMatKhau())) {
+                tb = new ThongBao("Đăng nhập thành công", 0);
                 tb.show();
+                try {
+                    writeObj("savetk.txt", s);
+                } catch (IOException ex) {
+                    Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 Main main = new Main();
                 NhanVienDao.setMaNV(s.getMaNV());
                 main.show();
@@ -224,8 +256,8 @@ public class DangNhap extends javax.swing.JFrame {
                 return;
             }
         });
-        if(tb.getNoidung().equalsIgnoreCase("")){
-            tb  = new ThongBao("Sai mật khẩu",1);
+        if (tb.getNoidung().equalsIgnoreCase("")) {
+            tb = new ThongBao("Sai mật khẩu", 1);
             tb.show();
         }
     }//GEN-LAST:event_btnDNActionPerformed
@@ -260,43 +292,34 @@ public class DangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPassActionPerformed
 
-    private void cbRememberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRememberActionPerformed
-        // TODO add your handling code here:
-                if(cbRemember.isSelected()){
-             savetk(txtEmailSDT.getText(),txtPass.getText());
-        }else{
-            savetk("","");
-        }
-           
-    }//GEN-LAST:event_cbRememberActionPerformed
-
-       public void savetk(String username,String pass) {
+    public void savetk(String username, String pass) {
         try ( FileOutputStream fout = new FileOutputStream("savetk.txt");  ObjectOutputStream oos = new ObjectOutputStream(fout);) {
             oos.writeObject(username);
             oos.writeObject(pass);
         } catch (Exception e) {
             System.out.println(e);
-        }        
-        
-    }
-        public void showTk() {
-        File f = new File("savetk.txt");
-        if(f.exists()){
-            try ( FileInputStream fin = new FileInputStream(f);  ObjectInputStream ois = new ObjectInputStream(fin);) {
-            
-            String username = (String) ois.readObject();
-            String pass = (String) ois.readObject();
-            txtEmailSDT.setText(username);
-            txtPass.setText(pass);
-            if(txtEmailSDT.getText().length() > 0){
-                cbRemember.setSelected(true);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
         }
-        }
-        
+
     }
+
+//    public void showTk() {
+//        File f = new File("savetk.txt");
+//        if (f.exists()) {
+//            try ( FileInputStream fin = new FileInputStream(f);  ObjectInputStream ois = new ObjectInputStream(fin);) {
+//
+//                String username = (String) ois.readObject();
+//                String pass = (String) ois.readObject();
+//                txtEmailSDT.setText(username);
+//                txtPass.setText(pass);
+//                if (txtEmailSDT.getText().length() > 0) {
+////                cbRemember.setSelected(true);
+//                }
+//            } catch (Exception e) {
+//                System.out.println(e);
+//            }
+//        }
+//
+//    }
     /**
      * @param args the command line arguments
      */
@@ -334,7 +357,6 @@ public class DangNhap extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDN;
-    private javax.swing.JCheckBox cbRemember;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
