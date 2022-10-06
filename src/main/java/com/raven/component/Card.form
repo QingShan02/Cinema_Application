@@ -20,41 +20,36 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <Component id="lbImg" min="-2" pref="145" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lbValues" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbTitle" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbNamSX" min="-2" max="-2" attributes="0"/>
                   <Component id="pnlGioChieu" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbValues" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbTitle" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbIcon" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="294" max="32767" attributes="0"/>
+              <EmptySpace pref="156" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="lbIcon" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Component id="lbTitle" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lbValues" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
-              <Component id="pnlGioChieu" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="lbNamSX" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="pnlGioChieu" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="56" max="32767" attributes="0"/>
           </Group>
+          <Component id="lbImg" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lbIcon">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icon/stock.png"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lbTitle">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -92,5 +87,12 @@
         <Property name="rows" type="int" value="1"/>
       </Layout>
     </Container>
+    <Component class="javax.swing.JLabel" name="lbImg">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbNamSX">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nam sx"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

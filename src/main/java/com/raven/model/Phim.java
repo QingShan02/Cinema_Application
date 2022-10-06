@@ -20,7 +20,7 @@ public class Phim {
     private String MaPhim;
     private String TenPhim;
     private String DienVien;
-    private String NamSX;
+    private int NamSX;
     private String Hinh;
     private String DaoDien;
     private String QuocGia;

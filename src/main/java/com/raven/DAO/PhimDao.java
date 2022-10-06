@@ -39,7 +39,7 @@ public class PhimDao {
             pst.setString(1, p.getMaPhim());
             pst.setString(2, p.getTenPhim());
             pst.setString(3, p.getDienVien());
-            pst.setString(4, p.getNamSX());
+            pst.setInt(4, p.getNamSX());
             pst.setString(5, p.getHinh());
             pst.setString(6, p.getDaoDien());
             pst.setString(7, p.getQuocGia());
@@ -59,7 +59,7 @@ public class PhimDao {
             st = con.createStatement();
             rs = st.executeQuery("select * from Phim");
             while (rs.next()) {
-                list.add(new Phim(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10)));
+                list.add(new Phim(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10)));
             }
 
         } catch (SQLException ex) {
@@ -73,7 +73,7 @@ public class PhimDao {
             PreparedStatement st = con.prepareStatement("update Phim set TenPhim = ?, DienVien = ?, NamSX = ?, Hinh = ?, DaoDien = ?, QuocGia = ?, ThoiLuong = ?, MoTa = ?, Traller = ? where MaPhim =?");
             st.setString(1, p.getTenPhim());
             st.setString(2, p.getDienVien());
-            st.setInt(3, Integer.parseInt(p.getNamSX()));
+            st.setInt(3, p.getNamSX());
             st.setString(4, p.getHinh());
             st.setString(5, p.getDaoDien());
             st.setString(6, p.getQuocGia());
