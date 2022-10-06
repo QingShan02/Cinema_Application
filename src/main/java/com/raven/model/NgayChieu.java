@@ -20,12 +20,11 @@ public class NgayChieu {
     private String Ngay;
     private String GioBatDau;
 
-    public NgayChieu(String GioBatDau) {
+    public NgayChieu(int Stt, String GioBatDau) {
+        this.Stt = Stt;
         this.GioBatDau = GioBatDau;
     }
-    
-//    public NgayChieu(String maPhim) {
-//        
-//    }
+
+
     
 }

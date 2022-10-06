@@ -1,6 +1,7 @@
 package com.raven.component;
 
 import com.raven.DAO.PhimDao;
+import com.raven.form.Form_ChoNgoi;
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
 import com.raven.main.DangNhap;
@@ -12,6 +13,10 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -19,32 +24,33 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Card extends javax.swing.JPanel {
-    
+
     private JButton btnGioChieu;
-    
+
     public Card() {
         initComponents();
         setOpaque(false);
-        
+
     }
-    
+    JPanel mainPanel;
+
     public Card(String tenPhim, String ngay, List<NgayChieu> gioChieu) {
         initComponents();
         lbTitle.setText(tenPhim);
         lbValues.setText(ngay);
-
+//        this.mainPanel = mainPanel;
         for (NgayChieu gc : gioChieu) {
             btnGioChieu = new JButton();
             btnGioChieu.setText(gc.getGioBatDau());
             pnlGioChieu.add(btnGioChieu);
         }
-        
+
     }
-    
+
     public Color getColor1() {
         return color1;
     }
-    
+
     public void setColor1(Color color1) {
         this.color1 = color1;
     }
@@ -65,12 +71,23 @@ public class Card extends javax.swing.JPanel {
         lbTitle.setText(data.getTitle());
         lbValues.setText(data.getValues());
         pnlGioChieu.removeAll();
-        data.getNc().stream().forEach(s->{
+        System.out.println(data.getNc().size());
+        data.getNc().stream().forEach(s -> {
             JButton btn = new JButton(s.getGioBatDau());
             btn.setBackground(Color.GRAY);
             pnlGioChieu.add(btn);
             
-                    });
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    data.getMainpJPanel().removeAll();
+                    data.getMainpJPanel().add(new Form_ChoNgoi());
+                    data.getMainpJPanel().repaint();
+                    data.getMainpJPanel().revalidate();
+                }
+            });
+
+        });
         pnlGioChieu.repaint();
         pnlGioChieu.revalidate();
         //lbDescription.setText(data.getDescription());
@@ -137,8 +154,8 @@ public class Card extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
 
-@Override
-protected void paintComponent(Graphics grphcs) {
+    @Override
+    protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         GradientPaint g = new GradientPaint(0, 0, color1, 0, getHeight(), color2);

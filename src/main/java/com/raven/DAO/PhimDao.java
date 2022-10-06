@@ -4,6 +4,7 @@
  */
 package com.raven.DAO;
 
+import com.raven.model.ChiTietGhe;
 import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
 import java.sql.Array;
@@ -128,16 +129,34 @@ public class PhimDao {
     public List<NgayChieu> GioCuaPhim(String maphim, String ngay) {
         List<NgayChieu> list = new ArrayList<>();
         try {
-            pst = con.prepareStatement("select GioBatDau from XuatChieu xc join NgayChieu n on n.STT = xc.STT and n.Ngay = xc.Ngay where maphim = ? and xc.ngay = ?");
+            pst = con.prepareStatement("select n.STT,GioBatDau from XuatChieu xc join NgayChieu n on n.STT = xc.STT and n.Ngay = xc.Ngay where maphim = ? and xc.ngay = ?");
             pst.setString(1, maphim);
             pst.setDate(2, java.sql.Date.valueOf(ngay));
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new NgayChieu(rs.getString(1)));
+                list.add(new NgayChieu(rs.getInt(1),rs.getString(2)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return list;
+    }
+    public List<ChiTietGhe> CountVe(String maphim, String ngay, int stt){
+        List<ChiTietGhe> list = new ArrayList();
+        try {
+            pst = con .prepareCall("{call getCountVe(?,?,?)}");
+            pst.setString(1, maphim);
+            pst.setDate(2, java.sql.Date.valueOf(ngay));
+            pst.setInt(3, stt);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                list.add(new ChiTietGhe(rs.getInt(1),rs.getString(2)));
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         return list;
     }
 }

@@ -31,9 +31,9 @@ public class DangNhap extends javax.swing.JFrame {
     ThongBao tb;
 
     public Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
-        
+
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
-        if(ois==null){
+        if (ois == null) {
             return null;
         }
         return ois.readObject();
@@ -52,14 +52,15 @@ public class DangNhap extends javax.swing.JFrame {
 
         try {
 //            System.out.println("2");
-            NhanVien list_temp =(NhanVien) readObj("savetk.txt");
+            if (new File("savetk.txt").length() != 0) {
+                NhanVien list_temp = (NhanVien) readObj("savetk.txt");
 //            System.out.println("1");
-            if(list_temp != null){
-            dao.Select().stream().filter(s -> s.getSoDT().equalsIgnoreCase(list_temp.getSoDT())).forEach(s -> NhanVienDao.setMaNV(s.getMaNV()));
-            Main main = new Main();
-            main.show();
-            this.dispose();
-            return;
+//            if(list_temp != null){
+                dao.Select().stream().filter(s -> s.getSoDT().equalsIgnoreCase(list_temp.getSoDT())).forEach(s -> NhanVienDao.setMaNV(s.getMaNV()));
+                Main main = new Main();
+                main.show();
+                this.dispose();
+                return;
             }
         } catch (IOException ex) {
             Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
@@ -238,7 +239,7 @@ public class DangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = txtEmailSDT.getText();
         String pass = txtPass.getText();
-        System.out.println(username +","+pass);
+        System.out.println(username + "," + pass);
         tb = new ThongBao("", 0);
         dao.Select().stream().forEach(s -> {
             if (username.equalsIgnoreCase(s.getSoDT()) && pass.equalsIgnoreCase(s.getMatKhau())) {

@@ -50,7 +50,7 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void selected(int index) {
                 if (index == 0 ) {
-                    setForm(home);
+                    setForm(new Form_Home(mainPanel));
                 } //else if (index == 1) {
                 //                    setForm(form1);
                 //                } else if (index == 2) {
@@ -79,7 +79,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         //  set when system open start with home form
-        setForm(home);
+        setForm(new Form_Home(mainPanel));
     }
     public void DangXuat(){
         File f = new File("savetk.txt");

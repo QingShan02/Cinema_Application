@@ -25,5 +25,10 @@ public class ChiTietGhe {
         this.MaPhong = MaPhong;
         this.TenGhe = TenGhe;
     }
+
+    public ChiTietGhe(int MaCTGhe, String TenGhe) {
+        this.MaCTGhe = MaCTGhe;
+        this.TenGhe = TenGhe;
+    }
     
 }
