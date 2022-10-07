@@ -1,6 +1,7 @@
 package com.raven.component;
 
 import com.raven.DAO.PhimDao;
+import com.raven.DAO.PhongDao;
 import com.raven.form.Form_ChoNgoi;
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
@@ -44,6 +45,7 @@ public class Card extends javax.swing.JPanel {
             btnGioChieu = new JButton();
             btnGioChieu.setText(gc.getGioBatDau());
             pnlGioChieu.add(btnGioChieu);
+
         }
 
     }
@@ -66,26 +68,35 @@ public class Card extends javax.swing.JPanel {
 
     private Color color1;
     private Color color2;
+    PhongDao daoPhong;
 
     public void setData(Model_Card data, String img, int namSX) {
         //lbIcon.setIcon(data.getIcon());
         lbTitle.setText(data.getTitle());
         lbValues.setText(data.getValues());
         pnlGioChieu.removeAll();
-        System.out.println(data.getNc().size());
+
         data.getNc().stream().forEach(s -> {
+
             JButton btn = new JButton(s.getGioBatDau());
             btn.setBackground(Color.GRAY);
             pnlGioChieu.add(btn);
-            
+
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     data.getMainpJPanel().removeAll();
-                    data.getMainpJPanel().add(new Form_ChoNgoi());
+                    daoPhong = new PhongDao();
+                    System.out.println(data.getMaPhim());
+                    System.out.println(data.getValues());
+                    System.out.println(s.getStt());
+                    String maPhong = daoPhong.SelectMaPhong(data.getMaPhim(), data.getValues(), s.getStt());
+                    
+                    data.getMainpJPanel().add(new Form_ChoNgoi(maPhong));
                     data.getMainpJPanel().repaint();
                     data.getMainpJPanel().revalidate();
                 }
+
             });
 
         });
@@ -95,7 +106,7 @@ public class Card extends javax.swing.JPanel {
         lbImg.setIcon(resizeImage("src/main/resources/poster/" + img + ".png"));
         lbNamSX.setText(String.valueOf(namSX));
     }
-    
+
     public ImageIcon resizeImage(String path) {
         ImageIcon ii = new ImageIcon(path);
         ImageIcon imageIcon = new ImageIcon(ii.getImage().getScaledInstance(130, 200, java.awt.Image.SCALE_SMOOTH));
@@ -124,7 +135,7 @@ public class Card extends javax.swing.JPanel {
 
         lbValues.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         lbValues.setForeground(new java.awt.Color(255, 255, 255));
-        lbValues.setText("Values");
+        lbValues.setText("NgayChieu");
 
         pnlGioChieu.setBackground(new java.awt.Color(51, 51, 51));
         pnlGioChieu.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,7 +155,7 @@ public class Card extends javax.swing.JPanel {
                     .addComponent(lbTitle)
                     .addComponent(lbNamSX)
                     .addComponent(pnlGioChieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

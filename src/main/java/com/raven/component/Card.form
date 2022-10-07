@@ -28,7 +28,7 @@
                   <Component id="lbNamSX" min="-2" max="-2" attributes="0"/>
                   <Component id="pnlGioChieu" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="156" max="32767" attributes="0"/>
+              <EmptySpace pref="119" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,7 +69,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Values"/>
+        <Property name="text" type="java.lang.String" value="NgayChieu"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="pnlGioChieu">
