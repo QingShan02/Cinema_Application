@@ -92,7 +92,7 @@ public class Card extends javax.swing.JPanel {
                     System.out.println(data.getValues());
                     System.out.println(s.getStt());
                     String maPhong = daoPhong.SelectMaPhong(data.getMaPhim(), data.getValues(), s.getStt());
-                    List<ChiTietGhe> listGheCV =  daoPhong.SelectGheInVe("2022-09-01", s.getStt(), maPhong);
+                    List<ChiTietGhe> listGheCV =  daoPhong.SelectGheInVe("2022-09-01", s.getStt(), data.getMaPhim());
 
                     data.getMainpJPanel().add(new Form_ChoNgoi(maPhong,s.getGioBatDau(),listGheCV));
                     data.getMainpJPanel().repaint();

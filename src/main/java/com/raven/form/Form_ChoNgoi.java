@@ -58,14 +58,14 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         ListPhong.stream().forEach(s -> {
             cboPhong.addItem(s.getTenPhong());
         });
-        SodoGhe();
+//        SodoGhe();
 //        ListPhong.stream().forEach(s -> {
 //            if (s.getMaPhong().equalsIgnoreCase(maphongString)) {
 //                cboPhong.setSelectedItem(s.getTenPhong());
 //                
 //            }
 //        });
-        ListGhe = daoGhe.Select(maphongString);
+        ListGhe = daoGhe.Select(ListPhong.get(cboPhong.getSelectedIndex()).getMaPhong());
 
         System.out.println("abc");
 
@@ -312,6 +312,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         // TODO add your handling code here:
         Sodochongoi3.removeAll();
         Sodochongoivip.removeAll();
+                ListGhe = daoGhe.Select(ListPhong.get(cboPhong.getSelectedIndex()).getMaPhong());
+
         SodoGhe();
 
     }//GEN-LAST:event_cboPhongItemStateChanged
