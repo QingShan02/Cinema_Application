@@ -47,12 +47,13 @@ List<NgayChieu> nc;
         this.nc = nc;
     }
     JPanel mainpJPanel;
-    public Model_Card(Icon icon, String title, String values, List<NgayChieu> nc, JPanel mainpJPanel) {
+    public Model_Card(Icon icon, String title, String values, List<NgayChieu> nc, JPanel mainpJPanel, String MaPhim) {
         this.icon = icon;
         this.title = title;
         this.values = values;
         this.nc = nc;
         this.mainpJPanel = mainpJPanel;
+        this.MaPhim = MaPhim;
     }
 
     public JPanel getMainpJPanel() {
@@ -66,8 +67,17 @@ List<NgayChieu> nc;
     public Model_Card() {
     }
 
+    public String getMaPhim() {
+        return MaPhim;
+    }
+
+    public void setMaPhim(String MaPhim) {
+        this.MaPhim = MaPhim;
+    }
+
     private Icon icon;
     private String title;
     private String values;
     private String description;
+    private String MaPhim;
 }

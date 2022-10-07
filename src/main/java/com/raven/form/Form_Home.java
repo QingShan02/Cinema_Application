@@ -26,7 +26,7 @@ import javax.swing.JScrollPane;
 
 public class Form_Home extends javax.swing.JPanel {
 
-    PhongDao dao;
+    PhongDao daoPhong;
     List<Object[]> list;
     Form_ChoNgoi cn;
     PhimDao daoPhim;
@@ -37,8 +37,8 @@ public class Form_Home extends javax.swing.JPanel {
 //        dao = new PhongDao();
 //        list = dao.fillCard();
         daoPhim = new PhimDao();
-        listPhim = daoPhim.PhimTrongNgay("2022-09-01");
         
+        listPhim = daoPhim.PhimTrongNgay("2022-09-01");
         
         cn = new Form_ChoNgoi();
 //        list.stream().forEach(s->System.out.println(s[0]));
@@ -97,7 +97,7 @@ public class Form_Home extends javax.swing.JPanel {
             card = new Card();
 //            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) list.get(i)[0], list.get(i)[1] + " số ghế", list.get(i)[2] + " số vé"));
 //            card.setColor1(cl[i]);
-            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01",listXC,main), phim.getMaPhim(), phim.getNamSX());
+            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01",listXC,main,phim.getMaPhim()), phim.getMaPhim(), phim.getNamSX());
             card.setColor1(Color.BLACK);
             card.setColor2(Color.BLACK);
                         panel1.add(card);
@@ -114,7 +114,7 @@ public class Form_Home extends javax.swing.JPanel {
 //                }
 //            });
         }
-        System.out.println("1dhaahsd");
+     
         panel1.repaint();
         panel1.revalidate();
         

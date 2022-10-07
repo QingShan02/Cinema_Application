@@ -44,9 +44,27 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     Color cl;
     List<ChiTietGhe> List;
     List<ChiTietGhe> List2;
+String maphongString;
+
+    public Form_ChoNgoi(String maphongString) {
+        initComponents();
+        this.maphongString = maphongString;
+         daoPhong = new PhongDao();
+        daoGhe = new GheDao();
+        ListPhong = daoPhong.Select();
+        ListGhe = daoGhe.Select();
+        ListPhong.stream().forEach(s -> {
+            cboPhong.addItem(s.getTenPhong());
+        });
+        ListPhong.stream().forEach(s->{
+            if(s.getMaPhong().equalsIgnoreCase(maphongString)){
+                        cboPhong.setSelectedItem(s.getTenPhong());
+
+            }
+        });
+    }
 
     public void SodoGhe() {
-
         List = ListGhe.stream().filter(s -> s.getMaPhong().equalsIgnoreCase(ListPhong.get(cboPhong.getSelectedIndex()).getMaPhong())).limit(96).collect(Collectors.toList());
         for (ChiTietGhe s : List) {
             if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
