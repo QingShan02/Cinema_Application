@@ -21,7 +21,9 @@ public class ChiTietGhe {
     private String MaGhe;
     private String TenGhe;
 
-    public ChiTietGhe(String MaPhong, String TenGhe) {
+
+    public ChiTietGhe(String MaPhong, String TenGhe,int MaCTGhe) {
+        this.MaCTGhe = MaCTGhe;
         this.MaPhong = MaPhong;
         this.TenGhe = TenGhe;
     }

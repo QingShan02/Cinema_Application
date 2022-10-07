@@ -7,6 +7,7 @@ import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
 import com.raven.main.DangNhap;
 import com.raven.main.Main;
+import com.raven.model.ChiTietGhe;
 import com.raven.model.Model_Card;
 import com.raven.model.NgayChieu;
 import java.awt.Color;
@@ -91,8 +92,9 @@ public class Card extends javax.swing.JPanel {
                     System.out.println(data.getValues());
                     System.out.println(s.getStt());
                     String maPhong = daoPhong.SelectMaPhong(data.getMaPhim(), data.getValues(), s.getStt());
-                    
-                    data.getMainpJPanel().add(new Form_ChoNgoi(maPhong,s.getGioBatDau()));
+                    List<ChiTietGhe> listGheCV =  daoPhong.SelectGheInVe("2022-09-01", s.getStt(), maPhong);
+
+                    data.getMainpJPanel().add(new Form_ChoNgoi(maPhong,s.getGioBatDau(),listGheCV));
                     data.getMainpJPanel().repaint();
                     data.getMainpJPanel().revalidate();
                 }

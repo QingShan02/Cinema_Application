@@ -33,40 +33,49 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
      */
     public Form_ChoNgoi() {
         initComponents();
-        daoPhong = new PhongDao();
-        daoGhe = new GheDao();
-        ListPhong = daoPhong.Select();
-        ListGhe = daoGhe.Select();
-        ListPhong.stream().forEach(s -> {
-            cboPhong.addItem(s.getTenPhong());
-        });
+//        daoPhong = new PhongDao();
+//        daoGhe = new GheDao();
+//        ListPhong = daoPhong.Select();
+//        ListGhe = daoGhe.Select();
+//        ListPhong.stream().forEach(s -> {
+//            cboPhong.addItem(s.getTenPhong());
+//        });
     }
     Color cl;
     List<ChiTietGhe> List;
     List<ChiTietGhe> List2;
-String maphongString;
+    String maphongString;
+    List<ChiTietGhe> listGheCV;
 
-    public Form_ChoNgoi(String maphongString,String gio) {
+    public Form_ChoNgoi(String maphongString, String gio, List<ChiTietGhe> listGheCV) {
         initComponents();
+        this.listGheCV = listGheCV;
+
         this.maphongString = maphongString;
-         daoPhong = new PhongDao();
+        daoPhong = new PhongDao();
         daoGhe = new GheDao();
         ListPhong = daoPhong.Select();
-        ListGhe = daoGhe.Select();
         ListPhong.stream().forEach(s -> {
             cboPhong.addItem(s.getTenPhong());
         });
-        ListPhong.stream().forEach(s->{
-            if(s.getMaPhong().equalsIgnoreCase(maphongString)){
-                        cboPhong.setSelectedItem(s.getTenPhong());
+        SodoGhe();
+//        ListPhong.stream().forEach(s -> {
+//            if (s.getMaPhong().equalsIgnoreCase(maphongString)) {
+//                cboPhong.setSelectedItem(s.getTenPhong());
+//                
+//            }
+//        });
+        ListGhe = daoGhe.Select(maphongString);
 
-            }
-        });
+        System.out.println("abc");
+
         lblGio.setText(gio);
     }
+    List<Model_Ghe> lModel = new ArrayList<>();
+    Model_Ghe ghe;
 
     public void SodoGhe() {
-        List = ListGhe.stream().filter(s -> s.getMaPhong().equalsIgnoreCase(ListPhong.get(cboPhong.getSelectedIndex()).getMaPhong())).limit(96).collect(Collectors.toList());
+        List = ListGhe.stream().limit(96).collect(Collectors.toList());
         for (ChiTietGhe s : List) {
             if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                 cl = Color.PINK;
@@ -74,7 +83,7 @@ String maphongString;
                 cl = Color.GREEN;
             }
 
-            Model_Ghe ghe = new Model_Ghe(cl, s.getTenGhe());
+            ghe = new Model_Ghe(cl, s.getTenGhe());
             ghe.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -92,16 +101,18 @@ String maphongString;
 
             });
             Sodochongoi3.add(ghe);
+            lModel.add(ghe);
 
         }
         if (cboPhong.getSelectedIndex() >= 5) {
-            List2 = ListGhe.stream().filter(s -> s.getMaPhong().equalsIgnoreCase(ListPhong.get(cboPhong.getSelectedIndex()).getMaPhong())).skip(96).collect(Collectors.toList());
+            List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
             for (ChiTietGhe s : List2) {
                 if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
                     cl = Color.RED;
                 }
-                Model_Ghe ghe2 = new Model_Ghe(cl, s.getTenGhe());
-                ghe2.addMouseListener(new MouseAdapter() {
+                ghe = new Model_Ghe(cl, s.getTenGhe());
+                lModel.add(ghe);
+                ghe.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (e.getComponent().getBackground().equals(Color.YELLOW)) {
@@ -117,9 +128,19 @@ String maphongString;
                         }
                     }
                 });
-                Sodochongoivip.add(ghe2);
+                Sodochongoivip.add(ghe);
+                            lModel.add(ghe);
+
             }
 
+        }
+        for (ChiTietGhe g : listGheCV) {
+            for (int i = 0; i < ListGhe.size(); i++) {
+                if (g.getMaCTGhe() == ListGhe.get(i).getMaCTGhe()) {
+                    lModel.get(i).setBackground(Color.GRAY);
+                    lModel.get(i).setEnabled(false);
+                }
+            }
         }
         Sodochongoivip.repaint();
         Sodochongoivip.revalidate();

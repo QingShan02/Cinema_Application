@@ -4,6 +4,7 @@
  */
 package com.raven.DAO;
 
+import com.raven.model.ChiTietGhe;
 import com.raven.model.PhongChieu;
 import java.sql.Array;
 import java.sql.Connection;
@@ -86,8 +87,8 @@ public class PhongDao {
             e.printStackTrace();
         }
     }
-    public List<String> SelectGheInVe(String ngay, int stt,String maphim){
-        List<String> list = new ArrayList<>();
+    public List<ChiTietGhe> SelectGheInVe(String ngay, int stt,String maphim){
+        List<ChiTietGhe> list = new ArrayList<>();
         try {
             pst = con.prepareCall("{ call SelectGheInVe(?,?,?)}");
             pst.setDate(1, java.sql.Date.valueOf("2022-09-01"));
@@ -95,7 +96,7 @@ public class PhongDao {
             pst.setString(3, maphim);
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(rs.getString(1));
+                list.add(new ChiTietGhe(rs.getInt(1),rs.getString(2)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
