@@ -86,15 +86,16 @@ public class PhongDao {
             e.printStackTrace();
         }
     }
-    public List<Object[]> fillCard(){
-        List<Object[]> list = new ArrayList<>();
-        Object[] arr;
+    public List<String> SelectGheInVe(String ngay, int stt,String maphim){
+        List<String> list = new ArrayList<>();
         try {
-            pst = con.prepareCall("{ call fillcard(?)}");
+            pst = con.prepareCall("{ call SelectGheInVe(?,?,?)}");
             pst.setDate(1, java.sql.Date.valueOf("2022-09-01"));
+            pst.setInt(2, stt);
+            pst.setString(3, maphim);
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Object[]{rs.getString("TenPhong"),rs.getInt("soGhe"),rs.getInt("soVe")});
+                list.add(rs.getString(1));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);

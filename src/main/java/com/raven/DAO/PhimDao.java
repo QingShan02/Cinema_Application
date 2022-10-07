@@ -114,11 +114,11 @@ public class PhimDao {
     public List<Phim> PhimTrongNgay(String ngay) {
         List<Phim> list = new ArrayList<>();
         try {
-            pst = con.prepareStatement("select p.maphim,p.tenphim from XuatChieu xc join Phim p on p.maphim = xc.maphim where xc.ngay = ?;");
+            pst = con.prepareStatement("select p.maphim,p.tenphim,p.NamSX from XuatChieu xc join Phim p on p.maphim = xc.maphim where xc.ngay = ?;");
             pst.setDate(1, java.sql.Date.valueOf(ngay));
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Phim(rs.getString(1), rs.getString(2)));
+                list.add(new Phim(rs.getString(1), rs.getString(2),rs.getInt(3)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
