@@ -8,7 +8,7 @@ package com.raven.main;
 import com.raven.DAO.NhanVienDao;
 import com.raven.event.EventMenuSelected;
 import com.raven.form.Form_ChoNgoi;
-
+import com.raven.form.Form_KhachHang;
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
 import com.raven.form.Form_XacThuc;
@@ -38,52 +38,57 @@ public class Main extends javax.swing.JFrame {
     private Form_Phim form_phim;
     private Form_ChoNgoi ChoNgoi;
     private Form_XacThuc form_xacthuc;
+    private Form_KhachHang form_KhachHang;
+
     public Main() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         home = new Form_Home();
         ChoNgoi = new Form_ChoNgoi();
         form_phim = new Form_Phim();
+        form_KhachHang = new Form_KhachHang();
 //        form_xacthuc = new Form_XacThuc();
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
-                if (index == 0 ) {
+                if (index == 0) {
                     setForm(new Form_Home(mainPanel));
-                } //else if (index == 1) {
-                //                    setForm(form1);
-                //                } else if (index == 2) {
+                } else if (index == 1) {
+                    setForm(form_KhachHang);
+                } //                } else if (index == 2) {
                 //                    setForm(form2);
                 else if (index == 3) {
                     setForm(ChoNgoi);
                 } else if (index == 4) {
                     setForm(form_phim);
-                }
-//                else if (index == 5){
-//                    setForm(form_5);
-//                }else if (index ==6){
-//                    setForm(form_6);
-//                }else if (index==7){
-//                    setForm(form_7);
-//                }
-//                else if (index == 8){
-//                    setForm(form_8);
-//                }
-                else if (index==9){
+                } //                else if (index == 5){
+                //                    setForm(form_5);
+                //                }else if (index ==6){
+                //                    setForm(form_6);
+                //                }else if (index==7){
+                //                    setForm(form_7);
+                //                }
+                //                else if (index == 8){
+                //                    setForm(form_8);
+                //                }
+                else if (index == 9) {
                     setForm(new Form_XacThuc(mainPanel));
-                } else if(index == 10){
+                } else if (index == 10) {
                     DangXuat();
                 }
 
             }
-        });
+        }
+        );
         //  set when system open start with home form
-        setForm(new Form_Home(mainPanel));
+        setForm(
+                new Form_Home(mainPanel));
     }
-    public void DangXuat(){
+
+    public void DangXuat() {
         File f = new File("savetk.txt");
-        
+
         if (f.exists()) {
             try {
                 new FileOutputStream(f).close();
@@ -97,6 +102,7 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }
+
     private void setForm(JComponent com) {
         mainPanel.removeAll();
         mainPanel.add(com);

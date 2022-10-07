@@ -29,7 +29,17 @@ public class KhachHangDao {
     public void Insert(KhachHang kh) {
         try {
             pst = con.prepareStatement("insert into KhachHang values(?,?,?,?,?,?,?)");
+            System.out.println("aaaa");
+            pst.setInt(1, kh.getMaKH());
+            pst.setString(2, kh.getTenKH());
+            pst.setString(3, kh.getMatKhau());
+            pst.setString(4, kh.getEmail());
+            pst.setString(6, kh.getDiaChi());
+            pst.setString(5, kh.getSoDT());
+            pst.setInt(7, kh.getGioiTinh());   
+            System.out.println("bbb");
             int kq = pst.executeUpdate();
+            System.out.println("cccc");
             System.out.println(kq);
         } catch (SQLException ex) {
             Logger.getLogger(KhachHangDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -50,7 +60,8 @@ public class KhachHangDao {
         return list;
     }
 
-    public static void UpdateKhachHang(String TenKH, String MatKhau, String Email, String SoDT, String DiaChi, int GioiTinh, int MaKH) throws SQLException {
+    public void UpdateKhachHang(String TenKH, String MatKhau, String Email, String SoDT, String DiaChi, int GioiTinh, int MaKH) throws SQLException {
+        try {
         PreparedStatement st = con.prepareStatement("update KhachHang set TenKH = ?, MatKhau = ?, Email = ?, SoDT = ?, DiaChi = ?,GioiTinh = ?  where MaKH =?");
         st.setString(1, TenKH);
         st.setString(2, MatKhau);
@@ -60,13 +71,16 @@ public class KhachHangDao {
         st.setInt(6, GioiTinh);
         st.setInt(7, MaKH);
         st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void DeleteKhachHang(String MaKH) {
+    public void DeleteKhachHang(Integer MaKH) {
         try {
             PreparedStatement pt = con.prepareStatement("delete from KhachHang where MaKH = ?");
-            pt.setString(1, MaKH);
-            pt.executeQuery();
+            pt.setInt(1, MaKH);
+            pt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -23,4 +23,6 @@ public class KhachHang {
     private String SoDT;
     private String DiaChi;
     private int GioiTinh;
+
 }
+
