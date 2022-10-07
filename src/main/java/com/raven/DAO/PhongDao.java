@@ -4,9 +4,11 @@
  */
 package com.raven.DAO;
 
+import com.raven.model.ChiTietGhe;
 import com.raven.model.PhongChieu;
 import java.sql.Array;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,12 +54,28 @@ public class PhongDao {
         }
         return list;
     }
+    public String SelectMaPhong(String MaPhim, String NgayChieu, int Stt){
+        String Mafilm = null;
+        try {
+            pst = con.prepareStatement("select MaPhong from XuatChieu x join  NgayChieu n on x.stt = n.stt where MaPhim = ? and n.Ngay = ? and n.Stt = ?");
+            pst.setString(1, MaPhim);
+            pst.setDate(2,java.sql.Date.valueOf(NgayChieu));
+            pst.setInt(3, Stt);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                Mafilm = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Mafilm;
+    }
 
     public void Update(String TenPhong, String MaPhong) throws SQLException {
-        PreparedStatement st = con.prepareStatement("update PhongChieu set TenPhong = ? where MaPhong =?");
-        st.setString(1, TenPhong);
-        st.setString(2, MaPhong);
-        st.executeUpdate();
+         pst = con.prepareStatement("update PhongChieu set TenPhong = ? where MaPhong =?");
+        pst.setString(1, TenPhong);
+        pst.setString(2, MaPhong);
+        pst.executeUpdate();
     }
 
     public void Delete(String MaPhong) {
@@ -69,15 +87,16 @@ public class PhongDao {
             e.printStackTrace();
         }
     }
-    public List<Object[]> fillCard(){
-        List<Object[]> list = new ArrayList<>();
-        Object[] arr;
+    public List<ChiTietGhe> SelectGheInVe(String ngay, int stt,String maphim){
+        List<ChiTietGhe> list = new ArrayList<>();
         try {
-            pst = con.prepareCall("{ call fillcard(?)}");
+            pst = con.prepareCall("{ call SelectGheInVe(?,?,?)}");
             pst.setDate(1, java.sql.Date.valueOf("2022-09-01"));
+            pst.setInt(2, stt);
+            pst.setString(3, maphim);
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Object[]{rs.getString("TenPhong"),rs.getInt("soGhe"),rs.getInt("soVe")});
+                list.add(new ChiTietGhe(rs.getInt(1),rs.getString(2)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);

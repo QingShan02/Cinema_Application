@@ -26,7 +26,7 @@ import javax.swing.JScrollPane;
 
 public class Form_Home extends javax.swing.JPanel {
 
-    PhongDao dao;
+    PhongDao daoPhong;
     List<Object[]> list;
     Form_ChoNgoi cn;
     PhimDao daoPhim;
@@ -37,8 +37,8 @@ public class Form_Home extends javax.swing.JPanel {
 //        dao = new PhongDao();
 //        list = dao.fillCard();
         daoPhim = new PhimDao();
-        listPhim = daoPhim.PhimTrongNgay("2022-09-01");
         
+        listPhim = daoPhim.PhimTrongNgay("2022-09-01");
         
         cn = new Form_ChoNgoi();
 //        list.stream().forEach(s->System.out.println(s[0]));
@@ -97,7 +97,7 @@ public class Form_Home extends javax.swing.JPanel {
             card = new Card();
 //            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) list.get(i)[0], list.get(i)[1] + " số ghế", list.get(i)[2] + " số vé"));
 //            card.setColor1(cl[i]);
-    card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01",listXC,main));
+            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01",listXC,main,phim.getMaPhim()), phim.getMaPhim(), phim.getNamSX());
             card.setColor1(Color.BLACK);
             card.setColor2(Color.BLACK);
                         panel1.add(card);
@@ -114,7 +114,7 @@ public class Form_Home extends javax.swing.JPanel {
 //                }
 //            });
         }
-        System.out.println("1dhaahsd");
+     
         panel1.repaint();
         panel1.revalidate();
         
@@ -128,32 +128,34 @@ public class Form_Home extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         panel1 = new javax.swing.JLayeredPane();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        panel1.setLayout(new javax.swing.BoxLayout(panel1, javax.swing.BoxLayout.PAGE_AXIS));
+        panel1.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
+        jScrollPane1.setViewportView(panel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLayeredPane panel1;
     // End of variables declaration//GEN-END:variables
 }

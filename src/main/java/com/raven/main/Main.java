@@ -11,6 +11,8 @@ import com.raven.form.Form_ChoNgoi;
 import com.raven.form.Form_KhachHang;
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
+import com.raven.form.Form_QLPhong;
+import com.raven.form.Form_Topping;
 import com.raven.form.Form_XacThuc;
 import com.raven.model.NhanVien;
 import java.awt.Color;
@@ -62,17 +64,20 @@ public class Main extends javax.swing.JFrame {
                     setForm(ChoNgoi);
                 } else if (index == 4) {
                     setForm(form_phim);
-                } //                else if (index == 5){
-                //                    setForm(form_5);
-                //                }else if (index ==6){
-                //                    setForm(form_6);
-                //                }else if (index==7){
-                //                    setForm(form_7);
-                //                }
-                //                else if (index == 8){
-                //                    setForm(form_8);
-                //                }
-                else if (index == 9) {
+                }
+                else if (index == 5){
+                    setForm(new Form_Topping());
+                }
+                else if (index ==6){
+                    setForm(new Form_QLPhong());
+                }
+//                }else if (index==7){
+//                    setForm(form_7);
+//                }
+//                else if (index == 8){
+//                    setForm(new Form_QLPhong());
+//                }
+                else if (index==9){
                     setForm(new Form_XacThuc(mainPanel));
                 } else if (index == 10) {
                     DangXuat();

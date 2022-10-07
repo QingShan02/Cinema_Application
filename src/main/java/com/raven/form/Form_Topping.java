@@ -4,17 +4,53 @@
  */
 package com.raven.form;
 
+import com.raven.DAO.ToppingDao;
+import com.raven.model.Model_topping;
+import com.raven.model.Topping;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.border.LineBorder;
+
 /**
  *
  * @author TRA
  */
 public class Form_Topping extends javax.swing.JPanel {
 
+    Topping tp;
+    ToppingDao dao;
+    List<Topping> listTopping = new ArrayList<>();
+    Model_topping mt;
     /**
      * Creates new form From_Topping
      */
     public Form_Topping() {
         initComponents();
+        dao = new ToppingDao();
+        listTopping.addAll(dao.Select());
+        mt = new Model_topping();
+        for (Topping tp : listTopping) {
+            mt.setBorder(new LineBorder(Color.GRAY, 4, true));
+            mt = new Model_topping(tp.getTenTopping(), tp.getSoLuongDangCo(), tp.getMaTopping());
+            jPanel3.add(mt);
+            mt.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    System.out.println("hahaha");
+                    txtTenTopping.setText(tp.getTenTopping());
+                    txtSoLuong.setText(String.valueOf(tp.getSoLuongDangCo()));
+                    txtMaTopping.setText(tp.getMaTopping());
+                }
+            });
+        }
+        jPanel3.repaint();
+        jPanel3.revalidate();
     }
 
     /**
@@ -77,25 +113,31 @@ public class Form_Topping extends javax.swing.JPanel {
         btnThem.setBackground(new java.awt.Color(102, 51, 0));
         btnThem.setForeground(new java.awt.Color(242, 242, 242));
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnXoa.setBackground(new java.awt.Color(102, 51, 0));
         btnXoa.setForeground(new java.awt.Color(242, 242, 242));
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnCapNhat.setBackground(new java.awt.Color(102, 51, 0));
         btnCapNhat.setForeground(new java.awt.Color(242, 242, 242));
         btnCapNhat.setText("Cập Nhật");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 188, Short.MAX_VALUE)
-        );
+        jPanel3.setLayout(new java.awt.GridLayout(1, 3, 0, 5));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -161,10 +203,10 @@ public class Form_Topping extends javax.swing.JPanel {
                         .addComponent(btnTimKiem1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -198,11 +240,11 @@ public class Form_Topping extends javax.swing.JPanel {
                             .addComponent(btnThem)
                             .addComponent(btnXoa)
                             .addComponent(btnCapNhat))))
-                .addGap(17, 17, 17)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -211,17 +253,43 @@ public class Form_Topping extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        tp.setTenTopping(txtTenTopping.getText());
+        tp.setMaTopping("");
+        tp.setSoLuongDangCo(Integer.parseInt(txtSoLuong.getText()));
+        tp.setGia(0);
+        dao = new ToppingDao();
+        dao.Insert(tp);
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        dao = new ToppingDao();
+        dao.DeleteTopping(txtMaTopping.getText());
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        // TODO add your handling code here:
+        dao = new ToppingDao();
+        try {
+            dao.UpdateTopping(txtTenTopping.getText(), Integer.parseInt(txtSoLuong.getText()), 1.1, txtMaTopping.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(Form_Topping.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnCapNhatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

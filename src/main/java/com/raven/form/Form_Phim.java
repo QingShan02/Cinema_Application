@@ -59,7 +59,7 @@ public class Form_Phim extends javax.swing.JPanel {
         txtMaPhim.setText(temp.getMaPhim());
         txtTenPhim.setText(temp.getTenPhim());
         txtDienVien.setText(temp.getDienVien());
-        txtNamSX.setText(temp.getNamSX());
+        txtNamSX.setText(String.valueOf(temp.getNamSX()));
         txtDaoDien.setText(temp.getDaoDien());
         txtQuocGia.setText(temp.getQuocGia());
         txtThoiLuong.setText(temp.getThoiLuong());
@@ -500,7 +500,7 @@ public class Form_Phim extends javax.swing.JPanel {
         if (!this.checkValidate(8)) {
             return;
         }
-        Phim p = new Phim(txtMaPhim.getText(), txtTenPhim.getText(), txtDienVien.getText(), txtNamSX.getText(), "", txtDaoDien.getText(), txtQuocGia.getText(), txtThoiLuong.getText(), txtMoTa.getText(), "");
+        Phim p = new Phim(txtMaPhim.getText(), txtTenPhim.getText(), txtDienVien.getText(), Integer.parseInt(txtNamSX.getText()), "", txtDaoDien.getText(), txtQuocGia.getText(), txtThoiLuong.getText(), txtMoTa.getText(), "");
         dao.Update(p);
         this.Xoa();
         FillTable();
@@ -536,7 +536,7 @@ public class Form_Phim extends javax.swing.JPanel {
         if (!this.checkValidate(8)) {
             return;
         }
-        Phim p = new Phim(txtMaPhim.getText(), txtTenPhim.getText(), txtDienVien.getText(), txtNamSX.getText(), "", txtDaoDien.getText(), txtQuocGia.getText(), txtThoiLuong.getText(), txtMoTa.getText(), "");
+        Phim p = new Phim(txtMaPhim.getText(), txtTenPhim.getText(), txtDienVien.getText(), Integer.parseInt(txtNamSX.getText()), "", txtDaoDien.getText(), txtQuocGia.getText(), txtThoiLuong.getText(), txtMoTa.getText(), "");
         dao.Insert(p);
         this.Xoa();
         FillTable();

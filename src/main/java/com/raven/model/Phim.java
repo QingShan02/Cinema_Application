@@ -20,7 +20,7 @@ public class Phim {
     private String MaPhim;
     private String TenPhim;
     private String DienVien;
-    private String NamSX;
+    private int NamSX;
     private String Hinh;
     private String DaoDien;
     private String QuocGia;
@@ -28,9 +28,11 @@ public class Phim {
     private String MoTa;
     private String Traller;
 
-    public Phim(String MaPhim, String TenPhim) {
+    public Phim(String MaPhim, String TenPhim, int NamSX) {
         this.MaPhim = MaPhim;
         this.TenPhim = TenPhim;
+        this.NamSX = NamSX;
     }
+
 
 }
