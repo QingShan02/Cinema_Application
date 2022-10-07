@@ -128,6 +128,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("Tên Phòng");
 
         cboPhong.addItemListener(new java.awt.event.ItemListener() {
@@ -141,11 +143,12 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             }
         });
 
-        Sodochongoi3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Sodochongoi3.setBackground(new java.awt.Color(255, 255, 255));
         Sodochongoi3.setFocusCycleRoot(true);
         Sodochongoi3.setPreferredSize(new java.awt.Dimension(3, 3));
         Sodochongoi3.setLayout(new java.awt.GridLayout(8, 12, 1, 1));
 
+        Sodochongoivip.setBackground(new java.awt.Color(255, 255, 255));
         Sodochongoivip.setLayout(new java.awt.GridLayout(1, 14, 1, 1));
 
         jPanel5.setBackground(new java.awt.Color(255, 102, 255));
@@ -187,10 +190,13 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             .addGap(0, 36, Short.MAX_VALUE)
         );
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Ghế Thường");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Ghế Đôi");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Ghế Vip");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -215,9 +221,9 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
+                        .addGap(34, 34, 34)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(jLabel4)
@@ -230,7 +236,6 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -246,7 +251,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2)))
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
