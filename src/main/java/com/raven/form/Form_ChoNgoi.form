@@ -27,7 +27,11 @@
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="cboPhong" min="-2" pref="331" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="cboPhong" min="-2" pref="331" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                              <Component id="lblGio" min="-2" pref="135" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                               <Component id="Sodochongoi3" min="-2" pref="699" max="-2" attributes="0"/>
@@ -65,7 +69,10 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cboPhong" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="cboPhong" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGio" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="Sodochongoi3" min="-2" pref="301" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -223,6 +230,8 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Gh&#x1ebf; Vip"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblGio">
     </Component>
   </SubComponents>
 </Form>

@@ -49,6 +49,8 @@ public class Form_Topping extends javax.swing.JPanel {
                 }
             });
         }
+        jPanel3.repaint();
+        jPanel3.revalidate();
     }
 
     /**

@@ -92,7 +92,7 @@ public class Card extends javax.swing.JPanel {
                     System.out.println(s.getStt());
                     String maPhong = daoPhong.SelectMaPhong(data.getMaPhim(), data.getValues(), s.getStt());
                     
-                    data.getMainpJPanel().add(new Form_ChoNgoi(maPhong));
+                    data.getMainpJPanel().add(new Form_ChoNgoi(maPhong,s.getGioBatDau()));
                     data.getMainpJPanel().repaint();
                     data.getMainpJPanel().revalidate();
                 }
