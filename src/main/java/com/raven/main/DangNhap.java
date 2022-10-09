@@ -30,7 +30,7 @@ public class DangNhap extends javax.swing.JFrame {
     NhanVienDao dao;
     ThongBao tb;
 
-    public Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
         if (ois == null) {
@@ -48,25 +48,7 @@ public class DangNhap extends javax.swing.JFrame {
 
     public DangNhap() {
 //        File f = new File("savetk.txt");
-        dao = new NhanVienDao();
-
-        try {
-//            System.out.println("2");
-            if (new File("savetk.txt").length() != 0) {
-                NhanVien list_temp = (NhanVien) readObj("savetk.txt");
-//            System.out.println("1");
-//            if(list_temp != null){
-                dao.Select().stream().filter(s -> s.getSoDT().equalsIgnoreCase(list_temp.getSoDT())).forEach(s -> NhanVienDao.setMaNV(s.getMaNV()));
-                Main main = new Main();
-                main.show();
-                this.dispose();
-                return;
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
 
         initComponents();
         setLocationRelativeTo(null);

@@ -35,21 +35,6 @@ public class Card extends javax.swing.JPanel {
         setOpaque(false);
 
     }
-    JPanel mainPanel;
-
-    public Card(String tenPhim, String ngay, List<NgayChieu> gioChieu) {
-        initComponents();
-        lbTitle.setText(tenPhim);
-        lbValues.setText(ngay);
-//        this.mainPanel = mainPanel;
-        for (NgayChieu gc : gioChieu) {
-            btnGioChieu = new JButton();
-            btnGioChieu.setText(gc.getGioBatDau());
-            pnlGioChieu.add(btnGioChieu);
-
-        }
-
-    }
 
     public Color getColor1() {
         return color1;
@@ -86,17 +71,18 @@ public class Card extends javax.swing.JPanel {
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    data.getMainpJPanel().removeAll();
+                    Main.mainF.removeAll();
                     daoPhong = new PhongDao();
                     System.out.println(data.getMaPhim());
                     System.out.println(data.getValues());
                     System.out.println(s.getStt());
-                    String maPhong = daoPhong.SelectMaPhong(data.getMaPhim(), data.getValues(), s.getStt());
-                    List<ChiTietGhe> listGheCV =  daoPhong.SelectGheInVe("2022-09-01", s.getStt(), data.getMaPhim());
 
-                    data.getMainpJPanel().add(new Form_ChoNgoi(maPhong,s.getGioBatDau(),listGheCV));
-                    data.getMainpJPanel().repaint();
-                    data.getMainpJPanel().revalidate();
+                    String maPhong = daoPhong.SelectMaPhong(data.getMaPhim(), data.getValues(), s.getStt());
+                    List<ChiTietGhe> listGheCV = daoPhong.SelectGheInVe("2022-09-01", s.getStt(), data.getMaPhim());
+
+                    Main.mainF.add(new Form_ChoNgoi(maPhong, s.getGioBatDau(), listGheCV));
+                    Main.mainF.repaint();
+                    Main.mainF.revalidate();
                 }
 
             });

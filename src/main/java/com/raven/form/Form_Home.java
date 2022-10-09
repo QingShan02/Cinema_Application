@@ -32,98 +32,31 @@ public class Form_Home extends javax.swing.JPanel {
     PhimDao daoPhim;
     List<Phim> listPhim;
     List<NgayChieu> listXC;
+
     public Form_Home() {
         initComponents();
-//        dao = new PhongDao();
-//        list = dao.fillCard();
-        daoPhim = new PhimDao();
-        
-        listPhim = daoPhim.PhimTrongNgay("2022-09-01");
-        
-        cn = new Form_ChoNgoi();
-//        list.stream().forEach(s->System.out.println(s[0]));
-//        Color cl[] = new Color[]{Color.RED, Color.BLUE, Color.GRAY};;
-        Card card = null;
-        for (Phim phim : listPhim) {
-            
-            listXC = daoPhim.GioCuaPhim(phim.getMaPhim(), "2022-09-01");
-            
-            card = new Card();
-//            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) list.get(i)[0], list.get(i)[1] + " số ghế", list.get(i)[2] + " số vé"));
-//            card.setColor1(cl[i]);
-//    card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01",listXC,));
-            card.setColor1(Color.BLACK);
-            card.setColor2(Color.BLACK);
-                        panel1.add(card);
 
-//            System.out.println(card.getParent());
-//            card.addMouseListener(new MouseAdapter() {
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-////                    System.out.println(1);
-//                    panel1.removeAll();
-//                    panel1.add(cn);
-//                    panel1.repaint();
-//                    panel1.revalidate();
-//                }
-//            });
-        }
-        
-//        for (Phim n : listPhim) {
-//            System.out.println(n);
-//            n.get
-//        }
-        
-    }
-    JPanel main;
-
-    public Form_Home(JPanel main) {
-        this.main = main;
-         initComponents();
-//        dao = new PhongDao();
-//        list = dao.fillCard();
         daoPhim = new PhimDao();
         listPhim = daoPhim.PhimTrongNgay("2022-09-01");
-        
-        
+
         cn = new Form_ChoNgoi();
-//        list.stream().forEach(s->System.out.println(s[0]));
-//        Color cl[] = new Color[]{Color.RED, Color.BLUE, Color.GRAY};;
+
         Card card = null;
         for (Phim phim : listPhim) {
-            
+
             listXC = daoPhim.GioCuaPhim(phim.getMaPhim(), "2022-09-01");
-            
             card = new Card();
-//            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) list.get(i)[0], list.get(i)[1] + " số ghế", list.get(i)[2] + " số vé"));
-//            card.setColor1(cl[i]);
-            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01",listXC,main,phim.getMaPhim()), phim.getMaPhim(), phim.getNamSX());
+            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01", listXC, phim.getMaPhim()), phim.getMaPhim(), phim.getNamSX());
             card.setColor1(Color.BLACK);
             card.setColor2(Color.BLACK);
-                        panel1.add(card);
-                        
-//            System.out.println(card.getParent());
-//            card.addMouseListener(new MouseAdapter() {
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-////                    System.out.println(1);
-//                    panel1.removeAll();
-//                    panel1.add(cn);
-//                    panel1.repaint();
-//                    panel1.revalidate();
-//                }
-//            });
+            panel1.add(card);
+
         }
-     
         panel1.repaint();
         panel1.revalidate();
-        
-//        for (Phim n : listPhim) {
-//            System.out.println(n);
-//            n.get
-//        }
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

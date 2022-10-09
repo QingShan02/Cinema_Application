@@ -3,81 +3,17 @@ package com.raven.model;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JPanel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Model_Card {
-
-    public Icon getIcon() {
-        return icon;
-    }
-
-    public void setIcon(Icon icon) {
-        this.icon = icon;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getValues() {
-        return values;
-    }
-
-    public void setValues(String values) {
-        this.values = values;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-List<NgayChieu> nc;
-
-    public List<NgayChieu> getNc() {
-        return nc;
-    }
-
-    public void setNc(List<NgayChieu> nc) {
-        this.nc = nc;
-    }
-    JPanel mainpJPanel;
-    public Model_Card(Icon icon, String title, String values, List<NgayChieu> nc, JPanel mainpJPanel, String MaPhim) {
-        this.icon = icon;
-        this.title = title;
-        this.values = values;
-        this.nc = nc;
-        this.mainpJPanel = mainpJPanel;
-        this.MaPhim = MaPhim;
-    }
-
-    public JPanel getMainpJPanel() {
-        return mainpJPanel;
-    }
-
-    public void setMainpJPanel(JPanel mainpJPanel) {
-        this.mainpJPanel = mainpJPanel;
-    }
-    
-    public Model_Card() {
-    }
-
-    public String getMaPhim() {
-        return MaPhim;
-    }
-
-    public void setMaPhim(String MaPhim) {
-        this.MaPhim = MaPhim;
-    }
-
     private Icon icon;
     private String title;
     private String values;
-    private String description;
+    private List<NgayChieu> nc;
     private String MaPhim;
 }
