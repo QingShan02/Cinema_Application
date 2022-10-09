@@ -10,6 +10,7 @@ import com.raven.main.Main;
 import com.raven.model.ChiTietGhe;
 import com.raven.model.Model_Card;
 import com.raven.model.NgayChieu;
+import com.raven.model.PhongChieu;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -77,10 +78,10 @@ public class Card extends javax.swing.JPanel {
                     System.out.println(data.getValues());
                     System.out.println(s.getStt());
 
-                    String maPhong = daoPhong.SelectMaPhong(data.getMaPhim(), data.getValues(), s.getStt());
+                    PhongChieu phg = daoPhong.SelectPhong(data.getMaPhim(), data.getValues(), s.getStt());
                     List<ChiTietGhe> listGheCV = daoPhong.SelectGheInVe("2022-09-01", s.getStt(), data.getMaPhim());
 
-                    Main.mainF.add(new Form_ChoNgoi(maPhong, s.getGioBatDau(), listGheCV));
+                    Main.mainF.add(new Form_ChoNgoi(phg, s.getGioBatDau(), listGheCV));
                     Main.mainF.repaint();
                     Main.mainF.revalidate();
                 }

@@ -20,4 +20,5 @@ public class Topping {
     private String TenTopping;
     private int SoLuongDangCo;
     private double Gia;
+    private String hinh;
 }

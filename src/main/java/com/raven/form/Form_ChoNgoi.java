@@ -22,10 +22,7 @@ import java.util.stream.Collectors;
  * @author Daokh
  */
 public class Form_ChoNgoi extends javax.swing.JPanel {
-
-    PhongDao daoPhong;
     GheDao daoGhe;
-    List<PhongChieu> ListPhong = new ArrayList<>();
     List<ChiTietGhe> ListGhe = new ArrayList<>();
 
     /**
@@ -33,43 +30,22 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
      */
     public Form_ChoNgoi() {
         initComponents();
-//        daoPhong = new PhongDao();
-//        daoGhe = new GheDao();
-//        ListPhong = daoPhong.Select();
-//        ListGhe = daoGhe.Select();
-//        ListPhong.stream().forEach(s -> {
-//            cboPhong.addItem(s.getTenPhong());
-//        });
     }
     Color cl;
     List<ChiTietGhe> List;
     List<ChiTietGhe> List2;
-    String maphongString;
     List<ChiTietGhe> listGheCV;
+    PhongChieu phg;
 
-    public Form_ChoNgoi(String maphongString, String gio, List<ChiTietGhe> listGheCV) {
+    public Form_ChoNgoi(PhongChieu phg, String gio, List<ChiTietGhe> listGheCV) {
         initComponents();
         this.listGheCV = listGheCV;
-
-        this.maphongString = maphongString;
-        daoPhong = new PhongDao();
+        this.phg = phg;
         daoGhe = new GheDao();
-        ListPhong = daoPhong.Select();
-        ListPhong.stream().forEach(s -> {
-            cboPhong.addItem(s.getTenPhong());
-        });
-//        SodoGhe();
-//        ListPhong.stream().forEach(s -> {
-//            if (s.getMaPhong().equalsIgnoreCase(maphongString)) {
-//                cboPhong.setSelectedItem(s.getTenPhong());
-//                
-//            }
-//        });
-        ListGhe = daoGhe.Select(ListPhong.get(cboPhong.getSelectedIndex()).getMaPhong());
-
-        System.out.println("abc");
-
+        ListGhe = daoGhe.Select(this.phg.getMaPhong());
+        lblTenPhong.setText(lblTenPhong.getText()+" "+this.phg.getTenPhong());
         lblGio.setText(gio);
+        SodoGhe();
     }
     List<Model_Ghe> lModel = new ArrayList<>();
     Model_Ghe ghe;
@@ -84,27 +60,28 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             }
 
             ghe = new Model_Ghe(cl, s.getTenGhe());
-            ghe.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-
-                    if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-                        if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-                            e.getComponent().setBackground(Color.PINK);
-                        } else {
-                            e.getComponent().setBackground(Color.GREEN);
-                        }
-                    } else {
-                        e.getComponent().setBackground(Color.YELLOW);
-                    }
-                }
-
-            });
+//            ghe.addMouseListener(new MouseAdapter() {
+//                @Override
+//                public void mouseClicked(MouseEvent e) {
+//
+//                    if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+//                        if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+//                            e.getComponent().setBackground(Color.PINK);
+//                        } else {
+//                            e.getComponent().setBackground(Color.GREEN);
+//                        }
+//                    } else {
+//                        e.getComponent().setBackground(Color.YELLOW);
+//                    }
+//                }
+//
+//            });
             Sodochongoi3.add(ghe);
             lModel.add(ghe);
 
         }
-        if (cboPhong.getSelectedIndex() >= 5) {
+        int id = Integer.parseInt(phg.getMaPhong().substring(2));
+        if (id>= 5) {
             List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
             for (ChiTietGhe s : List2) {
                 if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
@@ -112,24 +89,24 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                 }
                 ghe = new Model_Ghe(cl, s.getTenGhe());
                 lModel.add(ghe);
-                ghe.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-                                e.getComponent().setBackground(Color.PINK);
-                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
-                                e.getComponent().setBackground(Color.RED);
-                            } else {
-                                e.getComponent().setBackground(Color.GREEN);
-                            }
-                        } else {
-                            e.getComponent().setBackground(Color.YELLOW);
-                        }
-                    }
-                });
+//                ghe.addMouseListener(new MouseAdapter() {
+//                    @Override
+//                    public void mouseClicked(MouseEvent e) {
+//                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+//                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+//                                e.getComponent().setBackground(Color.PINK);
+//                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+//                                e.getComponent().setBackground(Color.RED);
+//                            } else {
+//                                e.getComponent().setBackground(Color.GREEN);
+//                            }
+//                        } else {
+//                            e.getComponent().setBackground(Color.YELLOW);
+//                        }
+//                    }
+//                });
                 Sodochongoivip.add(ghe);
-                            lModel.add(ghe);
+                lModel.add(ghe);
 
             }
 
@@ -138,7 +115,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             for (int i = 0; i < ListGhe.size(); i++) {
                 if (g.getMaCTGhe() == ListGhe.get(i).getMaCTGhe()) {
                     lModel.get(i).setBackground(Color.GRAY);
-                    lModel.get(i).setEnabled(false);
+                    lModel.get(i).setFocusable(false);
                 }
             }
         }
@@ -157,8 +134,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        cboPhong = new javax.swing.JComboBox<>();
+        lblTenPhong = new javax.swing.JLabel();
         Sodochongoi3 = new javax.swing.JPanel();
         Sodochongoivip = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -171,18 +147,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Tên Phòng");
-
-        cboPhong.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboPhongItemStateChanged(evt);
-            }
-        });
-        cboPhong.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboPhongMouseClicked(evt);
-            }
-        });
+        lblTenPhong.setText("Tên Phòng:");
 
         Sodochongoi3.setBackground(new java.awt.Color(255, 255, 255));
         Sodochongoi3.setFocusCycleRoot(true);
@@ -247,17 +212,6 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72)
-                                .addComponent(lblGio, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(Sodochongoi3, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Sodochongoivip, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -272,20 +226,26 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                         .addGap(32, 32, 32)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTenPhong)
+                                .addGap(341, 341, 341)
+                                .addComponent(lblGio, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Sodochongoi3, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblGio, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblGio, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTenPhong))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Sodochongoi3, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -303,27 +263,10 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cboPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboPhongMouseClicked
-//        Sodochongoi3.removeAll();
-//        SodoGhe();
-    }//GEN-LAST:event_cboPhongMouseClicked
-
-    private void cboPhongItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboPhongItemStateChanged
-        // TODO add your handling code here:
-        Sodochongoi3.removeAll();
-        Sodochongoivip.removeAll();
-                ListGhe = daoGhe.Select(ListPhong.get(cboPhong.getSelectedIndex()).getMaPhong());
-
-        SodoGhe();
-
-    }//GEN-LAST:event_cboPhongItemStateChanged
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Sodochongoi3;
     private javax.swing.JPanel Sodochongoivip;
-    private javax.swing.JComboBox<String> cboPhong;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -331,5 +274,6 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblGio;
+    private javax.swing.JLabel lblTenPhong;
     // End of variables declaration//GEN-END:variables
 }

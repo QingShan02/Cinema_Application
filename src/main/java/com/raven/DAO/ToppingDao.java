@@ -28,7 +28,12 @@ public class ToppingDao {
 
     public void Insert(Topping tp) {
         try {
-            pst = con.prepareStatement("insert into Topping values(?,?,?,?)");
+            pst = con.prepareStatement("insert into Topping values(?,?,?,?,?)");
+            pst.setString(1, tp.getMaTopping());
+            pst.setString(2, tp.getTenTopping());
+            pst.setInt(3, tp.getSoLuongDangCo());
+            pst.setFloat(4, (float) tp.getGia());
+            pst.setString(5, tp.getHinh());
             int kq = pst.executeUpdate();
             System.out.println(kq);
         } catch (SQLException ex) {
@@ -43,7 +48,7 @@ public class ToppingDao {
             st = con.createStatement();
             rs = st.executeQuery("select * from Topping");
             while (rs.next()) {
-                list.add(new Topping(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4)));
+                list.add(new Topping(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4),rs.getString(5)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ToppingDao.class.getName()).log(Level.SEVERE, null, ex);

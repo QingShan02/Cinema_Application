@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 
 /**
@@ -27,6 +28,7 @@ public class Form_Topping extends javax.swing.JPanel {
     ToppingDao dao;
     List<Topping> listTopping = new ArrayList<>();
     Model_topping mt;
+
     /**
      * Creates new form From_Topping
      */
@@ -42,15 +44,21 @@ public class Form_Topping extends javax.swing.JPanel {
             mt.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    System.out.println("hahaha");
                     txtTenTopping.setText(tp.getTenTopping());
                     txtSoLuong.setText(String.valueOf(tp.getSoLuongDangCo()));
                     txtMaTopping.setText(tp.getMaTopping());
+                    lblHinh.setIcon(resizeImage("src/main/resources/topping/" + tp.getMaTopping() + ".jpg"));
                 }
             });
         }
         jPanel3.repaint();
         jPanel3.revalidate();
+    }
+
+    public ImageIcon resizeImage(String path) {
+        ImageIcon ii = new ImageIcon(path);
+        ImageIcon imageIcon = new ImageIcon(ii.getImage().getScaledInstance(130, 200, java.awt.Image.SCALE_SMOOTH));
+        return imageIcon;
     }
 
     /**
@@ -65,7 +73,6 @@ public class Form_Topping extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
         btnTimKiem1 = new javax.swing.JButton();
         lblTenTopping = new javax.swing.JLabel();
         lblMaTopping = new javax.swing.JLabel();
@@ -82,23 +89,13 @@ public class Form_Topping extends javax.swing.JPanel {
         btn2 = new javax.swing.JButton();
         btn3 = new javax.swing.JButton();
         btn4 = new javax.swing.JButton();
+        lblHinh = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
         btnTimKiem.setBackground(new java.awt.Color(102, 51, 0));
         btnTimKiem.setForeground(new java.awt.Color(255, 255, 255));
         btnTimKiem.setText("Tìm Kiếm");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 116, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
-        );
 
         btnTimKiem1.setBackground(new java.awt.Color(102, 51, 0));
         btnTimKiem1.setForeground(new java.awt.Color(242, 242, 242));
@@ -170,13 +167,18 @@ public class Form_Topping extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(198, 198, 198)
+                                .addComponent(btnTimKiem1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(btnTimKiem)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(46, 46, 46)
+                                        .addComponent(btnTimKiem))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -197,16 +199,12 @@ public class Form_Topping extends javax.swing.JPanel {
                                 .addComponent(btnXoa)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnCapNhat)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(btnTimKiem1))
+                                .addGap(0, 12, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -216,11 +214,13 @@ public class Form_Topping extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnTimKiem)))
+                                .addComponent(btnTimKiem))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(btnTimKiem1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -241,27 +241,23 @@ public class Form_Topping extends javax.swing.JPanel {
                             .addComponent(btnXoa)
                             .addComponent(btnCapNhat))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -303,9 +299,9 @@ public class Form_Topping extends javax.swing.JPanel {
     private javax.swing.JButton btnTimKiem1;
     private javax.swing.JButton btnXoa;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblHinh;
     private javax.swing.JLabel lblMaTopping;
     private javax.swing.JLabel lblSoLuong;
     private javax.swing.JLabel lblTenTopping;

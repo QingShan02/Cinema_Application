@@ -54,21 +54,21 @@ public class PhongDao {
         }
         return list;
     }
-    public String SelectMaPhong(String MaPhim, String NgayChieu, int Stt){
-        String Mafilm = null;
+    public PhongChieu SelectPhong(String MaPhim, String NgayChieu, int Stt){
+        PhongChieu phg = null;
         try {
-            pst = con.prepareStatement("select MaPhong from XuatChieu x join  NgayChieu n on x.stt = n.stt where MaPhim = ? and n.Ngay = ? and n.Stt = ?");
+            pst = con.prepareStatement("select x.MaPhong,TenPhong from XuatChieu x join  NgayChieu n on x.stt = n.stt join PhongChieu p on p.MaPhong = x.MaPhong where MaPhim = ? and n.Ngay = ? and n.Stt = ?");
             pst.setString(1, MaPhim);
             pst.setDate(2,java.sql.Date.valueOf(NgayChieu));
             pst.setInt(3, Stt);
             rs = pst.executeQuery();
             while(rs.next()){
-                Mafilm = rs.getString(1);
+                phg=new PhongChieu(rs.getString(1), rs.getString(2));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return Mafilm;
+        return phg;
     }
 
     public void Update(String TenPhong, String MaPhong) throws SQLException {
