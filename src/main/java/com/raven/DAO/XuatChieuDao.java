@@ -4,12 +4,14 @@
  */
 package com.raven.DAO;
 
+import com.raven.model.Phim;
 import com.raven.model.XuatChieu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,6 +27,7 @@ public class XuatChieuDao {
     static Statement st = null;
     static PreparedStatement pst = null;
     static ResultSet rs;
+    
 
     public void Insert(XuatChieu xc) {
         try {
@@ -69,4 +72,21 @@ public class XuatChieuDao {
             e.printStackTrace();
         }
     }
+    
+    public List<Phim> SelectTenPhim(int stt, String ngayChieu) {
+        List<Phim> list = new ArrayList<>();
+        try {
+            pst = con.prepareStatement("select Phim.MaPhim, TenPhim from XuatChieu join Phim on XuatChieu.MaPhim = Phim.MaPhim where Stt = ? and Ngay = ?");
+            pst.setInt(1, stt);
+            pst.setDate(2, java.sql.Date.valueOf(ngayChieu));
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Phim(rs.getString("MaPhim"), rs.getString("TenPhim")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(XuatChieuDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
 }
