@@ -7,13 +7,11 @@ package com.raven.form;
 import com.raven.DAO.PhimDao;
 import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
-import java.awt.Button;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.*;
 import java.util.Date;
-import javax.swing.JButton;
 
 /**
  *
@@ -33,7 +31,10 @@ public class Form_QuanLyLichChieu extends javax.swing.JPanel {
     public Form_QuanLyLichChieu() {
         initComponents();
         daophim = new PhimDao();
+        
     }
+
+    
 
     public void FillPhim() {
         ListPhim = daophim.Select();
@@ -47,10 +48,7 @@ public class Form_QuanLyLichChieu extends javax.swing.JPanel {
         String maPhim = ListPhim.get(index).getMaPhim();
         ListGioTheoNgayPhim = daophim.GioCuaPhim(maPhim, ngayChieuPhim);
         ListGioTheoNgayPhim.stream().forEach(s -> {
-            pnlLichChieu.removeAll();
-            pnlLichChieu.add(new JButton(s.getGioBatDau()));
-            pnlLichChieu.repaint();
-            pnlLichChieu.revalidate();
+
         });
     }
 
@@ -70,16 +68,21 @@ public class Form_QuanLyLichChieu extends javax.swing.JPanel {
         btnXoa = new javax.swing.JButton();
         cboPhim = new javax.swing.JComboBox<>();
         ChonNgay = new com.toedter.calendar.JDateChooser();
+        times = new javax.swing.JPanel();
+        Date date = new Date();
+        SpinnerDateModel sm =
+        new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
+        jSpinner1 = new javax.swing.JSpinner(sm);
 
-        jLabel1.setText("Ng�y Chi?u");
+        jLabel1.setText("Ngày Chiếu");
 
         jLabel2.setText("Phim");
 
-        btnThem.setText("Th�m");
+        btnThem.setText("Thêm");
 
-        btnCapNhat.setText("C?p Nh?t");
+        btnCapNhat.setText("Cập Nhật");
 
-        btnXoa.setText("X�a");
+        btnXoa.setText("Xóa");
 
         cboPhim.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -87,11 +90,24 @@ public class Form_QuanLyLichChieu extends javax.swing.JPanel {
             }
         });
 
-        ChonNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                ChonNgayPropertyChange(evt);
-            }
-        });
+        JSpinner.DateEditor de = new JSpinner.DateEditor(jSpinner1, "HH:mm");
+        jSpinner1.setEditor(de);
+
+        javax.swing.GroupLayout timesLayout = new javax.swing.GroupLayout(times);
+        times.setLayout(timesLayout);
+        timesLayout.setHorizontalGroup(
+            timesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(timesLayout.createSequentialGroup()
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 48, Short.MAX_VALUE))
+        );
+        timesLayout.setVerticalGroup(
+            timesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(timesLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -101,22 +117,27 @@ public class Form_QuanLyLichChieu extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnThem)
-                        .addGap(50, 50, 50)
-                        .addComponent(btnCapNhat)
-                        .addGap(55, 55, 55)
-                        .addComponent(btnXoa))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(ChonNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(93, 93, 93)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(332, 332, 332))
-                            .addComponent(cboPhim, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                                .addComponent(btnThem)
+                                .addGap(50, 50, 50)
+                                .addComponent(btnCapNhat)
+                                .addGap(55, 55, 55)
+                                .addComponent(btnXoa))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(ChonNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(117, 117, 117)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(332, 332, 332))
+                                    .addComponent(cboPhim, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(times, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +150,9 @@ public class Form_QuanLyLichChieu extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cboPhim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ChonNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(204, 204, 204)
+                .addGap(47, 47, 47)
+                .addComponent(times, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnCapNhat)
@@ -170,5 +193,7 @@ public class Form_QuanLyLichChieu extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboPhim;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JPanel times;
     // End of variables declaration//GEN-END:variables
 }
