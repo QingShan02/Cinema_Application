@@ -4,20 +4,34 @@
  */
 package com.raven.form;
 
+import com.raven.DAO.GheDao;
 import com.raven.DAO.NgayChieuDao;
 import com.raven.DAO.PhimDao;
+import com.raven.DAO.PhongDao;
 import com.raven.DAO.XuatChieuDao;
+import com.raven.main.Main;
+import com.raven.model.ChiTietGhe;
 import com.raven.model.Model_Phim;
 import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
+import com.raven.model.PhongChieu;
+import com.raven.model.ThanhToan;
 import com.raven.model.XuatChieu;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,6 +54,7 @@ public class Form_ChonPhim extends javax.swing.JPanel {
         initComponents();
         daoNgay = new NgayChieuDao();
         daoXuatChieu = new XuatChieuDao();
+        cboGio.removeAllItems();
 
     }
 
@@ -50,7 +65,21 @@ public class Form_ChonPhim extends javax.swing.JPanel {
             cboGio.addItem(s.getGioBatDau());
         });
     }
+ public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
+        if (ois == null) {
+            return null;
+        }
+        return ois.readObject();
+    }
+
+    public static void writeObj(String path, Object data) throws FileNotFoundException, IOException {
+        try (
+                 FileOutputStream fos = new FileOutputStream(path);  ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+            oos.writeObject(data);
+        }
+    }
     public void FillPhim() {
         mp = new Model_Phim();
         int stt = listGio.get(index).getStt();
@@ -59,15 +88,26 @@ public class Form_ChonPhim extends javax.swing.JPanel {
         listPhim.forEach(s -> {
             mp = new Model_Phim(s.getTenPhim(), s.getMaPhim());
             pnlPhim.add(mp);
+            PhongChieu phg = new PhongDao().SelectPhong(s.getMaPhim(), ngayChieu, listGio.get(index).getStt());
+            List<ChiTietGhe> listGheCV = new PhongDao().SelectGheInVe(ngayChieu, listGio.get(index).getStt(), s.getMaPhim());
+
             mp.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    dcNgayChieu.removeAll();
-                    cboGio.removeAll();
-                    pnlPhim.removeAll();
-                    pnlPhim.add(new Form_ChoNgoi());
-                    pnlPhim.repaint();
-                    pnlPhim.revalidate();
+                    ThanhToan tt = new ThanhToan();
+                    tt.setMaPhim(s.getMaPhim());
+                    tt.setSTT(listGio.get(index).getStt());
+                    tt.setMaPhong(phg.getMaPhong());
+                    tt.setNgayChieu(ngayChieu);
+                    try {
+                        writeObj("temp.txt",tt);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Form_ChonPhim.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Main.mainF.removeAll();
+                    Main.mainF.add(new Form_ChoNgoi(phg, listGio.get(index).getGioBatDau(), listGheCV));
+                    Main.mainF.repaint();
+                    Main.mainF.revalidate();
                 }
             });
         });
@@ -89,6 +129,10 @@ public class Form_ChonPhim extends javax.swing.JPanel {
         dcNgayChieu = new com.toedter.calendar.JDateChooser();
         cboGio = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         pnlPhim.setLayout(new javax.swing.BoxLayout(pnlPhim, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -108,6 +152,7 @@ public class Form_ChonPhim extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        dcNgayChieu.setDateFormatString("yyyy-MM-dd");
         dcNgayChieu.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
                 dcNgayChieuHierarchyChanged(evt);
@@ -138,7 +183,7 @@ public class Form_ChonPhim extends javax.swing.JPanel {
                         .addComponent(dcNgayChieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboGio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 141, Short.MAX_VALUE)))
+                        .addGap(0, 126, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

@@ -53,6 +53,7 @@ public class DangNhap extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 //        showTk();
+dao = new NhanVienDao();
     }
 
     /**

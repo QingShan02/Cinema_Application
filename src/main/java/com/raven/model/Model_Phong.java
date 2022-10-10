@@ -71,9 +71,12 @@ public class Model_Phong extends javax.swing.JPanel {
 
         lblTenPhong = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         lblTenPhong.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTenPhong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenPhong.setText("Tên phòng");
+        lblTenPhong.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

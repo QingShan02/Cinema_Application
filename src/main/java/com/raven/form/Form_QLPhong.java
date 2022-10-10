@@ -66,6 +66,7 @@ public class Form_QLPhong extends javax.swing.JPanel {
 
         pnlQLPhong = new javax.swing.JPanel();
 
+        pnlQLPhong.setBackground(new java.awt.Color(255, 255, 255));
         pnlQLPhong.setLayout(new java.awt.GridLayout(0, 2, 5, 5));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
