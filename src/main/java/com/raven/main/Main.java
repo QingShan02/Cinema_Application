@@ -13,6 +13,7 @@ import com.raven.form.Form_KhachHang;
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
 import com.raven.form.Form_QLPhong;
+import com.raven.form.Form_QuanLyLichChieu;
 import com.raven.form.Form_Topping;
 import com.raven.form.Form_XacThuc;
 import com.raven.model.NhanVien;
@@ -39,7 +40,6 @@ public class Main extends javax.swing.JFrame {
      */
     public static JPanel mainF;
 
-
     public Main() {
         initComponents();
         mainF = mainPanel;
@@ -52,9 +52,9 @@ public class Main extends javax.swing.JFrame {
                     setForm(new Form_Home());
                 } else if (index == 1) {
                     setForm(new Form_KhachHang());
-                } //                } else if (index == 2) {
-                //                    setForm(form2);
-                else if (index == 3) {
+                } else if (index == 2) {
+                    setForm(new Form_QuanLyLichChieu());
+                } else if (index == 3) {
                     setForm(new Form_ChoNgoi());
                 } else if (index == 4) {
                     setForm(new Form_Phim());

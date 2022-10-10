@@ -25,6 +25,10 @@ public class NgayChieu {
         this.GioBatDau = GioBatDau;
     }
 
+    public NgayChieu(String GioBatDau) {
+        this.GioBatDau = GioBatDau;
+    }
+
 
     
 }
