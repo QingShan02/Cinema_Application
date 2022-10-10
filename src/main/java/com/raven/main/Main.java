@@ -8,6 +8,7 @@ package com.raven.main;
 import com.raven.DAO.NhanVienDao;
 import com.raven.event.EventMenuSelected;
 import com.raven.form.Form_ChoNgoi;
+import com.raven.form.Form_ChonPhim;
 import com.raven.form.Form_KhachHang;
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
@@ -60,7 +61,7 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 5) {
                     setForm(new Form_Topping());
                 } else if (index == 6) {
-                    setForm(new Form_QLPhong());
+                    setForm(new Form_ChonPhim());
                 } //                }else if (index==7){
                 //                    setForm(form_7);
                 //                }
