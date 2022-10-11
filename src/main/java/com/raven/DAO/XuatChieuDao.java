@@ -29,6 +29,12 @@ public class XuatChieuDao {
     public void Insert(XuatChieu xc) {
         try {
             pst = con.prepareStatement("insert into XuatChieu values(?,?,?,?,?)");
+            pst.setInt(1, xc.getStt());
+            pst.setDate(2, java.sql.Date.valueOf(xc.getNgay()));
+            pst.setString(3, xc.getMaPhong());
+            pst.setString(4, xc.getMaPhim());
+            pst.setDouble(5, xc.getGiaXuatChieu());
+
             int kq = pst.executeUpdate();
             System.out.println(kq);
         } catch (SQLException ex) {
