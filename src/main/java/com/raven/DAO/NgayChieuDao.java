@@ -27,6 +27,21 @@ public class NgayChieuDao {
     static ResultSet rs;
     List<NgayChieu> list;
 
+    public void insert(NgayChieu nc) {
+        try {
+            pst = con.prepareStatement("insert into NgayChieu values(?,?,?)");
+            pst.setInt(1, nc.getStt());
+            pst.setDate(2, java.sql.Date.valueOf(nc.getNgay()));
+            pst.setString(3, nc.getGioBatDau());
+
+            int kq = pst.executeUpdate();
+            System.out.println(kq);
+        } catch (SQLException ex) {
+            Logger.getLogger(NgayChieuDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public List<NgayChieu> Select() {
         list = new ArrayList<>();
         try {

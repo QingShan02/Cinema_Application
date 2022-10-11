@@ -125,6 +125,7 @@ public class PhimDao {
         }
         return list;
     }
+    
 
     public List<NgayChieu> GioCuaPhim(String maphim, String ngay) {
         List<NgayChieu> list = new ArrayList<>();

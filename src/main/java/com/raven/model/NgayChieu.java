@@ -30,6 +30,4 @@ public class NgayChieu {
         this.GioBatDau = GioBatDau;
     }
 
-
-    
 }
