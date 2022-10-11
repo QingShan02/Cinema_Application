@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 public class RunMain {
     public static void main(String[] args) {
          NhanVienDao dao = new NhanVienDao();
-
         try {
             if (new File("savetk.txt").length() != 0) {
                 NhanVien list_temp = (NhanVien) DangNhap.readObj("savetk.txt");

@@ -25,6 +25,7 @@ public class NgayChieuDao {
     static Statement st = null;
     static PreparedStatement pst = null;
     static ResultSet rs;
+    List<NgayChieu> list;
 
     public void insert(NgayChieu nc) {
         try {
@@ -42,7 +43,7 @@ public class NgayChieuDao {
     }
 
     public List<NgayChieu> Select() {
-        List<NgayChieu> list = new ArrayList<>();
+        list = new ArrayList<>();
         try {
             st = con.createStatement();
             rs = st.executeQuery("select * from NgayChieu");
@@ -51,21 +52,22 @@ public class NgayChieuDao {
         }
         return list;
     }
-
+    
     public List<NgayChieu> SelectGioBatDau(String ngayChieu) {
-        List<NgayChieu> list = new ArrayList<>();
-
+        list = new ArrayList<>();
+        
         try {
-            pst = con.prepareStatement("select GioBatDau from NgayChieu where Ngay = ?");
+            pst = con.prepareStatement("select Stt, GioBatDau from NgayChieu where Ngay = ?");
             pst.setDate(1, java.sql.Date.valueOf(ngayChieu));
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new NgayChieu(rs.getString(0)));
+                list.add(new NgayChieu(rs.getInt("Stt"), rs.getString("GioBatDau")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(NgayChieuDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        
         return list;
     }
 }

@@ -15,19 +15,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NgayChieu {
-
-    private int Stt;
-    private String Ngay;
-    private String GioBatDau;
-    public NgayChieu(String GioBatDau) {
-
-        this.GioBatDau = GioBatDau;
-    }
-
-    public NgayChieu(int Stt, String GioBatDau) {
-        this.Stt = Stt;
-        this.GioBatDau = GioBatDau;
-    }
-
+public class ThanhToan {
+    private int MaCTGhe;
+    private String MaGhe;
+    private String MaPhong;
+    private int STT;
+    private String NgayChieu;
+    private String MaPhim;
+    private String MaTopping;
+    private int SoLuongMua;
 }
