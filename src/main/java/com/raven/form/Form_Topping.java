@@ -10,13 +10,22 @@ import com.raven.model.Topping;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -32,6 +41,38 @@ public class Form_Topping extends javax.swing.JPanel {
     /**
      * Creates new form From_Topping
      */
+    String name = "";
+    public void ChonAnh() {
+        try {
+            JFileChooser fChooser = new JFileChooser("E://");
+//            fChooser.setFileFilter(new FileNameExtensionFilter("JPEG file", "jpg", "jpeg"));
+
+            fChooser.setDialogTitle("Chọn ảnh");
+            int a = fChooser.showOpenDialog(null);
+            if (a == JFileChooser.APPROVE_OPTION) {
+                File fTenAnh = fChooser.getSelectedFile();
+                System.out.println(fTenAnh.getName());
+                InputStream ip = new BufferedInputStream(new FileInputStream(fTenAnh));
+                OutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/topping/"+fTenAnh.getName()));
+//                OutputStream outN = new BufferedOutputStream(new FileOutputStream(fTenAnh));
+                byte[] b = new byte[1024];
+                int i;
+                while ((i = ip.read(b)) > 0) {
+                    out.write(b, 0, i);
+                    out.flush();
+                }
+                lblHinh.setIcon(resizeImage("src/main/resources/topping/" + fTenAnh.getName()));
+                name = fTenAnh.getName();
+//                lblAnh.setText("");
+            } else {
+                System.out.println("Chưa chọn ảnh");
+                name = "";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public Form_Topping() {
         initComponents();
         dao = new ToppingDao();
@@ -100,6 +141,11 @@ public class Form_Topping extends javax.swing.JPanel {
         btnTimKiem1.setBackground(new java.awt.Color(102, 51, 0));
         btnTimKiem1.setForeground(new java.awt.Color(242, 242, 242));
         btnTimKiem1.setText("Chọn Anh");
+        btnTimKiem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiem1ActionPerformed(evt);
+            }
+        });
 
         lblTenTopping.setText("Tên Topping");
 
@@ -267,25 +313,31 @@ public class Form_Topping extends javax.swing.JPanel {
         tp.setMaTopping("");
         tp.setSoLuongDangCo(Integer.parseInt(txtSoLuong.getText()));
         tp.setGia(0);
+        tp.setHinh(name);
         dao = new ToppingDao();
         dao.Insert(tp);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        dao = new ToppingDao();
-        dao.DeleteTopping(txtMaTopping.getText());
+        dao.delete(txtMaTopping.getText());
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         // TODO add your handling code here:
-        dao = new ToppingDao();
-        try {
-            dao.UpdateTopping(txtTenTopping.getText(), Integer.parseInt(txtSoLuong.getText()), 1.1, txtMaTopping.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(Form_Topping.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                tp.setTenTopping(txtTenTopping.getText());
+        tp.setMaTopping("");
+        tp.setSoLuongDangCo(Integer.parseInt(txtSoLuong.getText()));
+        tp.setGia(0);
+        tp.setHinh(name);
+        dao.update(tp);
+
     }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void btnTimKiem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiem1ActionPerformed
+        // TODO add your handling code here:
+        ChonAnh();
+    }//GEN-LAST:event_btnTimKiem1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

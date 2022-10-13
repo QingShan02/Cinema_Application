@@ -177,6 +177,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n Anh"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTimKiem1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTenTopping">
           <Properties>

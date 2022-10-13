@@ -8,11 +8,20 @@ import com.raven.DAO.PhimDao;
 import com.raven.model.Phim;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,7 +51,38 @@ public class Form_Phim extends javax.swing.JPanel {
         dao = new PhimDao();
         FillTable();
     }
-    
+    String name = "";
+    public void ChonAnh() {
+        try {
+            JFileChooser fChooser = new JFileChooser("E://");
+//            fChooser.setFileFilter(new FileNameExtensionFilter("JPEG file", "jpg", "jpeg"));
+
+            fChooser.setDialogTitle("Chọn ảnh");
+            int a = fChooser.showOpenDialog(null);
+            if (a == JFileChooser.APPROVE_OPTION) {
+                File fTenAnh = fChooser.getSelectedFile();
+                System.out.println(fTenAnh.getName());
+                InputStream ip = new BufferedInputStream(new FileInputStream(fTenAnh));
+                OutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/poster/"+fTenAnh.getName()));
+//                OutputStream outN = new BufferedOutputStream(new FileOutputStream(fTenAnh));
+                byte[] b = new byte[1024];
+                int i;
+                while ((i = ip.read(b)) > 0) {
+                    out.write(b, 0, i);
+                    out.flush();
+                }
+                lblHinh.setIcon(resizeImage("src/main/resources/poster/" + fTenAnh.getName()));
+                name = fTenAnh.getName();
+//                lblAnh.setText("");
+            } else {
+                System.out.println("Chưa chọn ảnh");
+                name = "";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void FillTable() {
         list.clear();
         list = dao.Select();
@@ -64,9 +104,13 @@ public class Form_Phim extends javax.swing.JPanel {
         txtQuocGia.setText(temp.getQuocGia());
         txtThoiLuong.setText(temp.getThoiLuong());
         txtMoTa.setText(temp.getMoTa());
-        
+        lblHinh.setIcon(resizeImage("src/main/resources/topping/"+temp.getHinh()));
     }
-    
+        public ImageIcon resizeImage(String path) {
+        ImageIcon ii = new ImageIcon(path);
+        ImageIcon imageIcon = new ImageIcon(ii.getImage().getScaledInstance(130, 200, java.awt.Image.SCALE_SMOOTH));
+        return imageIcon;
+    }
     public boolean checkValidate(int index) {
         if (index == 1) {
             if (txtMaPhim.getText().length() == 0) {
@@ -212,6 +256,7 @@ public class Form_Phim extends javax.swing.JPanel {
         btnXoa = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
         btnCapNhat = new javax.swing.JButton();
+        lblHinh = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -428,6 +473,12 @@ public class Form_Phim extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        lblHinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblHinhMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -435,7 +486,9 @@ public class Form_Phim extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
+                        .addGap(20, 20, 20)
+                        .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -447,8 +500,13 @@ public class Form_Phim extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -500,7 +558,7 @@ public class Form_Phim extends javax.swing.JPanel {
         if (!this.checkValidate(8)) {
             return;
         }
-        Phim p = new Phim(txtMaPhim.getText(), txtTenPhim.getText(), txtDienVien.getText(), Integer.parseInt(txtNamSX.getText()), "", txtDaoDien.getText(), txtQuocGia.getText(), txtThoiLuong.getText(), txtMoTa.getText(), "");
+        Phim p = new Phim(txtMaPhim.getText(), txtTenPhim.getText(), txtDienVien.getText(), Integer.parseInt(txtNamSX.getText()), name, txtDaoDien.getText(), txtQuocGia.getText(), txtThoiLuong.getText(), txtMoTa.getText(), "");
         dao.Update(p);
         this.Xoa();
         FillTable();
@@ -536,11 +594,16 @@ public class Form_Phim extends javax.swing.JPanel {
         if (!this.checkValidate(8)) {
             return;
         }
-        Phim p = new Phim(txtMaPhim.getText(), txtTenPhim.getText(), txtDienVien.getText(), Integer.parseInt(txtNamSX.getText()), "", txtDaoDien.getText(), txtQuocGia.getText(), txtThoiLuong.getText(), txtMoTa.getText(), "");
+        Phim p = new Phim(txtMaPhim.getText(), txtTenPhim.getText(), txtDienVien.getText(), Integer.parseInt(txtNamSX.getText()), name, txtDaoDien.getText(), txtQuocGia.getText(), txtThoiLuong.getText(), txtMoTa.getText(), "");
         dao.Insert(p);
         this.Xoa();
         FillTable();
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void lblHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhMouseClicked
+        // TODO add your handling code here:
+        ChonAnh();
+    }//GEN-LAST:event_lblHinhMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -555,6 +618,7 @@ public class Form_Phim extends javax.swing.JPanel {
     private javax.swing.JLabel lblDV;
     private javax.swing.JLabel lblDaoDien;
     private javax.swing.JLabel lblDienVien;
+    private javax.swing.JLabel lblHinh;
     private javax.swing.JLabel lblMP;
     private javax.swing.JLabel lblMT;
     private javax.swing.JLabel lblMaPhim;

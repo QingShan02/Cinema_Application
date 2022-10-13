@@ -100,8 +100,12 @@ public class Form_ChonPhim extends javax.swing.JPanel {
                     tt.setMaPhong(phg.getMaPhong());
                     tt.setNgayChieu(ngayChieu);
                     try {
-                        writeObj("temp.txt",tt);
+                        if(readObj("temp.txt")==null){
+                           writeObj("temp.txt",tt);
+                        }
                     } catch (IOException ex) {
+                        Logger.getLogger(Form_ChonPhim.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
                         Logger.getLogger(Form_ChonPhim.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     Main.mainF.removeAll();

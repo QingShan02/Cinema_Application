@@ -56,16 +56,21 @@ public class ToppingDao {
         return list;
     }
 
-    public static void UpdateTopping(String TenTopping, int SoLuongDangCo, double Gia, String MaTopping) throws SQLException {
-        PreparedStatement st = con.prepareStatement("update Topping set TenTopping = ?, SoLuongDangCo = ? , Gia = ? where MaTopping =?");
-        st.setString(1, TenTopping);
-        st.setInt(2, SoLuongDangCo);
-        st.setDouble(3, Gia);
-        st.setString(4, MaTopping);
-        st.executeUpdate();
+    public void update(Topping tp) {
+        try {
+            PreparedStatement st = con.prepareStatement("update Topping set TenTopping = ?, SoLuongDangCo = ? , Gia = ?, Hinh=? where MaTopping =?");
+            st.setString(1, tp.getTenTopping());
+            st.setInt(2, tp.getSoLuongDangCo());
+            st.setDouble(3, tp.getGia());
+            st.setString(4, tp.getHinh());
+            st.setString(5, tp.getMaTopping());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ToppingDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static void DeleteTopping(String MaTopping) {
+    public void delete(String MaTopping) {
         try {
             PreparedStatement pt = con.prepareStatement("delete from Topping where MaTopping = ?");
             pt.setString(1, MaTopping);
