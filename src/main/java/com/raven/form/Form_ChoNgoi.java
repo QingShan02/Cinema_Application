@@ -81,22 +81,22 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             }
 
             ghe = new Model_Ghe(cl, s.getTenGhe());
-//            ghe.addMouseListener(new MouseAdapter() {
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-//
-//                    if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-//                        if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-//                            e.getComponent().setBackground(Color.PINK);
-//                        } else {
-//                            e.getComponent().setBackground(Color.GREEN);
-//                        }
-//                    } else {
-//                        e.getComponent().setBackground(Color.YELLOW);
-//                    }
-//                }
-//
-//            });
+            ghe.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                    if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+                        if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+                            e.getComponent().setBackground(Color.PINK);
+                        } else {
+                            e.getComponent().setBackground(Color.GREEN);
+                        }
+                    } else {
+                        e.getComponent().setBackground(Color.YELLOW);
+                    }
+                }
+
+            });
             Sodochongoi3.add(ghe);
             lModel.add(ghe);
 
@@ -110,27 +110,30 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                 }
                 ghe = new Model_Ghe(cl, s.getTenGhe());
                 lModel.add(ghe);
-//                ghe.addMouseListener(new MouseAdapter() {
-//                    @Override
-//                    public void mouseClicked(MouseEvent e) {
-//                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-//                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-//                                e.getComponent().setBackground(Color.PINK);
-//                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
-//                                e.getComponent().setBackground(Color.RED);
-//                            } else {
-//                                e.getComponent().setBackground(Color.GREEN);
-//                            }
-//                        } else {
-//                            e.getComponent().setBackground(Color.YELLOW);
-//                        }
-//                    }
-//                });
+                ghe.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+                                e.getComponent().setBackground(Color.PINK);
+                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+                                e.getComponent().setBackground(Color.RED);
+                            } else {
+                                e.getComponent().setBackground(Color.GREEN);
+                            }
+                        } else {
+                            e.getComponent().setBackground(Color.YELLOW);
+                        }
+                    }
+                });
                 Sodochongoivip.add(ghe);
                 lModel.add(ghe);
 
             }
 
+        }
+        if(listGheCV.size()==96 || listGheCV.size()==110){
+            btnNext.setEnabled(false);
         }
         for (ChiTietGhe g : listGheCV) {
             for (int i = 0; i < ListGhe.size(); i++) {

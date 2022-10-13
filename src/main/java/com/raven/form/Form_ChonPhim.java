@@ -20,12 +20,14 @@ import com.raven.model.XuatChieu;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,7 +67,8 @@ public class Form_ChonPhim extends javax.swing.JPanel {
             cboGio.addItem(s.getGioBatDau());
         });
     }
- public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
+
+    public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
         if (ois == null) {
@@ -80,6 +83,7 @@ public class Form_ChonPhim extends javax.swing.JPanel {
             oos.writeObject(data);
         }
     }
+
     public void FillPhim() {
         mp = new Model_Phim();
         int stt = listGio.get(index).getStt();
@@ -100,12 +104,12 @@ public class Form_ChonPhim extends javax.swing.JPanel {
                     tt.setMaPhong(phg.getMaPhong());
                     tt.setNgayChieu(ngayChieu);
                     try {
-                        if(readObj("temp.txt")==null){
-                           writeObj("temp.txt",tt);
+                        if (new File("temp.txt").length() != 0) {
+                            new PrintWriter("temp.txt").close();
                         }
+                        writeObj("temp.txt", tt);
+
                     } catch (IOException ex) {
-                        Logger.getLogger(Form_ChonPhim.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
                         Logger.getLogger(Form_ChonPhim.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     Main.mainF.removeAll();
