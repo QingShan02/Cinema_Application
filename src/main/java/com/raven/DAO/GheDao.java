@@ -42,9 +42,9 @@ public class GheDao {
         List<ChiTietGhe> list = new ArrayList<>();
         try {
             st = con.createStatement();
-            rs = st.executeQuery("select MaPhong,TenGhe,MaCTGhe from ChiTietGhe join Ghe on Ghe.MaGhe=ChiTietGhe.MaGhe where MaPhong ='"+maphong+"'");
+            rs = st.executeQuery("select MaPhong,TenGhe,MaCTGhe,Ghe.MaGhe from ChiTietGhe join Ghe on Ghe.MaGhe=ChiTietGhe.MaGhe where MaPhong ='"+maphong+"'");
             while (rs.next()) {
-                list.add(new ChiTietGhe(rs.getString(1), rs.getString(2),rs.getInt(3)));
+                list.add(new ChiTietGhe(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GheDao.class.getName()).log(Level.SEVERE, null, ex);

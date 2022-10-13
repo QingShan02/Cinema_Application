@@ -10,6 +10,7 @@ import com.raven.main.Main;
 import com.raven.model.ChiTietGhe;
 import com.raven.model.Model_Ghe;
 import com.raven.model.PhongChieu;
+import com.raven.model.ThanhToan;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -20,8 +21,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -87,7 +91,19 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             ghe.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    try {
+                        ThanhToan tt = (ThanhToan) readObj("temp.txt");
+                        tt.setMaCTGhe(s.getMaCTGhe());
+                        tt.setMaGhe(s.getMaGhe());
+                        new PrintWriter("temp.txt").close();
+                        writeObj("temp.txt", tt);
 
+                    } catch (IOException ex) {
+                        Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                     if (e.getComponent().getBackground().equals(Color.YELLOW)) {
                         if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                             e.getComponent().setBackground(Color.PINK);
@@ -307,7 +323,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
+        
         Main.mainF.removeAll();
         Main.mainF.add(new Form_ChonTopping());
         Main.mainF.repaint();
