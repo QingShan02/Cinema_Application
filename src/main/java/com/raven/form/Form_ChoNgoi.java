@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
  * @author Daokh
  */
 public class Form_ChoNgoi extends javax.swing.JPanel {
+
     GheDao daoGhe;
     List<ChiTietGhe> ListGhe = new ArrayList<>();
 
@@ -43,7 +44,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     List<ChiTietGhe> List2;
     List<ChiTietGhe> listGheCV;
     PhongChieu phg;
- public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
+
+    public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
         if (ois == null) {
@@ -58,13 +60,14 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             oos.writeObject(data);
         }
     }
+
     public Form_ChoNgoi(PhongChieu phg, String gio, List<ChiTietGhe> listGheCV) {
         initComponents();
         this.listGheCV = listGheCV;
         this.phg = phg;
         daoGhe = new GheDao();
         ListGhe = daoGhe.Select(this.phg.getMaPhong());
-        lblTenPhong.setText(lblTenPhong.getText()+" "+this.phg.getTenPhong());
+        lblTenPhong.setText(lblTenPhong.getText() + " " + this.phg.getTenPhong());
         lblGio.setText(gio);
         SodoGhe();
     }
@@ -84,7 +87,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             ghe.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    System.out.println(e.getComponent().getName());
+
                     if (e.getComponent().getBackground().equals(Color.YELLOW)) {
                         if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                             e.getComponent().setBackground(Color.PINK);
@@ -102,14 +105,18 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
 
         }
         int id = Integer.parseInt(phg.getMaPhong().substring(2));
-        if (id>= 5) {
+        if (id >= 5) {
             List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
             for (ChiTietGhe s : List2) {
                 if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
                     cl = Color.RED;
                 }
                 ghe = new Model_Ghe(cl, s.getTenGhe());
+
                 lModelGhe.add(ghe);
+
+                lModelGhe.add(ghe);
+
                 ghe.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -131,6 +138,9 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
 
             }
 
+        }
+        if (listGheCV.size() == 96 || listGheCV.size() == 110) {
+            btnNext.setEnabled(false);
         }
         for (ChiTietGhe g : listGheCV) {
             for (int i = 0; i < ListGhe.size(); i++) {
