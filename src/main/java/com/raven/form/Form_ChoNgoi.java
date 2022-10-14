@@ -170,40 +170,40 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
 
             }
         }
-        for(int i = 0; i < ListGhe.size(); i++){
+        for (int i = 0; i < ListGhe.size(); i++) {
             ChiTietGhe s = ListGhe.get(i);
             ghe = lModelGhe.get(i);
-            if(!ghe.getBackground().equals(Color.GRAY)){
+            if (!ghe.getBackground().equals(Color.GRAY)) {
                 ghe.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    try {
-                        ThanhToan tt = (ThanhToan) readObj("temp.txt");
-                        tt.setMaCTGhe(s.getMaCTGhe());
-                        tt.setMaGhe(s.getMaGhe());
-                        new PrintWriter("temp.txt").close();
-                        writeObj("temp.txt", tt);
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
 
-                    } catch (IOException ex) {
-                        Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                    if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-                        if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-                            e.getComponent().setBackground(Color.PINK);
+                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+                                e.getComponent().setBackground(Color.PINK);
+                            } else {
+                                e.getComponent().setBackground(Color.GREEN);
+                            }
                         } else {
-                            e.getComponent().setBackground(Color.GREEN);
-                        }
-                    } else {
-                        e.getComponent().setBackground(Color.YELLOW);
-                    }
-                }
+                            try {
+                                ThanhToan tt = (ThanhToan) readObj("temp.txt");
+                                tt.setMaCTGhe(s.getMaCTGhe());
+                                tt.setMaGhe(s.getMaGhe());
+                                new PrintWriter("temp.txt").close();
+                                writeObj("temp.txt", tt);
 
-            });
+                            } catch (IOException ex) {
+                                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            e.getComponent().setBackground(Color.YELLOW);
+                        }
+                    }
+
+                });
             }
-             
+
         }
         Sodochongoivip.repaint();
         Sodochongoivip.revalidate();
