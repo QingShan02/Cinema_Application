@@ -32,8 +32,6 @@ public class Model_Ghe extends javax.swing.JPanel {
         this.setBackground(color);
         jLabel1 = new JLabel(title);
         this.add(jLabel1);
-        
-
     }
 
     

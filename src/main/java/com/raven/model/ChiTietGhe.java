@@ -28,6 +28,14 @@ public class ChiTietGhe {
         this.TenGhe = TenGhe;
     }
 
+    public ChiTietGhe(String MaPhong, String TenGhe,int MaCTGhe, String MaGhe) {
+        this.MaCTGhe = MaCTGhe;
+        this.MaPhong = MaPhong;
+        this.MaGhe = MaGhe;
+        this.TenGhe = TenGhe;
+    }
+    
+    
     public ChiTietGhe(int MaCTGhe, String TenGhe) {
         this.MaCTGhe = MaCTGhe;
         this.TenGhe = TenGhe;

@@ -30,10 +30,14 @@ E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\ChiTietTopping.ja
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\Ghe.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\swing\Table.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\ChiTietGhe.java
+E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\form\Form_ChonTopping.java
+E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\form\Form_QuanLyLichChieu.java
+E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\ThanhToan.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\swing\ListMenu.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\main\DangKy.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\form\Form_Topping.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\swing\TableHeader.java
+E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\Model_Phim.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\event\EventMenuSelected.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\main\RunMain.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\DAO\ConnectDB.java
@@ -59,5 +63,6 @@ E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\NgayChieu.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\StatusType.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\DAO\GheDao.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\form\Form_QLPhong.java
+E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\Model_ChonTopping.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\component\Menu.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\DAO\ToppingDao.java
