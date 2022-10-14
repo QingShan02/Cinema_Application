@@ -84,7 +84,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             ghe.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-
+                    
                     if (e.getComponent().getBackground().equals(Color.YELLOW)) {
                         if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                             e.getComponent().setBackground(Color.PINK);
@@ -133,7 +133,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
 
         }
         if(listGheCV.size()==96 || listGheCV.size()==110){
-            btnNext.setEnabled(false);
+            btnNext.setEnabled(true);
         }
         for (ChiTietGhe g : listGheCV) {
             for (int i = 0; i < ListGhe.size(); i++) {
