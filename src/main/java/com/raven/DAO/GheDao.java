@@ -38,13 +38,13 @@ public class GheDao {
         }
     }
 
-    public List<ChiTietGhe> Select(String maphong) {
+    public List<ChiTietGhe> Select(String maphong, int stt) {
         List<ChiTietGhe> list = new ArrayList<>();
         try {
             st = con.createStatement();
-            rs = st.executeQuery("select MaPhong,TenGhe,MaCTGhe,Ghe.MaGhe from ChiTietGhe join Ghe on Ghe.MaGhe=ChiTietGhe.MaGhe where MaPhong ='"+maphong+"'");
+            rs = st.executeQuery("select ChiTietGhe.maphong,TenGhe,MaCTGhe,Ghe.MaGhe,(loaighe.phuthu+ xuatchieu.giaxuatchieu) as gia from ChiTietGhe join Ghe on Ghe.MaGhe=ChiTietGhe.MaGhe join loaighe ON loaighe.maloai = Ghe.maloai join phongchieu ON phongchieu.maphong = ChiTietGhe.maphong join xuatchieu ON xuatchieu.maphong = phongchieu.maphong where ChiTietGhe.MaPhong = '"+maphong+"' and xuatchieu.stt ="+stt+";");
             while (rs.next()) {
-                list.add(new ChiTietGhe(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4)));
+                list.add(new ChiTietGhe(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getDouble(5)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GheDao.class.getName()).log(Level.SEVERE, null, ex);

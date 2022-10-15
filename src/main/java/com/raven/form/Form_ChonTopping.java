@@ -36,21 +36,7 @@ public class Form_ChonTopping extends javax.swing.JPanel {
             pnlTopping.add(new Model_ChonTopping(s));
         });
     }
- public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
-        if (ois == null) {
-            return null;
-        }
-        return ois.readObject();
-    }
-
-    public static void writeObj(String path, Object data) throws FileNotFoundException, IOException {
-        try (
-                 FileOutputStream fos = new FileOutputStream(path);  ObjectOutputStream oos = new ObjectOutputStream(fos);) {
-            oos.writeObject(data);
-        }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

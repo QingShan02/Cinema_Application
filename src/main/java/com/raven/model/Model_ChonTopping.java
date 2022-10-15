@@ -4,6 +4,12 @@
  */
 package com.raven.model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import javax.swing.ImageIcon;
 
 /**
@@ -26,11 +32,28 @@ public class Model_ChonTopping extends javax.swing.JPanel {
         this.tp = tp;
         chkTenTopping.setText(tp.getTenTopping());
         lblHinh.setIcon(resizeImage("src/main/resources/topping/"+tp.getHinh()));
+                    snSoLuong.setEnabled(chkTenTopping.isSelected());
+                    snSoLuong.setValue(1);
     }
    public ImageIcon resizeImage(String path) {
         ImageIcon ii = new ImageIcon(path);
         ImageIcon imageIcon = new ImageIcon(ii.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         return imageIcon;
+    }
+    public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
+
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
+        if (ois == null) {
+            return null;
+        }
+        return ois.readObject();
+    }
+
+    public static void writeObj(String path, Object data) throws FileNotFoundException, IOException {
+        try (
+                 FileOutputStream fos = new FileOutputStream(path);  ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+            oos.writeObject(data);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,7 +103,10 @@ public class Model_ChonTopping extends javax.swing.JPanel {
 
     private void chkTenToppingItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkTenToppingItemStateChanged
         // TODO add your handling code here:
-        
+            snSoLuong.setEnabled(chkTenTopping.isSelected());
+            if(snSoLuong.isEnabled()){
+                
+            }
     }//GEN-LAST:event_chkTenToppingItemStateChanged
 
 

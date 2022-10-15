@@ -4,6 +4,7 @@
  */
 package com.raven.DAO;
 
+import com.raven.main.DangNhap;
 import com.raven.model.Ve;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,9 +30,14 @@ public class VeDao {
     public void Insert(Ve v) {
         try {
             pst = con.prepareStatement("insert into Ve values(?,?,?,?,?,?)");
+            pst.setInt(1, v.getIdVe());
+            pst.setDouble(2, v.getTongGiaVe());
+            pst.setDouble(3, v.getThueVAT());
+            pst.setInt(4, v.getMaKH());
+            pst.setInt(5, v.getMaCTGhe());
+            pst.setString(6, NhanVienDao.MaNV);
             int kq = pst.executeUpdate();
-            System.out.println(kq);
-        } catch (SQLException ex) {
+            } catch (SQLException ex) {
             Logger.getLogger(VeDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

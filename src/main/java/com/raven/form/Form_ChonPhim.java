@@ -87,6 +87,8 @@ public class Form_ChonPhim extends javax.swing.JPanel {
     public void FillPhim() {
         mp = new Model_Phim();
         int stt = listGio.get(index).getStt();
+        System.out.println(stt);
+        NgayChieu nc = listGio.get(index);
         listPhim = daoXuatChieu.SelectTenPhim(stt, ngayChieu);
         pnlPhim.removeAll();
         listPhim.forEach(s -> {
@@ -113,7 +115,7 @@ public class Form_ChonPhim extends javax.swing.JPanel {
                         Logger.getLogger(Form_ChonPhim.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     Main.mainF.removeAll();
-                    Main.mainF.add(new Form_ChoNgoi(phg, listGio.get(index).getGioBatDau(), listGheCV));
+                    Main.mainF.add(new Form_ChoNgoi(phg, nc, listGheCV));
                     Main.mainF.repaint();
                     Main.mainF.revalidate();
                 }

@@ -20,7 +20,7 @@ public class ChiTietGhe {
     private String MaPhong;
     private String MaGhe;
     private String TenGhe;
-
+    private double gia;
 
     public ChiTietGhe(String MaPhong, String TenGhe,int MaCTGhe) {
         this.MaCTGhe = MaCTGhe;
@@ -28,11 +28,12 @@ public class ChiTietGhe {
         this.TenGhe = TenGhe;
     }
 
-    public ChiTietGhe(String MaPhong, String TenGhe,int MaCTGhe, String MaGhe) {
+    public ChiTietGhe(String MaPhong, String TenGhe,int MaCTGhe, String MaGhe, double gia) {
         this.MaCTGhe = MaCTGhe;
         this.MaPhong = MaPhong;
         this.MaGhe = MaGhe;
         this.TenGhe = TenGhe;
+        this.gia = gia;
     }
     
     

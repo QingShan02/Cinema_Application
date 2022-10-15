@@ -81,7 +81,7 @@ public class Card extends javax.swing.JPanel {
                     PhongChieu phg = daoPhong.SelectPhong(data.getMaPhim(), data.getValues(), s.getStt());
                     List<ChiTietGhe> listGheCV = daoPhong.SelectGheInVe("2022-09-01", s.getStt(), data.getMaPhim());
 
-                    Main.mainF.add(new Form_ChoNgoi(phg, s.getGioBatDau(), listGheCV));
+                    Main.mainF.add(new Form_ChoNgoi(phg, s, listGheCV));
                     Main.mainF.repaint();
                     Main.mainF.revalidate();
                 }
