@@ -55,22 +55,16 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 2) {
                     setForm(new Form_QuanLyLichChieu());
                 } else if (index == 3) {
-                    setForm(new Form_ChoNgoi());
-                } else if (index == 4) {
                     setForm(new Form_Phim());
-                } else if (index == 5) {
+                } else if (index == 4) {
                     setForm(new Form_Topping());
+                } else if (index == 5) {
+                    setForm(new Form_ChonPhim());
                 } else if (index == 6) {
                     setForm(new Form_ChonPhim());
-                } //                }else if (index==7){
-                //                    setForm(form_7);
-                //                }
-                //                else if (index == 8){
-                //                    setForm(new Form_QLPhong());
-                //                }
-                else if (index == 9) {
-                    setForm(new Form_XacThuc(mainPanel));
-                } else if (index == 10) {
+                } else if (index == 7) {
+                    setForm(new Form_XacThuc());
+                } else if (index == 8) {
                     DangXuat();
                 }
 

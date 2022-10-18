@@ -37,7 +37,21 @@ public class GheDao {
             Logger.getLogger(GheDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    public Ghe SelectById(int MaGheCT){
+        Ghe g = new Ghe();
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery("select Ghe.* from Ghe join ChiTietGhe on ChiTietGhe.MaGhe = Ghe.MaGhe where MaCTGhe = "+MaGheCT);
+            while (rs.next()) {                
+                g.setMaGhe(rs.getString(1));
+                g.setTenGhe(rs.getString(2));
+                g.setMaLoai(rs.getInt(3));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GheDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return g;
+    }
     public List<ChiTietGhe> Select(String maphong, int stt) {
         List<ChiTietGhe> list = new ArrayList<>();
         try {

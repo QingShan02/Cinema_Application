@@ -47,15 +47,12 @@
         <Property name="alignment" type="int" value="0"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblHinh">
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="chkTenTopping">
+        <Component class="javax.swing.JLabel" name="lblTenTopping">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jCheckBox1"/>
+            <Property name="text" type="java.lang.String" value="jLabel2"/>
           </Properties>
-          <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="chkTenToppingItemStateChanged"/>
-          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblHinh">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -66,11 +63,6 @@
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="snSoLuongStateChanged"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblGia">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel2"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

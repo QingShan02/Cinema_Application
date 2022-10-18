@@ -13,10 +13,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -51,6 +53,21 @@ public class PhimDao {
         } catch (SQLException ex) {
             Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Phim SelectById(String maPhim) {
+        Phim p = new Phim();
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery("select * from Phim where MaPhim = '" + maPhim + "'");
+            while (rs.next()) {
+                p = new Phim(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return p;
     }
 
     public List<Phim> Select() {
@@ -114,18 +131,21 @@ public class PhimDao {
     public List<Phim> PhimTrongNgay(String ngay) {
         List<Phim> list = new ArrayList<>();
         try {
-            pst = con.prepareStatement("select p.maphim,p.tenphim,p.NamSX from XuatChieu xc join Phim p on p.maphim = xc.maphim where xc.ngay = ?;");
+            pst = con.prepareStatement("select p.maphim,p.tenphim,p.NamSX from XuatChieu xc join Phim p on p.maphim = xc.maphim join ngaychieu nc on nc.stt = xc.stt where xc.ngay = ? and nc.giobatdau >cast(? as time);");
             pst.setDate(1, java.sql.Date.valueOf(ngay));
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            System.out.println(dtf.format(now));
+            pst.setString(2, dtf.format(now));
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Phim(rs.getString(1), rs.getString(2),rs.getInt(3)));
+                list.add(new Phim(rs.getString(1), rs.getString(2), rs.getInt(3)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
-    
 
     public List<NgayChieu> GioCuaPhim(String maphim, String ngay) {
         List<NgayChieu> list = new ArrayList<>();
@@ -135,29 +155,29 @@ public class PhimDao {
             pst.setDate(2, java.sql.Date.valueOf(ngay));
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new NgayChieu(rs.getInt(1),rs.getString(2)));
+                list.add(new NgayChieu(rs.getInt(1), rs.getString(2)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
-    public List<ChiTietGhe> CountVe(String maphim, String ngay, int stt){
+
+    public List<ChiTietGhe> CountVe(String maphim, String ngay, int stt) {
         List<ChiTietGhe> list = new ArrayList();
         try {
-            pst = con .prepareCall("{call getCountVe(?,?,?)}");
+            pst = con.prepareCall("{call getCountVe(?,?,?)}");
             pst.setString(1, maphim);
             pst.setDate(2, java.sql.Date.valueOf(ngay));
             pst.setInt(3, stt);
             rs = pst.executeQuery();
-            while(rs.next()){
-                list.add(new ChiTietGhe(rs.getInt(1),rs.getString(2)));
-            } 
+            while (rs.next()) {
+                list.add(new ChiTietGhe(rs.getInt(1), rs.getString(2)));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         return list;
     }
 }

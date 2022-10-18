@@ -22,4 +22,12 @@ public class Ve {
     private int MaKH;
     private int MaCTGhe;
     private String MaNV;
+
+    public Ve(double TongGiaVe, double ThueVAT, int MaCTGhe, String MaNV) {
+        this.TongGiaVe = TongGiaVe;
+        this.ThueVAT = ThueVAT;
+        this.MaCTGhe = MaCTGhe;
+        this.MaNV = MaNV;
+    }
+    
 }

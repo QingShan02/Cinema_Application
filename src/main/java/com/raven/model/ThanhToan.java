@@ -5,6 +5,7 @@
 package com.raven.model;
 
 import java.io.Serializable;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,10 +20,10 @@ import lombok.NoArgsConstructor;
 public class ThanhToan implements Serializable{
     private int MaCTGhe;
     private String MaGhe;
+    private double GiaGhe;
     private String MaPhong;
     private int STT;
     private String NgayChieu;
     private String MaPhim;
-    private String MaTopping;
-    private int SoLuongMua;
+    List<Topping> ListTopping;
 }

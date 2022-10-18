@@ -29,17 +29,30 @@ public class VeDao {
 
     public void Insert(Ve v) {
         try {
-            pst = con.prepareStatement("insert into Ve values(?,?,?,?,?,?)");
-            pst.setInt(1, v.getIdVe());
-            pst.setDouble(2, v.getTongGiaVe());
-            pst.setDouble(3, v.getThueVAT());
-            pst.setInt(4, v.getMaKH());
-            pst.setInt(5, v.getMaCTGhe());
-            pst.setString(6, NhanVienDao.MaNV);
+            pst = con.prepareStatement("insert into Ve(TongGiaVe, ThueVat, MaCTGhe, MaNV) values(?,?,?,?)");
+//            pst.setInt(1, v.getIdVe());
+            pst.setDouble(1, v.getTongGiaVe());
+            pst.setDouble(2, v.getThueVAT());
+//            pst.setInt(3, v.getMaKH());
+            pst.setInt(3, v.getMaCTGhe());
+            pst.setString(4, NhanVienDao.MaNV);
             int kq = pst.executeUpdate();
-            } catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(VeDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public int findMaxId() {
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery("select max(idVe) from Ve");
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VeDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 
     public List<Ve> Select() {

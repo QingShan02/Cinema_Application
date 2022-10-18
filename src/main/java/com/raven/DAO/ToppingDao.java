@@ -4,6 +4,7 @@
  */
 package com.raven.DAO;
 
+import com.raven.model.ChiTietTopping;
 import com.raven.model.Topping;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,7 +56,18 @@ public class ToppingDao {
         }
         return list;
     }
-
+    public void InsertCT(ChiTietTopping t){
+        try {
+            pst = con.prepareStatement("insert into ChiTietTopping values(?,?,?)");
+            pst.setInt(1, t.getIdVe());
+            pst.setString(2, t.getMaTopping());
+            pst.setInt(3, t.getSoLuongMua());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ToppingDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     public void update(Topping tp) {
         try {
             PreparedStatement st = con.prepareStatement("update Topping set TenTopping = ?, SoLuongDangCo = ? , Gia = ?, Hinh=? where MaTopping =?");

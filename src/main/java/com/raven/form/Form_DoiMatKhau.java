@@ -5,6 +5,7 @@
 package com.raven.form;
 
 import com.raven.DAO.NhanVienDao;
+import com.raven.main.Main;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -289,7 +290,11 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
         try {
             NhanVienDao.UpdateNV(txtXacNhanMatKhau.getText());
             JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
-            this.setVisible(false);
+            Main.mainF.removeAll();
+            Main.mainF.add(new Form_Home());
+            Main.mainF.repaint();
+            Main.mainF.revalidate();
+//            this.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(Form_DoiMatKhau.class.getName()).log(Level.SEVERE, null, ex);
 

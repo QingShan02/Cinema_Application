@@ -194,6 +194,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                                 ThanhToan tt = (ThanhToan) readObj("temp.txt");
                                 tt.setMaCTGhe(s.getMaCTGhe());
                                 tt.setMaGhe(s.getMaGhe());
+                                tt.setGiaGhe(s.getGia());
                                 new PrintWriter("temp.txt").close();
                                 writeObj("temp.txt", tt);
 

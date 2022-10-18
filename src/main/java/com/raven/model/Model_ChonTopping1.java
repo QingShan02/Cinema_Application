@@ -20,25 +20,24 @@ import javax.swing.ImageIcon;
  *
  * @author Daokh
  */
-public class Model_ChonTopping extends javax.swing.JPanel {
+public class Model_ChonTopping1 extends javax.swing.JPanel {
 
     /**
      * Creates new form Model_ChonTopping
      */
-    public Model_ChonTopping() {
+    public Model_ChonTopping1() {
         initComponents();
 
     }
     Topping tp;
 
-    public Model_ChonTopping(Topping tp) {
+    public Model_ChonTopping1(Topping tp) {
         initComponents();
         this.tp = tp;
-        chkTenTopping.setText(tp.getTenTopping());
+        lblTenTopping.setText(tp.getTenTopping());
         lblHinh.setIcon(resizeImage("src/main/resources/topping/" + tp.getHinh()));
-        snSoLuong.setEnabled(chkTenTopping.isSelected());
-        lblGia.setText(tp.getGia()+"");
-        snSoLuong.setValue(1);
+//        snSoLuong.setEnabled(lbl.isSelected());
+        snSoLuong.setValue(tp.getSoLuongMua());
     }
 
     public ImageIcon resizeImage(String path) {
@@ -73,26 +72,20 @@ public class Model_ChonTopping extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        lblTenTopping = new javax.swing.JLabel();
         lblHinh = new javax.swing.JLabel();
-        chkTenTopping = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         snSoLuong = new javax.swing.JSpinner();
-        lblGia = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        jPanel1.add(lblHinh);
 
-        chkTenTopping.setText("jCheckBox1");
-        chkTenTopping.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chkTenToppingItemStateChanged(evt);
-            }
-        });
-        jPanel1.add(chkTenTopping);
+        lblTenTopping.setText("jLabel2");
+        jPanel1.add(lblTenTopping);
+        jPanel1.add(lblHinh);
 
         jLabel1.setText("Số lượng");
         jPanel1.add(jLabel1);
@@ -103,9 +96,6 @@ public class Model_ChonTopping extends javax.swing.JPanel {
             }
         });
         jPanel1.add(snSoLuong);
-
-        lblGia.setText("jLabel2");
-        jPanel1.add(lblGia);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -118,12 +108,6 @@ public class Model_ChonTopping extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void chkTenToppingItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkTenToppingItemStateChanged
-        // TODO add your handling code here:
-        snSoLuong.setEnabled(chkTenTopping.isSelected());
-
-    }//GEN-LAST:event_chkTenToppingItemStateChanged
 
     private void snSoLuongStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_snSoLuongStateChanged
         // TODO add your handling code here:
@@ -161,20 +145,19 @@ public class Model_ChonTopping extends javax.swing.JPanel {
 
                 writeObj("temp.txt", tt);
             } catch (IOException ex) {
-                Logger.getLogger(Model_ChonTopping.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Model_ChonTopping1.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Model_ChonTopping.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Model_ChonTopping1.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_snSoLuongStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox chkTenTopping;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblGia;
     private javax.swing.JLabel lblHinh;
+    private javax.swing.JLabel lblTenTopping;
     private javax.swing.JSpinner snSoLuong;
     // End of variables declaration//GEN-END:variables
 }

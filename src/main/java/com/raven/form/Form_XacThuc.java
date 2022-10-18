@@ -4,6 +4,7 @@
  */
 package com.raven.form;
 
+import com.raven.main.Main;
 import com.raven.sendEmail.EmailMain;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -21,7 +22,8 @@ public class Form_XacThuc extends javax.swing.JPanel {
     String maXacThuc;
     public Form_XacThuc() {
         initComponents();
-//        EmailMain.GuiEmail("");
+        EmailMain.GuiEmail("");
+        this.mainJPanel = Main.mainF;
     }
     JPanel mainJPanel;
 
