@@ -105,6 +105,7 @@ public class Form_ChonPhim extends javax.swing.JPanel {
                     tt.setSTT(listGio.get(index).getStt());
                     tt.setMaPhong(phg.getMaPhong());
                     tt.setNgayChieu(ngayChieu);
+                    
                     try {
                         if (new File("temp.txt").length() != 0) {
                             new PrintWriter("temp.txt").close();

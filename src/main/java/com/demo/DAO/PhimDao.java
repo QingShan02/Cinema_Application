@@ -131,12 +131,14 @@ public class PhimDao {
     public List<Phim> PhimTrongNgay(String ngay) {
         List<Phim> list = new ArrayList<>();
         try {
-            pst = con.prepareStatement("select p.maphim,p.tenphim,p.NamSX from XuatChieu xc join Phim p on p.maphim = xc.maphim join ngaychieu nc on nc.stt = xc.stt where xc.ngay = ? and nc.giobatdau >cast(? as time);");
+//            pst = con.prepareStatement("select p.maphim,p.tenphim,p.NamSX from XuatChieu xc join Phim p on p.maphim = xc.maphim join ngaychieu nc on nc.stt = xc.stt where xc.ngay = ? and nc.giobatdau >cast(? as time);");
+                        pst = con.prepareStatement("select p.maphim,p.tenphim,p.NamSX from XuatChieu xc join Phim p on p.maphim = xc.maphim join ngaychieu nc on nc.stt = xc.stt where xc.ngay = ? ");
+
             pst.setDate(1, java.sql.Date.valueOf(ngay));
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            System.out.println(dtf.format(now));
-            pst.setString(2, dtf.format(now));
+//            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+//            LocalDateTime now = LocalDateTime.now();
+//            System.out.println(dtf.format(now));
+//            pst.setString(2, dtf.format(now));
             rs = pst.executeQuery();
             while (rs.next()) {
                 list.add(new Phim(rs.getString(1), rs.getString(2), rs.getInt(3)));

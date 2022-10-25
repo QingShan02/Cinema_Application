@@ -4,6 +4,7 @@
  */
 package com.raven.model;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NgayChieu {
+public class NgayChieu implements Serializable{
 
     private int Stt;
     private String Ngay;

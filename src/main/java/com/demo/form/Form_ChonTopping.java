@@ -7,12 +7,19 @@ package com.raven.form;
 import com.raven.DAO.ToppingDao;
 import com.raven.main.Main;
 import com.raven.model.Model_ChonTopping;
+import static com.raven.model.Model_ChonTopping.readObj;
+import com.raven.model.ThanhToan;
+import com.raven.model.Topping;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 
 /**
@@ -20,7 +27,21 @@ import javax.swing.JCheckBox;
  * @author Daokh
  */
 public class Form_ChonTopping extends javax.swing.JPanel {
+public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
+        if (ois == null) {
+            return null;
+        }
+        return ois.readObject();
+    }
+
+    public static void writeObj(String path, Object data) throws FileNotFoundException, IOException {
+        try (
+                 FileOutputStream fos = new FileOutputStream(path);  ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+            oos.writeObject(data);
+        }
+    }
     /**
      * Creates new form Form_ChonTopping
      */
@@ -30,6 +51,11 @@ public class Form_ChonTopping extends javax.swing.JPanel {
         initComponents();
         dao = new ToppingDao();
         FillTopping();
+
+
+//                    tt.setMaTopping(tp.getMaTopping());
+//                    tt.setSoLuongMua((int) snSoLuong.getValue());
+                List<Topping> list = new ArrayList<>();
     }
 
     public void FillTopping() {

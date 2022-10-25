@@ -4,6 +4,8 @@
  */
 package com.raven.model;
 
+import com.sun.source.doctree.SerialTree;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PhongChieu {
+public class PhongChieu implements Serializable{
     private String MaPhong;
     private String TenPhong;
 }

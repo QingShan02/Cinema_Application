@@ -3,6 +3,7 @@ package com.raven.component;
 import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
 import com.raven.form.Form_ChoNgoi;
+import static com.raven.form.Form_ChoNgoi.writeObj;
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
 import com.raven.main.DangNhap;
@@ -20,7 +21,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -80,7 +86,16 @@ public class Card extends javax.swing.JPanel {
 
                     PhongChieu phg = daoPhong.SelectPhong(data.getMaPhim(), data.getValues(), s.getStt());
                     List<ChiTietGhe> listGheCV = daoPhong.SelectGheInVe("2022-09-01", s.getStt(), data.getMaPhim());
-
+     try {
+            new PrintWriter("bonho.txt").close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            writeObj("bonho.txt", new Object[]{phg,s,listGheCV,data.getMaPhim(),s.getStt()});
+        } catch (IOException ex) {
+            Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+        }
                     Main.mainF.add(new Form_ChoNgoi(phg, s, listGheCV));
                     Main.mainF.repaint();
                     Main.mainF.revalidate();

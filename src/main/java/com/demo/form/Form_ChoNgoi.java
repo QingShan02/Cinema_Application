@@ -70,6 +70,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
 
     public Form_ChoNgoi(PhongChieu phg, NgayChieu nc, List<ChiTietGhe> listGheCV) {
         initComponents();
+   
+
         this.listGheCV = listGheCV;
         this.phg = phg;
         daoGhe = new GheDao();

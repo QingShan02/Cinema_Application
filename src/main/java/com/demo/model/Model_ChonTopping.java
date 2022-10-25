@@ -38,7 +38,7 @@ public class Model_ChonTopping extends javax.swing.JPanel {
         lblHinh.setIcon(resizeImage("src/main/resources/topping/" + tp.getHinh()));
         snSoLuong.setEnabled(chkTenTopping.isSelected());
         lblGia.setText(tp.getGia()+"");
-        snSoLuong.setValue(1);
+        snSoLuong.setValue(0);
     }
 
     public ImageIcon resizeImage(String path) {
@@ -140,7 +140,6 @@ public class Model_ChonTopping extends javax.swing.JPanel {
                     for (int i = 0; i < list.size(); i++) {
 
                         if (list.get(i).getMaTopping().equalsIgnoreCase(tp.getMaTopping())) {
-                            System.out.println(">>hello");
                             list.set(i, new Topping(tp.getMaTopping(), tp.getTenTopping(), tp.getGia(), (int) snSoLuong.getValue()));
                             k++;
                             break;

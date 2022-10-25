@@ -6,6 +6,7 @@
 package com.raven.main;
 
 import com.raven.DAO.NhanVienDao;
+import com.raven.DAO.PhongDao;
 import com.raven.event.EventMenuSelected;
 import com.raven.form.Form_ChoNgoi;
 import com.raven.form.Form_ChonPhim;
@@ -16,18 +17,30 @@ import com.raven.form.Form_QLPhong;
 import com.raven.form.Form_QuanLyLichChieu;
 import com.raven.form.Form_Topping;
 import com.raven.form.Form_XacThuc;
+import com.raven.model.ChiTietGhe;
+import com.raven.model.NgayChieu;
 import com.raven.model.NhanVien;
+import com.raven.model.PhongChieu;
+import com.raven.swing.MenuItem;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -39,11 +52,12 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     public static JPanel mainF;
-
+    PhongDao daoPhong;
     public Main() {
         initComponents();
         mainF = mainPanel;
         setBackground(new Color(0, 0, 0, 0));
+        daoPhong = new PhongDao();
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -72,6 +86,31 @@ public class Main extends javax.swing.JFrame {
         }
         );
         setForm(new Form_Home());
+        JMenuItem mn = new JMenuItem("refresh");
+        mn.setActionCommand("refresh");
+        MenuItemListener menuItemListener = new MenuItemListener();
+        mn.addActionListener(menuItemListener);
+        jPopupMenu1.add(mn);
+
+        mainPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1) {
+//                    System.out.println("1");
+                    jPopupMenu1.show(mainPanel, e.getX(), e.getY());
+                }
+            }
+        });
+    }
+
+    class MenuItemListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+                    mainPanel.removeAll();
+        System.out.println(">>5");
+        mainPanel.add(cp);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+        }
     }
 
     public void DangXuat() {
@@ -93,6 +132,7 @@ public class Main extends javax.swing.JFrame {
 
     private void setForm(JComponent com) {
         mainPanel.removeAll();
+        System.out.println(">>4");
         mainPanel.add(com);
         mainPanel.repaint();
         mainPanel.revalidate();
@@ -107,6 +147,7 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         panelBorder1 = new com.raven.swing.PanelBorder();
         menu = new com.raven.component.Menu();
         header2 = new com.raven.component.Header();
@@ -124,6 +165,19 @@ public class Main extends javax.swing.JFrame {
         header2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
 
         mainPanel.setOpaque(false);
+        mainPanel.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                mainPanelComponentAdded(evt);
+            }
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                mainPanelComponentRemoved(evt);
+            }
+        });
+        mainPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                mainPanelComponentMoved(evt);
+            }
+        });
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
@@ -165,6 +219,48 @@ public class Main extends javax.swing.JFrame {
     private void menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_menuMouseClicked
+    JComponent cp;
+
+    public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
+
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
+        if (ois == null) {
+            return null;
+        }
+        return ois.readObject();
+    }
+    private void mainPanelComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_mainPanelComponentAdded
+        
+//        cp = (JComponent) evt.getChild();
+    }//GEN-LAST:event_mainPanelComponentAdded
+
+    private void mainPanelComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_mainPanelComponentMoved
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_mainPanelComponentMoved
+
+    private void mainPanelComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_mainPanelComponentRemoved
+        // TODO add your handling code here:
+                Object[] obj = new Object[]{};
+        try {
+            // TODO add your handling code here:
+            if (new File("bonho.txt").length() != 0) {
+                
+                obj = (Object[]) readObj("bonho.txt");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (evt.getChild().getClass() == Form_ChoNgoi.class) {
+            System.out.println(">>3");
+            List<ChiTietGhe> listGheCV = daoPhong.SelectGheInVe("2022-09-01", (int)obj[4],(String) obj[3]);
+
+            cp = new Form_ChoNgoi((PhongChieu) obj[0], (NgayChieu) obj[1],listGheCV);
+
+        }
+    }//GEN-LAST:event_mainPanelComponentRemoved
 
     /**
      * @param args the command line arguments
@@ -203,6 +299,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.component.Header header2;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPanel mainPanel;
     private com.raven.component.Menu menu;
     private com.raven.swing.PanelBorder panelBorder1;
