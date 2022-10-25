@@ -44,6 +44,7 @@ E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\DAO\ConnectDB.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\swing\ScrollBar.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\XuatChieu.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\sendEmail\CheckMail.java
+E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\form\Form_ThanhToan.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\Ve.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\main\DangNhap.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\form\Form_Home.java
@@ -56,6 +57,7 @@ E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\DAO\VeDao.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\sendEmail\EmailMain.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\swing\PanelBorder.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\LoaiGhe.java
+E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\Model_ChonTopping1.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\model\Topping.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\form\Form_ChonPhim.java
 E:\RapChieuPhim\RapChieuPhim_App\src\main\java\com\raven\DAO\PhimDao.java
