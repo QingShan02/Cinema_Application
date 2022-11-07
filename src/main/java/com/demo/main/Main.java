@@ -53,6 +53,39 @@ public class Main extends javax.swing.JFrame {
      */
     public static JPanel mainF;
     PhongDao daoPhong;
+    public Main(String macn){
+        initComponents();
+        mainF = mainPanel;
+        setBackground(new Color(0, 0, 0, 0));
+        daoPhong = new PhongDao();
+        menu.initMoving(Main.this);
+        menu.addEventMenuSelected(new EventMenuSelected() {
+            @Override
+            public void selected(int index) {
+                if (index == 0) {
+                    setForm(new Form_Home());
+                } else if (index == 1) {
+                    setForm(new Form_KhachHang());
+                } else if (index == 2) {
+                    setForm(new Form_QuanLyLichChieu());
+                } else if (index == 3) {
+                    setForm(new Form_Phim());
+                } else if (index == 4) {
+                    setForm(new Form_Topping());
+                } else if (index == 5) {
+                    setForm(new Form_ChonPhim());
+                } else if (index == 6) {
+                    setForm(new Form_ChonPhim());
+                } else if (index == 7) {
+                    setForm(new Form_XacThuc());
+                } else if (index == 8) {
+                    DangXuat();
+                }
+
+            }
+        }
+        );
+    }
     public Main() {
         initComponents();
         mainF = mainPanel;
