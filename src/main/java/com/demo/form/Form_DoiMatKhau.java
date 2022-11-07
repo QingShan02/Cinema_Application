@@ -114,6 +114,7 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel2.setOpaque(false);
 
         lblNhapMatKhauMoi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblNhapMatKhauMoi.setText("Nhập mật khẩu mới");

@@ -33,8 +33,9 @@ public class EmailMain {
     }
 
     public static void GuiEmail(String toEmail) {
-        final String username = "phamthitra1507@gmail.com";
-        final String password = "jjyrklyiojwipjwk";
+        final String username = "ngobakha2t4@gmail.com";
+        final String password = "tsopgjhvyuygyygt";
+        System.out.println(username);
 //        final String ToEmail = XacNhanEmail.getEmail();
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -56,7 +57,7 @@ public class EmailMain {
                         Message.RecipientType.TO,
                         InternetAddress.parse("traptps21791@fpt.edu.vn")
                 );
-                message.setSubject("ĐỔI MẬT KHẨU!");
+                message.setSubject("CHANGE PASSWORD");
                 message.setText("Ðây là mã xác thuc: " + RanDom() + "\n Vui lòng nhap de xac minh");
                 
                 Transport.send(message);

@@ -53,6 +53,20 @@ public class NgayChieuDao {
         return list;
     }
     
+        public List<NgayChieu> SelectGio() {
+        list = new ArrayList<>();
+        try {
+            pst = con.prepareCall("{ call SelectGio()}");
+            rs = pst.executeQuery();
+              while (rs.next()) {
+                list.add(new NgayChieu(rs.getInt("Stt"), rs.getString("Ngay"),rs.getString("GioBatDau")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NgayChieuDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+        
     public List<NgayChieu> SelectGioBatDau(String ngayChieu) {
         list = new ArrayList<>();
         

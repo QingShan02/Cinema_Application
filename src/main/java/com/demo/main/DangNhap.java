@@ -230,11 +230,11 @@ dao = new NhanVienDao();
             if (username.equalsIgnoreCase(s.getSoDT()) && pass.equalsIgnoreCase(s.getMatKhau())) {
                 tb = new ThongBao("Đăng nhập thành công", 0);
                 tb.show();
-//                try {
-//                    writeObj("savetk.txt", s);
-//                } catch (IOException ex) {
-//                    Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
-//                }
+                try {
+                    writeObj("savetk.txt", s);
+                } catch (IOException ex) {
+                    Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                }
 //                Main main = new Main();
                 NhanVienDao.setMaNV(s.getMaNV());
                 Form_ChonChiNhanh cn = new Form_ChonChiNhanh();

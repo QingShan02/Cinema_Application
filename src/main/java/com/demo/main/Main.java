@@ -74,11 +74,9 @@ public class Main extends javax.swing.JFrame {
                     setForm(new Form_Topping());
                 } else if (index == 5) {
                     setForm(new Form_ChonPhim());
-                } else if (index == 6) {
-                    setForm(new Form_ChonPhim());
-                } else if (index == 7) {
+                }  else if (index == 6) {
                     setForm(new Form_XacThuc());
-                } else if (index == 8) {
+                } else if (index == 7) {
                     DangXuat();
                 }
 

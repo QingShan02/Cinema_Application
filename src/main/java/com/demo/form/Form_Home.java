@@ -1,5 +1,6 @@
 package com.raven.form;
 
+import com.raven.DAO.NgayChieuDao;
 import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
 import com.raven.component.Card;
@@ -10,6 +11,7 @@ import com.raven.model.Phim;
 import com.raven.model.PhongChieu;
 import com.raven.model.StatusType;
 import com.raven.swing.ScrollBar;
+import com.toedter.components.JTitlePanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,28 +34,34 @@ public class Form_Home extends javax.swing.JPanel {
     PhimDao daoPhim;
     List<Phim> listPhim;
     List<NgayChieu> listXC;
-
+    NgayChieuDao daoNC;
+    NgayChieu nc = new NgayChieu();
     public Form_Home() {
         initComponents();
 
-        daoPhim = new PhimDao();
-        listPhim = daoPhim.PhimTrongNgay("2022-09-01");
-
-        cn = new Form_ChoNgoi();
-
-        Card card = null;
-        for (Phim phim : listPhim) {
-
-            listXC = daoPhim.GioCuaPhim(phim.getMaPhim(), "2022-09-01");
-            card = new Card();
-            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01", listXC, phim.getMaPhim()), phim.getMaPhim(), phim.getNamSX());
-            card.setColor1(Color.BLACK);
-            card.setColor2(Color.BLACK);
-            panel1.add(card);
-
+//        daoPhim = new PhimDao();
+//        listPhim = daoPhim.PhimTrongNgay("2022-09-01");
+        daoNC = new NgayChieuDao();
+        listXC = daoNC.SelectGio();
+//        cn = new Form_ChoNgoi();
+        JPanel panel;
+        for (NgayChieu nc : listXC) {
+            panel = new JPanel();
+            jTabbedPane1.addTab(nc.getGioBatDau(), panel);
         }
-        panel1.repaint();
-        panel1.revalidate();
+//        Card card = null;
+//        for (Phim phim : listPhim) {
+//
+//            listXC = daoPhim.GioCuaPhim(phim.getMaPhim(), "2022-09-01");
+//            card = new Card();
+//            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01", listXC, phim.getMaPhim()), phim.getMaPhim(), phim.getNamSX());
+//            card.setColor1(Color.BLACK);
+//            card.setColor2(Color.BLACK);
+//            panel1.add(card);
+//
+//        }
+        jTabbedPane1.repaint();
+        jTabbedPane1.revalidate();
 
     }
 
@@ -63,11 +71,20 @@ public class Form_Home extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         panel1 = new javax.swing.JLayeredPane();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(0, 0, 0));
 
+        jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
+
+        panel1.setBackground(new java.awt.Color(0, 0, 0));
         panel1.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
+
+        jTabbedPane1.setBackground(new java.awt.Color(0, 0, 0));
+        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        panel1.add(jTabbedPane1);
+
         jScrollPane1.setViewportView(panel1);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -81,7 +98,7 @@ public class Form_Home extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addGap(0, 308, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -102,6 +119,7 @@ public class Form_Home extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLayeredPane panel1;
     // End of variables declaration//GEN-END:variables
 }

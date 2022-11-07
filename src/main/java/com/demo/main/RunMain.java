@@ -15,20 +15,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 
-
 /**
  *
  * @author Daokh
  */
 public class RunMain {
+
     public static void main(String[] args) {
-         NhanVienDao dao = new NhanVienDao();
-         try {
-             FlatDarculaLaf.setup();
-                      UIManager.put( "Button.arc", 999 );
-UIManager.put( "Component.arc", 999 );
-UIManager.put( "ProgressBar.arc", 999 );
-UIManager.put( "TextComponent.arc", 999 );
+        NhanVienDao dao = new NhanVienDao();
+        try {
+            FlatDarculaLaf.setup();
+            UIManager.put("Button.arc", 999);
+            UIManager.put("Component.arc", 999);
+            UIManager.put("ProgressBar.arc", 999);
+            UIManager.put("TextComponent.arc", 999);
         } catch (Exception e) {
             e.printStackTrace();
         }

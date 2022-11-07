@@ -81,6 +81,7 @@ public class Form_XacThuc extends javax.swing.JPanel {
         btnCancel = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setOpaque(false);
 
         lblMaXacThuc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblMaXacThuc.setText("Nhập mã xác thực");
