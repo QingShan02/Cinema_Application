@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.raven.DAO;
-
+import com.raven.model.Phim;
 import com.raven.model.NgayChieu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,24 +52,24 @@ public class NgayChieuDao {
         }
         return list;
     }
-    
-        public List<NgayChieu> SelectGio() {
+
+    public List<NgayChieu> SelectGio() {
         list = new ArrayList<>();
         try {
             pst = con.prepareCall("{ call SelectGio()}");
             rs = pst.executeQuery();
-              while (rs.next()) {
-                list.add(new NgayChieu(rs.getInt("Stt"), rs.getString("Ngay"),rs.getString("GioBatDau")));
+            while (rs.next()) {
+                list.add(new NgayChieu(rs.getInt("Stt"), rs.getString("Ngay"), rs.getString("GioBatDau")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(NgayChieuDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
-        
+
     public List<NgayChieu> SelectGioBatDau(String ngayChieu) {
         list = new ArrayList<>();
-        
+
         try {
             pst = con.prepareStatement("select Stt, GioBatDau from NgayChieu where Ngay = ?");
             pst.setDate(1, java.sql.Date.valueOf(ngayChieu));
@@ -80,8 +80,23 @@ public class NgayChieuDao {
         } catch (SQLException ex) {
             Logger.getLogger(NgayChieuDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+        return list;
+    }
+
+    public List<Phim> SelectTenPhim( String giobatdau) {
+        List<Phim> list = new ArrayList();
+        try {
+            pst = con.prepareCall("{call SelectTenPhim(cast(? as time))}");
+            pst.setString(1, giobatdau);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Phim(rs.getString(2),rs.getString(3),rs.getString(6),rs.getInt(4),rs.getString(7),rs.getString(8)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NgayChieuDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return list;
     }
 }

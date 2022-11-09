@@ -1,5 +1,6 @@
 package com.raven.form;
 
+import com.demo.form.TablePhim;
 import com.raven.DAO.NgayChieuDao;
 import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
@@ -21,10 +22,13 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Form_Home extends javax.swing.JPanel {
 
@@ -36,6 +40,8 @@ public class Form_Home extends javax.swing.JPanel {
     List<NgayChieu> listXC;
     NgayChieuDao daoNC;
     NgayChieu nc = new NgayChieu();
+    List<JPanel> listP = new ArrayList<>();
+
     public Form_Home() {
         initComponents();
 
@@ -47,6 +53,8 @@ public class Form_Home extends javax.swing.JPanel {
         JPanel panel;
         for (NgayChieu nc : listXC) {
             panel = new JPanel();
+            
+            listP.add(panel);
             jTabbedPane1.addTab(nc.getGioBatDau(), panel);
         }
 //        Card card = null;
@@ -83,6 +91,11 @@ public class Form_Home extends javax.swing.JPanel {
 
         jTabbedPane1.setBackground(new java.awt.Color(0, 0, 0));
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
         panel1.add(jTabbedPane1);
 
         jScrollPane1.setViewportView(panel1);
@@ -114,6 +127,22 @@ public class Form_Home extends javax.swing.JPanel {
                 .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+//        String [] header = {"hehe","ten"};
+//        String [][] row = {
+//            {"1","Minh"}
+//        };
+        JTable table = new JTable();
+        int temp = jTabbedPane1.getSelectedIndex();
+        listP.get(temp).removeAll();
+        listP.get(temp).add(new TablePhim(jTabbedPane1.getTitleAt(temp)));
+        listP.get(temp).setLayout(new BoxLayout(table, BoxLayout.PAGE_AXIS));
+        table.setSize(1000, 400);
+
+        jTabbedPane1.repaint();
+    }//GEN-LAST:event_jTabbedPane1StateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

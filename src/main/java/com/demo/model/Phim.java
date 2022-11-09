@@ -32,11 +32,20 @@ public class Phim {
         MaPhim = maPhim;
         TenPhim = tenPhim;
     }
+
     public Phim(String MaPhim, String TenPhim, int NamSX) {
         this.MaPhim = MaPhim;
         this.TenPhim = TenPhim;
         this.NamSX = NamSX;
     }
 
+    public Phim(String tenphim,String dienvien,String daodien, int namsx, String quocgia, String thoiluong) {
+        this.TenPhim = tenphim;
+        this.DienVien = dienvien;
+        this.DaoDien = daodien;
+        this.NamSX = namsx;
+        this.QuocGia = quocgia;
+        this.ThoiLuong = thoiluong;
+    }
 
 }
