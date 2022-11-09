@@ -35,6 +35,22 @@ public class PhimDao {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public List<Phim> SelectTenPhim(String giobatdau) {
+        List<Phim> list = new ArrayList();
+        try {
+            pst = con.prepareCall("{call SelectTenPhim(cast(? as time))}");
+            pst.setString(1, giobatdau);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Phim(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+
     public void Insert(Phim p) {
         try {
             pst = con.prepareStatement("insert into Phim values(?,?,?,?,?,?,?,?,?,?)");
@@ -132,7 +148,7 @@ public class PhimDao {
         List<Phim> list = new ArrayList<>();
         try {
 //            pst = con.prepareStatement("select p.maphim,p.tenphim,p.NamSX from XuatChieu xc join Phim p on p.maphim = xc.maphim join ngaychieu nc on nc.stt = xc.stt where xc.ngay = ? and nc.giobatdau >cast(? as time);");
-                        pst = con.prepareStatement("select p.maphim,p.tenphim,p.NamSX from XuatChieu xc join Phim p on p.maphim = xc.maphim join ngaychieu nc on nc.stt = xc.stt where xc.ngay = ? ");
+            pst = con.prepareStatement("select p.maphim,p.tenphim,p.NamSX from XuatChieu xc join Phim p on p.maphim = xc.maphim join ngaychieu nc on nc.stt = xc.stt where xc.ngay = ? ");
 
             pst.setDate(1, java.sql.Date.valueOf(ngay));
 //            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");

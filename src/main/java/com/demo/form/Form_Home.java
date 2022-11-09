@@ -35,16 +35,30 @@ public class Form_Home extends javax.swing.JPanel {
     PhongDao daoPhong;
     List<Object[]> list;
     Form_ChoNgoi cn;
-    PhimDao daoPhim;
-    List<Phim> listPhim;
     List<NgayChieu> listXC;
     NgayChieuDao daoNC;
     NgayChieu nc = new NgayChieu();
     List<JPanel> listP = new ArrayList<>();
+    Phim p;
+    PhimDao daoPhim;
+    List<Phim> listPhim;
 
     public Form_Home() {
         initComponents();
+        daoPhim = new PhimDao();
 
+//        NgayChieuDao daoNC = new NgayChieuDao();
+//        List<Phim> list = daoNC.SelectTenPhim(gio);
+//        listPhim.forEach(s -> {
+////            JPanel.add(s.getTenPhim(),s.getDienVien(),s.getDaoDien(),s.getQuocGia(),s.getThoiLuong(),s.getNamSX());
+//            lblTenPhim.setText(s.getTenPhim());
+//            lblDV.setText(s.getDienVien());
+//            lblDD.setText(s.getDaoDien());
+//            lblQG.setText(s.getQuocGia());
+//            lblTL.setText(s.getThoiLuong());
+////            lblNSX.setText(s.getNamSX());
+//            lblHinh.setText(s.getHinh());
+//        });
 //        daoPhim = new PhimDao();
 //        listPhim = daoPhim.PhimTrongNgay("2022-09-01");
         daoNC = new NgayChieuDao();
@@ -53,7 +67,7 @@ public class Form_Home extends javax.swing.JPanel {
         JPanel panel;
         for (NgayChieu nc : listXC) {
             panel = new JPanel();
-            
+            panel.setBackground(Color.black);
             listP.add(panel);
             jTabbedPane1.addTab(nc.getGioBatDau(), panel);
         }
@@ -80,7 +94,6 @@ public class Form_Home extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         panel1 = new javax.swing.JLayeredPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -100,29 +113,19 @@ public class Form_Home extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(panel1);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel1.setText("Phim sắp chiếu");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
@@ -137,16 +140,20 @@ public class Form_Home extends javax.swing.JPanel {
         JTable table = new JTable();
         int temp = jTabbedPane1.getSelectedIndex();
         listP.get(temp).removeAll();
-        listP.get(temp).add(new TablePhim(jTabbedPane1.getTitleAt(temp)));
-        listP.get(temp).setLayout(new BoxLayout(table, BoxLayout.PAGE_AXIS));
-        table.setSize(1000, 400);
+        listPhim = daoPhim.SelectTenPhim(jTabbedPane1.getTitleAt(temp));
+        listPhim.forEach(s -> {
+        listP.get(temp).add(new TablePhim(s));
 
-        jTabbedPane1.repaint();
+        });
+
+//        listP.get(temp).setLayout(new BoxLayout(table, BoxLayout.PAGE_AXIS));
+//        table.setSize(1000, 400);
+
+//        jTabbedPane1.repaint();
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLayeredPane panel1;

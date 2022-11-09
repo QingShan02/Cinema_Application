@@ -28,6 +28,17 @@ public class Phim {
     private String MoTa;
     private String Traller;
 
+    public Phim(String tenphim, String dienvien, int namsx, String hinh, String daodien, String quocgia, String thoiluong) {
+        this.TenPhim = tenphim;
+        this.DienVien = dienvien;
+        this.NamSX = namsx;
+        this.Hinh = hinh;
+        this.DaoDien = daodien;
+        this.QuocGia = quocgia;
+        this.ThoiLuong = thoiluong;
+
+    }
+
     public Phim(String maPhim, String tenPhim) {
         MaPhim = maPhim;
         TenPhim = tenPhim;
@@ -37,15 +48,6 @@ public class Phim {
         this.MaPhim = MaPhim;
         this.TenPhim = TenPhim;
         this.NamSX = NamSX;
-    }
-
-    public Phim(String tenphim,String dienvien,String daodien, int namsx, String quocgia, String thoiluong) {
-        this.TenPhim = tenphim;
-        this.DienVien = dienvien;
-        this.DaoDien = daodien;
-        this.NamSX = namsx;
-        this.QuocGia = quocgia;
-        this.ThoiLuong = thoiluong;
     }
 
 }

@@ -5,8 +5,10 @@
 package com.demo.form;
 
 import com.raven.DAO.NgayChieuDao;
+import com.raven.DAO.PhimDao;
 import com.raven.model.Phim;
 import java.util.List;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,20 +20,30 @@ public class TablePhim extends javax.swing.JPanel {
     /**
      * Creates new form TablePhim
      */
+    PhimDao daophim;
+    List<Phim> listPhim;
+
     public TablePhim() {
         initComponents();
-        this.setSize(1000,300);
     }
 
-    public TablePhim(String gio) {
+    public TablePhim(Phim p) {
         initComponents();
-        NgayChieuDao daoNC = new NgayChieuDao();
-        List<Phim> list = daoNC.SelectTenPhim(gio);
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        list.forEach(s -> {
-            model.addRow(new Object[]{s.getTenPhim(), s.getDienVien(), s.getDaoDien(), s.getNamSX(), s.getQuocGia(), s.getThoiLuong()});
-        });
+
+//        NgayChieuDao daoNC = new NgayChieuDao();
+//        List<Phim> list = daoNC.SelectTenPhim(gio);
+//        listPhim.forEach(s -> {
+//            JPanel.add(s.getTenPhim(),s.getDienVien(),s.getDaoDien(),s.getQuocGia(),s.getThoiLuong(),s.getNamSX());
+        lblTenPhim.setText(p.getTenPhim());
+        lblDV.setText(p.getDienVien());
+        lblDD.setText(p.getDaoDien());
+        lblQG.setText(p.getQuocGia());
+        lblTL.setText(p.getThoiLuong());
+        lblNSX.setText(String.valueOf(p.getNamSX()));
+//            lblHinh.setText(p.getHinh());
+//        lblHinh.setIcon(resizeImage("src/main/resources/poster/" + p.getHinh() + ".jpg"));
+
+//        });
     }
 
     /**
@@ -43,44 +55,129 @@ public class TablePhim extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        lblHinh = new javax.swing.JLabel();
+        lblTenPhim = new javax.swing.JLabel();
+        lblDienVien = new javax.swing.JLabel();
+        lblDaoDien = new javax.swing.JLabel();
+        lblQuocGia = new javax.swing.JLabel();
+        lblThoiLuong = new javax.swing.JLabel();
+        lblNamSX = new javax.swing.JLabel();
+        lblDV = new javax.swing.JLabel();
+        lblDD = new javax.swing.JLabel();
+        lblQG = new javax.swing.JLabel();
+        lblTL = new javax.swing.JLabel();
+        lblNSX = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Tên Phim", "Diễn viên", "Đạo diễn", "Năm SX", "Quốc gia", "Thời lượng"
-            }
-        ));
-        jTable1.setDragEnabled(true);
-        jScrollPane1.setViewportView(jTable1);
+        setBackground(new java.awt.Color(0, 0, 0));
+
+        lblHinh.setForeground(new java.awt.Color(255, 255, 255));
+
+        lblTenPhim.setForeground(new java.awt.Color(255, 255, 255));
+
+        lblDienVien.setForeground(new java.awt.Color(255, 255, 255));
+        lblDienVien.setText("Dien vien:");
+
+        lblDaoDien.setForeground(new java.awt.Color(255, 255, 255));
+        lblDaoDien.setText("Dao dien:");
+
+        lblQuocGia.setForeground(new java.awt.Color(255, 255, 255));
+        lblQuocGia.setText("Quoc gia:");
+
+        lblThoiLuong.setForeground(new java.awt.Color(255, 255, 255));
+        lblThoiLuong.setText("Thoi luong");
+
+        lblNamSX.setForeground(new java.awt.Color(255, 255, 255));
+        lblNamSX.setText("Nam SX");
+
+        lblDV.setForeground(new java.awt.Color(255, 255, 255));
+
+        lblDD.setForeground(new java.awt.Color(255, 255, 255));
+
+        lblQG.setForeground(new java.awt.Color(255, 255, 255));
+
+        lblTL.setForeground(new java.awt.Color(255, 255, 255));
+
+        lblNSX.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblQuocGia)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblQG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDaoDien)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDienVien)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDV, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTenPhim)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblThoiLuong)
+                            .addComponent(lblNamSX))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTL, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblTenPhim)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDienVien)
+                            .addComponent(lblDV))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDaoDien)
+                            .addComponent(lblDD))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblQuocGia)
+                            .addComponent(lblQG))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblThoiLuong)
+                            .addComponent(lblTL))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNamSX)
+                            .addComponent(lblNSX))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblDD;
+    private javax.swing.JLabel lblDV;
+    private javax.swing.JLabel lblDaoDien;
+    private javax.swing.JLabel lblDienVien;
+    private javax.swing.JLabel lblHinh;
+    private javax.swing.JLabel lblNSX;
+    private javax.swing.JLabel lblNamSX;
+    private javax.swing.JLabel lblQG;
+    private javax.swing.JLabel lblQuocGia;
+    private javax.swing.JLabel lblTL;
+    private javax.swing.JLabel lblTenPhim;
+    private javax.swing.JLabel lblThoiLuong;
     // End of variables declaration//GEN-END:variables
 }
