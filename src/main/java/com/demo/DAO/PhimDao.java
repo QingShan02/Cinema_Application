@@ -42,7 +42,7 @@ public class PhimDao {
             pst.setString(1, giobatdau);
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Phim(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                list.add(new Phim(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),rs.getString(8)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);

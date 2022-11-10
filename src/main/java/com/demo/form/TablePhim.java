@@ -4,12 +4,15 @@
  */
 package com.demo.form;
 
-import com.raven.DAO.NgayChieuDao;
 import com.raven.DAO.PhimDao;
+import com.raven.DAO.PhongDao;
+import com.raven.DAO.XuatChieuDao;
+import com.raven.form.Form_ChoNgoi;
+import com.raven.model.ChiTietGhe;
+import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,28 +25,26 @@ public class TablePhim extends javax.swing.JPanel {
      */
     PhimDao daophim;
     List<Phim> listPhim;
+    List<ChiTietGhe> ListPhong;
+    PhongDao daoPhong;
+    XuatChieuDao daoXC;
+    List<NgayChieu> ngaychieu = new ArrayList<>();
+    String maPhong;
 
     public TablePhim() {
         initComponents();
     }
 
-    public TablePhim(Phim p) {
+    public TablePhim(Phim p, int stt) {
         initComponents();
-
-//        NgayChieuDao daoNC = new NgayChieuDao();
-//        List<Phim> list = daoNC.SelectTenPhim(gio);
-//        listPhim.forEach(s -> {
-//            JPanel.add(s.getTenPhim(),s.getDienVien(),s.getDaoDien(),s.getQuocGia(),s.getThoiLuong(),s.getNamSX());
+//        maPhong = daoXC.SelectMaPhong(p.getMaPhim(), stt);
         lblTenPhim.setText(p.getTenPhim());
         lblDV.setText(p.getDienVien());
         lblDD.setText(p.getDaoDien());
         lblQG.setText(p.getQuocGia());
         lblTL.setText(p.getThoiLuong());
         lblNSX.setText(String.valueOf(p.getNamSX()));
-//            lblHinh.setText(p.getHinh());
-//        lblHinh.setIcon(resizeImage("src/main/resources/poster/" + p.getHinh() + ".jpg"));
-
-//        });
+        System.out.println(maPhong);
     }
 
     /**
@@ -69,6 +70,11 @@ public class TablePhim extends javax.swing.JPanel {
         lblNSX = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         lblHinh.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -164,6 +170,10 @@ public class TablePhim extends javax.swing.JPanel {
                 .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

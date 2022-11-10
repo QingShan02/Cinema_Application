@@ -4,37 +4,18 @@ import com.demo.form.TablePhim;
 import com.raven.DAO.NgayChieuDao;
 import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
-import com.raven.component.Card;
-import com.raven.component.Menu;
-import com.raven.model.Model_Card;
 import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
-import com.raven.model.PhongChieu;
-import com.raven.model.StatusType;
-import com.raven.swing.ScrollBar;
-import com.toedter.components.JTitlePanel;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class Form_Home extends javax.swing.JPanel {
 
     PhongDao daoPhong;
     List<Object[]> list;
-    Form_ChoNgoi cn;
     List<NgayChieu> listXC;
     NgayChieuDao daoNC;
     NgayChieu nc = new NgayChieu();
@@ -46,21 +27,6 @@ public class Form_Home extends javax.swing.JPanel {
     public Form_Home() {
         initComponents();
         daoPhim = new PhimDao();
-
-//        NgayChieuDao daoNC = new NgayChieuDao();
-//        List<Phim> list = daoNC.SelectTenPhim(gio);
-//        listPhim.forEach(s -> {
-////            JPanel.add(s.getTenPhim(),s.getDienVien(),s.getDaoDien(),s.getQuocGia(),s.getThoiLuong(),s.getNamSX());
-//            lblTenPhim.setText(s.getTenPhim());
-//            lblDV.setText(s.getDienVien());
-//            lblDD.setText(s.getDaoDien());
-//            lblQG.setText(s.getQuocGia());
-//            lblTL.setText(s.getThoiLuong());
-////            lblNSX.setText(s.getNamSX());
-//            lblHinh.setText(s.getHinh());
-//        });
-//        daoPhim = new PhimDao();
-//        listPhim = daoPhim.PhimTrongNgay("2022-09-01");
         daoNC = new NgayChieuDao();
         listXC = daoNC.SelectGio();
 //        cn = new Form_ChoNgoi();
@@ -71,17 +37,6 @@ public class Form_Home extends javax.swing.JPanel {
             listP.add(panel);
             jTabbedPane1.addTab(nc.getGioBatDau(), panel);
         }
-//        Card card = null;
-//        for (Phim phim : listPhim) {
-//
-//            listXC = daoPhim.GioCuaPhim(phim.getMaPhim(), "2022-09-01");
-//            card = new Card();
-//            card.setData(new Model_Card(new ImageIcon("src/main/resources/icon/stock.png"), (String) phim.getTenPhim(), "2022-09-01", listXC, phim.getMaPhim()), phim.getMaPhim(), phim.getNamSX());
-//            card.setColor1(Color.BLACK);
-//            card.setColor2(Color.BLACK);
-//            panel1.add(card);
-//
-//        }
         jTabbedPane1.repaint();
         jTabbedPane1.revalidate();
 
@@ -132,24 +87,15 @@ public class Form_Home extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
-        // TODO add your handling code here:
-//        String [] header = {"hehe","ten"};
-//        String [][] row = {
-//            {"1","Minh"}
-//        };
+
         JTable table = new JTable();
         int temp = jTabbedPane1.getSelectedIndex();
         listP.get(temp).removeAll();
         listPhim = daoPhim.SelectTenPhim(jTabbedPane1.getTitleAt(temp));
         listPhim.forEach(s -> {
-        listP.get(temp).add(new TablePhim(s));
-
+            listP.get(temp).add(new TablePhim(s,listXC.get(temp).getStt()));
+            
         });
-
-//        listP.get(temp).setLayout(new BoxLayout(table, BoxLayout.PAGE_AXIS));
-//        table.setSize(1000, 400);
-
-//        jTabbedPane1.repaint();
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
 

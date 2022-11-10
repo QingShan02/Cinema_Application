@@ -28,7 +28,7 @@ public class Phim {
     private String MoTa;
     private String Traller;
 
-    public Phim(String tenphim, String dienvien, int namsx, String hinh, String daodien, String quocgia, String thoiluong) {
+    public Phim(String tenphim, String dienvien, int namsx, String hinh, String daodien, String quocgia, String thoiluong, String maphim) {
         this.TenPhim = tenphim;
         this.DienVien = dienvien;
         this.NamSX = namsx;
@@ -36,7 +36,7 @@ public class Phim {
         this.DaoDien = daodien;
         this.QuocGia = quocgia;
         this.ThoiLuong = thoiluong;
-
+        this.MaPhim = maphim;
     }
 
     public Phim(String maPhim, String tenPhim) {

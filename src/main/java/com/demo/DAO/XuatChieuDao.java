@@ -27,7 +27,6 @@ public class XuatChieuDao {
     static Statement st = null;
     static PreparedStatement pst = null;
     static ResultSet rs;
-    
 
     public void Insert(XuatChieu xc) {
         try {
@@ -78,7 +77,7 @@ public class XuatChieuDao {
             e.printStackTrace();
         }
     }
-    
+
     public List<Phim> SelectTenPhim(int stt, String ngayChieu) {
         List<Phim> list = new ArrayList<>();
         try {
@@ -94,5 +93,18 @@ public class XuatChieuDao {
         }
         return list;
     }
-    
+
+    public String SelectMaPhong(String maPhim, int stt) {
+        String maPhong = null;
+        try {
+            pst = con.prepareStatement("select MaPhong from xuatchieu where MaPhim =? and ngay =?");
+            pst.setString(1, maPhim);
+            pst.setInt(2, stt);
+            rs = pst.executeQuery();
+            maPhong = rs.getString(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return maPhong;
+    }
 }
