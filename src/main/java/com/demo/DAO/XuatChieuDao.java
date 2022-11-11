@@ -94,14 +94,16 @@ public class XuatChieuDao {
         return list;
     }
 
-    public String SelectMaPhong(String maPhim, int stt) {
+    public String SelectMaPhong(String maPhim, int sttngay) {
         String maPhong = null;
         try {
             pst = con.prepareStatement("select MaPhong from xuatchieu where MaPhim =? and ngay =?");
             pst.setString(1, maPhim);
-            pst.setInt(2, stt);
+            pst.setInt(2, sttngay);
             rs = pst.executeQuery();
-            maPhong = rs.getString(1);
+            while (rs.next()) {                
+                maPhong = rs.getString(1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

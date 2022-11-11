@@ -37,9 +37,6 @@ import java.util.stream.Collectors;
  */
 public class Form_ChoNgoi extends javax.swing.JPanel {
 
-    GheDao daoGhe;
-    List<ChiTietGhe> ListGhe = new ArrayList<>();
-
     /**
      * Creates new form Form_ChoNgoi
      */
@@ -51,6 +48,10 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     List<ChiTietGhe> List2;
     List<ChiTietGhe> listGheCV;
     PhongChieu phg;
+    List<Model_Ghe> lModelGhe = new ArrayList<>();
+    Model_Ghe ghe;
+    GheDao daoGhe;
+    List<ChiTietGhe> ListGhe = new ArrayList<>();
 
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
@@ -73,145 +74,153 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         this.listGheCV = listGheCV;
         this.phg = phg;
         daoGhe = new GheDao();
-        ListGhe = daoGhe.Select(this.phg.getMaPhong(),nc.getStt());
+        ListGhe = daoGhe.Select(this.phg.getMaPhong(), nc.getStt());
         lblTenPhong.setText(lblTenPhong.getText() + " " + this.phg.getTenPhong());
         lblGio.setText(nc.getGioBatDau());
         SodoGhe();
     }
-    List<Model_Ghe> lModelGhe = new ArrayList<>();
-    Model_Ghe ghe;
+
+    public Form_ChoNgoi(String maphong, int sttngay) {
+        initComponents();
+        daoGhe = new GheDao();
+        ListGhe = daoGhe.Select(maphong, sttngay);
+        ListGhe.stream().forEach(s ->{
+            s.getMaGhe();
+        });
+        SodoGhe();
+    }
 
     public void SodoGhe() {
         List = ListGhe.stream().limit(96).collect(Collectors.toList());
         for (ChiTietGhe s : List) {
             if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                 cl = Color.PINK;
+                
             } else {
                 cl = Color.GREEN;
             }
 
             ghe = new Model_Ghe(cl, s.getTenGhe());
-//            ghe.addMouseListener(new MouseAdapter() {
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-//                    try {
-//                        ThanhToan tt = (ThanhToan) readObj("temp.txt");
-//                        tt.setMaCTGhe(s.getMaCTGhe());
-//                        tt.setMaGhe(s.getMaGhe());
-//                        new PrintWriter("temp.txt").close();
-//                        writeObj("temp.txt", tt);
-//
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-//                    } catch (ClassNotFoundException ex) {
-//                        Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//
-//                    if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-//                        if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-//                            e.getComponent().setBackground(Color.PINK);
-//                        } else {
-//                            e.getComponent().setBackground(Color.GREEN);
-//                        }
-//                    } else {
-//                        e.getComponent().setBackground(Color.YELLOW);
-//                    }
-//                }
-//
-//            });
+            ghe.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    try {
+                        ThanhToan tt = (ThanhToan) readObj("temp.txt");
+                        tt.setMaCTGhe(s.getMaCTGhe());
+                        tt.setMaGhe(s.getMaGhe());
+                        new PrintWriter("temp.txt").close();
+                        writeObj("temp.txt", tt);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+                        if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+                            e.getComponent().setBackground(Color.PINK);
+                        } else {
+                            e.getComponent().setBackground(Color.GREEN);
+                        }
+                    } else {
+                        e.getComponent().setBackground(Color.YELLOW);
+                    }
+                }
+
+            });
             Sodochongoi3.add(ghe);
             lModelGhe.add(ghe);
 
         }
-        int id = Integer.parseInt(phg.getMaPhong().substring(2));
-        if (id >= 5) {
-            List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
-            for (ChiTietGhe s : List2) {
-                if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
-                    cl = Color.RED;
-                }
-                ghe = new Model_Ghe(cl, s.getTenGhe());
-
-                lModelGhe.add(ghe);
-
-                lModelGhe.add(ghe);
-
+//        int id = Integer.parseInt(phg.getMaPhong().substring(2));
+//        if (id >= 5) {
+//            List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
+//            for (ChiTietGhe s : List2) {
+//                if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+//                    cl = Color.RED;
+//                }
+//                ghe = new Model_Ghe(cl, s.getTenGhe());
+//
+//                lModelGhe.add(ghe);
+//
+//                lModelGhe.add(ghe);
+//
+////                ghe.addMouseListener(new MouseAdapter() {
+////                    @Override
+////                    public void mouseClicked(MouseEvent e) {
+////                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+////                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+////                                e.getComponent().setBackground(Color.PINK);
+////                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+////                                e.getComponent().setBackground(Color.RED);
+////                            } else {
+////                                e.getComponent().setBackground(Color.GREEN);
+////                            }
+////                        } else {
+////                            e.getComponent().setBackground(Color.YELLOW);
+////                        }
+////                    }
+////                });
+//                Sodochongoivip.add(ghe);
+//                lModelGhe.add(ghe);
+//
+//            }
+//
+//        }
+//        if (listGheCV.size() == 96 || listGheCV.size() == 110) {
+//            btnNext.setEnabled(false);
+//        }
+//        for (int i = 0; i < ListGhe.size(); i++) {
+//            ChiTietGhe s = ListGhe.get(i);
+//            ghe = lModelGhe.get(i);
+//            for (ChiTietGhe g : listGheCV) {
+//                if (g.getMaCTGhe() == s.getMaCTGhe()) {
+//                    ghe.setBackground(Color.GRAY);
+//                    break;
+//                }
+//
+//            }
+//        }
+//        for (int i = 0; i < ListGhe.size(); i++) {
+//            ChiTietGhe s = ListGhe.get(i);
+//            ghe = lModelGhe.get(i);
+//            if (!ghe.getBackground().equals(Color.GRAY)) {
 //                ghe.addMouseListener(new MouseAdapter() {
 //                    @Override
 //                    public void mouseClicked(MouseEvent e) {
+//
 //                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
 //                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
 //                                e.getComponent().setBackground(Color.PINK);
-//                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
-//                                e.getComponent().setBackground(Color.RED);
+//                                lblGiaGhe.setText("Giá:");
 //                            } else {
 //                                e.getComponent().setBackground(Color.GREEN);
+//                                lblGiaGhe.setText("Giá:");
 //                            }
 //                        } else {
+//                            
+//                            try {
+//                                ThanhToan tt = (ThanhToan) readObj("temp.txt");
+//                                tt.setMaCTGhe(s.getMaCTGhe());
+//                                tt.setMaGhe(s.getMaGhe());
+//                                tt.setGiaGhe(s.getGia());
+//                                new PrintWriter("temp.txt").close();
+//                                writeObj("temp.txt", tt);
+//
+//                            } catch (IOException ex) {
+//                                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+//                            } catch (ClassNotFoundException ex) {
+//                                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
 //                            e.getComponent().setBackground(Color.YELLOW);
+//                            lblGiaGhe.setText(lblGiaGhe.getText()+" "+s.getGia()+" VND");
 //                        }
 //                    }
+//
 //                });
-                Sodochongoivip.add(ghe);
-                lModelGhe.add(ghe);
-
-            }
-
-        }
-        if (listGheCV.size() == 96 || listGheCV.size() == 110) {
-            btnNext.setEnabled(false);
-        }
-        for (int i = 0; i < ListGhe.size(); i++) {
-            ChiTietGhe s = ListGhe.get(i);
-            ghe = lModelGhe.get(i);
-            for (ChiTietGhe g : listGheCV) {
-                if (g.getMaCTGhe() == s.getMaCTGhe()) {
-                    ghe.setBackground(Color.GRAY);
-                    break;
-                }
-
-            }
-        }
-        for (int i = 0; i < ListGhe.size(); i++) {
-            ChiTietGhe s = ListGhe.get(i);
-            ghe = lModelGhe.get(i);
-            if (!ghe.getBackground().equals(Color.GRAY)) {
-                ghe.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-
-                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-                                e.getComponent().setBackground(Color.PINK);
-                                lblGiaGhe.setText("Giá:");
-                            } else {
-                                e.getComponent().setBackground(Color.GREEN);
-                                lblGiaGhe.setText("Giá:");
-                            }
-                        } else {
-                            
-                            try {
-                                ThanhToan tt = (ThanhToan) readObj("temp.txt");
-                                tt.setMaCTGhe(s.getMaCTGhe());
-                                tt.setMaGhe(s.getMaGhe());
-                                tt.setGiaGhe(s.getGia());
-                                new PrintWriter("temp.txt").close();
-                                writeObj("temp.txt", tt);
-
-                            } catch (IOException ex) {
-                                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (ClassNotFoundException ex) {
-                                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            e.getComponent().setBackground(Color.YELLOW);
-                            lblGiaGhe.setText(lblGiaGhe.getText()+" "+s.getGia()+" VND");
-                        }
-                    }
-
-                });
-            }
-
-        }
+//            }
+//
+//        }
         Sodochongoivip.repaint();
         Sodochongoivip.revalidate();
         Sodochongoi3.repaint();

@@ -8,6 +8,7 @@ import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
 import com.raven.DAO.XuatChieuDao;
 import com.raven.form.Form_ChoNgoi;
+import com.raven.main.Main;
 import com.raven.model.ChiTietGhe;
 import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
@@ -33,27 +34,29 @@ public class TablePhim extends javax.swing.JPanel {
     XuatChieuDao daoXC;
     List<NgayChieu> ngaychieu = new ArrayList<>();
     String maPhong;
+    int sttn;
 
     public TablePhim() {
         initComponents();
     }
 
-    public TablePhim(Phim p, int stt) {
+    public TablePhim(Phim p, int sttngay) {
         initComponents();
-//        maPhong = daoXC.SelectMaPhong(p.getMaPhim(), stt);
+        daoXC = new XuatChieuDao();
         lblTenPhim.setText(p.getTenPhim());
         lblDV.setText(p.getDienVien());
         lblDD.setText(p.getDaoDien());
         lblQG.setText(p.getQuocGia());
         lblTL.setText(p.getThoiLuong());
         lblNSX.setText(String.valueOf(p.getNamSX()));
-//            lblHinh.setText(p.getHinh());
         lblHinh.setIcon(resizeImage("src/main/resources/poster/" + p.getHinh()));
-
-//        });
+        maPhong = daoXC.SelectMaPhong(p.getMaPhim(), sttngay);
+        sttn = sttngay;
+        System.out.println(maPhong);
+        
     }
-    
-        public ImageIcon resizeImage(String path) {
+
+    public ImageIcon resizeImage(String path) {
         ImageIcon ii = new ImageIcon(path);
         ImageIcon imageIcon = new ImageIcon(ii.getImage().getScaledInstance(150, 300, java.awt.Image.SCALE_SMOOTH));
         return imageIcon;
@@ -195,7 +198,10 @@ public class TablePhim extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        
+        Main.mainF.removeAll();
+        Main.mainF.add(new Form_ChoNgoi(maPhong, sttn));
+        Main.mainF.repaint();
+        Main.mainF.revalidate();
     }//GEN-LAST:event_formMouseClicked
 
 
