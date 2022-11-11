@@ -13,6 +13,9 @@ import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -44,7 +47,16 @@ public class TablePhim extends javax.swing.JPanel {
         lblQG.setText(p.getQuocGia());
         lblTL.setText(p.getThoiLuong());
         lblNSX.setText(String.valueOf(p.getNamSX()));
-        System.out.println(maPhong);
+//            lblHinh.setText(p.getHinh());
+        lblHinh.setIcon(resizeImage("src/main/resources/poster/" + p.getHinh()));
+
+//        });
+    }
+    
+        public ImageIcon resizeImage(String path) {
+        ImageIcon ii = new ImageIcon(path);
+        ImageIcon imageIcon = new ImageIcon(ii.getImage().getScaledInstance(150, 300, java.awt.Image.SCALE_SMOOTH));
+        return imageIcon;
     }
 
     /**
@@ -78,31 +90,42 @@ public class TablePhim extends javax.swing.JPanel {
 
         lblHinh.setForeground(new java.awt.Color(255, 255, 255));
 
-        lblTenPhim.setForeground(new java.awt.Color(255, 255, 255));
+        lblTenPhim.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTenPhim.setForeground(new java.awt.Color(255, 0, 51));
 
+        lblDienVien.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDienVien.setForeground(new java.awt.Color(255, 255, 255));
-        lblDienVien.setText("Dien vien:");
+        lblDienVien.setText("Diễn viên :");
 
+        lblDaoDien.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDaoDien.setForeground(new java.awt.Color(255, 255, 255));
-        lblDaoDien.setText("Dao dien:");
+        lblDaoDien.setText("Đạo diễn :");
 
+        lblQuocGia.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblQuocGia.setForeground(new java.awt.Color(255, 255, 255));
-        lblQuocGia.setText("Quoc gia:");
+        lblQuocGia.setText("Quốc gia :");
 
+        lblThoiLuong.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblThoiLuong.setForeground(new java.awt.Color(255, 255, 255));
-        lblThoiLuong.setText("Thoi luong");
+        lblThoiLuong.setText("Thời lượng :");
 
+        lblNamSX.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblNamSX.setForeground(new java.awt.Color(255, 255, 255));
-        lblNamSX.setText("Nam SX");
+        lblNamSX.setText("Năm SX :");
 
+        lblDV.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDV.setForeground(new java.awt.Color(255, 255, 255));
 
+        lblDD.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDD.setForeground(new java.awt.Color(255, 255, 255));
 
+        lblQG.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblQG.setForeground(new java.awt.Color(255, 255, 255));
 
+        lblTL.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblTL.setForeground(new java.awt.Color(255, 255, 255));
 
+        lblNSX.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblNSX.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -135,7 +158,7 @@ public class TablePhim extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTL, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

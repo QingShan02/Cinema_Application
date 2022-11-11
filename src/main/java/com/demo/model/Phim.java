@@ -39,6 +39,20 @@ public class Phim {
         this.MaPhim = maphim;
     }
 
+    public Phim(String MaPhim, String TenPhim, String DienVien, int NamSX, String Hinh, String DaoDien, String QuocGia, String ThoiLuong, String MoTa, String Traller) {
+        this.MaPhim = MaPhim;
+        this.TenPhim = TenPhim;
+        this.DienVien = DienVien;
+        this.NamSX = NamSX;
+        this.Hinh = Hinh;
+        this.DaoDien = DaoDien;
+        this.QuocGia = QuocGia;
+        this.ThoiLuong = ThoiLuong;
+        this.MoTa = MoTa;
+        this.Traller = Traller;
+    }
+
+        
     public Phim(String maPhim, String tenPhim) {
         MaPhim = maPhim;
         TenPhim = tenPhim;
