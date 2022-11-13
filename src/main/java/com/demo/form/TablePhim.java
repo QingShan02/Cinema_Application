@@ -53,7 +53,7 @@ public class TablePhim extends javax.swing.JPanel {
         maPhong = daoXC.SelectMaPhong(p.getMaPhim(), sttngay);
         sttn = sttngay;
         System.out.println(maPhong);
-        
+        System.out.println(sttn);
     }
 
     public ImageIcon resizeImage(String path) {

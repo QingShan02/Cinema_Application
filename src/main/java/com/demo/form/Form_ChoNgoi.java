@@ -134,39 +134,39 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         }
 //        int id = Integer.parseInt(phg.getMaPhong().substring(2));
 //        if (id >= 5) {
-//            List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
-//            for (ChiTietGhe s : List2) {
-//                if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
-//                    cl = Color.RED;
-//                }
-//                ghe = new Model_Ghe(cl, s.getTenGhe());
-//
-//                lModelGhe.add(ghe);
-//
-//                lModelGhe.add(ghe);
-//
-////                ghe.addMouseListener(new MouseAdapter() {
-////                    @Override
-////                    public void mouseClicked(MouseEvent e) {
-////                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-////                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-////                                e.getComponent().setBackground(Color.PINK);
-////                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
-////                                e.getComponent().setBackground(Color.RED);
-////                            } else {
-////                                e.getComponent().setBackground(Color.GREEN);
-////                            }
-////                        } else {
-////                            e.getComponent().setBackground(Color.YELLOW);
-////                        }
-////                    }
-////                });
-//                Sodochongoivip.add(ghe);
-//                lModelGhe.add(ghe);
-//
+            List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
+            for (ChiTietGhe s : List2) {
+                if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+                    cl = Color.RED;
+                }
+                ghe = new Model_Ghe(cl, s.getTenGhe());
+
+                lModelGhe.add(ghe);
+
+                lModelGhe.add(ghe);
+
+//                ghe.addMouseListener(new MouseAdapter() {
+//                    @Override
+//                    public void mouseClicked(MouseEvent e) {
+//                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+//                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+//                                e.getComponent().setBackground(Color.PINK);
+//                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+//                                e.getComponent().setBackground(Color.RED);
+//                            } else {
+//                                e.getComponent().setBackground(Color.GREEN);
+//                            }
+//                        } else {
+//                            e.getComponent().setBackground(Color.YELLOW);
+//                        }
+//                    }
+//                });
+                Sodochongoivip.add(ghe);
+                lModelGhe.add(ghe);
+
 //            }
-//
-//        }
+
+        }
 //        if (listGheCV.size() == 96 || listGheCV.size() == 110) {
 //            btnNext.setEnabled(false);
 //        }
@@ -330,7 +330,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -375,10 +375,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                                 .addGap(8, 8, 8)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel5))))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
