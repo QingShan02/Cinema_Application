@@ -87,16 +87,16 @@ public class PhongDao {
             e.printStackTrace();
         }
     }
-    public List<ChiTietGhe> SelectGheInVe(String ngay, int stt,String maphim){
+    public List<ChiTietGhe> Selectghecove(String maPhim, int sttngay ,String gioBatDau){
         List<ChiTietGhe> list = new ArrayList<>();
         try {
-            pst = con.prepareCall("{ call SelectGheInVe(?,?,?)}");
-            pst.setDate(1, java.sql.Date.valueOf("2022-09-01"));
-            pst.setInt(2, stt);
-            pst.setString(3, maphim);
+            pst = con.prepareCall("{ call Selectghecove(?,?,cast(? as time))}");
+            pst.setString(1, maPhim);
+            pst.setInt(2, sttngay);
+            pst.setString(3, gioBatDau);
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new ChiTietGhe(rs.getInt(1),rs.getString(2)));
+                list.add(new ChiTietGhe(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDouble(5), rs.getInt(6)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);

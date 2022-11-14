@@ -47,11 +47,13 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     List<ChiTietGhe> List;
     List<ChiTietGhe> List2;
     List<ChiTietGhe> listGheCV;
-    PhongChieu phg;
+    List<ChiTietGhe> ListGhe = new ArrayList<>();
     List<Model_Ghe> lModelGhe = new ArrayList<>();
+    PhongChieu phg;
     Model_Ghe ghe;
     GheDao daoGhe;
-    List<ChiTietGhe> ListGhe = new ArrayList<>();
+    PhongDao daoPhong;
+    String maPhongChieu;
 
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
@@ -69,9 +71,10 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         }
     }
 
+    //Cái này bản cũ chưa xóa
     public Form_ChoNgoi(PhongChieu phg, NgayChieu nc, List<ChiTietGhe> listGheCV) {
         initComponents();
-        this.listGheCV = listGheCV;
+//        this.listGheCV = listGheCV;
         this.phg = phg;
         daoGhe = new GheDao();
         ListGhe = daoGhe.Select(this.phg.getMaPhong(), nc.getStt());
@@ -80,11 +83,15 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         SodoGhe();
     }
 
-    public Form_ChoNgoi(String maphong, int sttngay) {
+    //Cái này mới sử dụng cái này
+    public Form_ChoNgoi(String maphong,String maPhim, int sttngay, String gioBatDau) {
         initComponents();
         daoGhe = new GheDao();
+        daoPhong = new PhongDao();
         ListGhe = daoGhe.Select(maphong, sttngay);
-        ListGhe.stream().forEach(s ->{
+        listGheCV = daoPhong.Selectghecove(maPhim, sttngay, gioBatDau);
+        maPhongChieu = maphong;
+        ListGhe.stream().forEach(s -> {
             s.getMaGhe();
         });
         SodoGhe();
@@ -95,7 +102,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         for (ChiTietGhe s : List) {
             if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                 cl = Color.PINK;
-                
+
             } else {
                 cl = Color.GREEN;
             }
@@ -132,18 +139,18 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             lModelGhe.add(ghe);
 
         }
-//        int id = Integer.parseInt(phg.getMaPhong().substring(2));
-//        if (id >= 5) {
-            List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
-            for (ChiTietGhe s : List2) {
-                if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
-                    cl = Color.RED;
-                }
-                ghe = new Model_Ghe(cl, s.getTenGhe());
+        int id = Integer.parseInt(maPhongChieu.substring(2));
+        if (id >= 5) {
+        List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
+        for (ChiTietGhe s : List2) {
+            if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+                cl = Color.RED;
+            }
+            ghe = new Model_Ghe(cl, s.getTenGhe());
 
-                lModelGhe.add(ghe);
+            lModelGhe.add(ghe);
 
-                lModelGhe.add(ghe);
+            lModelGhe.add(ghe);
 
 //                ghe.addMouseListener(new MouseAdapter() {
 //                    @Override
@@ -161,11 +168,10 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
 //                        }
 //                    }
 //                });
-                Sodochongoivip.add(ghe);
-                lModelGhe.add(ghe);
+            Sodochongoivip.add(ghe);
+            lModelGhe.add(ghe);
 
-//            }
-
+            }
         }
 //        if (listGheCV.size() == 96 || listGheCV.size() == 110) {
 //            btnNext.setEnabled(false);

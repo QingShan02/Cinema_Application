@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -85,18 +86,19 @@ public class Card extends javax.swing.JPanel {
                     System.out.println(s.getStt());
 
                     PhongChieu phg = daoPhong.SelectPhong(data.getMaPhim(), data.getValues(), s.getStt());
-                    List<ChiTietGhe> listGheCV = daoPhong.SelectGheInVe("2022-09-01", s.getStt(), data.getMaPhim());
+//                    List<ChiTietGhe> listGheCV = daoPhong.SelectGheInVe("2022-09-01", s.getStt(), data.getMaPhim());
      try {
             new PrintWriter("bonho.txt").close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            writeObj("bonho.txt", new Object[]{phg,s,listGheCV,data.getMaPhim(),s.getStt()});
-        } catch (IOException ex) {
-            Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                    Main.mainF.add(new Form_ChoNgoi(phg, s, listGheCV));
+//        try {
+//            
+//            writeObj("bonho.txt", new Object[]{phg,s,listGheCV,data.getMaPhim(),s.getStt()});
+//        } catch (IOException ex) {
+//            Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//                    Main.mainF.add(new Form_ChoNgoi(phg, s, listGheCV));
                     Main.mainF.repaint();
                     Main.mainF.revalidate();
                 }

@@ -273,24 +273,22 @@ public class Main extends javax.swing.JFrame {
     private void mainPanelComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_mainPanelComponentRemoved
         // TODO add your handling code here:
                 Object[] obj = new Object[]{};
-        try {
-            // TODO add your handling code here:
-            if (new File("bonho.txt").length() != 0) {
-                
-                obj = (Object[]) readObj("bonho.txt");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            // TODO add your handling code here:
+//            if (new File("bonho.txt").length() != 0) {
+//                
+//                obj = (Object[]) readObj("bonho.txt");
+//            }
+//        } catch (IOException ex) {
+//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         if (evt.getChild().getClass() == Form_ChoNgoi.class) {
-            System.out.println(">>3");
-            List<ChiTietGhe> listGheCV = daoPhong.SelectGheInVe("2022-09-01", (int)obj[4],(String) obj[3]);
+//            List<ChiTietGhe> listGheCV = daoPhong.Selectghecove((String) obj[3],"2022-11-10","18:00:00");
 
-            cp = new Form_ChoNgoi((PhongChieu) obj[0], (NgayChieu) obj[1],listGheCV);
-
-        }
+//            cp = new Form_ChoNgoi((PhongChieu) obj[0], (NgayChieu) obj[1],listGheCV);
+        }   
     }//GEN-LAST:event_mainPanelComponentRemoved
 
     /**

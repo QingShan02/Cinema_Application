@@ -22,6 +22,8 @@ public class ChiTietGhe implements Serializable{
     private String MaGhe;
     private String TenGhe;
     private double gia;
+    private int idVe;
+    private int maLoaiGhe;
 
     public ChiTietGhe(String MaPhong, String TenGhe,int MaCTGhe) {
         this.MaCTGhe = MaCTGhe;
@@ -41,6 +43,15 @@ public class ChiTietGhe implements Serializable{
     public ChiTietGhe(int MaCTGhe, String TenGhe) {
         this.MaCTGhe = MaCTGhe;
         this.TenGhe = TenGhe;
+    }
+
+    public ChiTietGhe(int maLoaiGhe,String MaGhe, String TenGhe, int idVe, double gia,int MaCTGhe ) {
+        this.maLoaiGhe = maLoaiGhe;
+        this.MaCTGhe = MaCTGhe;
+        this.MaGhe = MaGhe;
+        this.TenGhe = TenGhe;
+        this.gia = gia;
+        this.idVe = idVe;
     }
     
 }

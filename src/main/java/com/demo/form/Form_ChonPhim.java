@@ -95,7 +95,8 @@ public class Form_ChonPhim extends javax.swing.JPanel {
             mp = new Model_Phim(s.getTenPhim(), s.getMaPhim());
             pnlPhim.add(mp);
             PhongChieu phg = new PhongDao().SelectPhong(s.getMaPhim(), ngayChieu, listGio.get(index).getStt());
-            List<ChiTietGhe> listGheCV = new PhongDao().SelectGheInVe(ngayChieu, listGio.get(index).getStt(), s.getMaPhim());
+//            List<ChiTietGhe> listGheCV = new PhongDao().SelectGheInVe(ngayChieu, listGio.get(index).getStt(), s.getMaPhim());
+//            List<ChiTietGhe> listGheCV = new PhongDao().Selectghecove(s.getMaPhim(),ngayChieu,listGio.get(index).getGioBatDau());
 
             mp.addMouseListener(new MouseAdapter() {
                 @Override
@@ -116,7 +117,7 @@ public class Form_ChonPhim extends javax.swing.JPanel {
                         Logger.getLogger(Form_ChonPhim.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     Main.mainF.removeAll();
-                    Main.mainF.add(new Form_ChoNgoi(phg, nc, listGheCV));
+//                    Main.mainF.add(new Form_ChoNgoi(phg, nc, listGheCV));
                     Main.mainF.repaint();
                     Main.mainF.revalidate();
                 }

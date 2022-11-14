@@ -33,14 +33,14 @@ public class TablePhim extends javax.swing.JPanel {
     PhongDao daoPhong;
     XuatChieuDao daoXC;
     List<NgayChieu> ngaychieu = new ArrayList<>();
-    String maPhong;
+    String maPhong,gioBatDau,maPhim;
     int sttn;
 
     public TablePhim() {
         initComponents();
     }
 
-    public TablePhim(Phim p, int sttngay) {
+    public TablePhim(Phim p, int sttngay, String gioBatDauChieu) {
         initComponents();
         daoXC = new XuatChieuDao();
         lblTenPhim.setText(p.getTenPhim());
@@ -52,8 +52,12 @@ public class TablePhim extends javax.swing.JPanel {
         lblHinh.setIcon(resizeImage("src/main/resources/poster/" + p.getHinh()));
         maPhong = daoXC.SelectMaPhong(p.getMaPhim(), sttngay);
         sttn = sttngay;
+        gioBatDau = gioBatDauChieu;
+        maPhim = p.getMaPhim();
         System.out.println(maPhong);
+        System.out.println(maPhim);
         System.out.println(sttn);
+        System.out.println(gioBatDau);
     }
 
     public ImageIcon resizeImage(String path) {
@@ -199,7 +203,7 @@ public class TablePhim extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         Main.mainF.removeAll();
-        Main.mainF.add(new Form_ChoNgoi(maPhong, sttn));
+        Main.mainF.add(new Form_ChoNgoi(maPhong,maPhim, sttn, gioBatDau));
         Main.mainF.repaint();
         Main.mainF.revalidate();
     }//GEN-LAST:event_formMouseClicked

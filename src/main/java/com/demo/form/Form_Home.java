@@ -93,7 +93,7 @@ public class Form_Home extends javax.swing.JPanel {
         listP.get(temp).removeAll();
         listPhim = daoPhim.SelectTenPhim(jTabbedPane1.getTitleAt(temp));
         listPhim.forEach(s -> {
-            listP.get(temp).add(new TablePhim(s,listXC.get(temp).getStt()));
+            listP.get(temp).add(new TablePhim(s,listXC.get(temp).getStt(),jTabbedPane1.getTitleAt(temp)));
             
         });
     }//GEN-LAST:event_jTabbedPane1StateChanged
