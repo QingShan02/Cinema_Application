@@ -98,15 +98,14 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     }
 
     public void SodoGhe() {
+        int id = Integer.parseInt(maPhongChieu.substring(2));
         List = ListGhe.stream().limit(96).collect(Collectors.toList());
         for (ChiTietGhe s : List) {
             if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                 cl = Color.PINK;
-
             } else {
                 cl = Color.GREEN;
             }
-
             ghe = new Model_Ghe(cl, s.getTenGhe());
             ghe.addMouseListener(new MouseAdapter() {
                 @Override
@@ -122,7 +121,6 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
                     if (e.getComponent().getBackground().equals(Color.YELLOW)) {
                         if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                             e.getComponent().setBackground(Color.PINK);
@@ -133,13 +131,11 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                         e.getComponent().setBackground(Color.YELLOW);
                     }
                 }
-
             });
             Sodochongoi3.add(ghe);
             lModelGhe.add(ghe);
 
         }
-        int id = Integer.parseInt(maPhongChieu.substring(2));
         if (id >= 5) {
         List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
         for (ChiTietGhe s : List2) {
@@ -172,14 +168,11 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
 //        if (listGheCV.size() == 96 || listGheCV.size() == 110) {
 //            btnNext.setEnabled(false);
 //        }
-        for (int i = 0; i < ListGhe.size(); i++) {
             for (ChiTietGhe g : listGheCV) {
                 if (g.getIdVe() != 0) {
                     ghe.setBackground(Color.GRAY);
-                    break;
                 }
             }
-        }
 //        for (int i = 0; i < ListGhe.size(); i++) {
 //            ChiTietGhe s = ListGhe.get(i);
 //            ghe = lModelGhe.get(i);
