@@ -147,27 +147,23 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                 cl = Color.RED;
             }
             ghe = new Model_Ghe(cl, s.getTenGhe());
-
             lModelGhe.add(ghe);
-
-            lModelGhe.add(ghe);
-
-//                ghe.addMouseListener(new MouseAdapter() {
-//                    @Override
-//                    public void mouseClicked(MouseEvent e) {
-//                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-//                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-//                                e.getComponent().setBackground(Color.PINK);
-//                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
-//                                e.getComponent().setBackground(Color.RED);
-//                            } else {
-//                                e.getComponent().setBackground(Color.GREEN);
-//                            }
-//                        } else {
-//                            e.getComponent().setBackground(Color.YELLOW);
-//                        }
-//                    }
-//                });
+                ghe.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+                                e.getComponent().setBackground(Color.PINK);
+                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+                                e.getComponent().setBackground(Color.RED);
+                            } else {
+                                e.getComponent().setBackground(Color.GREEN);
+                            }
+                        } else {
+                            e.getComponent().setBackground(Color.YELLOW);
+                        }
+                    }
+                });
             Sodochongoivip.add(ghe);
             lModelGhe.add(ghe);
 
@@ -176,17 +172,14 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
 //        if (listGheCV.size() == 96 || listGheCV.size() == 110) {
 //            btnNext.setEnabled(false);
 //        }
-//        for (int i = 0; i < ListGhe.size(); i++) {
-//            ChiTietGhe s = ListGhe.get(i);
-//            ghe = lModelGhe.get(i);
-//            for (ChiTietGhe g : listGheCV) {
-//                if (g.getMaCTGhe() == s.getMaCTGhe()) {
-//                    ghe.setBackground(Color.GRAY);
-//                    break;
-//                }
-//
-//            }
-//        }
+        for (int i = 0; i < ListGhe.size(); i++) {
+            for (ChiTietGhe g : listGheCV) {
+                if (g.getIdVe() != 0) {
+                    ghe.setBackground(Color.GRAY);
+                    break;
+                }
+            }
+        }
 //        for (int i = 0; i < ListGhe.size(); i++) {
 //            ChiTietGhe s = ListGhe.get(i);
 //            ghe = lModelGhe.get(i);
