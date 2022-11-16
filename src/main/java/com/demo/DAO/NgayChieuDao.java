@@ -84,19 +84,4 @@ public class NgayChieuDao {
         return list;
     }
 
-    public List<Phim> SelectTenPhim( String giobatdau) {
-        List<Phim> list = new ArrayList();
-        try {
-            pst = con.prepareCall("{call SelectTenPhim(cast(? as time))}");
-            pst.setString(1, giobatdau);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-//                list.add(new Phim(rs.getString(5),rs.getString(2),rs.getString(3),rs.getString(6),rs.getInt(4),rs.getString(7),rs.getString(8));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(NgayChieuDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return list;
-    }
 }

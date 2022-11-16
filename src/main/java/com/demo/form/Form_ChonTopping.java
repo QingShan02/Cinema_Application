@@ -4,12 +4,15 @@
  */
 package com.raven.form;
 
+import com.demo.model.Model_CTopping;
 import com.raven.DAO.ToppingDao;
 import com.raven.main.Main;
 import com.raven.model.Model_ChonTopping;
 import static com.raven.model.Model_ChonTopping.readObj;
 import com.raven.model.ThanhToan;
 import com.raven.model.Topping;
+import java.awt.Color;
+import java.awt.Panel;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,7 +30,8 @@ import javax.swing.JCheckBox;
  * @author Daokh
  */
 public class Form_ChonTopping extends javax.swing.JPanel {
-public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
+
+    public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
         if (ois == null) {
@@ -52,15 +56,12 @@ public static Object readObj(String path) throws FileNotFoundException, IOExcept
         dao = new ToppingDao();
         FillTopping();
 
-
-//                    tt.setMaTopping(tp.getMaTopping());
-//                    tt.setSoLuongMua((int) snSoLuong.getValue());
-                List<Topping> list = new ArrayList<>();
+        List<Topping> list = new ArrayList<>();
     }
 
     public void FillTopping() {
         dao.Select().forEach(s -> {
-            pnlTopping.add(new Model_ChonTopping(s));
+            pnlTopping.add(new Model_CTopping(s));
         });
     }
 
@@ -109,7 +110,6 @@ public static Object readObj(String path) throws FileNotFoundException, IOExcept
         );
 
         pnlTopping.setBackground(new java.awt.Color(255, 255, 255));
-        pnlTopping.setLayout(new java.awt.GridLayout(4, 1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

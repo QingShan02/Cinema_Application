@@ -38,6 +38,7 @@ public class Phim {
         this.ThoiLuong = thoiluong;
         this.MaPhim = maphim;
     }
+    
       
     public Phim(String maPhim, String tenPhim) {
         MaPhim = maPhim;

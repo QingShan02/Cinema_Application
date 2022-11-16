@@ -53,7 +53,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     Model_Ghe ghe;
     GheDao daoGhe;
     PhongDao daoPhong;
-    String maPhongChieu;
+    String maPhongChieu,maPhimChieu;
 
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
@@ -91,6 +91,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         ListGhe = daoGhe.Select(maphong, sttngay);
         listGheCV = daoPhong.Selectghecove(maPhim, sttngay, gioBatDau);
         maPhongChieu = maphong;
+        maPhimChieu = maPhim;
         ListGhe.stream().forEach(s -> {
             s.getMaGhe();
         });
@@ -113,9 +114,12 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
                     try {
                         ThanhToan tt = (ThanhToan) readObj("temp.txt");
                         tt.setMaCTGhe(s.getMaCTGhe());
+                        tt.setMaPhong(maPhongChieu);
+                        tt.setMaPhim(maPhimChieu);
                         tt.setMaGhe(s.getMaGhe());
                         new PrintWriter("temp.txt").close();
                         writeObj("temp.txt", tt);
+                        System.out.println(tt.getMaPhong());
                     } catch (IOException ex) {
                         Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ClassNotFoundException ex) {
