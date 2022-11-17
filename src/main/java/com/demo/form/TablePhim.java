@@ -8,12 +8,19 @@ import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
 import com.raven.DAO.XuatChieuDao;
 import com.raven.form.Form_ChoNgoi;
+import static com.raven.form.Form_ChoNgoi.writeObj;
 import com.raven.main.Main;
 import com.raven.model.ChiTietGhe;
 import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
+import com.raven.model.ThanhToan;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -33,7 +40,7 @@ public class TablePhim extends javax.swing.JPanel {
     PhongDao daoPhong;
     XuatChieuDao daoXC;
     List<NgayChieu> ngaychieu = new ArrayList<>();
-    String maPhong,gioBatDau,maPhim;
+    String maPhong, gioBatDau, maPhim;
     int sttn;
 
     public TablePhim() {
@@ -202,8 +209,21 @@ public class TablePhim extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        try {
+            ThanhToan tt = new ThanhToan();
+            new PrintWriter("temp.txt").close();
+            tt.setMaPhong(maPhong);
+            tt.setMaPhim(maPhim);
+            tt.setSTT(sttn);
+            writeObj("temp.txt", tt);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Main.mainF.removeAll();
-        Main.mainF.add(new Form_ChoNgoi(maPhong,maPhim, sttn, gioBatDau));
+        Main.mainF.add(new Form_ChoNgoi(maPhong, maPhim, sttn, gioBatDau));
         Main.mainF.repaint();
         Main.mainF.revalidate();
     }//GEN-LAST:event_formMouseClicked
