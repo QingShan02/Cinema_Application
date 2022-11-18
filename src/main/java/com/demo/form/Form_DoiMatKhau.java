@@ -4,7 +4,7 @@
  */
 package com.raven.form;
 
-import com.raven.DAO.NhanVienDao;
+import com.raven.DAO.NguoiDungDao;
 import com.raven.main.Main;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -289,7 +289,7 @@ public class Form_DoiMatKhau extends javax.swing.JPanel {
         }
 
         try {
-            NhanVienDao.UpdateNV(txtXacNhanMatKhau.getText());
+            NguoiDungDao.UpdateNV(txtXacNhanMatKhau.getText());
             JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
             Main.mainF.removeAll();
             Main.mainF.add(new Form_Home());

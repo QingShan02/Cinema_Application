@@ -122,7 +122,7 @@ public class Form_ThongKeChiNhanh extends javax.swing.JPanel {
             listTK = daove.ThongKeNgay(ngay);
             listTK.stream().forEach(s -> {
                 txtTongVe.setText(String.valueOf(s.getTongSoVe()));
-                txtTongDoanhThu.setText(String.valueOf(s.getTongGiaVe()));
+                txtTongDoanhThu.setText(String.valueOf(s.getGiaVe()));
             });
 
         }

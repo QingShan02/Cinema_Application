@@ -5,7 +5,7 @@
  */
 package com.raven.main;
 
-import com.raven.DAO.NhanVienDao;
+import com.raven.DAO.NguoiDungDao;
 import com.raven.DAO.PhongDao;
 import com.raven.event.EventMenuSelected;
 import com.raven.form.Form_ChoNgoi;
@@ -19,7 +19,7 @@ import com.raven.form.Form_Topping;
 import com.raven.form.Form_XacThuc;
 import com.raven.model.ChiTietGhe;
 import com.raven.model.NgayChieu;
-import com.raven.model.NhanVien;
+import com.raven.model.NguoiDung;
 import com.raven.model.PhongChieu;
 import com.raven.swing.MenuItem;
 import java.awt.Color;

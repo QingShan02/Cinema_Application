@@ -6,8 +6,8 @@ package com.raven.main;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.raven.DAO.NhanVienDao;
-import com.raven.model.NhanVien;
+import com.raven.DAO.NguoiDungDao;
+import com.raven.model.NguoiDung;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,7 +22,7 @@ import javax.swing.UIManager;
 public class RunMain {
 
     public static void main(String[] args) {
-        NhanVienDao dao = new NhanVienDao();
+        NguoiDungDao dao = new NguoiDungDao();
         try {
             FlatDarculaLaf.setup();
             UIManager.put("Button.arc", 999);
@@ -35,8 +35,8 @@ public class RunMain {
 
         try {
             if (new File("savetk.txt").length() != 0) {
-                NhanVien list_temp = (NhanVien) DangNhap.readObj("savetk.txt");
-                dao.Select().stream().filter(s -> s.getSoDT().equalsIgnoreCase(list_temp.getSoDT())).forEach(s -> NhanVienDao.setMaNV(s.getMaNV()));
+                NguoiDung list_temp = (NguoiDung) DangNhap.readObj("savetk.txt");
+                dao.Select().stream().filter(s -> s.getSoDT().equalsIgnoreCase(list_temp.getSoDT())).forEach(s -> NguoiDungDao.setMaNV(s.getMaNguoiDung()));
                 Main main = new Main();
                 main.show();
                 return;

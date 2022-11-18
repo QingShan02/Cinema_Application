@@ -5,9 +5,9 @@
 package com.raven.main;
 
 import com.demo.form.Form_ChonChiNhanh;
-import com.raven.DAO.NhanVienDao;
+import com.raven.DAO.NguoiDungDao;
 import com.raven.helper.ThongBao;
-import com.raven.model.NhanVien;
+import com.raven.model.NguoiDung;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,7 +28,7 @@ public class DangNhap extends javax.swing.JFrame {
     /**
      * Creates new form DangNhap
      */
-    NhanVienDao dao;
+    NguoiDungDao dao;
     ThongBao tb;
 
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
@@ -54,7 +54,7 @@ public class DangNhap extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 //        showTk();
-dao = new NhanVienDao();
+dao = new NguoiDungDao();
     }
 
     /**
@@ -236,7 +236,7 @@ dao = new NhanVienDao();
                     Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
                 }
 //                Main main = new Main();
-                NhanVienDao.setMaNV(s.getMaNV());
+                NguoiDungDao.setMaNV(s.getMaNguoiDung());
                 Form_ChonChiNhanh cn = new Form_ChonChiNhanh();
                 cn.show();
 //                main.show();

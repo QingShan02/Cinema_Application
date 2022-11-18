@@ -4,7 +4,7 @@
  */
 package com.raven.DAO;
 
-import com.raven.model.NhanVien;
+import com.raven.model.NguoiDung;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author Daokh
  */
-public class NhanVienDao {
+public class NguoiDungDao {
 
     static Connection con = ConnectDB.getConnection();
     static Statement st = null;
@@ -28,29 +28,29 @@ public class NhanVienDao {
     static String MaNV;
 
     public static void setMaNV(String MaNV){
-        NhanVienDao.MaNV = MaNV;
+        NguoiDungDao.MaNV = MaNV;
         }
     
-    public void Insert(NhanVien nv) {
+    public void Insert(NguoiDung nv) {
         try {
             pst = con.prepareStatement("insert into NhanVien values(?,?,?,?,?,?,?)");
             int kq = pst.executeUpdate();
             System.out.println(kq);
         } catch (SQLException ex) {
-            Logger.getLogger(NhanVienDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NguoiDungDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public List<NhanVien> Select() {
-        List<NhanVien> list = new ArrayList<>();
+    public List<NguoiDung> Select() {
+        List<NguoiDung> list = new ArrayList<>();
         try {
             st = con.createStatement();
-            rs = st.executeQuery("select * from NhanVien");
+            rs = st.executeQuery("select * from NguoiDung");
             while (rs.next()) {
-                list.add(new NhanVien(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                list.add(new NguoiDung(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(NhanVienDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NguoiDungDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }

@@ -16,20 +16,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NhanVien implements Serializable{
-    private String MaNV;
-    private String HoTen;
-    private int GioiTinh;
+public class NguoiDung implements Serializable{
+    private String MaNguoiDung;
+    private String TenNguoiDung;
     private String MatKhau;
-    private String NgaySinh;
     private String SoDT;
-    private String MaCV;
-    @Override
-    public String toString(){
-        return "NhanVien{"+getMaNV()+","+getHoTen()+"}";
-    }
+    private String MaCN;
+   
 
-    public NhanVien(String MatKhau, String SoDT) {
+    public NguoiDung(String MatKhau, String SoDT) {
         this.MatKhau = MatKhau;
         this.SoDT = SoDT;
     }

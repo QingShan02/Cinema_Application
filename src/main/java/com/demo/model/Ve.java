@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Ve {
 
     private int IdVe;
-    private double TongGiaVe;
+    private double GiaVe;
     private double ThueVAT;
     private int MaKH;
     private int MaCTGhe;
@@ -26,25 +26,25 @@ public class Ve {
     private int TongSoVe;
 
     
-    public Ve(double TongGiaVe, double ThueVAT, int MaCTGhe, String MaNV) {
-        this.TongGiaVe = TongGiaVe;
+    public Ve(double GiaVe, double ThueVAT, int MaCTGhe, String MaNV) {
+        this.GiaVe = GiaVe;
         this.ThueVAT = ThueVAT;
         this.MaCTGhe = MaCTGhe;
         this.MaNV = MaNV;
     }
 
-    public Ve(int IdVe, double TongGiaVe, double ThueVAT, int MaKH, int MaCTGhe, String MaNV) {
+    public Ve(int IdVe, double GiaVe, double ThueVAT, int MaKH, int MaCTGhe, String MaNV) {
         this.IdVe = IdVe;
-        this.TongGiaVe = TongGiaVe;
+        this.GiaVe = GiaVe;
         this.ThueVAT = ThueVAT;
         this.MaKH = MaKH;
         this.MaCTGhe = MaCTGhe;
         this.MaNV = MaNV;
     }
     
-    public Ve(int TongSoVe, double TongGiaVe) {
+    public Ve(int SoVe, double TongGiaVe) {
         this.TongSoVe = TongSoVe;
-        this.TongGiaVe = TongGiaVe;
+        this.GiaVe = GiaVe;
     }
 
 }
