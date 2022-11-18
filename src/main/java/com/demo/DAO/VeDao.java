@@ -4,7 +4,11 @@
  */
 package com.raven.DAO;
 
+import static com.raven.DAO.PhongDao.con;
+import static com.raven.DAO.PhongDao.pst;
+import static com.raven.DAO.PhongDao.rs;
 import com.raven.main.DangNhap;
+import com.raven.model.ChiTietGhe;
 import com.raven.model.Ve;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -92,5 +96,21 @@ public class VeDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public List<Ve> ThongKeNgay(String ngayThongKe){
+        List<Ve> list = new ArrayList();
+        try {
+            pst = con.prepareCall("{ call thongKetheongay(cast(? as date))}");
+            pst.setString(1, ngayThongKe);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Ve(rs.getInt(1),rs.getDouble(2)));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return list;
     }
 }

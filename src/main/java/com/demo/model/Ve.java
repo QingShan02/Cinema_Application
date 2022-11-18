@@ -16,18 +16,35 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ve {
+
     private int IdVe;
     private double TongGiaVe;
     private double ThueVAT;
     private int MaKH;
     private int MaCTGhe;
     private String MaNV;
+    private int TongSoVe;
 
+    
     public Ve(double TongGiaVe, double ThueVAT, int MaCTGhe, String MaNV) {
         this.TongGiaVe = TongGiaVe;
         this.ThueVAT = ThueVAT;
         this.MaCTGhe = MaCTGhe;
         this.MaNV = MaNV;
     }
+
+    public Ve(int IdVe, double TongGiaVe, double ThueVAT, int MaKH, int MaCTGhe, String MaNV) {
+        this.IdVe = IdVe;
+        this.TongGiaVe = TongGiaVe;
+        this.ThueVAT = ThueVAT;
+        this.MaKH = MaKH;
+        this.MaCTGhe = MaCTGhe;
+        this.MaNV = MaNV;
+    }
     
+    public Ve(int TongSoVe, double TongGiaVe) {
+        this.TongSoVe = TongSoVe;
+        this.TongGiaVe = TongGiaVe;
+    }
+
 }
