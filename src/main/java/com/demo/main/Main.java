@@ -5,6 +5,7 @@
  */
 package com.raven.main;
 
+import com.demo.form.Form_CSVC;
 import com.demo.form.Form_ThongKeChiNhanh;
 import com.raven.DAO.NguoiDungDao;
 import com.raven.DAO.PhongDao;
@@ -68,7 +69,7 @@ public class Main extends javax.swing.JFrame {
                     setForm(new Form_Home());
                 }
                 else if (index == 1) {
-                    setForm(new Form_QuanLyLichChieu());
+                    setForm(new Form_CSVC());
                 } else if (index == 2) {
                     setForm(new Form_Topping());
                 } else if (index == 3) {
@@ -102,7 +103,7 @@ public class Main extends javax.swing.JFrame {
                 if (index == 0) {
                     setForm(new Form_Home());
                 }else if (index == 1) {
-                    setForm(new Form_QuanLyLichChieu());
+                    setForm(new Form_CSVC());
                 } else if (index == 2) {
                     setForm(new Form_Topping());
                 } else if (index == 3) {
