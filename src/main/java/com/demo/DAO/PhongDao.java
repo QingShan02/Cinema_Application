@@ -90,10 +90,10 @@ public class PhongDao {
     public List<ChiTietGhe> Selectghecove(String maPhim, int sttngay ,String gioBatDau){
         List<ChiTietGhe> list = new ArrayList<>();
         try {
-            pst = con.prepareCall("{ call Selectghecove(?,?,cast(? as time))}");
+            pst = con.prepareCall("{ call Selectghecove(?,?)}");
             pst.setString(1, maPhim);
             pst.setInt(2, sttngay);
-            pst.setString(3, gioBatDau);
+//            pst.setString(3, gioBatDau);
             rs = pst.executeQuery();
             while (rs.next()) {
                 list.add(new ChiTietGhe(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getInt(4), rs.getFloat(5), rs.getInt(6)));
