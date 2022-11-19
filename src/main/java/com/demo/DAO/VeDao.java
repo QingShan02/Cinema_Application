@@ -81,7 +81,7 @@ public class VeDao {
 
     public void Update(double TongGiaVe, double ThueVAT, int MaKH, int MaCTGhe, String MaNV, int IdVe) {
         try {
-            PreparedStatement st = con.prepareStatement("update Ve set TongGiaVe = ?, ThueVAT = ?, MaKH = ?, MaCTGhe = ?, MaNV = ? where IdVe =?");
+            PreparedStatement st = con.prepareStatement("update Ve set GiaVe = ?, ThueVAT = ?, MaKH = ?, MaCTGhe = ?, MaNV = ? where IdVe =?");
             st.setDouble(1, TongGiaVe);
             st.setDouble(2, ThueVAT);
             st.setInt(3, MaKH);

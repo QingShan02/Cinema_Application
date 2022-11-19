@@ -33,7 +33,7 @@ public class NguoiDungDao {
     
     public void Insert(NguoiDung nv) {
         try {
-            pst = con.prepareStatement("insert into NhanVien values(?,?,?,?,?,?,?)");
+            pst = con.prepareStatement("insert into NguoiDung values(?,?,?,?,?)");
             int kq = pst.executeUpdate();
             System.out.println(kq);
         } catch (SQLException ex) {
@@ -56,7 +56,7 @@ public class NguoiDungDao {
     }
 
     public static void UpdateNhanVien(String HoTen, int GioiTinh, String MatKhau, String NgaySinh, String SoDT, String MaCV, String MaNV) throws SQLException {
-        PreparedStatement st = con.prepareStatement("update NhanVien set HoTen = ?, GioiTinh = ? , MatKhau = ?, NgaySinh = ?, SoDT = ?, MaCV = ? where MaNV =?");
+        PreparedStatement st = con.prepareStatement("update NguoiDung set TenNguoiDung = ?, MatKhau = ?, SoDT = ?, MaCN = ? where MaNguoiDung =?");
         st.setString(1, HoTen);
         st.setInt(2, GioiTinh);
         st.setString(3, MatKhau);
@@ -69,7 +69,7 @@ public class NguoiDungDao {
     
     public static void DeleteNhanVien(String MaNV){
         try {
-            PreparedStatement pt = con.prepareStatement("delete from NhanVien where MaNV = ?");
+            PreparedStatement pt = con.prepareStatement("delete from NguoiDung where MaNguoiDung = ?");
             pt.setString(1, MaNV);
             pt.executeQuery();
         } catch (SQLException e) {
