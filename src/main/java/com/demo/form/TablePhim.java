@@ -47,7 +47,7 @@ public class TablePhim extends javax.swing.JPanel {
         initComponents();
     }
 
-    public TablePhim(Phim p, int sttngay, String gioBatDauChieu) {
+    public TablePhim(Phim p, int sttngay) {
         initComponents();
         daoXC = new XuatChieuDao();
         lblTenPhim.setText(p.getTenPhim());
@@ -59,7 +59,7 @@ public class TablePhim extends javax.swing.JPanel {
         lblHinh.setIcon(resizeImage("src/main/resources/poster/" + p.getHinh()));
         maPhong = daoXC.SelectMaPhong(p.getMaPhim(), sttngay);
         sttn = sttngay;
-        gioBatDau = gioBatDauChieu;
+//        gioBatDau = gioBatDauChieu;
         maPhim = p.getMaPhim();
         System.out.println(maPhong);
         System.out.println(maPhim);
