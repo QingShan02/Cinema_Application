@@ -7,6 +7,7 @@ package com.raven.main;
 
 import com.demo.form.Form_CSVC;
 import com.demo.form.Form_ThongKeChiNhanh;
+import com.demo.form.Setting;
 import com.raven.DAO.NguoiDungDao;
 import com.raven.DAO.PhongDao;
 import com.raven.event.EventMenuSelected;
@@ -109,9 +110,9 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 3) {
                     setForm(new Form_ThongKeChiNhanh());
                 }
-//                else if (index == 4) {
-//                    setForm(new );
-//                }
+                else if (index == 5) {
+                    setForm(new Setting());
+                }
 //                else if (index == 5) {
 //                    setForm(new Form_DoiMatKhau());
 //                } 
