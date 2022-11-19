@@ -54,13 +54,13 @@ public class PhongDao {
         }
         return list;
     }
-    public PhongChieu SelectPhong(String MaPhim, String NgayChieu, int Stt){
+    public PhongChieu SelectPhong(String MaPhim, int Ngay){
         PhongChieu phg = null;
         try {
-            pst = con.prepareStatement("select x.MaPhong,TenPhong from XuatChieu x join  NgayChieu n on x.stt = n.stt join PhongChieu p on p.MaPhong = x.MaPhong where MaPhim = ? and n.Ngay = ? and n.Stt = ?");
+            pst = con.prepareStatement("select x.MaPhong,TenPhong from XuatChieu x join PhongChieu p on p.MaPhong = x.MaPhong where MaPhim = ? and x.Ngay = ?");
             pst.setString(1, MaPhim);
-            pst.setDate(2,java.sql.Date.valueOf(NgayChieu));
-            pst.setInt(3, Stt);
+//            pst.setDate(2,java.sql.Date.valueOf(NgayChieu));
+            pst.setInt(2, Ngay);
             rs = pst.executeQuery();
             while(rs.next()){
                 phg=new PhongChieu(rs.getString(1), rs.getString(2));

@@ -85,7 +85,7 @@ public class Card extends javax.swing.JPanel {
                     System.out.println(data.getValues());
                     System.out.println(s.getStt());
 
-                    PhongChieu phg = daoPhong.SelectPhong(data.getMaPhim(), data.getValues(), s.getStt());
+                    PhongChieu phg = daoPhong.SelectPhong(data.getMaPhim(), s.getStt());
 //                    List<ChiTietGhe> listGheCV = daoPhong.SelectGheInVe("2022-09-01", s.getStt(), data.getMaPhim());
      try {
             new PrintWriter("bonho.txt").close();

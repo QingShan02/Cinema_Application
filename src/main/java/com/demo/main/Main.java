@@ -11,7 +11,7 @@ import com.raven.DAO.NguoiDungDao;
 import com.raven.DAO.PhongDao;
 import com.raven.event.EventMenuSelected;
 import com.raven.form.Form_ChoNgoi;
-import com.raven.form.Form_ChonPhim;
+//import com.raven.form.Form_ChonPhim;
 import com.raven.form.Form_DoiMatKhau;
 import com.raven.form.Form_KhachHang;
 import com.raven.form.Form_Home;

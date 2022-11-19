@@ -132,13 +132,13 @@ public class Form_Topping extends javax.swing.JPanel {
         btn4 = new javax.swing.JButton();
         lblHinh = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 239, 214));
 
-        btnTimKiem.setBackground(new java.awt.Color(102, 51, 0));
+        btnTimKiem.setBackground(new java.awt.Color(130, 0, 0));
         btnTimKiem.setForeground(new java.awt.Color(255, 255, 255));
         btnTimKiem.setText("Tìm Kiếm");
 
-        btnTimKiem1.setBackground(new java.awt.Color(102, 51, 0));
+        btnTimKiem1.setBackground(new java.awt.Color(130, 0, 0));
         btnTimKiem1.setForeground(new java.awt.Color(242, 242, 242));
         btnTimKiem1.setText("Chọn Anh");
         btnTimKiem1.addActionListener(new java.awt.event.ActionListener() {
@@ -147,13 +147,20 @@ public class Form_Topping extends javax.swing.JPanel {
             }
         });
 
+        lblTenTopping.setBackground(new java.awt.Color(255, 0, 0));
+        lblTenTopping.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenTopping.setForeground(new java.awt.Color(130, 0, 0));
         lblTenTopping.setText("Tên Topping");
 
+        lblMaTopping.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblMaTopping.setForeground(new java.awt.Color(130, 0, 0));
         lblMaTopping.setText("Mã Topping");
 
+        lblSoLuong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblSoLuong.setForeground(new java.awt.Color(130, 0, 0));
         lblSoLuong.setText("Số Lượng");
 
-        btnThem.setBackground(new java.awt.Color(102, 51, 0));
+        btnThem.setBackground(new java.awt.Color(130, 0, 0));
         btnThem.setForeground(new java.awt.Color(242, 242, 242));
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +169,7 @@ public class Form_Topping extends javax.swing.JPanel {
             }
         });
 
-        btnXoa.setBackground(new java.awt.Color(102, 51, 0));
+        btnXoa.setBackground(new java.awt.Color(130, 0, 0));
         btnXoa.setForeground(new java.awt.Color(242, 242, 242));
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +178,7 @@ public class Form_Topping extends javax.swing.JPanel {
             }
         });
 
-        btnCapNhat.setBackground(new java.awt.Color(102, 51, 0));
+        btnCapNhat.setBackground(new java.awt.Color(130, 0, 0));
         btnCapNhat.setForeground(new java.awt.Color(242, 242, 242));
         btnCapNhat.setText("Cập Nhật");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -182,24 +189,24 @@ public class Form_Topping extends javax.swing.JPanel {
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 3, 0, 5));
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel4.setBackground(new java.awt.Color(255, 239, 214));
 
-        btn1.setBackground(new java.awt.Color(102, 51, 0));
+        btn1.setBackground(new java.awt.Color(130, 0, 0));
         btn1.setForeground(new java.awt.Color(242, 242, 242));
         btn1.setText("1");
         jPanel4.add(btn1);
 
-        btn2.setBackground(new java.awt.Color(102, 51, 0));
+        btn2.setBackground(new java.awt.Color(130, 0, 0));
         btn2.setForeground(new java.awt.Color(242, 242, 242));
         btn2.setText("2");
         jPanel4.add(btn2);
 
-        btn3.setBackground(new java.awt.Color(102, 51, 0));
+        btn3.setBackground(new java.awt.Color(130, 0, 0));
         btn3.setForeground(new java.awt.Color(242, 242, 242));
         btn3.setText("3");
         jPanel4.add(btn3);
 
-        btn4.setBackground(new java.awt.Color(102, 51, 0));
+        btn4.setBackground(new java.awt.Color(130, 0, 0));
         btn4.setForeground(new java.awt.Color(242, 242, 242));
         btn4.setText("4");
         jPanel4.add(btn4);
