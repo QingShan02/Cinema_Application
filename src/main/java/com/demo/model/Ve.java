@@ -42,7 +42,7 @@ public class Ve {
         this.MaNV = MaNV;
     }
     
-    public Ve(int SoVe, double TongGiaVe) {
+    public Ve(int TongSoVe, double GiaVe) {
         this.TongSoVe = TongSoVe;
         this.GiaVe = GiaVe;
     }

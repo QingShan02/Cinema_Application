@@ -5,11 +5,14 @@
  */
 package com.raven.main;
 
+import com.demo.form.Form_CSVC;
+import com.demo.form.Form_ThongKeChiNhanh;
 import com.raven.DAO.NguoiDungDao;
 import com.raven.DAO.PhongDao;
 import com.raven.event.EventMenuSelected;
 import com.raven.form.Form_ChoNgoi;
 import com.raven.form.Form_ChonPhim;
+import com.raven.form.Form_DoiMatKhau;
 import com.raven.form.Form_KhachHang;
 import com.raven.form.Form_Home;
 import com.raven.form.Form_Phim;
@@ -64,17 +67,21 @@ public class Main extends javax.swing.JFrame {
             public void selected(int index) {
                 if (index == 0) {
                     setForm(new Form_Home());
-                } else if (index == 1) {
-                    setForm(new Form_KhachHang());
+                }
+                else if (index == 1) {
+                    setForm(new Form_CSVC());
                 } else if (index == 2) {
-                    setForm(new Form_QuanLyLichChieu());
-                } else if (index == 3) {
-                    setForm(new Form_Phim());
-                } else if (index == 4) {
                     setForm(new Form_Topping());
-                } else if (index == 5) {
-                    setForm(new Form_ChonPhim());
-                }  else if (index == 6) {
+                } else if (index == 3) {
+                    setForm(new Form_ThongKeChiNhanh());
+                }
+//                else if (index == 4) {
+//                    setForm(new );
+//                }
+//                else if (index == 5) {
+//                    setForm(new Form_DoiMatKhau());
+//                }
+                else if (index == 6) {
                     setForm(new Form_XacThuc());
                 } else if (index == 7) {
                     DangXuat();
@@ -95,18 +102,21 @@ public class Main extends javax.swing.JFrame {
             public void selected(int index) {
                 if (index == 0) {
                     setForm(new Form_Home());
-                } else if (index == 1) {
-                    setForm(new Form_KhachHang());
+                }else if (index == 1) {
+                    setForm(new Form_CSVC());
                 } else if (index == 2) {
-                    setForm(new Form_QuanLyLichChieu());
-                } else if (index == 3) {
-                    setForm(new Form_Phim());
-                } else if (index == 4) {
                     setForm(new Form_Topping());
-                } else if (index == 5) {
-                    setForm(new Form_ChonPhim());
-                } else if (index == 6) {
-                    setForm(new Form_ChonPhim());
+                } else if (index == 3) {
+                    setForm(new Form_ThongKeChiNhanh());
+                }
+//                else if (index == 4) {
+//                    setForm(new );
+//                }
+//                else if (index == 5) {
+//                    setForm(new Form_DoiMatKhau());
+//                } 
+                else if (index == 6) {
+                    setForm(new Form_XacThuc());
                 } else if (index == 7) {
                     setForm(new Form_XacThuc());
                 } else if (index == 8) {
