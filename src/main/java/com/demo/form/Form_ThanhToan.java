@@ -64,6 +64,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     public void GetTime() {
         Date d = new Date();
         lblTime.setText(d.toGMTString());
+        
     }
 
     public void FillTenPhim() {
@@ -121,7 +122,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
             System.out.println(s.getMaTopping());
             jPanel1.add(new Model_ChonTopping1(new Topping(s.getMaTopping(), s.getTenTopping(), s.getSoLuongMua())));
         });
-//        jPanel1.removeAll();
+        jPanel1.removeAll();
         jPanel1.repaint();
         jPanel1.revalidate();
     }

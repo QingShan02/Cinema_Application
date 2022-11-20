@@ -100,6 +100,7 @@ public class PhongDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
+           
 
         }
         return list;

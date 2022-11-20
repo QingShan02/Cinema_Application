@@ -55,7 +55,11 @@
     <version>2.6</version>
     <type>jar</type>
 </dependency>
-
+        <dependency>
+            <groupId>jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>3.5.3</version>
+        </dependency>
     </dependencies>
     <name>App</name>
     <repositories>
