@@ -88,11 +88,10 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
         initComponents();
         daoGhe = new GheDao();
         daoPhong = new PhongDao();
-        ListGhe = daoGhe.Select(maphong, sttngay);
         listGheCV = daoPhong.Selectghecove(maPhim, sttngay, gioBatDau);
         maPhongChieu = maphong;
         maPhimChieu = maPhim;
-        ListGhe.stream().forEach(s -> {
+        listGheCV.stream().forEach(s -> {
             s.getMaGhe();
         });
         SodoGhe();
