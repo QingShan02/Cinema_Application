@@ -101,10 +101,10 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     public void SodoGhe() {
         int id = Integer.parseInt(maPhongChieu.substring(2));
         List = listGheCV.stream().limit(96).collect(Collectors.toList());
-                System.out.println(listGheCV.size());
+        System.out.println(listGheCV.size());
 
         for (ChiTietGhe s : List) {
-            
+
             if (s.getIdVe() != 0) {
                 ghe = new Model_Ghe(Color.GRAY, s.getTenGhe());
             } else {
@@ -148,35 +148,46 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             lModelGhe.add(ghe);
 
         }
-//        if (id >= 5) {
-//            List2 = ListGhe.stream().skip(96).collect(Collectors.toList());
-//            for (ChiTietGhe s : List2) {
-//                if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
-//                    cl = Color.RED;
-//                }
-//                ghe = new Model_Ghe(cl, s.getTenGhe());
-//                lModelGhe.add(ghe);
-//                ghe.addMouseListener(new MouseAdapter() {
-//                    @Override
-//                    public void mouseClicked(MouseEvent e) {
-//                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-//                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-//                                e.getComponent().setBackground(Color.PINK);
-//                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
-//                                e.getComponent().setBackground(Color.RED);
-//                            } else {
-//                                e.getComponent().setBackground(Color.GREEN);
-//                            }
-//                        } else {
-//                            e.getComponent().setBackground(Color.YELLOW);
-//                        }
-//                    }
-//                });
-//                Sodochongoivip.add(ghe);
-//                lModelGhe.add(ghe);
-//
-//            }
-//        }
+        if (id >= 5) {
+            List2 = listGheCV.stream().skip(96).collect(Collectors.toList());
+            for (ChiTietGhe s : List2) {
+                if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+                    cl = Color.RED;
+                }
+                if (s.getIdVe() != 0) {
+                    ghe = new Model_Ghe(Color.GRAY, s.getTenGhe());
+                } else {
+                    if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+                        cl = Color.PINK;
+                    } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+                        cl = Color.RED;
+                    } else {
+                        cl = Color.GREEN;
+                    }
+                }
+                ghe = new Model_Ghe(cl, s.getTenGhe());
+                lModelGhe.add(ghe);
+                ghe.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+                                e.getComponent().setBackground(Color.PINK);
+                            } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
+                                e.getComponent().setBackground(Color.RED);
+                            } else {
+                                e.getComponent().setBackground(Color.GREEN);
+                            }
+                        } else {
+                            e.getComponent().setBackground(Color.YELLOW);
+                        }
+                    }
+                });
+                Sodochongoivip.add(ghe);
+                lModelGhe.add(ghe);
+
+            }
+        }
 ////        if (listGheCV.size() == 96 || listGheCV.size() == 110) {
 ////            btnNext.setEnabled(false);
 ////        }
