@@ -4,10 +4,12 @@
  */
 package com.raven.main;
 
+import com.demo.form.Form_ChonChiNhanh;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.raven.DAO.NguoiDungDao;
 import com.raven.model.NguoiDung;
+import com.raven.model.ThanhToan;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -35,11 +37,18 @@ public class RunMain {
 
         try {
             if (new File("savetk.txt").length() != 0) {
-                NguoiDung list_temp = (NguoiDung) DangNhap.readObj("savetk.txt");
-                dao.Select().stream().filter(s -> s.getSoDT().equalsIgnoreCase(list_temp.getSoDT())).forEach(s -> NguoiDungDao.setMaNV(s.getMaNguoiDung()));
-                Main main = new Main();
-                main.show();
-                return;
+                if (new File("temp.txt").length() == 0) {
+                    Form_ChonChiNhanh cn = new Form_ChonChiNhanh();
+                    cn.show();
+                    return;
+                } else {
+                    NguoiDung list_temp = (NguoiDung) DangNhap.readObj("savetk.txt");
+                    dao.Select().stream().filter(s -> s.getSoDT().equalsIgnoreCase(list_temp.getSoDT())).forEach(s -> NguoiDungDao.setMaNV(s.getMaNguoiDung()));
+                    ThanhToan tt = (ThanhToan) DangNhap.readObj("temp.txt");
+                    Main main = new Main(tt.getMaCN());
+                    main.show();
+                    return;
+                }
             }
         } catch (IOException ex) {
             ex.printStackTrace();

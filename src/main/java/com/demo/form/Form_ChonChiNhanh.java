@@ -6,9 +6,16 @@ package com.demo.form;
 
 import com.demo.DAO.ChiNhanhDao;
 import com.demo.model.ChiNhanh;
+import com.raven.form.Form_ChoNgoi;
 import com.raven.main.Main;
+import com.raven.model.ThanhToan;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -183,8 +190,20 @@ public class Form_ChonChiNhanh extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
-        // TODO add your handling code here:\
-        Main main = new Main(list.get(cboChiNhanh.getSelectedIndex()).getMaCN());
+        String macn = list.get(cboChiNhanh.getSelectedIndex()).getMaCN();
+        try {
+            // TODO add your handling code here:\
+            new PrintWriter("temp.txt").close();
+            ThanhToan tt = new ThanhToan();
+             tt.setMaCN(macn);
+            Form_ChoNgoi.writeObj("temp.txt",tt);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Form_ChonChiNhanh.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Form_ChonChiNhanh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Main main = new Main(macn);
         main.show();
         this.dispose();
     }//GEN-LAST:event_btnChonActionPerformed

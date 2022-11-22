@@ -29,6 +29,7 @@ public class Form_Home extends javax.swing.JPanel {
         initComponents();
         daoPhim = new PhimDao();
         daoNC = new NgayChieuDao();
+        System.out.println(Main.maCN);
         listXC = daoNC.SelectGio(Main.maCN);
         System.out.println(listXC.size());
 //        cn = new Form_ChoNgoi();

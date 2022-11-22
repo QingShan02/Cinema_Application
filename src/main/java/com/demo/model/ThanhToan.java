@@ -26,4 +26,5 @@ public class ThanhToan implements Serializable{
     private String NgayChieu;
     private String MaPhim;
     List<Topping> ListTopping;
+    private String maCN;
 }

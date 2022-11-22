@@ -210,8 +210,7 @@ public class TablePhim extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         try {
-            ThanhToan tt = new ThanhToan();
-            new PrintWriter("temp.txt").close();
+            ThanhToan tt = (ThanhToan) Form_ChoNgoi.readObj("temp.txt");
             tt.setMaPhong(maPhong);
             tt.setMaPhim(maPhim);
             tt.setSTT(sttn);
@@ -220,6 +219,8 @@ public class TablePhim extends javax.swing.JPanel {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
         }
         Main.mainF.removeAll();

@@ -93,6 +93,7 @@ public class Main extends javax.swing.JFrame {
             }
         }
         );
+        setForm(new Form_Home());
     }
     public Main() {
         initComponents();
