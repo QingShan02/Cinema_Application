@@ -56,10 +56,12 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     public static JPanel mainF;
+    public static String maCN;
     PhongDao daoPhong;
     public Main(String macn){
         initComponents();
         mainF = mainPanel;
+        maCN = macn;
         setBackground(new Color(0, 0, 0, 0));
         daoPhong = new PhongDao();
         menu.initMoving(Main.this);

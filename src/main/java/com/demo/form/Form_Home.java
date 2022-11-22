@@ -4,6 +4,7 @@ import com.demo.form.TablePhim;
 import com.raven.DAO.NgayChieuDao;
 import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
+import com.raven.main.Main;
 import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
 import java.awt.Color;
@@ -28,7 +29,8 @@ public class Form_Home extends javax.swing.JPanel {
         initComponents();
         daoPhim = new PhimDao();
         daoNC = new NgayChieuDao();
-        listXC = daoNC.SelectGio();
+        listXC = daoNC.SelectGio(Main.maCN);
+        System.out.println(listXC.size());
 //        cn = new Form_ChoNgoi();
         JPanel panel;
         for (NgayChieu nc : listXC) {

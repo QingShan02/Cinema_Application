@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.raven.DAO;
+import com.raven.main.Main;
 import com.raven.model.Phim;
 import com.raven.model.NgayChieu;
 import java.sql.Connection;
@@ -53,10 +54,11 @@ public class NgayChieuDao {
         return list;
     }
 
-    public List<NgayChieu> SelectGio() {
+    public List<NgayChieu> SelectGio(String macn) {
         list = new ArrayList<>();
         try {
-            pst = con.prepareCall("{ call SelectGio()}");
+            pst = con.prepareCall("{ call SelectGio('"+macn+"')}");
+//            pst.setString(1, macn);
             rs = pst.executeQuery();
             while (rs.next()) {
                 list.add(new NgayChieu(rs.getInt("Stt"), rs.getString("Ngay"), rs.getString("GioBatDau")));
