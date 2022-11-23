@@ -224,7 +224,7 @@ public class TablePhim extends javax.swing.JPanel {
             Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
         }
         Main.mainF.removeAll();
-        Main.mainF.add(new Form_ChoNgoi(maPhong, maPhim, sttn, gioBatDau));
+        Main.mainF.add(new Form_ChoNgoi(sttn));
         Main.mainF.repaint();
         Main.mainF.revalidate();
     }//GEN-LAST:event_formMouseClicked

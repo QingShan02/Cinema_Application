@@ -87,12 +87,12 @@ public class PhongDao {
             e.printStackTrace();
         }
     }
-    public List<ChiTietGhe> Selectghecove(String maPhim, int sttngay ,String gioBatDau){
+    public List<ChiTietGhe> Selectghecove(int sttngay){
         List<ChiTietGhe> list = new ArrayList<>();
         try {
-            pst = con.prepareCall("{ call Selectghecove(?,?)}");
-            pst.setString(1, maPhim);
-            pst.setInt(2, sttngay);
+            pst = con.prepareCall("{ call Selectghecove(?)}");
+//            pst.setString(1, maPhim);
+            pst.setInt(1, sttngay);
 //            pst.setString(3, gioBatDau);
             rs = pst.executeQuery();
             while (rs.next()) {

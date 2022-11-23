@@ -84,13 +84,14 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     }
 
     //Cái này mới sử dụng cái này
-    public Form_ChoNgoi(String maphong, String maPhim, int sttngay, String gioBatDau) {
+    public Form_ChoNgoi(int sttngay) {
         initComponents();
         daoGhe = new GheDao();
         daoPhong = new PhongDao();
-        listGheCV = daoPhong.Selectghecove(maPhim, sttngay, gioBatDau);
-        maPhongChieu = maphong;
-        maPhimChieu = maPhim;
+        listGheCV = daoPhong.Selectghecove(sttngay);
+        System.out.println(listGheCV.size());
+//        maPhongChieu = maphong;
+//        maPhimChieu = maPhim;
         listGheCV.stream().forEach(s -> {
             s.getMaGhe();
         });
@@ -98,7 +99,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     }
 
     public void SodoGhe() {
-        int id = Integer.parseInt(maPhongChieu.substring(2));
+//        int id = Integer.parseInt(maPhongChieu.substring(2));
         List = listGheCV.stream().limit(96).collect(Collectors.toList());
         System.out.println(listGheCV.size());
 
@@ -147,7 +148,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             lModelGhe.add(ghe);
 
         }
-        if (id >= 5) {
+        if (listGheCV.size() >96 ) {
             List2 = listGheCV.stream().skip(96).collect(Collectors.toList());
             for (ChiTietGhe s : List2) {
                 if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {

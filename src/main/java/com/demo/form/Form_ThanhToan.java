@@ -56,7 +56,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     }
 
     public void FillTenPhong() {
-        System.out.println(tt.getMaPhim()+","+tt.getNgayChieu()+","+tt.getSTT());
+//        System.out.println(tt.getMaPhim()+","+tt.getNgayChieu()+","+tt.getSTT());
         String tenphong = daoPhong.SelectPhong(tt.getMaPhim(), tt.getSTT()).getTenPhong();
         lblTenPhong.setText(tenphong);
     }
@@ -96,19 +96,19 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         try {
             VeDao daoVe = new VeDao();
             tt = (ThanhToan) readObj("temp.txt");
-            if (tt.getListTopping() != null) {
-                for (Topping s : tt.getListTopping()) {
-                    temp += s.getGia() * s.getSoLuongMua();
-                }
-                daoVe.Insert(new Ve(tt.getGiaGhe() * 1.05 + temp, 0.05, tt.getMaCTGhe(), ""));
-                System.out.println();
-                tt.getListTopping().forEach(s -> {
-                    new ToppingDao().InsertCT(new ChiTietTopping(daoVe.findMaxId(), s.getMaTopping(), s.getSoLuongMua()));
-
-                });
-            } else {
-                daoVe.Insert(new Ve(tt.getGiaGhe() * 1.05 + temp, 0.05, tt.getMaCTGhe(), ""));
-            }
+//            if (tt.getListTopping() != null) {
+//                for (Topping s : tt.getListTopping()) {
+//                    temp += s.getGia() * s.getSoLuongMua();
+//                }
+//                daoVe.Insert(new Ve(tt.getGiaGhe() * 1.05 + temp, 0.05, tt.getMaCTGhe(), ""));
+//                System.out.println();
+//                tt.getListTopping().forEach(s -> {
+//                    new ToppingDao().InsertCT(new ChiTietTopping(daoVe.findMaxId(), s.getMaTopping(), s.getSoLuongMua()));
+//
+//                });
+//            } else {
+//                daoVe.Insert(new Ve(tt.getGiaGhe() * 1.05 + temp, 0.05, tt.getMaCTGhe(), ""));
+//            }
         } catch (IOException ex) {
             Logger.getLogger(Form_ThanhToan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
