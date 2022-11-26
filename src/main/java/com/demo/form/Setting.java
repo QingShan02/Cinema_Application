@@ -70,7 +70,7 @@ public class Setting extends javax.swing.JPanel {
 
         jTextField1.setText("jTextField1");
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         lblSetting.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lblSetting.setForeground(new java.awt.Color(255, 255, 255));

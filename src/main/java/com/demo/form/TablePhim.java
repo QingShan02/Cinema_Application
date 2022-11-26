@@ -17,6 +17,8 @@ import com.raven.model.ThanhToan;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -42,33 +44,38 @@ public class TablePhim extends javax.swing.JPanel {
     List<NgayChieu> ngaychieu = new ArrayList<>();
     String maPhong, gioBatDau, maPhim;
     int sttn;
-
+    String url = "http://localhost:8484/Image/poster/";
     public TablePhim() {
         initComponents();
     }
 
-    public TablePhim(Phim p, int sttngay) {
+    public TablePhim(Phim p,int sttngay, String gio) {
         initComponents();
         daoXC = new XuatChieuDao();
+        
         lblTenPhim.setText(p.getTenPhim());
         lblDV.setText(p.getDienVien());
         lblDD.setText(p.getDaoDien());
         lblQG.setText(p.getQuocGia());
         lblTL.setText(p.getThoiLuong());
         lblNSX.setText(String.valueOf(p.getNamSX()));
-        lblHinh.setIcon(resizeImage("src/main/resources/poster/" + p.getHinh()));
+        lblHinh.setIcon(resizeImage(url + p.getHinh()));
         maPhong = daoXC.SelectMaPhong(p.getMaPhim(), sttngay);
-        sttn = sttngay;
 //        gioBatDau = gioBatDauChieu;
         maPhim = p.getMaPhim();
-        System.out.println(maPhong);
-        System.out.println(maPhim);
-        System.out.println(sttn);
-        System.out.println(gioBatDau);
+        gioBatDau = gio;
     }
 
     public ImageIcon resizeImage(String path) {
-        ImageIcon ii = new ImageIcon(path);
+        URL temp= null;
+        try {
+            System.out.println(path);
+            temp = new URL(path);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ImageIcon ii = new ImageIcon(temp);
+        
         ImageIcon imageIcon = new ImageIcon(ii.getImage().getScaledInstance(150, 300, java.awt.Image.SCALE_SMOOTH));
         return imageIcon;
     }
@@ -224,7 +231,7 @@ public class TablePhim extends javax.swing.JPanel {
             Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
         }
         Main.mainF.removeAll();
-        Main.mainF.add(new Form_ChoNgoi(sttn));
+        Main.mainF.add(new Form_ChoNgoi(maPhim,gioBatDau));
         Main.mainF.repaint();
         Main.mainF.revalidate();
     }//GEN-LAST:event_formMouseClicked

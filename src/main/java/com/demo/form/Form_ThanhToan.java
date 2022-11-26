@@ -19,11 +19,18 @@ import com.raven.model.Topping;
 import com.raven.model.Ve;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+//import com.itextpdf.text.Document;
+//import com.itextpdf.text.Paragraph;
+//import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,7 +71,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     public void GetTime() {
         Date d = new Date();
         lblTime.setText(d.toGMTString());
-        
+
     }
 
     public void FillTenPhim() {
@@ -107,7 +114,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
 //
 //                });
 //            } else {
-//                daoVe.Insert(new Ve(tt.getGiaGhe() * 1.05 + temp, 0.05, tt.getMaCTGhe(), ""));
+                daoVe.Insert(new Ve(tt.getGiaGhe() * 1.05 + temp, 0.05, tt.getMaCTGhe(), ""));
 //            }
         } catch (IOException ex) {
             Logger.getLogger(Form_ThanhToan.class.getName()).log(Level.SEVERE, null, ex);
@@ -279,12 +286,35 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+//        CreateAndOpenPDFFile();
+
         Main.mainF.removeAll();
 //        Main.mainF.add(new Form_ChonPhim());
         Main.mainF.repaint();
         Main.mainF.revalidate();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+//    private void CreateAndOpenPDFFile() {
+//        try {
+//            Document document = new Document();
+//            PdfWriter.getInstance(document, new FileOutputStream("hoadon.pdf"));
+//            document.open();
+//            document.add(new Paragraph("Hello World"));
+//
+//            File file = new File("C:\\Users\\Ngoc Han\\Desktop\\RapChieuPhim_App\\hoadon.pdf");
+//            if(file.exists()){
+//                if(Desktop.isDesktopSupported()){
+//                    Desktop.getDesktop().open(file);
+//                }
+//            }else{
+//                JOptionPane.showMessageDialog(null, "File khong ton tai");
+//            }
+//            
+//            document.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

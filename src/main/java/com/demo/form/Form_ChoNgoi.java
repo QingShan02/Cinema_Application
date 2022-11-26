@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  *
  * @author Daokh
  */
-public class Form_ChoNgoi extends javax.swing.JPanel {
+public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
 
     /**
      * Creates new form Form_ChoNgoi
@@ -54,7 +54,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     GheDao daoGhe;
     PhongDao daoPhong;
     String maPhongChieu, maPhimChieu;
-
+    List<ChiTietGhe> listT = new ArrayList<>();
+    String maphim,gio;
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
@@ -70,39 +71,27 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             oos.writeObject(data);
         }
     }
-
-    //Cái này bản cũ chưa xóa
-    public Form_ChoNgoi(PhongChieu phg, NgayChieu nc, List<ChiTietGhe> listGheCV) {
-        initComponents();
-//        this.listGheCV = listGheCV;
-        this.phg = phg;
-        daoGhe = new GheDao();
-        ListGhe = daoGhe.Select(this.phg.getMaPhong(), nc.getStt());
-        lblTenPhong.setText(lblTenPhong.getText() + " " + this.phg.getTenPhong());
-        lblGio.setText(nc.getGioBatDau());
-        SodoGhe();
-    }
+    int sttngay;
+    int SoVe;
 
     //Cái này mới sử dụng cái này
-    public Form_ChoNgoi(int sttngay) {
+    public Form_ChoNgoi(String maphim, String gio) {
         initComponents();
         daoGhe = new GheDao();
+        this.maphim = maphim;
+        this.gio = gio;
         daoPhong = new PhongDao();
-        listGheCV = daoPhong.Selectghecove(sttngay);
-        System.out.println(listGheCV.size());
-//        maPhongChieu = maphong;
-//        maPhimChieu = maPhim;
-        listGheCV.stream().forEach(s -> {
-            s.getMaGhe();
-        });
+        listGheCV = daoPhong.Selectghecove(maphim,gio);
+        System.out.println(">>>"+gio);
+        SoVe = listGheCV.stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size();
+
         SodoGhe();
+        Thread t = new Thread(this);
+        t.start();
     }
 
     public void SodoGhe() {
-//        int id = Integer.parseInt(maPhongChieu.substring(2));
         List = listGheCV.stream().limit(96).collect(Collectors.toList());
-        System.out.println(listGheCV.size());
-
         for (ChiTietGhe s : List) {
 
             if (s.getIdVe() != 0) {
@@ -148,7 +137,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
             lModelGhe.add(ghe);
 
         }
-        if (listGheCV.size() >96 ) {
+        if (listGheCV.size() > 96) {
             List2 = listGheCV.stream().skip(96).collect(Collectors.toList());
             for (ChiTietGhe s : List2) {
                 if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
@@ -432,4 +421,23 @@ public class Form_ChoNgoi extends javax.swing.JPanel {
     private javax.swing.JLabel lblGio;
     private javax.swing.JLabel lblTenPhong;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                if (SoVe != daoPhong.Selectghecove(maphim,gio).stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size()) {
+                    Main.mainF.removeAll();
+                    Main.mainF.add(new Form_ChoNgoi(maphim,gio));
+                    Main.mainF.repaint();
+                    Main.mainF.revalidate();
+                    break;
+                }
+                System.out.println("1");
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }

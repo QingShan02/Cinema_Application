@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -45,7 +46,7 @@ public class PhimDao {
         } catch (SQLException ex) {
             Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+//        list = list.stream().distinct().collect(Collectors.toList());
         return list;
     }
 

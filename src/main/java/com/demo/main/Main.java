@@ -81,9 +81,9 @@ public class Main extends javax.swing.JFrame {
 //                else if (index == 4) {
 //                    setForm(new );
 //                }
-//                else if (index == 5) {
-//                    setForm(new Form_DoiMatKhau());
-//                }
+                else if (index == 5) {
+                    setForm(new Setting());
+                }
                 else if (index == 6) {
                     setForm(new Form_XacThuc());
                 } else if (index == 7) {
@@ -177,7 +177,6 @@ public class Main extends javax.swing.JFrame {
 
     private void setForm(JComponent com) {
         mainPanel.removeAll();
-        System.out.println(">>4");
         mainPanel.add(com);
         mainPanel.repaint();
         mainPanel.revalidate();

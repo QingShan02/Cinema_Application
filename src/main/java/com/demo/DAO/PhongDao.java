@@ -87,20 +87,20 @@ public class PhongDao {
             e.printStackTrace();
         }
     }
-    public List<ChiTietGhe> Selectghecove(int sttngay){
+    public List<ChiTietGhe> Selectghecove(String maPhim,String gioBatDau){
         List<ChiTietGhe> list = new ArrayList<>();
         try {
-            pst = con.prepareCall("{ call Selectghecove(?)}");
-//            pst.setString(1, maPhim);
-            pst.setInt(1, sttngay);
-//            pst.setString(3, gioBatDau);
+            pst = con.prepareCall("{ call Selectghecove(?,cast(? as time))}");
+            pst.setString(1, maPhim);
+//            pst.setInt(1, sttngay);
+            pst.setString(2, gioBatDau);
             rs = pst.executeQuery();
             while (rs.next()) {
                 list.add(new ChiTietGhe(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getInt(4), rs.getFloat(5), rs.getInt(6)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
-           
+            System.out.println("size:"+list.size());
 
         }
         return list;
