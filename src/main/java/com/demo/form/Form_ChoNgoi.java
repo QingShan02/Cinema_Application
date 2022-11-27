@@ -433,7 +433,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                     Main.mainF.revalidate();
                     break;
                 }
-                System.out.println("1");
+//                System.out.println("1");
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);

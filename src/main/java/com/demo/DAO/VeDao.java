@@ -8,6 +8,7 @@ import static com.raven.DAO.PhongDao.con;
 import static com.raven.DAO.PhongDao.pst;
 import static com.raven.DAO.PhongDao.rs;
 import com.raven.main.DangNhap;
+import com.raven.main.Main;
 import com.raven.model.ChiTietGhe;
 import com.raven.model.Ve;
 import java.sql.Connection;
@@ -113,6 +114,22 @@ public class VeDao {
             while (rs.next()) {
                 list.add(new Ve(rs.getInt(1), rs.getDouble(2)));
 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return list;
+    }
+        public List<Object[]> SelectVeOnline() {
+        List<Object[]> list = new ArrayList();
+        try {
+            pst = con.prepareCall("{ call SelectVeOnline(?)}");
+            pst.setString(1, Main.maCN);
+            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Object[]{rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5)});
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);

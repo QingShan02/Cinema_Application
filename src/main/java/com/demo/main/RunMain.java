@@ -5,6 +5,7 @@
 package com.raven.main;
 
 import com.demo.form.Form_ChonChiNhanh;
+import com.demo.form.Form_Loading;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.raven.DAO.NguoiDungDao;
@@ -24,7 +25,6 @@ import javax.swing.UIManager;
 public class RunMain {
 
     public static void main(String[] args) {
-        NguoiDungDao dao = new NguoiDungDao();
         try {
             FlatDarculaLaf.setup();
             UIManager.put("Button.arc", 999);
@@ -34,28 +34,7 @@ public class RunMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        try {
-            if (new File("savetk.txt").length() != 0) {
-                if (new File("temp.txt").length() == 0) {
-                    Form_ChonChiNhanh cn = new Form_ChonChiNhanh();
-                    cn.show();
-                    return;
-                } else {
-                    NguoiDung list_temp = (NguoiDung) DangNhap.readObj("savetk.txt");
-                    dao.Select().stream().filter(s -> s.getSoDT().equalsIgnoreCase(list_temp.getSoDT())).forEach(s -> NguoiDungDao.setMaNV(s.getMaNguoiDung()));
-                    ThanhToan tt = (ThanhToan) DangNhap.readObj("temp.txt");
-                    Main main = new Main(tt.getMaCN());
-                    main.show();
-                    return;
-                }
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        DangNhap dn = new DangNhap();
-        dn.show();
+        new Form_Loading().show();
+        
     }
 }
