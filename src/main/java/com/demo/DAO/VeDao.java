@@ -38,12 +38,13 @@ public class VeDao {
 
     public void Insert(Ve v) {
         try {
-            pst = con.prepareStatement("insert into Ve(GiaVe, ThueVat, MaCTGhe,NgayMuaVe) values(?,?,?,cast (? as date))");
+            pst = con.prepareStatement("insert into Ve(GiaVe, ThueVat, MaCTGhe,NgayMuaVe,Stt_xc) values(?,?,?,cast (? as date),?)");
 //            pst.setInt(1, v.getIdVe());
             pst.setDouble(1, v.getGiaVe());
             pst.setDouble(2, v.getThueVAT());
 //            pst.setInt(3, v.getMaKH());
             pst.setInt(3, v.getMaCTGhe());
+            pst.setInt(5, v.getStt_xc());
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Calendar cal = Calendar.getInstance();
             pst.setString(4,dateFormat.format(cal.getTime()));
@@ -66,19 +67,19 @@ public class VeDao {
         return 0;
     }
 
-    public List<Ve> Select() {
-        List<Ve> list = new ArrayList<>();
-        try {
-            st = con.createStatement();
-            rs = st.executeQuery("select * from Ve");
-            while (rs.next()) {
-                list.add(new Ve(rs.getInt(1), rs.getDouble(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getString(6)));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(VeDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
+//    public List<Ve> Select() {
+//        List<Ve> list = new ArrayList<>();
+//        try {
+//            st = con.createStatement();
+//            rs = st.executeQuery("select * from Ve");
+//            while (rs.next()) {
+//                list.add(new Ve(rs.getInt(1), rs.getDouble(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getString(6)));
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(VeDao.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return list;
+//    }
 
     public void Update(double TongGiaVe, double ThueVAT, int MaKH, int MaCTGhe, String MaNV, int IdVe) {
         try {

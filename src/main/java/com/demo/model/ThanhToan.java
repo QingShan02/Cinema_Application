@@ -27,4 +27,5 @@ public class ThanhToan implements Serializable{
     private String MaPhim;
     List<Topping> ListTopping;
     private String maCN;
+    private int stt_xc;
 }

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="maHD" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select chinhanh.*, hoadon.mahd, phim.tenphim, ghe.tenghe, phongchieu.tenphong, loaighe.tenloai, (loaighe.phuthu + xuatchieu.giaxuatchieu) as giachuatinh ,(loaighe.phuthu + xuatchieu.giaxuatchieu)*0.05 as giathue,ve.giave
+from chinhanh join phongchieu on phongchieu.macn = chinhanh.macn
+		left join chitietghe on chitietghe.maphong = phongchieu.maphong
+		join ghe on ghe.maghe = chitietghe.maghe
+		join ve on ve.mactghe = chitietghe.mactghe
+		join xuatchieu on xuatchieu.stt = ve.stt_xc
+		join phim on xuatchieu.maphim = phim.maphim
+		join hoadon on hoadon.idve = ve.idve
+		join loaighe on loaighe.maloai = ghe.maloai
+where hoadon.mahd = $P{maHD}]]>
+	</queryString>
+	<field name="macn" class="java.lang.String"/>
+	<field name="tencn" class="java.lang.String"/>
+	<field name="diachi" class="java.lang.String"/>
+	<field name="sodt" class="java.lang.String"/>
+	<field name="mahd" class="java.lang.String"/>
+	<field name="tenphim" class="java.lang.String"/>
+	<field name="tenghe" class="java.lang.String"/>
+	<field name="tenphong" class="java.lang.String"/>
+	<field name="tenloai" class="java.lang.String"/>
+	<field name="giachuatinh" class="java.lang.Double"/>
+	<field name="giathue" class="java.lang.Double"/>
+	<field name="giave" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="111" y="13" width="69" height="19" />
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hóa đơn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="59" width="69" height="20" />
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[T1 Cinema]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="59" width="100" height="20" />
+				<textFieldExpression><![CDATA[$F{tencn}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="15" y="46" width="240" height="1" />
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="11" width="80" height="20" />
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Địa chỉ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="11" width="191" height="20" />
+				<textFieldExpression><![CDATA[$F{diachi}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<line>
+				<reportElement x="15" y="0" width="240" height="1" />
+			</line>
+			<textField>
+				<reportElement x="15" y="13" width="240" height="48" />
+				<textFieldExpression><![CDATA[$F{tenphim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="41" width="69" height="20" />
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tenphong}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="41" width="54" height="20" />
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tenghe}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="339" splitType="Stretch">
+			<staticText>
+				<reportElement x="15" y="19" width="40" height="20" />
+				<text><![CDATA[Loại vé:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="69" y="19" width="100" height="20" />
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tenloai}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="15" y="51" width="240" height="1" />
+			</line>
+			<staticText>
+				<reportElement x="15" y="69" width="100" height="20" />
+				<text><![CDATA[Giá vé:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="69" width="75" height="20" />
+				<textFieldExpression><![CDATA[$F{giachuatinh}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="105" width="100" height="20" />
+				<text><![CDATA[Thuế (5%):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="105" width="75" height="20" />
+				<textFieldExpression><![CDATA[$F{giathue}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="15" y="140" width="240" height="1" />
+			</line>
+			<textField>
+				<reportElement x="180" y="145" width="75" height="20" />
+				<textFieldExpression><![CDATA[$F{giave}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="145" width="100" height="20" />
+				<text><![CDATA[Tổng:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="15" y="-184" width="114" height="55" />
+				<box>
+					<pen lineStyle="Solid"/>
+					<topPen lineStyle="Solid"/>
+					<leftPen lineStyle="Solid"/>
+					<bottomPen lineStyle="Solid"/>
+					<rightPen lineStyle="Solid"/>
+				</box>
+				<imageExpression><![CDATA["E:\\RapChieuPhim\\RapChieuPhim_App\\src\\main\\resources\\icon\\logoHoaDon.png"]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

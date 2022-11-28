@@ -55,7 +55,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     PhongDao daoPhong;
     String maPhongChieu, maPhimChieu;
     List<ChiTietGhe> listT = new ArrayList<>();
-    String maphim,gio;
+    String maphim, gio;
+
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
@@ -73,21 +74,24 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     }
     int sttngay;
     int SoVe;
-
+    Thread t;
     //Cái này mới sử dụng cái này
+
+
     public Form_ChoNgoi(String maphim, String gio) {
         initComponents();
         daoGhe = new GheDao();
         this.maphim = maphim;
         this.gio = gio;
         daoPhong = new PhongDao();
-        listGheCV = daoPhong.Selectghecove(maphim,gio);
-        System.out.println(">>>"+gio);
+        listGheCV = daoPhong.Selectghecove(maphim, gio);
+        System.out.println(">>>" + gio);
         SoVe = listGheCV.stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size();
 
         SodoGhe();
-        Thread t = new Thread(this);
+        t = new Thread(this);
         t.start();
+
     }
 
     public void SodoGhe() {
@@ -394,7 +398,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-
+        t.stop();
         Main.mainF.removeAll();
         Main.mainF.add(new Form_ChonTopping());
         Main.mainF.repaint();
@@ -426,9 +430,9 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     public void run() {
         while (true) {
             try {
-                if (SoVe != daoPhong.Selectghecove(maphim,gio).stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size()) {
+                if (SoVe != daoPhong.Selectghecove(maphim, gio).stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size()) {
                     Main.mainF.removeAll();
-                    Main.mainF.add(new Form_ChoNgoi(maphim,gio));
+                    Main.mainF.add(new Form_ChoNgoi(maphim, gio));
                     Main.mainF.repaint();
                     Main.mainF.revalidate();
                     break;

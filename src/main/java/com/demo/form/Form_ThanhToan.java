@@ -4,6 +4,9 @@
  */
 package com.raven.form;
 
+import com.demo.DAO.HoaDonDao;
+import com.demo.model.HoaDon;
+import com.raven.DAO.ConnectDB;
 import com.raven.DAO.GheDao;
 import com.raven.DAO.NgayChieuDao;
 import com.raven.DAO.PhimDao;
@@ -30,6 +33,14 @@ import java.util.logging.Logger;
 //import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,6 +56,8 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     PhimDao daoPhim;
     PhongDao daoPhong;
     GheDao daoGhe;
+    HoaDonDao daoHD;
+    VeDao daoVe;
 
     public Form_ThanhToan() {
         initComponents();
@@ -53,19 +66,21 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         daoPhim = new PhimDao();
         daoPhong = new PhongDao();
         daoGhe = new GheDao();
+        daoHD = new HoaDonDao();
+        daoVe = new VeDao();
         FillTenPhong();
         GetTime();
         FillTenPhim();
         FillTenPhim();
         FillGhe();
         FillGia();
-        FillTopping();
+//        FillTopping();
     }
 
     public void FillTenPhong() {
 //        System.out.println(tt.getMaPhim()+","+tt.getNgayChieu()+","+tt.getSTT());
-        String tenphong = daoPhong.SelectPhong(tt.getMaPhim(), tt.getSTT()).getTenPhong();
-        lblTenPhong.setText(tenphong);
+//        String tenphong = daoPhong.SelectPhong(tt.getMaPhim(), tt.getSTT()).getTenPhong();
+//        lblTenPhong.setText(tenphong);
     }
 
     public void GetTime() {
@@ -114,7 +129,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
 //
 //                });
 //            } else {
-                daoVe.Insert(new Ve(tt.getGiaGhe() * 1.05 + temp, 0.05, tt.getMaCTGhe(), ""));
+            daoVe.Insert(new Ve(tt.getGiaGhe() * 1.05 + temp, 0.05, tt.getMaCTGhe(), tt.getStt_xc()));
 //            }
         } catch (IOException ex) {
             Logger.getLogger(Form_ThanhToan.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,17 +138,16 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         }
     }
 
-    public void FillTopping() {
-//        System.out.println();
-        tt.getListTopping().forEach(s -> {
-            System.out.println(s.getMaTopping());
-            jPanel1.add(new Model_ChonTopping1(new Topping(s.getMaTopping(), s.getTenTopping(), s.getSoLuongMua())));
-        });
-        jPanel1.removeAll();
-        jPanel1.repaint();
-        jPanel1.revalidate();
-    }
-
+//    public void FillTopping() {
+////        System.out.println();
+//        tt.getListTopping().forEach(s -> {
+//            System.out.println(s.getMaTopping());
+//            jPanel1.add(new Model_ChonTopping1(new Topping(s.getMaTopping(), s.getTenTopping(), s.getSoLuongMua())));
+//        });
+//        jPanel1.removeAll();
+//        jPanel1.repaint();
+//        jPanel1.revalidate();
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -287,9 +301,21 @@ public class Form_ThanhToan extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 //        CreateAndOpenPDFFile();
+//        int min = 100000000;
+//        int max = 999999999;
+
+        //Generate random int value from 50 to 100 
+//      System.out.println("Random value in int from "+min+" to "+max+ ":");
+//        int random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
+        String a = UUID.randomUUID().toString();
+        System.out.println(a);
+        daoHD.Insert(new HoaDon(a, daoVe.findMaxId(), java.time.LocalDate.now() + "", tt.getGiaGhe() * 1.05 + temp));
+        Hashtable map = new Hashtable();
+        map.put("maHD", a);
+        ConnectDB.inHoaDon(map);
 
         Main.mainF.removeAll();
-//        Main.mainF.add(new Form_ChonPhim());
+        Main.mainF.add(new Form_Home());
         Main.mainF.repaint();
         Main.mainF.revalidate();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -315,7 +341,6 @@ public class Form_ThanhToan extends javax.swing.JPanel {
 //            e.printStackTrace();
 //        }
 //    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -5,7 +5,7 @@ import com.raven.DAO.PhongDao;
 import com.raven.form.Form_ChoNgoi;
 import static com.raven.form.Form_ChoNgoi.writeObj;
 import com.raven.form.Form_Home;
-import com.raven.form.Form_Phim;
+//import com.raven.form.Form_Phim;
 import com.raven.main.DangNhap;
 import com.raven.main.Main;
 import com.raven.model.ChiTietGhe;
@@ -85,7 +85,7 @@ public class Card extends javax.swing.JPanel {
                     System.out.println(data.getValues());
                     System.out.println(s.getStt());
 
-                    PhongChieu phg = daoPhong.SelectPhong(data.getMaPhim(), s.getStt());
+//                    PhongChieu phg = daoPhong.SelectPhong(data.getMaPhim(), s.getStt());
 //                    List<ChiTietGhe> listGheCV = daoPhong.SelectGheInVe("2022-09-01", s.getStt(), data.getMaPhim());
      try {
             new PrintWriter("bonho.txt").close();

@@ -48,11 +48,12 @@ public class TablePhim extends javax.swing.JPanel {
     public TablePhim() {
         initComponents();
     }
-
+    int stt_xc =0;
     public TablePhim(Phim p,int sttngay, String gio) {
         initComponents();
         daoXC = new XuatChieuDao();
-        
+        this.sttn = sttngay;
+        this.stt_xc = p.getStt_xc();
         lblTenPhim.setText(p.getTenPhim());
         lblDV.setText(p.getDienVien());
         lblDD.setText(p.getDaoDien());
@@ -60,6 +61,7 @@ public class TablePhim extends javax.swing.JPanel {
         lblTL.setText(p.getThoiLuong());
         lblNSX.setText(String.valueOf(p.getNamSX()));
         lblHinh.setIcon(resizeImage(url + p.getHinh()));
+        lblPhong.setText(p.getTenphong());
         maPhong = daoXC.SelectMaPhong(p.getMaPhim(), sttngay);
 //        gioBatDau = gioBatDauChieu;
         maPhim = p.getMaPhim();
@@ -101,6 +103,8 @@ public class TablePhim extends javax.swing.JPanel {
         lblQG = new javax.swing.JLabel();
         lblTL = new javax.swing.JLabel();
         lblNSX = new javax.swing.JLabel();
+        lblNamSX1 = new javax.swing.JLabel();
+        lblPhong = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,6 +153,12 @@ public class TablePhim extends javax.swing.JPanel {
         lblNSX.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblNSX.setForeground(new java.awt.Color(255, 255, 255));
 
+        lblNamSX1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNamSX1.setForeground(new java.awt.Color(255, 255, 255));
+        lblNamSX1.setText("Phòng:");
+
+        lblPhong.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,11 +184,13 @@ public class TablePhim extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblThoiLuong)
-                            .addComponent(lblNamSX))
+                            .addComponent(lblNamSX)
+                            .addComponent(lblNamSX1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblTL, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblNSX, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(lblPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -210,8 +222,12 @@ public class TablePhim extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNamSX)
-                            .addComponent(lblNSX))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                            .addComponent(lblNSX))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNamSX1)
+                            .addComponent(lblPhong))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -221,6 +237,8 @@ public class TablePhim extends javax.swing.JPanel {
             tt.setMaPhong(maPhong);
             tt.setMaPhim(maPhim);
             tt.setSTT(sttn);
+            tt.setStt_xc(stt_xc);
+            System.out.println(sttn);
             writeObj("temp.txt", tt);
 
         } catch (FileNotFoundException ex) {
@@ -245,6 +263,8 @@ public class TablePhim extends javax.swing.JPanel {
     private javax.swing.JLabel lblHinh;
     private javax.swing.JLabel lblNSX;
     private javax.swing.JLabel lblNamSX;
+    private javax.swing.JLabel lblNamSX1;
+    private javax.swing.JLabel lblPhong;
     private javax.swing.JLabel lblQG;
     private javax.swing.JLabel lblQuocGia;
     private javax.swing.JLabel lblTL;

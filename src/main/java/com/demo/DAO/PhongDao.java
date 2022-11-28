@@ -57,6 +57,7 @@ public class PhongDao {
     public PhongChieu SelectPhong(String MaPhim, int Ngay){
         PhongChieu phg = null;
         try {
+            System.out.println(">>"+MaPhim+","+Ngay);
             pst = con.prepareStatement("select x.MaPhong,TenPhong from XuatChieu x join PhongChieu p on p.MaPhong = x.MaPhong where MaPhim = ? and x.Ngay = ?");
             pst.setString(1, MaPhim);
 //            pst.setDate(2,java.sql.Date.valueOf(NgayChieu));

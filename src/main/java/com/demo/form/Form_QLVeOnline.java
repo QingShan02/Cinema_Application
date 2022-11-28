@@ -4,8 +4,13 @@
  */
 package com.demo.form;
 
+import com.demo.DAO.HoaDonDao;
+import com.demo.model.HoaDon;
+import com.raven.DAO.ConnectDB;
 import com.raven.DAO.VeDao;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.UUID;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,9 +24,11 @@ public class Form_QLVeOnline extends javax.swing.JPanel {
      */
     List<Object[]> list;
     VeDao dao;
+    HoaDonDao daoHD;
     public Form_QLVeOnline() {
         initComponents();
         dao = new VeDao();
+        daoHD = new HoaDonDao();
         list = dao.SelectVeOnline();
         FillToTable();
     }
@@ -45,6 +52,7 @@ public class Form_QLVeOnline extends javax.swing.JPanel {
         tblVe = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        btnXuatHoaDon = new javax.swing.JButton();
 
         tblVe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -63,6 +71,13 @@ public class Form_QLVeOnline extends javax.swing.JPanel {
 
         jButton1.setText("jButton1");
 
+        btnXuatHoaDon.setText("Xuất hóa đơn");
+        btnXuatHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatHoaDonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,8 +90,12 @@ public class Form_QLVeOnline extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnXuatHoaDon)
+                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,12 +106,26 @@ public class Form_QLVeOnline extends javax.swing.JPanel {
                     .addComponent(jButton1))
                 .addGap(71, 71, 71)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(btnXuatHoaDon)
+                .addGap(37, 37, 37))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
+        // TODO add your handling code here:
+                String a = UUID.randomUUID().toString();
+        int idve = (int) list.get(tblVe.getSelectedRow())[0];
+        double gia =  (double) list.get(tblVe.getSelectedRow())[4];
+        daoHD.Insert(new HoaDon(a, idve, java.time.LocalDate.now() + "",gia));
+        Hashtable map = new Hashtable();
+        map.put("maHD", a);
+        ConnectDB.inHoaDon(map);
+    }//GEN-LAST:event_btnXuatHoaDonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnXuatHoaDon;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;

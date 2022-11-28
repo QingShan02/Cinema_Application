@@ -23,23 +23,23 @@ public class Ve {
     private int MaKH;
     private int MaCTGhe;
     private String MaNV;
+    private int stt_xc;
     private int TongSoVe;
 
     
-    public Ve(double GiaVe, double ThueVAT, int MaCTGhe, String MaNV) {
+    public Ve(double GiaVe, double ThueVAT, int MaCTGhe, int stt_xc) {
         this.GiaVe = GiaVe;
         this.ThueVAT = ThueVAT;
         this.MaCTGhe = MaCTGhe;
-        this.MaNV = MaNV;
+        this.stt_xc = stt_xc;
     }
 
-    public Ve(int IdVe, double GiaVe, double ThueVAT, int MaKH, int MaCTGhe, String MaNV) {
-        this.IdVe = IdVe;
+    public Ve(double GiaVe, double ThueVAT, int MaKH, int MaCTGhe, int stt_xc) {
         this.GiaVe = GiaVe;
         this.ThueVAT = ThueVAT;
         this.MaKH = MaKH;
         this.MaCTGhe = MaCTGhe;
-        this.MaNV = MaNV;
+        this.stt_xc = stt_xc;
     }
     
     public Ve(int TongSoVe, double GiaVe) {
