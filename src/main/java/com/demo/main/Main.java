@@ -7,25 +7,16 @@ package com.raven.main;
 
 import com.demo.form.Form_CSVC;
 import com.demo.form.Form_QLVeOnline;
-import com.demo.form.Form_ThongKeChiNhanh;
+import com.demo.form.Form_ThongKeCN;
+import com.demo.form.LineChartThang;
 import com.demo.form.Setting;
-import com.raven.DAO.NguoiDungDao;
 import com.raven.DAO.PhongDao;
 import com.raven.event.EventMenuSelected;
 import com.raven.form.Form_ChoNgoi;
-import com.raven.form.Form_DoiMatKhau;
-import com.raven.form.Form_KhachHang;
 import com.raven.form.Form_Home;
-import com.raven.form.Form_QuanLyLichChieu;
 import com.raven.form.Form_Topping;
 import com.raven.form.Form_XacThuc;
-import com.raven.model.ChiTietGhe;
-import com.raven.model.NgayChieu;
-import com.raven.model.NguoiDung;
-import com.raven.model.PhongChieu;
-import com.raven.swing.MenuItem;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -36,7 +27,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -77,7 +67,7 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 3) {
                     setForm(new Form_Topping());
                 } else if (index == 4) {
-                    setForm(new Form_ThongKeChiNhanh());
+                    setForm(new Form_ThongKeCN());
                 }
 //                else if (index == 4) {
 //                    setForm(new );
@@ -112,7 +102,7 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 2) {
                     setForm(new Form_Topping());
                 } else if (index == 3) {
-                    setForm(new Form_ThongKeChiNhanh());
+                    setForm(new Form_ThongKeCN());
                 }
                 else if (index == 5) {
                     setForm(new Setting());
