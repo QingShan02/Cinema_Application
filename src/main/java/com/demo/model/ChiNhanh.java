@@ -20,4 +20,8 @@ public class ChiNhanh {
     private String TenCN;
     private String DiaChi;
     private String SoDT;
+    
+    public ChiNhanh(String TenCN) {
+        this.TenCN = TenCN;
+    }
 }

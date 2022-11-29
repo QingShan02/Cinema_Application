@@ -39,4 +39,19 @@ public class ChiNhanhDao {
         }
         return list;
     }
+    
+    public List<ChiNhanh> selectTenCN(){
+        List<ChiNhanh> list = new ArrayList<>();
+        try {
+            st =con.createStatement();
+            rs = st.executeQuery("select tencn from ChiNhanh");
+            while(rs.next()){
+                list.add(new ChiNhanh(rs.getString("tencn")));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ChiNhanhDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 }

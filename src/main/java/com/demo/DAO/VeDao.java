@@ -106,17 +106,31 @@ public class VeDao {
         }
     }
 
-    public List<Ve> ThongKeNgay(String ngayThongKe) {
+    public List<Ve> ThongKeNgay(String macn) {
         List<Ve> list = new ArrayList();
         try {
-            pst = con.prepareCall("{ call thongKetheongay(cast(? as date))}");
-            pst.setString(1, ngayThongKe);
+            pst = con.prepareCall("{ call thongKetheongay(?)}");
+            pst.setString(1, macn);
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Ve(rs.getInt(1), rs.getDouble(2)));
+                list.add(new Ve(rs.getDate(1),rs.getInt(2), rs.getDouble(3)));
 
             }
         } catch (SQLException ex) {
+            Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return list;
+    }
+     public List<Ve> ThongKeThang() {
+        List<Ve> list = new ArrayList();
+        try {
+            pst = con.prepareCall("{ call thongKetheoThang()}");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Ve(rs.getInt(1), rs.getDouble(2), rs.getInt(3)));
+            }
+        }catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
