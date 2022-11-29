@@ -11,6 +11,11 @@ import com.raven.model.NguoiDung;
 import com.raven.model.ThanhToan;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,8 +26,22 @@ public class Form_Loading extends javax.swing.JFrame implements Runnable {
     /**
      * Creates new form Form_Loading
      */
+    public ImageIcon resizeImage(String path) {
+//        URL temp= null;
+//        try {
+//            System.out.println(path);
+////            temp = new URL(path);
+//        } catch (MalformedURLException ex) {
+//            Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        ImageIcon ii = new ImageIcon(path);
+        
+        ImageIcon imageIcon = new ImageIcon(ii.getImage().getScaledInstance(627, 659, java.awt.Image.SCALE_SMOOTH));
+        return imageIcon;
+    }
     public Form_Loading() {
         initComponents();
+//        jLabel1.setIcon(resizeImage("src/main/resources/image/icon/loading.png"));
         Thread t = new Thread(this);
         t.start();
         setLocationRelativeTo(null);
@@ -68,7 +87,7 @@ public class Form_Loading extends javax.swing.JFrame implements Runnable {
                 }
                 i += 5;
                 pgbChao.setValue(i);
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -85,8 +104,11 @@ public class Form_Loading extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton1 = new javax.swing.JToggleButton();
         pgbChao = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
+
+        jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -94,6 +116,7 @@ public class Form_Loading extends javax.swing.JFrame implements Runnable {
         pgbChao.setStringPainted(true);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/loading.png"))); // NOI18N
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,6 +177,7 @@ public class Form_Loading extends javax.swing.JFrame implements Runnable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JProgressBar pgbChao;
     // End of variables declaration//GEN-END:variables
 }
