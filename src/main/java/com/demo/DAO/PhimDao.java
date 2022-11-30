@@ -33,22 +33,22 @@ public class PhimDao {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public List<Phim> SelectTenPhim(String giobatdau) {
-        List<Phim> list = new ArrayList();
-        try {
-            pst = con.prepareCall("{call SelectTenPhim(cast(? as time))}");
-            pst.setString(1, giobatdau);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                list.add(new Phim(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getInt(11),rs.getString(12),rs.getString(13)));
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-//        list = list.stream().distinct().collect(Collectors.toList());
-        return list;
-    }
+//    public List<Phim> SelectTenPhim(String giobatdau) {
+//        List<Phim> list = new ArrayList();
+//        try {
+//            pst = con.prepareCall("{call SelectTenPhim(cast(? as time))}");
+//            pst.setString(1, giobatdau);
+//            rs = pst.executeQuery();
+//            while (rs.next()) {
+//                list.add(new Phim(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getInt(11),rs.getString(12),rs.getString(13)));
+//
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(PhimDao.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+////        list = list.stream().distinct().collect(Collectors.toList());
+//        return list;
+//    }
 
     public void Insert(Phim p) {
         try {
