@@ -8,16 +8,19 @@ import com.demo.DAO.HoaDonDao;
 import com.demo.model.HoaDon;
 import com.raven.DAO.ConnectDB;
 import com.raven.DAO.VeDao;
+import com.raven.main.Main;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Daokh
  */
-public class Form_QLVeOnline extends javax.swing.JPanel {
+public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable{
 
     /**
      * Creates new form Form_QLVeOnline
@@ -25,20 +28,25 @@ public class Form_QLVeOnline extends javax.swing.JPanel {
     List<Object[]> list;
     VeDao dao;
     HoaDonDao daoHD;
+
     public Form_QLVeOnline() {
         initComponents();
         dao = new VeDao();
         daoHD = new HoaDonDao();
         list = dao.SelectVeOnline();
         FillToTable();
+        Thread t = new Thread(this);
+        t.start();
     }
-    void FillToTable(){
+
+    void FillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblVe.getModel();
         model.setRowCount(0);
-        list.forEach(s->{
+        list.forEach(s -> {
             model.addRow(s);
         });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,10 +122,10 @@ public class Form_QLVeOnline extends javax.swing.JPanel {
 
     private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
         // TODO add your handling code here:
-                String a = UUID.randomUUID().toString();
+        String a = UUID.randomUUID().toString();
         int idve = (int) list.get(tblVe.getSelectedRow())[0];
-        double gia =  (double) list.get(tblVe.getSelectedRow())[4];
-        daoHD.Insert(new HoaDon(a, idve, java.time.LocalDate.now() + "",gia));
+        double gia = (double) list.get(tblVe.getSelectedRow())[4];
+        daoHD.Insert(new HoaDon(a, idve, java.time.LocalDate.now() + "", gia));
         Hashtable map = new Hashtable();
         map.put("maHD", a);
         ConnectDB.inHoaDon(map);
@@ -131,4 +139,22 @@ public class Form_QLVeOnline extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblVe;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        while (true) {            
+            try {
+                if(list.size() !=dao.SelectVeOnline().size()){
+                    Main.mainF.removeAll();
+                    Main.mainF.add(new Form_QLVeOnline());
+                    Main.mainF.repaint();
+                    Main.mainF.revalidate();
+                    break;
+                }
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }

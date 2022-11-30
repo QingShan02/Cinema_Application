@@ -45,14 +45,17 @@ public class ConnectDB {
     }
     public static void inHoaDon(Hashtable HoaDon){
         try {
+            Class.forName("org.apache.batik.dom.svg.SVGDocumentFactory");
             File path = new File("src/main/java/com/demo/form/hoadon.jrxml");
             JasperDesign jdesign = JRXmlLoader.load(path.getAbsoluteFile());
             JasperReport rpt = JasperCompileManager.compileReport(jdesign);
             JasperPrint jprint = JasperFillManager.fillReport(rpt, HoaDon, con);
-            JasperViewer.viewReport(jprint);
+//            JasperViewer.viewReport(jprint);
             
             JasperPrintManager.printReport(jprint, false);
         } catch (JRException ex) {
+            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         
