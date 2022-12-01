@@ -240,6 +240,7 @@ public class TablePhim extends javax.swing.JPanel {
             tt.setStt_xc(stt_xc);
             System.out.println(sttn);
             writeObj("temp.txt", tt);
+        System.out.println("hehe:"+stt_xc);
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
@@ -249,7 +250,7 @@ public class TablePhim extends javax.swing.JPanel {
             Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
         }
         Main.mainF.removeAll();
-        Main.mainF.add(new Form_ChoNgoi(maPhim,gioBatDau));
+        Main.mainF.add(new Form_ChoNgoi(stt_xc));
         Main.mainF.repaint();
         Main.mainF.revalidate();
     }//GEN-LAST:event_formMouseClicked

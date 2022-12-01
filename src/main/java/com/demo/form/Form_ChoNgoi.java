@@ -55,7 +55,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     PhongDao daoPhong;
     String maPhongChieu, maPhimChieu;
     List<ChiTietGhe> listT = new ArrayList<>();
-    String maphim, gio;
+    int stt_xc;
 
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
@@ -77,15 +77,15 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     Thread t;
     //Cái này mới sử dụng cái này
 
-
-    public Form_ChoNgoi(String maphim, String gio) {
+    public Form_ChoNgoi(int stt_xc) {
         initComponents();
         daoGhe = new GheDao();
-        this.maphim = maphim;
-        this.gio = gio;
+//        this.maphim = maphim;
+//        this.gio = gio;
         daoPhong = new PhongDao();
-        listGheCV = daoPhong.Selectghecove(maphim, gio);
-        System.out.println(">>>" + gio);
+        this.stt_xc = stt_xc;
+        listGheCV = daoPhong.Selectghecove(stt_xc);
+//        System.out.println(">>>" + gio);
         SoVe = listGheCV.stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size();
 
         SodoGhe();
@@ -430,9 +430,9 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     public void run() {
         while (true) {
             try {
-                if (SoVe != daoPhong.Selectghecove(maphim, gio).stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size()) {
+                if (SoVe != daoPhong.Selectghecove(stt_xc).stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size()) {
                     Main.mainF.removeAll();
-                    Main.mainF.add(new Form_ChoNgoi(maphim, gio));
+                    Main.mainF.add(new Form_ChoNgoi(stt_xc));
                     Main.mainF.repaint();
                     Main.mainF.revalidate();
                     break;
