@@ -4,18 +4,9 @@
  */
 package com.raven.main;
 
-import com.demo.form.Form_ChonChiNhanh;
 import com.demo.form.Form_Loading;
 import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.raven.DAO.NguoiDungDao;
-import com.raven.model.NguoiDung;
 import com.raven.model.ThanhToan;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 /**
@@ -26,6 +17,9 @@ public class RunMain {
 
     public static void main(String[] args) {
         try {
+            ThanhToan tt = (ThanhToan) Main.readObj("temp.txt");
+            tt.setListTopping(null);
+            DangNhap.writeObj("temp.txt", tt);
             FlatDarculaLaf.setup();
             UIManager.put("Button.arc", 999);
             UIManager.put("Component.arc", 999);
