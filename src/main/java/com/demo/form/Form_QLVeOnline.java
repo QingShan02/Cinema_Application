@@ -64,13 +64,13 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable{
 
         tblVe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID Vé", "Tên Khách Hàng", "Tên Phim", "Thông Tin Ghế", "Giá", "Topping"
+                "ID Vé", "Tên Khách Hàng", "Tên Phim", "Thông Tin Ghế", "Ngày Chiếu", "Giá", "Topping", "Số lượng"
             }
         ));
         jScrollPane1.setViewportView(tblVe);

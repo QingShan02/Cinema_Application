@@ -71,7 +71,7 @@ public class TablePhim extends javax.swing.JPanel {
     public ImageIcon resizeImage(String path) {
         URL temp= null;
         try {
-            System.out.println(path);
+//            System.out.println(path);
             temp = new URL(path);
         } catch (MalformedURLException ex) {
             Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);

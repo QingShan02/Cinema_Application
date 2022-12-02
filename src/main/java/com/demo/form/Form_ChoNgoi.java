@@ -94,6 +94,16 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
 
     }
 
+    public void SetOpenButton(Model_Ghe t, boolean check) {
+        lModelGhe.stream().forEach(s -> {
+            if (!t.equals(s)) {
+                s.setEnabled(check);
+            }
+        });
+        Sodochongoi3.repaint();
+        Sodochongoi3.revalidate();
+    }
+
     public void SodoGhe() {
         List = listGheCV.stream().limit(96).collect(Collectors.toList());
         for (ChiTietGhe s : List) {
@@ -113,11 +123,12 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                         try {
                             ThanhToan tt = (ThanhToan) readObj("temp.txt");
                             tt.setMaCTGhe(s.getMaCTGhe());
-//                        tt.setMaPhong(maPhongChieu);
-//                        tt.setMaPhim(maPhimChieu);
+                            tt.setGiaGhe(s.getGia());
+                            SetOpenButton(ghe, false);
                             tt.setMaGhe(s.getMaGhe());
                             new PrintWriter("temp.txt").close();
                             writeObj("temp.txt", tt);
+                            lblGiaGhe.setText(lblGiaGhe.getText() + s.getGia());
                             System.out.println(tt.getMaPhong());
                         } catch (IOException ex) {
                             Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,6 +141,10 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                             } else {
                                 e.getComponent().setBackground(Color.GREEN);
                             }
+//                                new PrintWriter("temp.txt").close();
+                            lblGiaGhe.setText("Giá:");
+                            SetOpenButton(ghe, true);
+
                         } else {
                             e.getComponent().setBackground(Color.YELLOW);
                         }
@@ -181,54 +196,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
 
             }
         }
-////        if (listGheCV.size() == 96 || listGheCV.size() == 110) {
-////            btnNext.setEnabled(false);
-////        }
-//        for (ChiTietGhe g : listGheCV) {
-//            if (g.getIdVe() != 0) {
-//                ghe.setBackground(Color.GRAY);
-//            }
-//        }
-//        for (int i = 0; i < ListGhe.size(); i++) {
-//            ChiTietGhe s = ListGhe.get(i);
-//            ghe = lModelGhe.get(i);
-//            if (!ghe.getBackground().equals(Color.GRAY)) {
-//                ghe.addMouseListener(new MouseAdapter() {
-//                    @Override
-//                    public void mouseClicked(MouseEvent e) {
-//
-//                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-//                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-//                                e.getComponent().setBackground(Color.PINK);
-//                                lblGiaGhe.setText("Giá:");
-//                            } else {
-//                                e.getComponent().setBackground(Color.GREEN);
-//                                lblGiaGhe.setText("Giá:");
-//                            }
-//                        } else {
-//                            
-//                            try {
-//                                ThanhToan tt = (ThanhToan) readObj("temp.txt");
-//                                tt.setMaCTGhe(s.getMaCTGhe());
-//                                tt.setMaGhe(s.getMaGhe());
-//                                tt.setGiaGhe(s.getGia());
-//                                new PrintWriter("temp.txt").close();
-//                                writeObj("temp.txt", tt);
-//
-//                            } catch (IOException ex) {
-//                                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-//                            } catch (ClassNotFoundException ex) {
-//                                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-//                            }
-//                            e.getComponent().setBackground(Color.YELLOW);
-//                            lblGiaGhe.setText(lblGiaGhe.getText()+" "+s.getGia()+" VND");
-//                        }
-//                    }
-//
-//                });
-//            }
-//
-//        }
+
         Sodochongoivip.repaint();
         Sodochongoivip.revalidate();
         Sodochongoi3.repaint();

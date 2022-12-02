@@ -51,7 +51,6 @@ public class ConnectDB {
             JasperReport rpt = JasperCompileManager.compileReport(jdesign);
             JasperPrint jprint = JasperFillManager.fillReport(rpt, HoaDon, con);
 //            JasperViewer.viewReport(jprint);
-            
             JasperPrintManager.printReport(jprint, false);
         } catch (JRException ex) {
             Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
