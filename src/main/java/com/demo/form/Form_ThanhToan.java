@@ -323,13 +323,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        CreateAndOpenPDFFile();
-//        int min = 100000000;
-//        int max = 999999999;
 
-        //Generate random int value from 50 to 100 
-//      System.out.println("Random value in int from "+min+" to "+max+ ":");
-//        int random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
         String a = UUID.randomUUID().toString();
         System.out.println(a);
         daoHD.Insert(new HoaDon(a, daoVe.findMaxId(), java.time.LocalDate.now() + "", tt.getGiaGhe() * 1.05 + temp));
