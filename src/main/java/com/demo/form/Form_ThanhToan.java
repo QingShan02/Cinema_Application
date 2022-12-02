@@ -11,18 +11,14 @@ import com.raven.DAO.GheDao;
 import com.raven.DAO.NgayChieuDao;
 import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
-import com.raven.DAO.ToppingDao;
 import com.raven.DAO.VeDao;
+import com.raven.main.DangNhap;
 import com.raven.main.Main;
-import com.raven.model.ChiTietTopping;
-import com.raven.model.Model_ChonTopping;
-import com.raven.model.Model_ChonTopping1;
 import com.raven.model.ThanhToan;
 import com.raven.model.Topping;
 import com.raven.model.Ve;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Date;
@@ -31,17 +27,9 @@ import java.util.logging.Logger;
 //import com.itextpdf.text.Document;
 //import com.itextpdf.text.Paragraph;
 //import com.itextpdf.text.pdf.PdfWriter;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Map;
+import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -74,6 +62,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         FillTenPhim();
         FillGhe();
         FillGia();
+        fillTopping();
 //        FillTopping();
     }
 
@@ -113,6 +102,22 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     }
     ThanhToan tt;
     double temp = 0;
+
+    public void fillTopping() {
+        try {
+            List<Topping> tpList = tt.getListTopping();
+            String topping = "";
+            for (Topping tp : tpList) {
+
+                topping += (tp.getTenTopping() + " :" + tp.getSoLuongMua() + " x" + tp.getGia() + " = " + tp.getGia() * tp.getSoLuongMua() + "\n");
+
+            }
+            lbTopping.setText(topping);
+            System.out.println(topping);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void fillThanhToan() {
         try {
@@ -157,6 +162,10 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
         lblTenPhim = new javax.swing.JLabel();
@@ -171,7 +180,19 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         lblTenPhim1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lbTopping = new javax.swing.JTextArea();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -196,7 +217,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         lblTenGhe.setText("G12");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("Công ty TNHH CGV");
+        jLabel8.setText("Công ty TNHH T1 Cinema");
 
         lblTenPhong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTenPhong.setText("BCC");
@@ -221,30 +242,22 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         lblTenPhim1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTenPhim1.setText("Topping");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new java.awt.GridLayout(5, 1));
+        lbTopping.setEditable(false);
+        lbTopping.setColumns(20);
+        lbTopping.setRows(5);
+        jScrollPane4.setViewportView(lbTopping);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel8))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblTenPhim1)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,7 +273,17 @@ public class Form_ThanhToan extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblTenGhe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel8))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblTenPhim1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -284,10 +307,10 @@ public class Form_ThanhToan extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTenPhim1)
+                .addComponent(lblTenPhim1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jButton1))
@@ -318,6 +341,13 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         Main.mainF.add(new Form_Home());
         Main.mainF.repaint();
         Main.mainF.revalidate();
+        try {
+            ThanhToan tt = (ThanhToan) Main.readObj("temp.txt");
+            tt.setListTopping(null);
+            DangNhap.writeObj("temp.txt", tt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 //    private void CreateAndOpenPDFFile() {
@@ -350,8 +380,13 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextArea lbTopping;
     private javax.swing.JLabel lblGia;
     private javax.swing.JLabel lblTenGhe;
     private javax.swing.JLabel lblTenPhim;
