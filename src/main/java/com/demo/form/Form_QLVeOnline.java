@@ -9,18 +9,24 @@ import com.demo.model.HoaDon;
 import com.raven.DAO.ConnectDB;
 import com.raven.DAO.VeDao;
 import com.raven.main.Main;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Daokh
  */
-public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable{
+public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
 
     /**
      * Creates new form Form_QLVeOnline
@@ -28,6 +34,8 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable{
     List<Object[]> list;
     VeDao dao;
     HoaDonDao daoHD;
+    DataInputStream din;
+    DataOutputStream dout;
 
     public Form_QLVeOnline() {
         initComponents();
@@ -35,8 +43,7 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable{
         daoHD = new HoaDonDao();
         list = dao.SelectVeOnline();
         FillToTable();
-        Thread t = new Thread(this);
-        t.start();
+
     }
 
     void FillToTable() {
@@ -75,9 +82,26 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable{
         ));
         jScrollPane1.setViewportView(tblVe);
 
-        jTextField1.setText("jTextField1");
+        jTextField1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jTextField1HierarchyChanged(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnXuatHoaDon.setText("Xuất hóa đơn");
         btnXuatHoaDon.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +155,47 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable{
         ConnectDB.inHoaDon(map);
     }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ServerSocket ss;
+        try {
+            ss = new ServerSocket(3333);
+            Thread t = new Thread(this);
+            t.start();
+            System.out.println("1");
+            opencv op = new opencv();
+            System.out.println("2");
+            Socket s = ss.accept();
+            System.out.println("3");
+            din = new DataInputStream(s.getInputStream());
+            dout = new DataOutputStream(s.getOutputStream());
+
+            op.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        tblVe.clearSelection();
+    }//GEN-LAST:event_jTextField1KeyPressed
+    String temp = "";
+    private void jTextField1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jTextField1HierarchyChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTextField1HierarchyChanged
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        temp = jTextField1.getText();
+        for (int i = 0; i < list.size(); i++) {
+            if ((int) list.get(i)[0] == Integer.parseInt(temp)) {
+                tblVe.setRowSelectionInterval(i, i);
+            }
+        }
+    }//GEN-LAST:event_jTextField1KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnXuatHoaDon;
@@ -142,16 +207,31 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable{
 
     @Override
     public void run() {
-        while (true) {            
+        while (true) {
             try {
-                if(list.size() !=dao.SelectVeOnline().size()){
-                    Main.mainF.removeAll();
-                    Main.mainF.add(new Form_QLVeOnline());
-                    Main.mainF.repaint();
-                    Main.mainF.revalidate();
-                    break;
+                if (din != null) {
+                    if (din.readUTF() != "") {
+                        System.out.println("" + din.readUTF());
+                        jTextField1.setText(din.readUTF());
+                        break;
+                    }
+                    System.out.println(">>" + din.readUTF());
                 }
+                System.out.println("hehe");
+//            try {
+//                if (list.size() != dao.SelectVeOnline().size()) {
+//                    Main.mainF.removeAll();
+//                    Main.mainF.add(new Form_QLVeOnline());
+//                    Main.mainF.repaint();
+//                    Main.mainF.revalidate();
+//                    break;
+//                }
                 Thread.sleep(100);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            } catch (IOException ex) {
+                Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
             }
