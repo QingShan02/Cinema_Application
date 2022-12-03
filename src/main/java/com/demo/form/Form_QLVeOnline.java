@@ -34,6 +34,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -112,7 +113,19 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable, Thr
         ));
         jScrollPane1.setViewportView(tblVe);
 
-        jTextField1.setText("jTextField1");
+        jTextField1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jTextField1HierarchyChanged(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +189,26 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable, Thr
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       initWebcam();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        tblVe.clearSelection();
+    }//GEN-LAST:event_jTextField1KeyPressed
+    String temp = "";
+    private void jTextField1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jTextField1HierarchyChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTextField1HierarchyChanged
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        temp = jTextField1.getText();
+        for (int i = 0; i < list.size(); i++) {
+            if ((int) list.get(i)[0] == Integer.parseInt(temp)) {
+                tblVe.setRowSelectionInterval(i, i);
+            }
+        }
+    }//GEN-LAST:event_jTextField1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

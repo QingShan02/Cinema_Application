@@ -47,7 +47,7 @@ public class VeDao {
             pst.setInt(5, v.getStt_xc());
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Calendar cal = Calendar.getInstance();
-            pst.setString(4,dateFormat.format(cal.getTime()));
+            pst.setString(4, dateFormat.format(cal.getTime()));
             int kq = pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(VeDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,7 +80,6 @@ public class VeDao {
 //        }
 //        return list;
 //    }
-
     public void Update(double TongGiaVe, double ThueVAT, int MaKH, int MaCTGhe, String MaNV, int IdVe) {
         try {
             PreparedStatement st = con.prepareStatement("update Ve set GiaVe = ?, ThueVAT = ?, MaKH = ?, MaCTGhe = ?, MaNV = ? where IdVe =?");
@@ -106,14 +105,30 @@ public class VeDao {
         }
     }
 
-    public List<Ve> ThongKeNgay(String macn) {
-        List<Ve> list = new ArrayList();
+    public List<Ve> TONGVEDT() {
+        List<Ve> list = new ArrayList<>();
         try {
-            pst = con.prepareCall("{ call thongKetheongay(?)}");
-            pst.setString(1, macn);
+            pst = con.prepareStatement("select count(idve),sum(giave) from ve v join xuatchieu xc on xc.stt = v.stt_xc join ngaychieu nc on nc.stt = xc.ngay join PhongChieu pc on xc.maPhong = pc.maPhong "
+                    + "Join ChiNhanh cn on cn.maCn = pc.macn where cn.maCN = ?");
+            pst.setString(1, Main.maCN);
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Ve(rs.getDate(1),rs.getInt(2), rs.getDouble(3)));
+                list.add(new Ve(rs.getInt(1), rs.getDouble(2)));
+            }
+        } catch (Exception e) {
+            Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
+
+    public List<Ve> PhimHot() {
+        List<Ve> list = new ArrayList();
+        try {
+            pst = con.prepareCall("{ call PhimHot(?)}");
+            pst.setString(1, Main.maCN);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Ve(rs.getInt(1), rs.getString(2)));
 
             }
         } catch (SQLException ex) {
@@ -122,29 +137,48 @@ public class VeDao {
         }
         return list;
     }
-     public List<Ve> ThongKeThang() {
+
+    public List<Ve> DoanhThutheoNgay() {
         List<Ve> list = new ArrayList();
         try {
-            pst = con.prepareCall("{ call thongKetheoThang()}");
+            pst = con.prepareCall("{ call DoanhThutheoNgay(?)}");
+            pst.setString(1, Main.maCN);
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Ve(rs.getInt(1), rs.getDouble(2), rs.getInt(3)));
+                list.add(new Ve(rs.getDouble(1), rs.getString(2)));
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
         return list;
     }
-        public List<Object[]> SelectVeOnline() {
+
+    public List<Ve> DoanhThutheoThang() {
+        List<Ve> list = new ArrayList();
+        try {
+            pst = con.prepareCall("{ call DoanhThutheoThang(?)}");
+            pst.setString(1, Main.maCN);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Ve(rs.getDouble(1), rs.getString(2)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return list;
+    }
+
+    public List<Object[]> SelectVeOnline() {
         List<Object[]> list = new ArrayList();
         try {
             pst = con.prepareCall("{ call SelectVeOnline(?)}");
             pst.setString(1, Main.maCN);
-            
+
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Object[]{rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getDouble(6)});
+                list.add(new Object[]{rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getDouble(6),rs.getString(7),rs.getInt(8)});
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);

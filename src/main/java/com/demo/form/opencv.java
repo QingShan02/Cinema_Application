@@ -40,17 +40,17 @@ public class opencv extends javax.swing.JFrame implements Runnable, ThreadFactor
     private Executor executor = Executors.newSingleThreadExecutor(this);
     DataInputStream din;
     DataOutputStream dout;
+
     public opencv() throws IOException {
         initComponents();
 //        System.load("C:\\Users\\kien\\Desktop\\app\\opencv\\build\\java\\x64\\opencv_java460.dll");
-                Socket s = new Socket("localhost", 3333);
+        Socket s = new Socket("localhost", 3333);
         din = new DataInputStream(s.getInputStream());
         dout = new DataOutputStream(s.getOutputStream());
         initWebcam();
-
+        System.out.println(">>"+result_field.getText());
     }
     
-
     private void initWebcam() {
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(1);
@@ -61,9 +61,9 @@ public class opencv extends javax.swing.JFrame implements Runnable, ThreadFactor
         panel.setFPSDisplayed(true);
 //        jPanel2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
         executor.execute(this);
-
+        
     }
-
+    Result result = null;
     @Override
     public void run() {
         do {
@@ -72,7 +72,7 @@ public class opencv extends javax.swing.JFrame implements Runnable, ThreadFactor
             } catch (InterruptedException ex) {
                 Logger.getLogger(opencv.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Result result = null;
+            
             BufferedImage image = null;
             if (webcam.isOpen()) {
                 if ((image = webcam.getImage()) == null) {
@@ -89,18 +89,19 @@ public class opencv extends javax.swing.JFrame implements Runnable, ThreadFactor
             if (result != null) {
                 try {
                     dout.writeUTF(result.getText());
-                    System.out.println(""+result);
-                    this.dispose();
-                    break;
-                    
                 } catch (IOException ex) {
                     Logger.getLogger(opencv.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                webcam.close();
+                result_field.setText(result.getText());
+                System.out.println("" + result);
+//                this.dispose();
+                break;
             }
 //            if(result_field != null){
 //                this.dispose();
 //            }
-        } while (true);
+        } while (result==null);
     }
 
 //@Override
