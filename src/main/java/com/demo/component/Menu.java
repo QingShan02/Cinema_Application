@@ -79,7 +79,7 @@ public class Menu extends javax.swing.JPanel {
             .addGroup(panelMovingLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(Riseofkingdom)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         panelMovingLayout.setVerticalGroup(
             panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,7 +101,7 @@ public class Menu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelMoving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
-                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE))
+                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     private Form_Home home;
