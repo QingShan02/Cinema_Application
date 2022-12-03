@@ -6,9 +6,21 @@ package com.demo.form;
 
 import com.demo.DAO.HoaDonDao;
 import com.demo.model.HoaDon;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import com.raven.DAO.ConnectDB;
 import com.raven.DAO.VeDao;
 import com.raven.main.Main;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -17,6 +29,9 @@ import java.net.Socket;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -25,7 +40,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Daokh
  */
-public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
+public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable, ThreadFactory {
 
     /**
      * Creates new form Form_QLVeOnline
@@ -33,8 +48,12 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
     List<Object[]> list;
     VeDao dao;
     HoaDonDao daoHD;
-    DataInputStream din;
-    DataOutputStream dout;
+//    DataInputStream din;
+//    DataOutputStream dout;
+    public String a = null;
+    private WebcamPanel panel = null;
+    private Webcam webcam = null;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
 
     public Form_QLVeOnline() {
         initComponents();
@@ -42,6 +61,18 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
         daoHD = new HoaDonDao();
         list = dao.SelectVeOnline();
         FillToTable();
+
+    }
+
+    private void initWebcam() {
+        Dimension size = WebcamResolution.QVGA.getSize();
+        webcam = Webcam.getWebcams().get(1);
+        System.out.println(Webcam.getWebcams().size());
+        webcam.setViewSize(size);
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+        executor.execute(this);
 
     }
 
@@ -143,24 +174,7 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
     }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ServerSocket ss;
-        try {
-            ss = new ServerSocket(3333);
-            Thread t = new Thread(this);
-            t.start();
-            System.out.println("1");
-            opencv op = new opencv();
-            System.out.println("2");
-            Socket s = ss.accept();
-            System.out.println("3");
-            din = new DataInputStream(s.getInputStream());
-            dout = new DataOutputStream(s.getOutputStream());
-
-            op.show();
-
-        } catch (IOException ex) {
-            Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      initWebcam();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -173,35 +187,45 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
     // End of variables declaration//GEN-END:variables
 
     @Override
+    public Thread newThread(Runnable r) {
+        Thread t = new Thread(r, "My Thread");
+        t.setDaemon(true);
+        return t;
+    }
+
+    @Override
     public void run() {
-        while (true) {
+        do {
             try {
-                if (din != null) {
-                    if (din.readUTF() != "") {
-                        System.out.println("" + din.readUTF());
-                        jTextField1.setText(din.readUTF());
-                        break;
-                    }
-                    System.out.println(">>" + din.readUTF());
-                }
-                System.out.println("hehe");
-//            try {
-//                if (list.size() != dao.SelectVeOnline().size()) {
-//                    Main.mainF.removeAll();
-//                    Main.mainF.add(new Form_QLVeOnline());
-//                    Main.mainF.repaint();
-//                    Main.mainF.revalidate();
-//                    break;
-//                }
                 Thread.sleep(100);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-            } catch (IOException ex) {
-                Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(opencv.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+            Result result = null;
+            BufferedImage image = null;
+            if (webcam.isOpen()) {
+                if ((image = webcam.getImage()) == null) {
+                    continue;
+                }
+            }
+            LuminanceSource source = new BufferedImageLuminanceSource(image);
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+            try {
+                result = new MultiFormatReader().decode(bitmap);
+            } catch (NotFoundException ex) {
+                Logger.getLogger(opencv.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("" + result);
+            if (result != null) {
+                a = result.getText();
+                System.out.println("" + a);
+                for (String w : a.split("/", 0)) {
+                    System.out.println(w);
+                }
+                jTextField1.setText(a.split("/")[5]);
+
+                break;
+            }
+        } while (true);
     }
 }
