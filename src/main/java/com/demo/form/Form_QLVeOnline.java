@@ -161,11 +161,8 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
             ss = new ServerSocket(3333);
             Thread t = new Thread(this);
             t.start();
-            System.out.println("1");
             opencv op = new opencv();
-            System.out.println("2");
             Socket s = ss.accept();
-            System.out.println("3");
             din = new DataInputStream(s.getInputStream());
             dout = new DataOutputStream(s.getOutputStream());
 
