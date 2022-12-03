@@ -62,6 +62,7 @@ public class Form_CSVC extends javax.swing.JPanel {
         tblModel = (DefaultTableModel) tblCoSoVatChat.getModel();
         csvc_list = csvcDAO.SelectAll();
         tblModel.setRowCount(0);
+        System.out.println(csvc_list.size());
         csvc_list.stream().forEach(c -> {
             Object[] row = new Object[]{c.getTencn(), c.getTenphong(), c.getTencsvc(), c.getSoluong()};
             tblModel.addRow(row);

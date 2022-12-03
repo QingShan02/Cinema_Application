@@ -101,7 +101,7 @@ public class CoSoVatChatDao {
                 a.add(new CoSoVatChat(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CoSoVatChatDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.print(ex);
         }
         return a;
     }
