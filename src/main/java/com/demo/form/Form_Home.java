@@ -31,7 +31,7 @@ public class Form_Home extends javax.swing.JPanel {
         daoNC = new NgayChieuDao();
         System.out.println(Main.maCN);
         listXC = daoNC.SelectGio(Main.maCN);
-//        System.out.println(listXC.size());
+        System.out.println(listXC.size());
 //        cn = new Form_ChoNgoi();
         JPanel panel;
         for (NgayChieu nc : listXC) {

@@ -87,7 +87,7 @@ public class Form_Loading extends javax.swing.JFrame implements Runnable {
                 }
                 i += 5;
                 pgbChao.setValue(i);
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
