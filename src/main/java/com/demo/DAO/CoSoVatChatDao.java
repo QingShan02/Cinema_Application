@@ -92,37 +92,37 @@ public class CoSoVatChatDao {
     }
     
     public List<CoSoVatChat> SelectAll(String maCN) {
-        List<CoSoVatChat> a = new ArrayList<>();
+        List<CoSoVatChat> csvcList = new ArrayList<>();
         try {
             PreparedStatement pt = con.prepareCall("{ call SelectCSVC(? :: text)}");
             pt.setString(1, maCN);
             rs = pt.executeQuery();
             while (rs.next()) {
-                System.out.println(rs.getString(1)+","+rs.getString(2));
-                a.add(new CoSoVatChat(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+                csvcList.add(new CoSoVatChat(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6)));
             }
         } catch (SQLException ex) {
-            System.err.print(ex);
+            Logger.getLogger(CoSoVatChatDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return a;
+        return csvcList;
     }
     
-    public void InsertCTCSVC(String macn, String maphong, int soluong) {
+    public void InsertCTCSVC(String macn, String maphong, int soluong, int trangthai) {
         try {
-            pst = con.prepareStatement("insert into ct_csvc values(?, ?, ?)");
+            pst = con.prepareStatement("insert into ct_csvc values(?, ?, ?, ? :: bit)");
             pst.setString(1, macn);
             pst.setString(2, maphong);
             pst.setInt(3, soluong);
+            pst.setInt(4, trangthai);
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CoSoVatChatDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void UpdateCTCSVC(String macsvc, String maphong, int soluong) throws SQLException {
-        PreparedStatement st = con.prepareStatement("update ct_csvc set maphong = ?, soluong = ?  where macsvc =?");
-        st.setString(1, maphong);
-        st.setInt(2, soluong);
+    public void UpdateCTCSVC(String macsvc, String maphong, int soluong, int trangthai) throws SQLException {
+        PreparedStatement st = con.prepareStatement("update ct_csvc set soluong = ?, trangthai = ? :: bit  where macsvc =?");
+        st.setInt(1, soluong);
+        st.setInt(2, trangthai);
         st.setString(3, macsvc);
         st.executeUpdate();
     }
