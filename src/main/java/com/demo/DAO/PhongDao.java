@@ -57,6 +57,7 @@ public class PhongDao {
     public PhongChieu SelectPhong(String MaPhim, int Ngay){
         PhongChieu phg = null;
         try {
+            System.out.println(">>"+MaPhim+","+Ngay);
             pst = con.prepareStatement("select x.MaPhong,TenPhong from XuatChieu x join PhongChieu p on p.MaPhong = x.MaPhong where MaPhim = ? and x.Ngay = ?");
             pst.setString(1, MaPhim);
 //            pst.setDate(2,java.sql.Date.valueOf(NgayChieu));
@@ -87,20 +88,21 @@ public class PhongDao {
             e.printStackTrace();
         }
     }
-    public List<ChiTietGhe> Selectghecove(int sttngay){
+    public List<ChiTietGhe> Selectghecove(int stt_xc){
         List<ChiTietGhe> list = new ArrayList<>();
         try {
             pst = con.prepareCall("{ call Selectghecove(?)}");
-//            pst.setString(1, maPhim);
-            pst.setInt(1, sttngay);
-//            pst.setString(3, gioBatDau);
+            pst.setInt(1, stt_xc);
+//            pst.setInt(1, sttngay);
+//            pst.setString(2, gioBatDau);
+//            pst.setString(3, );
             rs = pst.executeQuery();
             while (rs.next()) {
                 list.add(new ChiTietGhe(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getInt(4), rs.getFloat(5), rs.getInt(6)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
-           
+            System.out.println("size:"+list.size());
 
         }
         return list;

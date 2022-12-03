@@ -41,14 +41,15 @@ public class Menu extends javax.swing.JPanel {
     private void init() {
         System.out.println(listMenu1.getParent().getParent());
 
-        listMenu1.addItem(new Model_Menu("5", "Trang chủ", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("1", "Trang chủ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("2", "Quản lý CSVC", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("3", "Quản lý TOPPING", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("1", "Thống Kê", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("3", "Vé Online", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("4", "Quản lý TOPPING", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("5", "Thống Kê", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("6", "Người dùng", Model_Menu.MenuType.TITLE));
-        listMenu1.addItem(new Model_Menu("9", "Cài Đặt", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("7", "Đổi mật khẩu", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("8", "Đăng xuất", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("7", "Cài Đặt", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("8", "Đổi mật khẩu", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("9", "Đăng xuất", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("10", "Thoát", Model_Menu.MenuType.MENU));
     }
 
@@ -64,7 +65,7 @@ public class Menu extends javax.swing.JPanel {
 
         Riseofkingdom.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         Riseofkingdom.setForeground(new java.awt.Color(255, 255, 255));
-        Riseofkingdom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/minh.png"))); // NOI18N
+        Riseofkingdom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logo2.png"))); // NOI18N
         Riseofkingdom.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RiseofkingdomMouseClicked(evt);
@@ -78,7 +79,7 @@ public class Menu extends javax.swing.JPanel {
             .addGroup(panelMovingLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(Riseofkingdom)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         panelMovingLayout.setVerticalGroup(
             panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +101,7 @@ public class Menu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelMoving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
-                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE))
+                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     private Form_Home home;

@@ -17,6 +17,8 @@ import com.raven.model.ThanhToan;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -42,33 +44,40 @@ public class TablePhim extends javax.swing.JPanel {
     List<NgayChieu> ngaychieu = new ArrayList<>();
     String maPhong, gioBatDau, maPhim;
     int sttn;
-
+    String url = "http://localhost:8484/Image/poster/";
     public TablePhim() {
         initComponents();
     }
-
-    public TablePhim(Phim p, int sttngay) {
+    int stt_xc =0;
+    public TablePhim(Phim p,int sttngay, String gio) {
         initComponents();
         daoXC = new XuatChieuDao();
+        this.sttn = sttngay;
+        this.stt_xc = p.getStt_xc();
         lblTenPhim.setText(p.getTenPhim());
         lblDV.setText(p.getDienVien());
         lblDD.setText(p.getDaoDien());
         lblQG.setText(p.getQuocGia());
         lblTL.setText(p.getThoiLuong());
         lblNSX.setText(String.valueOf(p.getNamSX()));
-        lblHinh.setIcon(resizeImage("src/main/resources/poster/" + p.getHinh()));
+        lblHinh.setIcon(resizeImage(url + p.getHinh()));
+        lblPhong.setText(p.getTenphong());
         maPhong = daoXC.SelectMaPhong(p.getMaPhim(), sttngay);
-        sttn = sttngay;
 //        gioBatDau = gioBatDauChieu;
         maPhim = p.getMaPhim();
-        System.out.println(maPhong);
-        System.out.println(maPhim);
-        System.out.println(sttn);
-        System.out.println(gioBatDau);
+        gioBatDau = gio;
     }
 
     public ImageIcon resizeImage(String path) {
-        ImageIcon ii = new ImageIcon(path);
+        URL temp= null;
+        try {
+//            System.out.println(path);
+            temp = new URL(path);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ImageIcon ii = new ImageIcon(temp);
+        
         ImageIcon imageIcon = new ImageIcon(ii.getImage().getScaledInstance(150, 300, java.awt.Image.SCALE_SMOOTH));
         return imageIcon;
     }
@@ -94,6 +103,8 @@ public class TablePhim extends javax.swing.JPanel {
         lblQG = new javax.swing.JLabel();
         lblTL = new javax.swing.JLabel();
         lblNSX = new javax.swing.JLabel();
+        lblNamSX1 = new javax.swing.JLabel();
+        lblPhong = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,6 +153,12 @@ public class TablePhim extends javax.swing.JPanel {
         lblNSX.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblNSX.setForeground(new java.awt.Color(255, 255, 255));
 
+        lblNamSX1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNamSX1.setForeground(new java.awt.Color(255, 255, 255));
+        lblNamSX1.setText("Phòng:");
+
+        lblPhong.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,11 +184,13 @@ public class TablePhim extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblThoiLuong)
-                            .addComponent(lblNamSX))
+                            .addComponent(lblNamSX)
+                            .addComponent(lblNamSX1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblTL, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblNSX, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(lblPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -203,8 +222,12 @@ public class TablePhim extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNamSX)
-                            .addComponent(lblNSX))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                            .addComponent(lblNSX))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNamSX1)
+                            .addComponent(lblPhong))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -214,7 +237,10 @@ public class TablePhim extends javax.swing.JPanel {
             tt.setMaPhong(maPhong);
             tt.setMaPhim(maPhim);
             tt.setSTT(sttn);
+            tt.setStt_xc(stt_xc);
+            System.out.println(sttn);
             writeObj("temp.txt", tt);
+        System.out.println("hehe:"+stt_xc);
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
@@ -224,7 +250,7 @@ public class TablePhim extends javax.swing.JPanel {
             Logger.getLogger(TablePhim.class.getName()).log(Level.SEVERE, null, ex);
         }
         Main.mainF.removeAll();
-        Main.mainF.add(new Form_ChoNgoi(sttn));
+        Main.mainF.add(new Form_ChoNgoi(stt_xc));
         Main.mainF.repaint();
         Main.mainF.revalidate();
     }//GEN-LAST:event_formMouseClicked
@@ -238,6 +264,8 @@ public class TablePhim extends javax.swing.JPanel {
     private javax.swing.JLabel lblHinh;
     private javax.swing.JLabel lblNSX;
     private javax.swing.JLabel lblNamSX;
+    private javax.swing.JLabel lblNamSX1;
+    private javax.swing.JLabel lblPhong;
     private javax.swing.JLabel lblQG;
     private javax.swing.JLabel lblQuocGia;
     private javax.swing.JLabel lblTL;

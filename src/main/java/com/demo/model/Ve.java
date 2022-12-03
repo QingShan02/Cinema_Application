@@ -7,7 +7,7 @@ package com.raven.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import java.util.Date;
 /**
  *
  * @author Daokh
@@ -23,28 +23,38 @@ public class Ve {
     private int MaKH;
     private int MaCTGhe;
     private String MaNV;
+    private int stt_xc;
     private int TongSoVe;
+    private String Thang;
 
     
-    public Ve(double GiaVe, double ThueVAT, int MaCTGhe, String MaNV) {
+    public Ve(double GiaVe, double ThueVAT, int MaCTGhe, int stt_xc) {
         this.GiaVe = GiaVe;
         this.ThueVAT = ThueVAT;
         this.MaCTGhe = MaCTGhe;
-        this.MaNV = MaNV;
+        this.stt_xc = stt_xc;
     }
 
-    public Ve(int IdVe, double GiaVe, double ThueVAT, int MaKH, int MaCTGhe, String MaNV) {
-        this.IdVe = IdVe;
+    public Ve(double GiaVe, double ThueVAT, int MaKH, int MaCTGhe, int stt_xc) {
         this.GiaVe = GiaVe;
         this.ThueVAT = ThueVAT;
         this.MaKH = MaKH;
         this.MaCTGhe = MaCTGhe;
-        this.MaNV = MaNV;
+        this.stt_xc = stt_xc;
     }
     
     public Ve(int TongSoVe, double GiaVe) {
         this.TongSoVe = TongSoVe;
         this.GiaVe = GiaVe;
     }
+ public Ve(double GiaVe, String Thang){
+        this.GiaVe = GiaVe;
+        this.Thang = Thang;
+    }
 
+    public Ve(int TongSoVe, String Thang) {
+        this.TongSoVe = TongSoVe;
+        this.Thang = Thang;
+    }
+ 
 }

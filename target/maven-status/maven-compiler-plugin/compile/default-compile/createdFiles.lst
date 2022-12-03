@@ -3,6 +3,7 @@ com\raven\form\Form_XacThuc.class
 com\raven\sendEmail\EmailMain.class
 com\raven\DAO\GheDao.class
 com\raven\swing\Table$2.class
+com\demo\DAO\JasperReportFill.class
 com\raven\model\StatusType.class
 com\raven\main\Main$4.class
 com\raven\form\Form_XacThuc$3.class
@@ -15,6 +16,7 @@ com\raven\main\DangKy$5.class
 com\demo\form\Setting$8.class
 com\raven\form\Form_KhachHang$2.class
 com\raven\swing\ListMenu$3.class
+com\demo\DAO\DataBean.class
 com\raven\form\Form_QuanLyLichChieu$1.class
 com\demo\model\ChiNhanh.class
 com\raven\main\DangNhap$3.class
@@ -33,7 +35,10 @@ com\raven\form\Form_DoiMatKhau$7.class
 com\raven\main\DangNhap$4.class
 com\demo\form\Form_ChonChiNhanh$3.class
 com\raven\model\TheLoai.class
+<<<<<<< HEAD
 com\raven\form\Form_Phim$3.class
+=======
+>>>>>>> origin/master
 com\demo\form\TablePhim.class
 com\raven\model\Model_ChonTopping$1.class
 com\raven\swing\ListMenu.class
@@ -43,7 +48,10 @@ com\raven\form\Form_KhachHang$6.class
 com\raven\model\Topping.class
 com\demo\model\CoSoVatChat.class
 com\raven\form\Form_DoiMatKhau$2.class
+<<<<<<< HEAD
 com\raven\form\Form_Phim$2.class
+=======
+>>>>>>> origin/master
 com\demo\form\Form_CSVC$3.class
 com\raven\main\Main$MenuItemListener.class
 com\raven\form\Form_ThanhToan$1.class
@@ -69,20 +77,27 @@ com\raven\model\Model_Ghe$1.class
 com\raven\main\DangNhap$7.class
 com\raven\form\Form_DoiMatKhau$4.class
 com\raven\main\Main$2.class
+com\demo\form\Form_QLVeOnline.class
 com\raven\event\EventMenuSelected.class
 com\raven\model\ThanhToan.class
 com\raven\form\Form_KhachHang$7.class
+com\demo\DAO\HoaDonDao.class
 com\raven\form\Form_DoiMatKhau$5.class
+com\demo\form\Form_QLVeOnline$1.class
 com\raven\main\DangNhap$8.class
 com\demo\model\Model_CTopping$1.class
 com\raven\main\Main$3.class
 com\raven\swing\CellStatus.class
 com\raven\form\Form_XacThuc$2.class
 com\raven\model\Model_Card.class
+<<<<<<< HEAD
 com\raven\form\Form_Phim$6.class
+=======
+>>>>>>> origin/master
 com\raven\main\Main$7.class
 com\raven\DAO\TheLoaiDao.class
 com\raven\main\DangKy.class
+com\demo\model\HoaDon.class
 com\raven\DAO\XuatChieuDao.class
 com\raven\form\Form_KhachHang.class
 com\raven\main\DangKy$2.class
@@ -94,6 +109,7 @@ com\raven\DAO\ConnectDB.class
 com\demo\form\Setting$5.class
 com\raven\DAO\NguoiDungDao.class
 com\raven\form\Form_ChoNgoi$2.class
+com\demo\DAO\DataBeanList.class
 com\raven\form\Form_ThanhToan.class
 com\raven\form\Form_QuanLyLichChieu$4.class
 com\raven\form\Form_DoiMatKhau.class
@@ -102,21 +118,29 @@ com\raven\DAO\VeDao.class
 com\raven\main\Main$1.class
 com\demo\form\Form_CSVC$1.class
 com\raven\model\NguoiDung.class
+<<<<<<< HEAD
+=======
+com\demo\form\LineChartEx.class
+>>>>>>> origin/master
 com\raven\DAO\PhongDao.class
 com\raven\form\Form_DoiMatKhau$10.class
 com\demo\DAO\ChiNhanhDao.class
 com\demo\form\Setting.class
+<<<<<<< HEAD
+=======
+com\demo\form\Form_Loading.class
+>>>>>>> origin/master
 com\raven\form\Form_DoiMatKhau$3.class
 com\demo\DAO\CoSoVatChatDao.class
 com\raven\form\Form_ChonTopping$1.class
 com\raven\swing\MenuItem.class
+com\demo\form\LineChartNgay.class
+com\demo\form\LineChartNgay$1.class
 com\raven\sendEmail\CheckMail$1.class
 com\raven\swing\TableStatus.class
 com\raven\form\Form_ChonTopping.class
-com\raven\form\Form_Phim$1.class
 com\raven\swing\ModernScrollBarUI.class
 com\raven\form\Form_Topping$3.class
-com\raven\form\Form_Phim.class
 com\raven\swing\Table.class
 com\raven\model\Model_Phim.class
 com\raven\DAO\LoaiGheDao.class
@@ -126,6 +150,7 @@ com\raven\form\Form_ChoNgoi$3.class
 com\raven\DAO\ToppingDao.class
 com\raven\form\Form_KhachHang$5.class
 com\raven\component\Card$2.class
+com\demo\form\Form_Loading$1.class
 com\raven\main\DangNhap$5.class
 com\raven\model\Phim.class
 com\raven\helper\ThongBao.class
@@ -147,6 +172,7 @@ com\raven\main\DangNhap.class
 com\demo\form\Form_ChonChiNhanh$4.class
 com\raven\sendEmail\CheckMail$3.class
 com\raven\swing\TableHeader.class
+com\demo\form\Form_ThongKeTheoNgayTungCN.class
 com\raven\model\Model_ChonTopping1.class
 com\raven\main\DangNhap$2.class
 com\raven\model\NgayChieu.class
@@ -157,7 +183,10 @@ com\raven\form\Form_KhachHang$3.class
 com\raven\DAO\KhachHangDao.class
 com\raven\model\KhachHang.class
 com\demo\form\Form_ThongKeChiNhanh$1.class
+<<<<<<< HEAD
 com\raven\form\Form_Phim$7.class
+=======
+>>>>>>> origin/master
 com\raven\sendEmail\EmailMain$1.class
 com\raven\DAO\ChucVuDao.class
 com\demo\form\Setting$1.class
@@ -165,7 +194,6 @@ com\raven\model\Model_Menu.class
 com\raven\main\DangKy$3.class
 com\raven\model\Model_Phong.class
 com\raven\swing\ScrollBar.class
-com\raven\form\Form_Phim$4.class
 com\raven\component\Menu$3.class
 com\raven\main\DangKy$6.class
 com\raven\form\Form_Home$1.class
@@ -183,7 +211,6 @@ com\raven\main\DangNhap$1.class
 com\raven\model\Model_ChonTopping.class
 com\raven\component\Header$4.class
 com\raven\model\LoaiGhe.class
-com\raven\form\Form_Phim$5.class
 com\raven\swing\Table$1.class
 com\raven\sendEmail\CheckMail$2.class
 com\demo\form\Form_ChonChiNhanh.class

@@ -15,13 +15,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChiNhanh {
-    private String MaCN;
-    private String TenCN;
-    private String DiaChi;
-    private String SoDT;
-    
-    public ChiNhanh(String TenCN) {
-        this.TenCN = TenCN;
-    }
+public class HoaDon {
+    private String MaHD;
+    private int IdVe;
+    private String NgayXuat;
+    private double TongHD;
 }

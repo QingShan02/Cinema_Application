@@ -8,8 +8,10 @@ import com.raven.main.Main;
 import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
@@ -33,15 +35,23 @@ public class Form_Home extends javax.swing.JPanel {
         listXC = daoNC.SelectGio(Main.maCN);
         System.out.println(listXC.size());
 //        cn = new Form_ChoNgoi();
-        JPanel panel;
-        for (NgayChieu nc : listXC) {
-            panel = new JPanel();
-            panel.setBackground(Color.black);
-            listP.add(panel);
-            jTabbedPane1.addTab(nc.getGioBatDau(), panel);
+        if (listXC.size() != 0) {
+            JPanel panel;
+            for (NgayChieu nc : listXC) {
+                panel = new JPanel();
+                panel.setBackground(Color.black);
+                listP.add(panel);
+                jTabbedPane1.addTab(nc.getGioBatDau(), panel);
+            }
+            jTabbedPane1.repaint();
+            jTabbedPane1.revalidate();
+        }else{
+            panel1.removeAll();
+            panel1.add(new JLabel("Hết lịch chiếu trong hôm nay"));
+            panel1.setLayout(new FlowLayout());
+            panel1.repaint();
+            panel1.revalidate();
         }
-        jTabbedPane1.repaint();
-        jTabbedPane1.revalidate();
 
     }
 
@@ -96,8 +106,8 @@ public class Form_Home extends javax.swing.JPanel {
         listP.get(temp).removeAll();
         listPhim = daoPhim.SelectTenPhim(jTabbedPane1.getTitleAt(temp));
         listPhim.forEach(s -> {
-            listP.get(temp).add(new TablePhim(s,listXC.get(temp).getStt()));
-            
+            listP.get(temp).add(new TablePhim(s, listXC.get(temp).getStt(), jTabbedPane1.getTitleAt(temp)));
+
         });
     }//GEN-LAST:event_jTabbedPane1StateChanged
 

@@ -91,10 +91,11 @@ public class CoSoVatChatDao {
         }
     }
     
-    public List<CoSoVatChat> SelectAll() {
+    public List<CoSoVatChat> SelectAll(String maCN) {
         List<CoSoVatChat> a = new ArrayList<>();
         try {
-            PreparedStatement pt = con.prepareCall("{ call SelectCSVC()}");
+            PreparedStatement pt = con.prepareCall("{ call SelectCSVC(? :: text)}");
+            pt.setString(1, maCN);
             rs = pt.executeQuery();
             while (rs.next()) {
                 System.out.println(rs.getString(1)+","+rs.getString(2));
