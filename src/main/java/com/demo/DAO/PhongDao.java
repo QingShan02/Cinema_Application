@@ -95,6 +95,7 @@ public class PhongDao {
             pst.setString(1, maPhim);
 //            pst.setInt(1, sttngay);
             pst.setString(2, gioBatDau);
+//            pst.setString(3, );
             rs = pst.executeQuery();
             while (rs.next()) {
                 list.add(new ChiTietGhe(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getInt(4), rs.getFloat(5), rs.getInt(6)));
