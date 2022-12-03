@@ -25,21 +25,23 @@ import javax.swing.table.DefaultTableModel;
 public class Form_CSVC extends javax.swing.JPanel {
 
     int current;
-    
+    int selected;
+
     CoSoVatChat csvc;
     ChiNhanh cn;
     PhongChieu phong;
-    
+
     CoSoVatChatDao csvcDAO;
     ChiNhanhDao cnDAO;
     PhongDao phongDAO;
-    
+
     List<CoSoVatChat> csvc_list;
     List<ChiNhanh> cn_list;
     List<PhongChieu> phong_list;
-    
+
     DefaultTableModel tblModel = new DefaultTableModel();
     DefaultComboBoxModel cboModel = new DefaultComboBoxModel();
+
     /**
      * Creates new form Form_CSVC
      */
@@ -48,47 +50,47 @@ public class Form_CSVC extends javax.swing.JPanel {
         csvcDAO = new CoSoVatChatDao();
         cnDAO = new ChiNhanhDao();
         phongDAO = new PhongDao();
-        
+
         csvc_list = new ArrayList<>();
         cn_list = new ArrayList<>();
         phong_list = new ArrayList<>();
-        
-        fillToTable();
+
         fillToCbxChiNhanh();
         fillToCbxPhong();
     }
 
-    public void fillToTable() {
+    public void fillToTable(String maCN) {
+        System.out.println(maCN);
         tblModel = (DefaultTableModel) tblCoSoVatChat.getModel();
-        csvc_list = csvcDAO.SelectAll();
+        csvc_list = csvcDAO.SelectAll(maCN);
         tblModel.setRowCount(0);
         csvc_list.stream().forEach(c -> {
             Object[] row = new Object[]{c.getTencn(), c.getTenphong(), c.getTencsvc(), c.getSoluong()};
             tblModel.addRow(row);
         });
     }
-    
+
     public void fillToCbxChiNhanh() {
         cboModel = (DefaultComboBoxModel) cboChiNhanh.getModel();
         cboModel.removeAllElements();
         cn_list = cnDAO.select();
-        
+
         cn_list.stream().forEach(cn -> {
             cboChiNhanh.addItem(cn.getTenCN());
         });
     }
-    
+
     public void fillToCbxPhong() {
         cboModel = (DefaultComboBoxModel) cboPhong.getModel();
         cboModel.removeAllElements();
         phong_list = phongDAO.Select();
-        
+
         phong_list.stream().forEach(p -> {
             cboPhong.addItem(p.getTenPhong());
         });
     }
-    
-     public void showDetails() {
+
+    public void showDetails() {
         CoSoVatChat csvc = csvc_list.get(current);
         cboChiNhanh.setSelectedItem(csvc_list.get(current).getTencn());
         cboPhong.setSelectedItem(csvc_list.get(current).getTenphong());
@@ -96,7 +98,7 @@ public class Form_CSVC extends javax.swing.JPanel {
         txtTenCSVC.setText(csvc.getTencsvc());
         txtSoLuong.setText(String.valueOf(csvc.getSoluong()));
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,6 +126,39 @@ public class Form_CSVC extends javax.swing.JPanel {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         cboChiNhanh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tên chi nhánh" }));
+        cboChiNhanh.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboChiNhanhItemStateChanged(evt);
+            }
+        });
+        cboChiNhanh.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                cboChiNhanhHierarchyChanged(evt);
+            }
+        });
+        cboChiNhanh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboChiNhanhMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                cboChiNhanhMouseReleased(evt);
+            }
+        });
+        cboChiNhanh.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cboChiNhanhPropertyChange(evt);
+            }
+        });
+        cboChiNhanh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cboChiNhanhKeyReleased(evt);
+            }
+        });
+        cboChiNhanh.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                cboChiNhanhVetoableChange(evt);
+            }
+        });
 
         cboPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tên phòng" }));
 
@@ -255,7 +290,7 @@ public class Form_CSVC extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         String maphong;
-        
+
         csvc = new CoSoVatChat();
         phong = new PhongChieu();
 
@@ -263,13 +298,15 @@ public class Form_CSVC extends javax.swing.JPanel {
         csvc.setTencsvc(txtTenCSVC.getText());
         phong.setMaPhong(phong_list.get(cboPhong.getSelectedIndex()).getMaPhong());
         csvc.setSoluong(Integer.parseInt(txtSoLuong.getText()));
-        
+
         maphong = phong.getMaPhong();
-        
+
         csvcDAO.Insert(csvc.getMacsvc(), csvc.getTencsvc(), csvc.getMacsvc() + ".png");
         csvcDAO.InsertCTCSVC(csvc.getMacsvc(), maphong, csvc.getSoluong());
-        
-        fillToTable();
+
+        selected = cboChiNhanh.getSelectedIndex() + 1;
+        String maCN = "cn" + selected;
+        fillToTable(maCN);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnCapNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhapActionPerformed
@@ -279,16 +316,15 @@ public class Form_CSVC extends javax.swing.JPanel {
             String macsvc = txtMaCSVC.getText();
             String tencsvc = txtTenCSVC.getText();
             int soluong = Integer.parseInt(txtSoLuong.getText());
-            
+
             csvc = new CoSoVatChat();
             phong = new PhongChieu();
-            
-            
+
             phong.setMaPhong(phong_list.get(cboPhong.getSelectedIndex()).getMaPhong());
             csvc.setSoluong(Integer.parseInt(txtSoLuong.getText()));
-            
+
             maphong = phong.getMaPhong();
-            
+
             csvcDAO.Update(macsvc, tencsvc, macsvc + ".png");
             csvcDAO.UpdateCTCSVC(macsvc, maphong, soluong);
         } catch (SQLException ex) {
@@ -301,6 +337,39 @@ public class Form_CSVC extends javax.swing.JPanel {
         current = tblCoSoVatChat.getSelectedRow();
         showDetails();
     }//GEN-LAST:event_tblCoSoVatChatMouseClicked
+
+    private void cboChiNhanhKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboChiNhanhKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboChiNhanhKeyReleased
+
+    private void cboChiNhanhHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_cboChiNhanhHierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboChiNhanhHierarchyChanged
+
+    private void cboChiNhanhPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cboChiNhanhPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboChiNhanhPropertyChange
+
+    private void cboChiNhanhVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_cboChiNhanhVetoableChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboChiNhanhVetoableChange
+
+    private void cboChiNhanhMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboChiNhanhMouseReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cboChiNhanhMouseReleased
+
+    private void cboChiNhanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboChiNhanhMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboChiNhanhMouseClicked
+
+    private void cboChiNhanhItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboChiNhanhItemStateChanged
+        // TODO add your handling code here:
+        selected = cboChiNhanh.getSelectedIndex() + 1;
+        String maCN = "cn" + selected;
+        
+        fillToTable(maCN);
+    }//GEN-LAST:event_cboChiNhanhItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

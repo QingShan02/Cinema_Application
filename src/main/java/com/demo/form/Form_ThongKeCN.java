@@ -45,7 +45,7 @@ public class Form_ThongKeCN extends javax.swing.JPanel {
     }
     
     public void FillToTable(){
-                ListXH = daove.PhimHot("cn1");
+                ListXH = daove.PhimHot();
                 tblmodel = (DefaultTableModel) tblXH.getModel();
                 tblmodel.setRowCount(0);
                 ListXH.stream().forEach(s ->{

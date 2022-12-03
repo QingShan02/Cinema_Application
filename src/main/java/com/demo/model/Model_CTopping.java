@@ -5,8 +5,6 @@
 package com.demo.model;
 
 import com.raven.model.Model_ChonTopping;
-import static com.raven.model.Model_ChonTopping.readObj;
-import static com.raven.model.Model_ChonTopping.writeObj;
 import com.raven.model.ThanhToan;
 import com.raven.model.Topping;
 import java.io.FileInputStream;
@@ -94,6 +92,11 @@ public class Model_CTopping extends javax.swing.JPanel {
         chkTenTopping.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 chkTenToppingStateChanged(evt);
+            }
+        });
+        chkTenTopping.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkTenToppingActionPerformed(evt);
             }
         });
 
@@ -205,6 +208,10 @@ public class Model_CTopping extends javax.swing.JPanel {
         // TODO add your handling code here:
         snSoLuong.setEnabled(chkTenTopping.isSelected());
     }//GEN-LAST:event_chkTenToppingStateChanged
+
+    private void chkTenToppingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTenToppingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkTenToppingActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

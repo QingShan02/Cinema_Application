@@ -6,6 +6,8 @@ package com.raven.form;
 
 import com.raven.DAO.GheDao;
 import com.raven.DAO.PhongDao;
+import static com.raven.form.Form_ChoNgoi.readObj;
+import static com.raven.form.Form_ChoNgoi.writeObj;
 import com.raven.main.Main;
 import com.raven.model.ChiTietGhe;
 import com.raven.model.Ghe;
@@ -18,6 +20,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -55,17 +58,63 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     PhongDao daoPhong;
     String maPhongChieu, maPhimChieu;
     List<ChiTietGhe> listT = new ArrayList<>();
-    String maphim, gio;
-
+    int stt_xc;
+    
+    class Mouse extends MouseAdapter {
+        
+        Model_Ghe ghe;
+        ChiTietGhe s;
+        
+        public Mouse() {
+        }
+        
+        public Mouse(Model_Ghe ghe, ChiTietGhe s) {
+            this.ghe = ghe;
+            this.s = s;
+        }
+        
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            try {
+                ThanhToan tt = (ThanhToan) readObj("temp.txt");
+                tt.setMaCTGhe(s.getMaCTGhe());
+                tt.setGiaGhe(s.getGia());
+//                SetOpenButton(ghe, false);
+                tt.setMaGhe(s.getMaGhe());
+                new PrintWriter("temp.txt").close();
+                writeObj("temp.txt", tt);
+                lblGiaGhe.setText(lblGiaGhe.getText() + s.getGia());
+                System.out.println(tt.getMaPhong());
+            } catch (IOException ex) {
+                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+                if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
+                    e.getComponent().setBackground(Color.PINK);
+                } else {
+                    e.getComponent().setBackground(Color.GREEN);
+                }
+//                                new PrintWriter("temp.txt").close();
+                lblGiaGhe.setText("Giá:");
+//                SetOpenButton(ghe, true);
+                
+            } else {
+                e.getComponent().setBackground(Color.YELLOW);
+            }
+        }
+    }
+    
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
-
+        
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
         if (ois == null) {
             return null;
         }
         return ois.readObject();
     }
-
+    
     public static void writeObj(String path, Object data) throws FileNotFoundException, IOException {
         try (
                  FileOutputStream fos = new FileOutputStream(path);  ObjectOutputStream oos = new ObjectOutputStream(fos);) {
@@ -77,27 +126,37 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     Thread t;
     //Cái này mới sử dụng cái này
 
-
-    public Form_ChoNgoi(String maphim, String gio) {
+    public Form_ChoNgoi(int stt_xc) {
         initComponents();
         daoGhe = new GheDao();
-        this.maphim = maphim;
-        this.gio = gio;
+//        this.maphim = maphim;
+//        this.gio = gio;
         daoPhong = new PhongDao();
-        listGheCV = daoPhong.Selectghecove(maphim, gio);
-        System.out.println(">>>" + gio);
+        this.stt_xc = stt_xc;
+        listGheCV = daoPhong.Selectghecove(stt_xc);
+//        System.out.println(">>>" + gio);
         SoVe = listGheCV.stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size();
-
+        
         SodoGhe();
         t = new Thread(this);
         t.start();
-
+        
     }
-
+    
+//    public void SetOpenButton(Model_Ghe t, boolean check) {
+//        lModelGhe.stream().forEach(s -> {
+//            if (!t.equals(s)) {
+//                s.removeMouseListener(s.getMouseListeners()[0]);
+//            }
+//        });
+//        Sodochongoi3.repaint();
+//        Sodochongoi3.revalidate();
+//    }
+    
     public void SodoGhe() {
         List = listGheCV.stream().limit(96).collect(Collectors.toList());
         for (ChiTietGhe s : List) {
-
+            
             if (s.getIdVe() != 0) {
                 ghe = new Model_Ghe(Color.GRAY, s.getTenGhe());
             } else {
@@ -107,39 +166,12 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                     cl = Color.GREEN;
                 }
                 ghe = new Model_Ghe(cl, s.getTenGhe());
-                ghe.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        try {
-                            ThanhToan tt = (ThanhToan) readObj("temp.txt");
-                            tt.setMaCTGhe(s.getMaCTGhe());
-//                        tt.setMaPhong(maPhongChieu);
-//                        tt.setMaPhim(maPhimChieu);
-                            tt.setMaGhe(s.getMaGhe());
-                            new PrintWriter("temp.txt").close();
-                            writeObj("temp.txt", tt);
-                            System.out.println(tt.getMaPhong());
-                        } catch (IOException ex) {
-                            Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (ClassNotFoundException ex) {
-                            Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-                                e.getComponent().setBackground(Color.PINK);
-                            } else {
-                                e.getComponent().setBackground(Color.GREEN);
-                            }
-                        } else {
-                            e.getComponent().setBackground(Color.YELLOW);
-                        }
-                    }
-                });
+                ghe.addMouseListener(new Mouse(ghe, s));
             }
-
+            
             Sodochongoi3.add(ghe);
             lModelGhe.add(ghe);
-
+            
         }
         if (listGheCV.size() > 96) {
             List2 = listGheCV.stream().skip(96).collect(Collectors.toList());
@@ -178,57 +210,10 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                 });
                 Sodochongoivip.add(ghe);
                 lModelGhe.add(ghe);
-
+                
             }
         }
-////        if (listGheCV.size() == 96 || listGheCV.size() == 110) {
-////            btnNext.setEnabled(false);
-////        }
-//        for (ChiTietGhe g : listGheCV) {
-//            if (g.getIdVe() != 0) {
-//                ghe.setBackground(Color.GRAY);
-//            }
-//        }
-//        for (int i = 0; i < ListGhe.size(); i++) {
-//            ChiTietGhe s = ListGhe.get(i);
-//            ghe = lModelGhe.get(i);
-//            if (!ghe.getBackground().equals(Color.GRAY)) {
-//                ghe.addMouseListener(new MouseAdapter() {
-//                    @Override
-//                    public void mouseClicked(MouseEvent e) {
-//
-//                        if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-//                            if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
-//                                e.getComponent().setBackground(Color.PINK);
-//                                lblGiaGhe.setText("Giá:");
-//                            } else {
-//                                e.getComponent().setBackground(Color.GREEN);
-//                                lblGiaGhe.setText("Giá:");
-//                            }
-//                        } else {
-//                            
-//                            try {
-//                                ThanhToan tt = (ThanhToan) readObj("temp.txt");
-//                                tt.setMaCTGhe(s.getMaCTGhe());
-//                                tt.setMaGhe(s.getMaGhe());
-//                                tt.setGiaGhe(s.getGia());
-//                                new PrintWriter("temp.txt").close();
-//                                writeObj("temp.txt", tt);
-//
-//                            } catch (IOException ex) {
-//                                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-//                            } catch (ClassNotFoundException ex) {
-//                                Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
-//                            }
-//                            e.getComponent().setBackground(Color.YELLOW);
-//                            lblGiaGhe.setText(lblGiaGhe.getText()+" "+s.getGia()+" VND");
-//                        }
-//                    }
-//
-//                });
-//            }
-//
-//        }
+        
         Sodochongoivip.repaint();
         Sodochongoivip.revalidate();
         Sodochongoi3.repaint();
@@ -430,9 +415,9 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     public void run() {
         while (true) {
             try {
-                if (SoVe != daoPhong.Selectghecove(maphim, gio).stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size()) {
+                if (SoVe != daoPhong.Selectghecove(stt_xc).stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size()) {
                     Main.mainF.removeAll();
-                    Main.mainF.add(new Form_ChoNgoi(maphim, gio));
+                    Main.mainF.add(new Form_ChoNgoi(stt_xc));
                     Main.mainF.repaint();
                     Main.mainF.revalidate();
                     break;

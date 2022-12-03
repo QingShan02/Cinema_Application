@@ -121,7 +121,7 @@ public class VeDao {
         return list;
     }
 
-    public List<Ve> PhimHot(String macn) {
+    public List<Ve> PhimHot() {
         List<Ve> list = new ArrayList();
         try {
             pst = con.prepareCall("{ call PhimHot(?)}");
@@ -178,7 +178,7 @@ public class VeDao {
 
             rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Object[]{rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5)});
+                list.add(new Object[]{rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getDouble(6),rs.getString(7),rs.getInt(8)});
             }
         } catch (SQLException ex) {
             Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);

@@ -88,13 +88,13 @@ public class PhongDao {
             e.printStackTrace();
         }
     }
-    public List<ChiTietGhe> Selectghecove(String maPhim,String gioBatDau){
+    public List<ChiTietGhe> Selectghecove(int stt_xc){
         List<ChiTietGhe> list = new ArrayList<>();
         try {
-            pst = con.prepareCall("{ call Selectghecove(?,cast(? as time))}");
-            pst.setString(1, maPhim);
+            pst = con.prepareCall("{ call Selectghecove(?)}");
+            pst.setInt(1, stt_xc);
 //            pst.setInt(1, sttngay);
-            pst.setString(2, gioBatDau);
+//            pst.setString(2, gioBatDau);
 //            pst.setString(3, );
             rs = pst.executeQuery();
             while (rs.next()) {

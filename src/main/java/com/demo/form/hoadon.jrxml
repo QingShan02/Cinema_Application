@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="144"/>
 	<parameter name="maHD" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -88,7 +88,7 @@ where hoadon.mahd = $P{maHD}]]>
 				<textFieldExpression><![CDATA[$F{tenphong}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="201" y="41" width="54" height="20"/>
+				<reportElement x="201" y="41" width="54" height="20" />
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -110,7 +110,7 @@ where hoadon.mahd = $P{maHD}]]>
 				<textFieldExpression><![CDATA[$F{tenloai}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="15" y="51" width="240" height="1"/>
+				<reportElement x="15" y="51" width="240" height="1" />
 			</line>
 			<staticText>
 				<reportElement x="15" y="69" width="100" height="20" />
@@ -125,7 +125,7 @@ where hoadon.mahd = $P{maHD}]]>
 				<text><![CDATA[Thuế (5%):]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="180" y="105" width="75" height="20"/>
+				<reportElement x="180" y="105" width="75" height="20" />
 				<textFieldExpression><![CDATA[$F{giathue}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -140,7 +140,7 @@ where hoadon.mahd = $P{maHD}]]>
 				<text><![CDATA[Tổng:]]></text>
 			</staticText>
 			<image>
-				<reportElement x="15" y="-184" width="114" height="55"/>
+				<reportElement x="15" y="-184" width="114" height="55" />
 				<box>
 					<pen lineStyle="Solid"/>
 					<topPen lineStyle="Solid"/>
@@ -151,7 +151,7 @@ where hoadon.mahd = $P{maHD}]]>
 				<imageExpression><![CDATA["E:\\RapChieuPhim\\RapChieuPhim_App\\src\\main\\resources\\icon\\logoHoaDon.png"]]></imageExpression>
 			</image>
 			<componentElement>
-				<reportElement x="345" y="58" width="200" height="50" />
+				<reportElement x="69" y="188" width="107" height="50" />
 				<jr:Code39 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
 					<jr:codeExpression><![CDATA[$P{maHD}]]></jr:codeExpression>
 				</jr:Code39>
