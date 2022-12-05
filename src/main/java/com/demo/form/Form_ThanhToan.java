@@ -340,6 +340,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
             ThanhToan tt = (ThanhToan) Main.readObj("temp.txt");
             tt.setListTopping(null);
             DangNhap.writeObj("temp.txt", tt);
+//            ConnectDB.inHoaDon(null);
         } catch (Exception e) {
             e.printStackTrace();
         }

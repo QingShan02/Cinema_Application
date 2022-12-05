@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b78d0384-458c-4f19-8639-fe1db10ce89a">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="144"/>
@@ -36,37 +36,37 @@ where hoadon.mahd = $P{maHD}]]>
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="111" y="13" width="69" height="19" />
+				<reportElement x="111" y="13" width="69" height="19" uuid="6113a422-69e3-4650-b7cd-4667eabf345b"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hóa đơn]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="59" width="69" height="20" />
+				<reportElement x="0" y="59" width="69" height="20" uuid="961c000a-efa5-4b1f-be11-475320deabaa"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[T1 Cinema]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="80" y="59" width="100" height="20" />
+				<reportElement x="80" y="59" width="100" height="20" uuid="615a6df1-deb4-4cc1-8801-c4bba157c897"/>
 				<textFieldExpression><![CDATA[$F{tencn}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="15" y="46" width="240" height="1" />
+				<reportElement x="15" y="46" width="240" height="1" uuid="31ff7aea-15c0-4d31-8d8e-baedf808e33e"/>
 			</line>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="11" width="80" height="20" />
+				<reportElement x="0" y="11" width="80" height="20" uuid="1e1e5ff9-f33f-4e24-a2d9-cd3d6a84d8e4"/>
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Địa chỉ:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="80" y="11" width="191" height="20" />
+				<reportElement x="80" y="11" width="191" height="20" uuid="70f4b529-03a2-47d7-94a9-ea0b694842d3"/>
 				<textFieldExpression><![CDATA[$F{diachi}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -74,21 +74,21 @@ where hoadon.mahd = $P{maHD}]]>
 	<columnHeader>
 		<band height="61" splitType="Stretch">
 			<line>
-				<reportElement x="15" y="0" width="240" height="1" />
+				<reportElement x="15" y="0" width="240" height="1" uuid="cf75ef79-2daf-4f14-8351-726834c6b447"/>
 			</line>
 			<textField>
-				<reportElement x="15" y="13" width="240" height="48" />
+				<reportElement x="15" y="13" width="240" height="48" uuid="1080b54f-57f8-48b9-a5e8-51fdb1cb22b0"/>
 				<textFieldExpression><![CDATA[$F{tenphim}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="111" y="41" width="69" height="20" />
+				<reportElement x="111" y="41" width="69" height="20" uuid="6404deae-13cc-41ee-85ff-e30177ef34cd"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tenphong}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="201" y="41" width="54" height="20" />
+				<reportElement x="201" y="41" width="54" height="20" uuid="dae842a7-bf3e-43bb-95a0-f1f22c3e159a"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -99,48 +99,48 @@ where hoadon.mahd = $P{maHD}]]>
 	<detail>
 		<band height="339" splitType="Stretch">
 			<staticText>
-				<reportElement x="15" y="19" width="40" height="20" />
+				<reportElement x="15" y="19" width="40" height="20" uuid="c7347c85-bc17-4bea-a23e-5a5171314c7e"/>
 				<text><![CDATA[Loại vé:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="69" y="19" width="100" height="20" />
+				<reportElement x="69" y="19" width="100" height="20" uuid="e9db5e81-c72c-49bb-a0da-7888e25ac2a7"/>
 				<textElement>
 					<font isBold="true" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tenloai}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="15" y="51" width="240" height="1" />
+				<reportElement x="15" y="51" width="240" height="1" uuid="860ce624-733d-4b4b-9ab1-f569699e53a5"/>
 			</line>
 			<staticText>
-				<reportElement x="15" y="69" width="100" height="20" />
+				<reportElement x="15" y="69" width="100" height="20" uuid="48f65d98-f23b-4739-83e3-3c53dcdd2e6b"/>
 				<text><![CDATA[Giá vé:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="180" y="69" width="75" height="20" />
+				<reportElement x="180" y="69" width="75" height="20" uuid="3e7206ec-b43b-4213-88c7-7d8b78a40b18"/>
 				<textFieldExpression><![CDATA[$F{giachuatinh}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="15" y="105" width="100" height="20" />
+				<reportElement x="15" y="105" width="100" height="20" uuid="0ac4bf47-0ce8-46c7-9f07-93bcc1d10f71"/>
 				<text><![CDATA[Thuế (5%):]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="180" y="105" width="75" height="20" />
+				<reportElement x="180" y="105" width="75" height="20" uuid="7f3ebfb4-3a6f-4b45-8bc6-c869b5010905"/>
 				<textFieldExpression><![CDATA[$F{giathue}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="15" y="140" width="240" height="1" />
+				<reportElement x="15" y="140" width="240" height="1" uuid="d1235bfe-14df-45bc-899e-5f6511360e12"/>
 			</line>
 			<textField>
-				<reportElement x="180" y="145" width="75" height="20" />
+				<reportElement x="180" y="145" width="75" height="20" uuid="a8a83e73-f479-436f-be3a-459e0b9909ce"/>
 				<textFieldExpression><![CDATA[$F{giave}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="15" y="145" width="100" height="20" />
+				<reportElement x="15" y="145" width="100" height="20" uuid="e1354992-ccbe-432b-8367-8b7498a9c99c"/>
 				<text><![CDATA[Tổng:]]></text>
 			</staticText>
 			<image>
-				<reportElement x="15" y="-184" width="114" height="55" />
+				<reportElement x="15" y="-184" width="114" height="55" uuid="1f893078-8f11-4bdb-90a9-034f247e2542"/>
 				<box>
 					<pen lineStyle="Solid"/>
 					<topPen lineStyle="Solid"/>
@@ -151,7 +151,7 @@ where hoadon.mahd = $P{maHD}]]>
 				<imageExpression><![CDATA["E:\\RapChieuPhim\\RapChieuPhim_App\\src\\main\\resources\\icon\\logoHoaDon.png"]]></imageExpression>
 			</image>
 			<componentElement>
-				<reportElement x="69" y="188" width="107" height="50" />
+				<reportElement x="69" y="188" width="107" height="50" uuid="06ef49a5-abc1-4146-9f3b-e8b5fd6106b5"/>
 				<jr:Code39 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
 					<jr:codeExpression><![CDATA[$P{maHD}]]></jr:codeExpression>
 				</jr:Code39>

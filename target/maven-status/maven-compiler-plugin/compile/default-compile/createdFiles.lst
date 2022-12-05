@@ -49,6 +49,10 @@ com\raven\model\Topping.class
 com\demo\model\CoSoVatChat.class
 com\raven\form\Form_DoiMatKhau$2.class
 com\demo\form\Form_CSVC$3.class
+<<<<<<< HEAD
+com\demo\helper\ReportHelper.class
+=======
+>>>>>>> origin/master
 com\demo\form\opencv.class
 com\raven\main\Main$MenuItemListener.class
 com\raven\form\Form_ThanhToan$1.class
