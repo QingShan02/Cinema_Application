@@ -91,5 +91,18 @@ public class ToppingDao {
             e.printStackTrace();
         }
     }
-
+    public List<Topping> SelectTPofVe(int idve){
+        List<Topping> list = new ArrayList<>();
+        try {
+            pst = con.prepareCall("{ call SelectTPofVe(?)}");
+            pst.setInt(1, idve);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                list.add(new Topping(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getFloat(4)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ToppingDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 }

@@ -125,19 +125,19 @@ public class Model_ChonTopping1 extends javax.swing.JPanel {
 
                         if (list.get(i).getMaTopping().equalsIgnoreCase(tp.getMaTopping())) {
                             System.out.println(">>hello");
-                            list.set(i, new Topping(tp.getMaTopping(), tp.getTenTopping(), tp.getGia(), (int) snSoLuong.getValue()));
+                            list.set(i, new Topping(tp.getMaTopping(), tp.getTenTopping(), (int) snSoLuong.getValue(), tp.getGia()));
                             k++;
                             break;
                         }
                     }
                     if (k == 0) {
-                        list.add(new Topping(tp.getMaTopping(), tp.getTenTopping(), tp.getGia(), (int) snSoLuong.getValue()));
+                        list.add(new Topping(tp.getMaTopping(), tp.getTenTopping(), (int) snSoLuong.getValue(), tp.getGia()));
                     }
                     k = 0;
 
                 } else {
                     list = new ArrayList<>();
-                    list.add(new Topping(tp.getMaTopping(), tp.getTenTopping(), tp.getGia(), (int) snSoLuong.getValue()));
+                    list.add(new Topping(tp.getMaTopping(), tp.getTenTopping(), (int) snSoLuong.getValue(), tp.getGia()));
                 }
                 System.out.println(list.size());
                 System.out.println(snSoLuong.getValue());

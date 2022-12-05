@@ -107,13 +107,14 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         try {
             List<Topping> tpList = tt.getListTopping();
             String topping = "";
+            if(tpList !=null){
             for (Topping tp : tpList) {
 
                 topping += (tp.getTenTopping() + " :" + tp.getSoLuongMua() + " x" + tp.getGia() + " = " + tp.getGia() * tp.getSoLuongMua() + "\n");
 
             }
             lbTopping.setText(topping);
-            System.out.println(topping);
+            System.out.println(topping);}
         } catch (Exception e) {
             e.printStackTrace();
         }

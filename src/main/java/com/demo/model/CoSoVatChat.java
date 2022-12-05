@@ -22,12 +22,15 @@ public class CoSoVatChat {
     private String tencsvc;
     private String hinh;
     private int soluong;
+    private int trangthai;
 
-    public CoSoVatChat(String tencn, String tenphong, String tencsvc, int soluong) {
+    public CoSoVatChat(String macsvc, String tencn, String tenphong, String tencsvc, int soluong, int trangthai) {
+        this.macsvc = macsvc;
         this.tencn = tencn;
         this.tenphong = tenphong;
         this.tencsvc = tencsvc;
         this.soluong = soluong;
+        this.trangthai = trangthai;
     }
     
 }

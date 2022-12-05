@@ -6,9 +6,23 @@ package com.demo.form;
 
 import com.demo.DAO.HoaDonDao;
 import com.demo.model.HoaDon;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import com.raven.DAO.ConnectDB;
+import com.raven.DAO.ToppingDao;
 import com.raven.DAO.VeDao;
 import com.raven.main.Main;
+import com.raven.model.Topping;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -17,6 +31,9 @@ import java.net.Socket;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -26,16 +43,22 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Daokh
  */
-public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
+public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable, ThreadFactory {
 
     /**
      * Creates new form Form_QLVeOnline
      */
     List<Object[]> list;
     VeDao dao;
+    ToppingDao daoTP;
     HoaDonDao daoHD;
-    DataInputStream din;
-    DataOutputStream dout;
+//    DataInputStream din;
+//    DataOutputStream dout;
+    public String a = null;
+    private WebcamPanel panel = null;
+    private Webcam webcam = null;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
+    List<Topping> listTP;
 
     public Form_QLVeOnline() {
         initComponents();
@@ -43,6 +66,18 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
         daoHD = new HoaDonDao();
         list = dao.SelectVeOnline();
         FillToTable();
+        daoTP = new ToppingDao();
+    }
+
+    private void initWebcam() {
+        Dimension size = WebcamResolution.QVGA.getSize();
+        webcam = Webcam.getWebcams().get(1);
+        System.out.println(Webcam.getWebcams().size());
+        webcam.setViewSize(size);
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+        executor.execute(this);
 
     }
 
@@ -51,6 +86,13 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
         model.setRowCount(0);
         list.forEach(s -> {
             model.addRow(s);
+        });
+    }
+
+    void FillTopping() {
+        modelTP.setRowCount(0);
+        listTP.forEach(s -> {
+            modelTP.addRow(new Object[]{s.getTenTopping(), s.getSoLuongMua(), s.getGia()});
         });
     }
 
@@ -68,18 +110,25 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btnXuatHoaDon = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblTopping = new javax.swing.JTable();
 
         tblVe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID Vé", "Tên Khách Hàng", "Tên Phim", "Thông Tin Ghế", "Ngày Chiếu", "Giá", "Topping", "Số lượng"
+                "ID Vé", "Tên Khách Hàng", "Tên Phim", "Thông Tin Ghế", "Ngày Chiếu", "Giá"
             }
         ));
+        tblVe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVeMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblVe);
 
         jTextField1.addHierarchyListener(new java.awt.event.HierarchyListener() {
@@ -110,6 +159,19 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
             }
         });
 
+        tblTopping.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Topping", "Số lượng", "Giá"
+            }
+        ));
+        jScrollPane2.setViewportView(tblTopping);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,15 +181,18 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnXuatHoaDon)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnXuatHoaDon)
-                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,10 +202,12 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(71, 71, 71)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(btnXuatHoaDon)
-                .addGap(37, 37, 37))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -148,7 +215,7 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
         // TODO add your handling code here:
         String a = UUID.randomUUID().toString();
         int idve = (int) list.get(tblVe.getSelectedRow())[0];
-        double gia = (double) list.get(tblVe.getSelectedRow())[4];
+        double gia = (double) list.get(tblVe.getSelectedRow())[5];
         daoHD.Insert(new HoaDon(a, idve, java.time.LocalDate.now() + "", gia));
         Hashtable map = new Hashtable();
         map.put("maHD", a);
@@ -156,21 +223,8 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
     }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ServerSocket ss;
-        try {
-            ss = new ServerSocket(3333);
-            Thread t = new Thread(this);
-            t.start();
-            opencv op = new opencv();
-            Socket s = ss.accept();
-            din = new DataInputStream(s.getInputStream());
-            dout = new DataOutputStream(s.getOutputStream());
 
-            op.show();
-
-        } catch (IOException ex) {
-            Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        initWebcam();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
@@ -192,46 +246,68 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable {
             }
         }
     }//GEN-LAST:event_jTextField1KeyReleased
+DefaultTableModel modelTP;
+    private void tblVeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVeMouseClicked
+        // TODO add your handling code here:
+        modelTP = (DefaultTableModel)tblTopping.getModel();
+        modelTP.setRowCount(0);
+        listTP = daoTP.SelectTPofVe((int) list.get(tblVe.getSelectedRow())[0]);
+        if(listTP.size()!=0){
+            FillTopping();
+        }
+    }//GEN-LAST:event_tblVeMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnXuatHoaDon;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblTopping;
     private javax.swing.JTable tblVe;
     // End of variables declaration//GEN-END:variables
 
     @Override
+    public Thread newThread(Runnable r) {
+        Thread t = new Thread(r, "My Thread");
+        t.setDaemon(true);
+        return t;
+    }
+
+    @Override
     public void run() {
-        while (true) {
+        do {
             try {
-                if (din != null) {
-                    if (din.readUTF() != "") {
-                        System.out.println("" + din.readUTF());
-                        jTextField1.setText(din.readUTF());
-                        break;
-                    }
-                    System.out.println(">>" + din.readUTF());
-                }
-                System.out.println("hehe");
-//            try {
-//                if (list.size() != dao.SelectVeOnline().size()) {
-//                    Main.mainF.removeAll();
-//                    Main.mainF.add(new Form_QLVeOnline());
-//                    Main.mainF.repaint();
-//                    Main.mainF.revalidate();
-//                    break;
-//                }
                 Thread.sleep(100);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-            } catch (IOException ex) {
-                Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Form_QLVeOnline.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(opencv.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+            Result result = null;
+            BufferedImage image = null;
+            if (webcam.isOpen()) {
+                if ((image = webcam.getImage()) == null) {
+                    continue;
+                }
+            }
+            LuminanceSource source = new BufferedImageLuminanceSource(image);
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+            try {
+                result = new MultiFormatReader().decode(bitmap);
+            } catch (NotFoundException ex) {
+                Logger.getLogger(opencv.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("" + result);
+            if (result != null) {
+                a = result.getText();
+                System.out.println("" + a);
+                for (String w : a.split("/", 0)) {
+                    System.out.println(w);
+                }
+                jTextField1.setText(a.split("/")[5]);
+
+                break;
+            }
+        } while (true);
     }
 }
