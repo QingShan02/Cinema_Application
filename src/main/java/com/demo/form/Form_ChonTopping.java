@@ -4,6 +4,7 @@
  */
 package com.raven.form;
 
+import com.demo.helper.ReportHelper;
 import com.demo.model.Model_CTopping;
 import com.raven.DAO.ToppingDao;
 import com.raven.main.Main;
@@ -141,8 +142,8 @@ public class Form_ChonTopping extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlTopping, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlTopping, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -154,6 +155,7 @@ public class Form_ChonTopping extends javax.swing.JPanel {
         Main.mainF.add(new Form_ThanhToan());
         Main.mainF.repaint();
         Main.mainF.revalidate();
+        ReportHelper.exportToppingReport();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
 
