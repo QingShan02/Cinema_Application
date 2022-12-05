@@ -1,88 +1,88 @@
-D:\App\src\main\java\com\demo\component\Card.java
-D:\App\src\main\java\com\demo\DAO\ChucVuDao.java
-D:\App\src\main\java\com\demo\swing\PanelBorder.java
-D:\App\src\main\java\com\demo\DAO\HoaDonDao.java
-D:\App\src\main\java\com\demo\model\ChiTietGhe.java
-D:\App\src\main\java\com\demo\DAO\DataBeanList.java
-D:\App\src\main\java\com\demo\form\Form_ChoNgoi.java
-D:\App\src\main\java\com\demo\form\Form_KhachHang.java
-D:\App\src\main\java\com\demo\form\Form_CSVC.java
-D:\App\src\main\java\com\demo\component\Menu.java
-D:\App\src\main\java\com\demo\DAO\LoaiGheDao.java
-D:\App\src\main\java\com\demo\DAO\ToppingDao.java
-D:\App\src\main\java\com\demo\form\Form_ThongKeChiNhanh.java
-D:\App\src\main\java\com\demo\model\HoaDon.java
-D:\App\src\main\java\com\demo\DAO\TheLoaiDao.java
-D:\App\src\main\java\com\demo\swing\ModernScrollBarUI.java
-D:\App\src\main\java\com\demo\model\LoaiGhe.java
-D:\App\src\main\java\com\demo\model\Model_ChonTopping1.java
-D:\App\src\main\java\com\demo\swing\TableStatus.java
-D:\App\src\main\java\com\demo\model\Model_topping.java
-D:\App\src\main\java\com\demo\model\Ve.java
-D:\App\src\main\java\com\demo\swing\MenuItem.java
-D:\App\src\main\java\com\demo\form\Form_DoiMatKhau.java
-D:\App\src\main\java\com\demo\model\KhachHang.java
-D:\App\src\main\java\com\demo\form\Form_QLVeOnline.java
-D:\App\src\main\java\com\demo\form\Form_Topping.java
-D:\App\src\main\java\com\demo\model\NgayChieu.java
-D:\App\src\main\java\com\demo\main\DangNhap.java
-D:\App\src\main\java\com\demo\swing\Table.java
-D:\App\src\main\java\com\demo\model\Model_Phim.java
-D:\App\src\main\java\com\demo\swing\ScrollBar.java
-D:\App\src\main\java\com\demo\DAO\VeDao.java
-D:\App\src\main\java\com\demo\model\Model_Phong.java
-D:\App\src\main\java\com\demo\swing\SearchText.java
-D:\App\src\main\java\com\demo\model\ChiNhanh.java
-D:\App\src\main\java\com\demo\form\Form_ChonTopping.java
-D:\App\src\main\java\com\demo\form\LineChartNgay.java
-D:\App\src\main\java\com\demo\model\ChucVu.java
-D:\App\src\main\java\com\demo\swing\ListMenu.java
-D:\App\src\main\java\com\demo\DAO\NguoiDungDao.java
-D:\App\src\main\java\com\demo\model\Model_CTopping.java
-D:\App\src\main\java\com\demo\form\TablePhim.java
-D:\App\src\main\java\com\demo\DAO\ConnectDB.java
-D:\App\src\main\java\com\demo\DAO\PhongDao.java
-D:\App\src\main\java\com\demo\DAO\CoSoVatChatDao.java
-D:\App\src\main\java\com\demo\form\Form_XacThuc.java
-D:\App\src\main\java\com\demo\model\Model_Ghe.java
-D:\App\src\main\java\com\demo\form\Form_ThanhToan.java
-D:\App\src\main\java\com\demo\DAO\XuatChieuDao.java
-D:\App\src\main\java\com\demo\component\Header.java
-D:\App\src\main\java\com\demo\form\Form_ChonChiNhanh.java
-D:\App\src\main\java\com\demo\model\NguoiDung.java
-D:\App\src\main\java\com\demo\sendEmail\EmailMain.java
-D:\App\src\main\java\com\demo\main\Main.java
-D:\App\src\main\java\com\demo\sendEmail\CheckMail.java
-D:\App\src\main\java\com\demo\form\Setting.java
-D:\App\src\main\java\com\demo\form\Form_QuanLyLichChieu.java
-D:\App\src\main\java\com\demo\model\Model_ChonTopping.java
-D:\App\src\main\java\com\demo\swing\CellStatus.java
-D:\App\src\main\java\com\demo\swing\TableHeader.java
-D:\App\src\main\java\com\demo\main\RunMain.java
-D:\App\src\main\java\com\demo\model\StatusType.java
-D:\App\src\main\java\com\demo\model\Model_Menu.java
-D:\App\src\main\java\com\demo\model\Ghe.java
-D:\App\src\main\java\com\demo\form\LineChartEx.java
-D:\App\src\main\java\com\demo\form\Form_Loading.java
-D:\App\src\main\java\com\demo\model\PhongChieu.java
-D:\App\src\main\java\com\demo\model\ThanhToan.java
-D:\App\src\main\java\com\demo\DAO\DataBean.java
-D:\App\src\main\java\com\demo\model\Model_Card.java
-D:\App\src\main\java\com\demo\model\ChiTietTopping.java
-D:\App\src\main\java\com\demo\model\TheLoai.java
-D:\App\src\main\java\com\demo\DAO\GheDao.java
-D:\App\src\main\java\com\demo\DAO\NgayChieuDao.java
-D:\App\src\main\java\com\demo\DAO\KhachHangDao.java
-D:\App\src\main\java\com\demo\model\Phim.java
-D:\App\src\main\java\com\demo\main\DangKy.java
-D:\App\src\main\java\com\demo\model\XuatChieu.java
-D:\App\src\main\java\com\demo\model\Topping.java
-D:\App\src\main\java\com\demo\form\Form_Home.java
-D:\App\src\main\java\com\demo\DAO\JasperReportFill.java
-D:\App\src\main\java\com\demo\model\CoSoVatChat.java
-D:\App\src\main\java\com\demo\event\EventMenuSelected.java
-D:\App\src\main\java\com\demo\form\Form_ThongKeTheoNgayTungCN.java
-D:\App\src\main\java\com\demo\DAO\PhimDao.java
-D:\App\src\main\java\com\demo\DAO\ChiNhanhDao.java
-D:\App\src\main\java\com\demo\form\Form_QLPhong.java
-D:\App\src\main\java\com\demo\helper\ThongBao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\KhachHang.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\BarChart.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Ve.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\NguoiDungDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_Home.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_XacThuc.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\ChiTietTopping.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\swing\ModernScrollBarUI.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\CoSoVatChat.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Model_topping.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\GheDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\ChucVu.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\HoaDon.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\sendEmail\EmailMain.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\swing\SearchText.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\swing\ListMenu.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\DataBeanList.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\swing\Table.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\sendEmail\CheckMail.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\DataBean.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\opencv.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\StatusType.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Model_ChonTopping1.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\NguoiDung.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_QuanLyLichChieu.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\swing\TableStatus.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\PhongDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\CoSoVatChatDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_ThanhToan.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_Loading.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_Topping.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\swing\TableHeader.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\component\Header.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Model_Menu.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\NgayChieu.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\VeDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\swing\ScrollBar.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\ConnectDB.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\HoaDonDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\swing\CellStatus.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Phim.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\TheLoai.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\helper\ReportHelper.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\swing\MenuItem.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\ToppingDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\LoaiGheDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_ChoNgoi.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Topping.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\ThanhToan.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\XuatChieuDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\event\EventMenuSelected.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_QLVeOnline.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\LoaiGhe.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\component\Menu.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_ChonChiNhanh.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\main\DangNhap.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Model_CTopping.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_CSVC.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\XuatChieu.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Model_Phong.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Model_ChonTopping.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\JasperReportFill.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\main\Main.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_ChonTopping.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\ChiNhanh.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_QLPhong.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\PhimDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_KhachHang.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Model_Phim.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_DoiMatKhau.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\TablePhim.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\ChucVuDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\NgayChieuDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\main\DangKy.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Model_Card.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\PhongChieu.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\main\RunMain.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\TheLoaiDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Model_Ghe.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\KhachHangDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\DAO\ChiNhanhDao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\helper\ThongBao.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Setting.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\form\Form_ThongKeCN.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\Ghe.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\model\ChiTietGhe.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\component\Card.java
+C:\Users\Ngoc Han\Desktop\RapChieuPhim_App\src\main\java\com\demo\swing\PanelBorder.java
