@@ -37,6 +37,7 @@ public class Model_ChonTopping1 extends javax.swing.JPanel {
         lblTenTopping.setText(tp.getTenTopping());
         lblHinh.setIcon(resizeImage("src/main/resources/topping/" + tp.getHinh()));
 //        snSoLuong.setEnabled(lbl.isSelected());
+        System.out.println(tp.getTenTopping());
         snSoLuong.setValue(tp.getSoLuongMua());
     }
 

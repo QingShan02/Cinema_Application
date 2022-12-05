@@ -14,6 +14,7 @@ import com.raven.DAO.PhongDao;
 import com.raven.DAO.VeDao;
 import com.raven.main.DangNhap;
 import com.raven.main.Main;
+import com.raven.model.Model_ChonTopping1;
 import com.raven.model.ThanhToan;
 import com.raven.model.Topping;
 import com.raven.model.Ve;
@@ -111,10 +112,11 @@ public class Form_ThanhToan extends javax.swing.JPanel {
             for (Topping tp : tpList) {
 
                 topping += (tp.getTenTopping() + " :" + tp.getSoLuongMua() + " x" + tp.getGia() + " = " + tp.getGia() * tp.getSoLuongMua() + "\n");
-
+                pnlTopping.add(new Model_ChonTopping1(tp));
             }
-            lbTopping.setText(topping);
-            System.out.println(topping);}
+            pnlTopping.repaint();
+            pnlTopping.revalidate();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -181,8 +183,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         lblTenPhim1 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        lbTopping = new javax.swing.JTextArea();
+        pnlTopping = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -243,10 +244,8 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         lblTenPhim1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTenPhim1.setText("Topping");
 
-        lbTopping.setEditable(false);
-        lbTopping.setColumns(20);
-        lbTopping.setRows(5);
-        jScrollPane4.setViewportView(lbTopping);
+        pnlTopping.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTopping.setLayout(new java.awt.GridLayout(1, 1, 5, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -256,25 +255,6 @@ public class Form_ThanhToan extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTenPhong)
-                                    .addComponent(lblTime)
-                                    .addComponent(lblTenPhim)
-                                    .addComponent(lblGia)
-                                    .addComponent(jLabel10))
-                                .addGap(0, 103, Short.MAX_VALUE))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblTenGhe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -283,8 +263,29 @@ public class Form_ThanhToan extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(lblTenPhim1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4))
+                        .addGap(0, 68, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTenPhong)
+                                    .addComponent(lblTime)
+                                    .addComponent(lblTenPhim)
+                                    .addComponent(lblGia)
+                                    .addComponent(jLabel10))
+                                .addGap(0, 103, Short.MAX_VALUE))
+                            .addComponent(jSeparator1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2))
+                            .addComponent(pnlTopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblTenGhe)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -309,15 +310,15 @@ public class Form_ThanhToan extends javax.swing.JPanel {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTenPhim1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                .addComponent(pnlTopping, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTenGhe)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTenGhe)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -379,15 +380,14 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextArea lbTopping;
     private javax.swing.JLabel lblGia;
     private javax.swing.JLabel lblTenGhe;
     private javax.swing.JLabel lblTenPhim;
     private javax.swing.JLabel lblTenPhim1;
     private javax.swing.JLabel lblTenPhong;
     private javax.swing.JLabel lblTime;
+    private javax.swing.JPanel pnlTopping;
     // End of variables declaration//GEN-END:variables
 }

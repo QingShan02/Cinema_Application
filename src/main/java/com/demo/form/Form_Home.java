@@ -1,19 +1,29 @@
 package com.raven.form;
 
 import com.demo.form.TablePhim;
+import com.itextpdf.text.pdf.PdfName;
 import com.raven.DAO.NgayChieuDao;
 import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
 import com.raven.main.Main;
 import com.raven.model.NgayChieu;
 import com.raven.model.Phim;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneLayout;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class Form_Home extends javax.swing.JPanel {
 
@@ -26,6 +36,7 @@ public class Form_Home extends javax.swing.JPanel {
     Phim p;
     PhimDao daoPhim;
     List<Phim> listPhim;
+//    JTabbedPane jTabbedPane1 = new JTabbedPane();
 
     public Form_Home() {
         initComponents();
@@ -34,87 +45,92 @@ public class Form_Home extends javax.swing.JPanel {
         System.out.println(Main.maCN);
         listXC = daoNC.SelectGio(Main.maCN);
         System.out.println(listXC.size());
+        jTabbedPane1.setTabPlacement(JTabbedPane.LEFT);
+
 //        cn = new Form_ChoNgoi();
+        JPanel panel1;
         if (listXC.size() != 0) {
-            JPanel panel;
             for (NgayChieu nc : listXC) {
-                panel = new JPanel();
-                panel.setBackground(Color.black);
-                listP.add(panel);
-                jTabbedPane1.addTab(nc.getGioBatDau(), panel);
+                panel1 = new JPanel();
+//                panel1.setPreferredSize(null);
+//                panel1 = new JLayeredPane();
+                panel1.setBackground(Color.white);
+                panel1.setLayout(new GridLayout(10, 1));
+                listP.add(panel1);
+                JScrollPane sc = new JScrollPane(panel1);
+                jTabbedPane1.addTab(nc.getGioBatDau(), sc);
+
             }
             jTabbedPane1.repaint();
             jTabbedPane1.revalidate();
-        }else{
-            panel1.removeAll();
-            panel1.add(new JLabel("Hết lịch chiếu trong hôm nay"));
-            panel1.setLayout(new FlowLayout());
-            panel1.repaint();
-            panel1.revalidate();
         }
 
+//        jTabbedPane1.setBounds(0, 0, 1000, 700);
+//        add(jTabbedPane1);
+//        repaint();
+//        revalidate();
+//                jTabbedPane1.setSelectedIndex(0);
+//        else{
+//            panel1.removeAll();
+//            panel1.add(new JLabel("Hết lịch chiếu trong hôm nay"));
+//            panel1.setLayout(new FlowLayout());
+//            panel1.repaint();
+//            panel1.revalidate();
+//        }
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        panel1 = new javax.swing.JLayeredPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
-        jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
-
-        panel1.setBackground(new java.awt.Color(0, 0, 0));
-        panel1.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
-
-        jTabbedPane1.setBackground(new java.awt.Color(0, 0, 0));
-        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
             }
         });
-        panel1.add(jTabbedPane1);
-
-        jScrollPane1.setViewportView(panel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+        int n = jTabbedPane1.getSelectedIndex();
+        String name = jTabbedPane1.getTitleAt(n);
+        listPhim = daoPhim.SelectTenPhim(name);
+        JScrollBar sc = new JScrollBar();
+//                        JPanel panel = new JPanel();
+//                        panel.setBounds(0, 0, 300, 300);
+//                        sc.add(panel);  
+        listP.get(n).removeAll();
 
-        JTable table = new JTable();
-        int temp = jTabbedPane1.getSelectedIndex();
-        listP.get(temp).removeAll();
-        listPhim = daoPhim.SelectTenPhim(jTabbedPane1.getTitleAt(temp));
         listPhim.forEach(s -> {
-            listP.get(temp).add(new TablePhim(s, listXC.get(temp).getStt(), jTabbedPane1.getTitleAt(temp)));
-
+            listP.get(n).add(new TablePhim(s, s.getStt_xc(), name));
         });
+//                                                listP.get(n).add(sc);
+//                                                sc.repaint();
+//                        sc.revalidate();
+        listP.get(n).repaint();
+        listP.get(n).validate();
+        jTabbedPane1.repaint();
+        jTabbedPane1.revalidate();
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLayeredPane panel1;
     // End of variables declaration//GEN-END:variables
 }

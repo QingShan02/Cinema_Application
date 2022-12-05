@@ -155,7 +155,7 @@ public class Form_ChonTopping extends javax.swing.JPanel {
         Main.mainF.add(new Form_ThanhToan());
         Main.mainF.repaint();
         Main.mainF.revalidate();
-        ReportHelper.exportToppingReport();
+//        ReportHelper.exportToppingReport();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
 
