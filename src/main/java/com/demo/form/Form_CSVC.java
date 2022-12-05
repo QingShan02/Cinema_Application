@@ -65,7 +65,14 @@ public class Form_CSVC extends javax.swing.JPanel {
         csvc_list = csvcDAO.SelectAll(maCN);
         tblModel.setRowCount(0);
         csvc_list.stream().forEach(c -> {
-            Object[] row = new Object[]{c.getTencn(), c.getTenphong(), c.getTencsvc(), c.getSoluong()};
+            String trangThai;
+            if (c.getTrangthai() == 0) {
+                trangThai = "Tốt";
+            } else {
+                trangThai = "Bảo trì";
+            }
+
+            Object[] row = new Object[]{c.getTencn(), c.getTenphong(), c.getTencsvc(), c.getSoluong(), trangThai};
             tblModel.addRow(row);
         });
     }
@@ -95,8 +102,14 @@ public class Form_CSVC extends javax.swing.JPanel {
         cboChiNhanh.setSelectedItem(csvc_list.get(current).getTencn());
         cboPhong.setSelectedItem(csvc_list.get(current).getTenphong());
         txtMaCSVC.setText(csvc.getMacsvc());
+        System.out.println(csvc.getMacsvc());
         txtTenCSVC.setText(csvc.getTencsvc());
         txtSoLuong.setText(String.valueOf(csvc.getSoluong()));
+        if (csvc.getTrangthai() == 0) {
+            rdoTT_Tot.setSelected(true);
+        } else {
+            rdoTT_BaoTri.setSelected(true);
+        }
     }
 
     /**
@@ -108,6 +121,7 @@ public class Form_CSVC extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGrTrangThai = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         cboChiNhanh = new javax.swing.JComboBox<>();
         cboPhong = new javax.swing.JComboBox<>();
@@ -117,6 +131,9 @@ public class Form_CSVC extends javax.swing.JPanel {
         txtTenCSVC = new javax.swing.JTextField();
         txtSoLuong = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        lblTrangThai = new javax.swing.JLabel();
+        rdoTT_Tot = new javax.swing.JRadioButton();
+        rdoTT_BaoTri = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCoSoVatChat = new javax.swing.JTable();
         btnThem = new javax.swing.JButton();
@@ -168,6 +185,14 @@ public class Form_CSVC extends javax.swing.JPanel {
 
         jLabel3.setText("Số lượng");
 
+        lblTrangThai.setText("Trạng thái");
+
+        btnGrTrangThai.add(rdoTT_Tot);
+        rdoTT_Tot.setText("Tốt");
+
+        btnGrTrangThai.add(rdoTT_BaoTri);
+        rdoTT_BaoTri.setText("Bảo trì");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -175,11 +200,12 @@ public class Form_CSVC extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cboChiNhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,13 +214,21 @@ public class Form_CSVC extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtMaCSVC, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                                    .addComponent(txtTenCSVC)))))
+                                    .addComponent(txtTenCSVC, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtMaCSVC)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(39, 39, 39))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(lblTrangThai)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39))
+                        .addComponent(rdoTT_Tot)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTT_BaoTri)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,27 +240,30 @@ public class Form_CSVC extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtMaCSVC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMaCSVC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTenCSVC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(lblTrangThai)
+                    .addComponent(rdoTT_Tot)
+                    .addComponent(rdoTT_BaoTri))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         tblCoSoVatChat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Chi nhánh", "Rạp", "Tên CSVC", "Số lượng"
+                "Chi nhánh", "Rạp", "Tên CSVC", "Số lượng", "Trạng thái"
             }
         ));
         tblCoSoVatChat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -277,7 +314,7 @@ public class Form_CSVC extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -298,11 +335,16 @@ public class Form_CSVC extends javax.swing.JPanel {
         csvc.setTencsvc(txtTenCSVC.getText());
         phong.setMaPhong(phong_list.get(cboPhong.getSelectedIndex()).getMaPhong());
         csvc.setSoluong(Integer.parseInt(txtSoLuong.getText()));
+        if (rdoTT_Tot.isSelected() == true) {
+            csvc.setTrangthai(0);
+        } else {
+            csvc.setTrangthai(1);
+        }
 
         maphong = phong.getMaPhong();
 
         csvcDAO.Insert(csvc.getMacsvc(), csvc.getTencsvc(), csvc.getMacsvc() + ".png");
-        csvcDAO.InsertCTCSVC(csvc.getMacsvc(), maphong, csvc.getSoluong());
+        csvcDAO.InsertCTCSVC(csvc.getMacsvc(), maphong, csvc.getSoluong(), csvc.getTrangthai());
 
         selected = cboChiNhanh.getSelectedIndex() + 1;
         String maCN = "cn" + selected;
@@ -316,6 +358,13 @@ public class Form_CSVC extends javax.swing.JPanel {
             String macsvc = txtMaCSVC.getText();
             String tencsvc = txtTenCSVC.getText();
             int soluong = Integer.parseInt(txtSoLuong.getText());
+            int trangthai;
+
+            if (rdoTT_Tot.isSelected() == true) {
+                trangthai = 0;
+            } else {
+                trangthai = 1;
+            }
 
             csvc = new CoSoVatChat();
             phong = new PhongChieu();
@@ -326,7 +375,7 @@ public class Form_CSVC extends javax.swing.JPanel {
             maphong = phong.getMaPhong();
 
             csvcDAO.Update(macsvc, tencsvc, macsvc + ".png");
-            csvcDAO.UpdateCTCSVC(macsvc, maphong, soluong);
+            csvcDAO.UpdateCTCSVC(macsvc, maphong, soluong, trangthai);
         } catch (SQLException ex) {
             Logger.getLogger(Form_CSVC.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -356,7 +405,7 @@ public class Form_CSVC extends javax.swing.JPanel {
 
     private void cboChiNhanhMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboChiNhanhMouseReleased
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_cboChiNhanhMouseReleased
 
     private void cboChiNhanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboChiNhanhMouseClicked
@@ -367,13 +416,14 @@ public class Form_CSVC extends javax.swing.JPanel {
         // TODO add your handling code here:
         selected = cboChiNhanh.getSelectedIndex() + 1;
         String maCN = "cn" + selected;
-        
+
         fillToTable(maCN);
     }//GEN-LAST:event_cboChiNhanhItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhap;
+    private javax.swing.ButtonGroup btnGrTrangThai;
     private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cboChiNhanh;
     private javax.swing.JComboBox<String> cboPhong;
@@ -382,6 +432,9 @@ public class Form_CSVC extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTrangThai;
+    private javax.swing.JRadioButton rdoTT_BaoTri;
+    private javax.swing.JRadioButton rdoTT_Tot;
     private javax.swing.JTable tblCoSoVatChat;
     private javax.swing.JTextField txtMaCSVC;
     private javax.swing.JTextField txtSoLuong;
