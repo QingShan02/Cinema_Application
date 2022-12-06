@@ -90,7 +90,7 @@ public class Form_CSVC extends javax.swing.JPanel {
     public void fillToCbxPhong() {
         cboModel = (DefaultComboBoxModel) cboPhong.getModel();
         cboModel.removeAllElements();
-        phong_list = phongDAO.Select();
+        phong_list = phongDAO.SelectTenPhong();
 
         phong_list.stream().forEach(p -> {
             cboPhong.addItem(p.getTenPhong());
@@ -352,8 +352,10 @@ public class Form_CSVC extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnCapNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhapActionPerformed
+        String macn = (String) cboChiNhanh.getSelectedItem();
         try {
             // TODO add your handling code here:
+
             String maphong;
             String macsvc = txtMaCSVC.getText();
             String tencsvc = txtTenCSVC.getText();
@@ -376,9 +378,11 @@ public class Form_CSVC extends javax.swing.JPanel {
 
             csvcDAO.Update(macsvc, tencsvc, macsvc + ".png");
             csvcDAO.UpdateCTCSVC(macsvc, maphong, soluong, trangthai);
+
         } catch (SQLException ex) {
             Logger.getLogger(Form_CSVC.class.getName()).log(Level.SEVERE, null, ex);
         }
+        fillToTable(macn);
     }//GEN-LAST:event_btnCapNhapActionPerformed
 
     private void tblCoSoVatChatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCoSoVatChatMouseClicked
