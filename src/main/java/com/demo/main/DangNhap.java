@@ -219,11 +219,37 @@ dao = new NguoiDungDao();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+public boolean CheckValidate(int id, String text){
+    if(id ==1){
+        if(text.equals("")){
+            new ThongBao("Không được bỏ trống số điện thoại", 1).show();
+            return false;
+        }
+        if(!text.matches("//d{10}")){
+            new ThongBao("Không đúng định dạng điện thoại",1).show();
+            return false;
+        }
+    }else{
+        if(text.equals("")){
+            new ThongBao("Không được bỏ trống mật khẩu", 1).show();
+            return false;
+        }
+        if(text.length()<8){
+            new ThongBao("Mật khẩu phải từ 8 kí tự trở lên",1).show();
+            return false;
+        }
+    }
+    return true;
+}
     private void btnDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDNActionPerformed
         // TODO add your handling code here:
         String username = txtEmailSDT.getText();
         String pass = txtPass.getText();
+        if(!CheckValidate(1, username)){
+            return;
+        }else if(!CheckValidate(2, pass)){
+            return;
+        }
         System.out.println(username + "," + pass);
         tb = new ThongBao("", 0);
         dao.Select().stream().forEach(s -> {
@@ -244,10 +270,6 @@ dao = new NguoiDungDao();
                 return;
             }
         });
-        if (tb.getNoidung().equalsIgnoreCase("")) {
-            tb = new ThongBao("Sai mật khẩu", 1);
-            tb.show();
-        }
     }//GEN-LAST:event_btnDNActionPerformed
 
     private void txtEmailSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailSDTActionPerformed
