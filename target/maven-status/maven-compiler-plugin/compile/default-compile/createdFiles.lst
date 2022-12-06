@@ -1,6 +1,7 @@
 com\raven\form\Form_DoiMatKhau$6.class
 com\raven\form\Form_XacThuc.class
 com\raven\sendEmail\EmailMain.class
+com\demo\form\Form_QLVeOnline$5.class
 com\raven\DAO\GheDao.class
 com\raven\swing\Table$2.class
 com\demo\DAO\JasperReportFill.class
@@ -49,10 +50,7 @@ com\raven\model\Topping.class
 com\demo\model\CoSoVatChat.class
 com\raven\form\Form_DoiMatKhau$2.class
 com\demo\form\Form_CSVC$3.class
-<<<<<<< HEAD
 com\demo\helper\ReportHelper.class
-=======
->>>>>>> origin/master
 com\demo\form\opencv.class
 com\raven\main\Main$MenuItemListener.class
 com\raven\form\Form_ThanhToan$1.class
