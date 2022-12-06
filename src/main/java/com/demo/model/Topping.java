@@ -38,7 +38,7 @@ public class Topping implements Serializable{
         this.SoLuongMua = SoLuongMua;
     }
 
-    public Topping(String MaTopping, String TenTopping, double Gia, int SoLuongMua) {
+    public Topping(String MaTopping, String TenTopping, int SoLuongMua , double Gia) {
         this.MaTopping = MaTopping;
         this.TenTopping = TenTopping;
         this.Gia = Gia;
