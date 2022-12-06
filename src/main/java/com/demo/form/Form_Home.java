@@ -46,7 +46,6 @@ public class Form_Home extends javax.swing.JPanel {
         listXC = daoNC.SelectGio(Main.maCN);
         System.out.println(listXC.size());
         jTabbedPane1.setTabPlacement(JTabbedPane.LEFT);
-
 //        cn = new Form_ChoNgoi();
         JPanel panel1;
         if (listXC.size() != 0) {
@@ -84,6 +83,7 @@ public class Form_Home extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        txtSearch = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -94,22 +94,33 @@ public class Form_Home extends javax.swing.JPanel {
             }
         });
 
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+            .addComponent(txtSearch)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+int n;
+    String name;
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
-        int n = jTabbedPane1.getSelectedIndex();
-        String name = jTabbedPane1.getTitleAt(n);
+        n = jTabbedPane1.getSelectedIndex();
+        name = jTabbedPane1.getTitleAt(n);
         listPhim = daoPhim.SelectTenPhim(name);
         JScrollBar sc = new JScrollBar();
 //                        JPanel panel = new JPanel();
@@ -120,17 +131,32 @@ public class Form_Home extends javax.swing.JPanel {
         listPhim.forEach(s -> {
             listP.get(n).add(new TablePhim(s, s.getStt_xc(), name));
         });
-//                                                listP.get(n).add(sc);
-//                                                sc.repaint();
-//                        sc.revalidate();
         listP.get(n).repaint();
         listP.get(n).validate();
         jTabbedPane1.repaint();
         jTabbedPane1.revalidate();
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+        String text = txtSearch.getText();
+
+        listP.get(n).removeAll();
+        listPhim.forEach(s -> {
+            if (s.getTenPhim().equalsIgnoreCase(text)) {
+                listP.get(n).add(new TablePhim(s, s.getStt_xc(), name));
+                return;
+            }
+
+        });
+        listPhim.forEach(s -> {
+            listP.get(n).add(new TablePhim(s, s.getStt_xc(), name));
+        });
+    }//GEN-LAST:event_txtSearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

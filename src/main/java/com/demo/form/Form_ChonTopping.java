@@ -8,6 +8,7 @@ import com.demo.helper.ReportHelper;
 import com.demo.model.Model_CTopping;
 import com.raven.DAO.ToppingDao;
 import com.raven.main.Main;
+import com.raven.model.ThanhToan;
 import com.raven.model.Topping;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,6 +18,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.jfree.chart.block.Arrangement;
 
 /**
  *
@@ -48,8 +52,16 @@ public class Form_ChonTopping extends javax.swing.JPanel {
         initComponents();
         dao = new ToppingDao();
         FillTopping();
-
-        List<Topping> list = new ArrayList<>();
+        try {
+            ThanhToan tt = (ThanhToan) readObj("temp.txt");
+            tt.setListTopping(null);
+            writeObj("temp.txt", tt);
+        } catch (IOException ex) {
+            Logger.getLogger(Form_ChonTopping.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Form_ChonTopping.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        List<Topping> list = new ArrayList<>();
     }
 
     public void FillTopping() {

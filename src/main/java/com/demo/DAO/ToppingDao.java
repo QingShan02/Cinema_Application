@@ -58,8 +58,8 @@ public class ToppingDao {
     }
     public void InsertCT(ChiTietTopping t){
         try {
-            pst = con.prepareStatement("insert into ChiTietTopping values(?,?,?)");
-            pst.setInt(1, t.getIdVe());
+            pst = con.prepareStatement("insert into ChiTietTopping(MaHD,MaTopping,SoLuongMua) values(?,?,?)");
+            pst.setString(1, t.getMaHD());
             pst.setString(2, t.getMaTopping());
             pst.setInt(3, t.getSoLuongMua());
             pst.executeUpdate();

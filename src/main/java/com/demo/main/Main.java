@@ -98,23 +98,25 @@ public class Main extends javax.swing.JFrame {
                     setForm(new Form_Home());
                 }else if (index == 1) {
                     setForm(new Form_CSVC());
-                } else if (index == 2) {
-                    setForm(new Form_Topping());
+                }else if(index ==2){
+                    setForm(new Form_QLVeOnline());
                 } else if (index == 3) {
+                    setForm(new Form_Topping());
+                } else if (index == 4) {
                     setForm(new Form_ThongKeCN());
                 }
-                else if (index == 5) {
-                    setForm(new Setting());
-                }
+//                else if (index == 5) {
+//                    setForm(new Setting());
+//                }
 //                else if (index == 5) {
 //                    setForm(new Form_DoiMatKhau());
 //                } 
                 else if (index == 6) {
                     setForm(new Form_XacThuc());
                 } else if (index == 7) {
-                    setForm(new Form_XacThuc());
-                } else if (index == 8) {
                     DangXuat();
+                } else if (index == 8) {
+                    System.exit(0);
                 }
 
             }
@@ -141,7 +143,6 @@ public class Main extends javax.swing.JFrame {
 
         public void actionPerformed(ActionEvent e) {
                     mainPanel.removeAll();
-        System.out.println(">>5");
         mainPanel.add(cp);
         mainPanel.repaint();
         mainPanel.revalidate();

@@ -11,9 +11,11 @@ import com.raven.DAO.GheDao;
 import com.raven.DAO.NgayChieuDao;
 import com.raven.DAO.PhimDao;
 import com.raven.DAO.PhongDao;
+import com.raven.DAO.ToppingDao;
 import com.raven.DAO.VeDao;
 import com.raven.main.DangNhap;
 import com.raven.main.Main;
+import com.raven.model.ChiTietTopping;
 import com.raven.model.Model_ChonTopping1;
 import com.raven.model.ThanhToan;
 import com.raven.model.Topping;
@@ -22,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,8 +77,9 @@ public class Form_ThanhToan extends javax.swing.JPanel {
     }
 
     public void GetTime() {
+        SimpleDateFormat fomat = new SimpleDateFormat("yyyy-MM-dd");
         Date d = new Date();
-        lblTime.setText(d.toGMTString());
+        lblTime.setText(fomat.format(d));
 
     }
 
@@ -108,14 +112,14 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         try {
             List<Topping> tpList = tt.getListTopping();
             String topping = "";
-            if(tpList !=null){
-            for (Topping tp : tpList) {
+            if (tpList != null) {
+                for (Topping tp : tpList) {
 
-                topping += (tp.getTenTopping() + " :" + tp.getSoLuongMua() + " x" + tp.getGia() + " = " + tp.getGia() * tp.getSoLuongMua() + "\n");
-                pnlTopping.add(new Model_ChonTopping1(tp));
-            }
-            pnlTopping.repaint();
-            pnlTopping.revalidate();
+                    topping += (tp.getTenTopping() + " :" + tp.getSoLuongMua() + " x" + tp.getGia() + " = " + tp.getGia() * tp.getSoLuongMua() + "\n");
+                    pnlTopping.add(new Model_ChonTopping1(tp));
+                }
+                pnlTopping.repaint();
+                pnlTopping.revalidate();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,19 +130,8 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         try {
             VeDao daoVe = new VeDao();
             tt = (ThanhToan) readObj("temp.txt");
-//            if (tt.getListTopping() != null) {
-//                for (Topping s : tt.getListTopping()) {
-//                    temp += s.getGia() * s.getSoLuongMua();
-//                }
-//                daoVe.Insert(new Ve(tt.getGiaGhe() * 1.05 + temp, 0.05, tt.getMaCTGhe(), ""));
-//                System.out.println();
-//                tt.getListTopping().forEach(s -> {
-//                    new ToppingDao().InsertCT(new ChiTietTopping(daoVe.findMaxId(), s.getMaTopping(), s.getSoLuongMua()));
-//
-//                });
-//            } else {
+
             daoVe.Insert(new Ve(tt.getGiaGhe() * 1.05 + temp, 0.05, tt.getMaCTGhe(), tt.getStt_xc()));
-//            }
         } catch (IOException ex) {
             Logger.getLogger(Form_ThanhToan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -245,7 +238,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         lblTenPhim1.setText("Topping");
 
         pnlTopping.setBackground(new java.awt.Color(255, 255, 255));
-        pnlTopping.setLayout(new java.awt.GridLayout(1, 1, 5, 0));
+        pnlTopping.setLayout(new javax.swing.BoxLayout(pnlTopping, javax.swing.BoxLayout.Y_AXIS));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -255,15 +248,6 @@ public class Form_ThanhToan extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel8))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblTenPhim1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 68, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,12 +265,21 @@ public class Form_ThanhToan extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(2, 2, 2))
-                            .addComponent(pnlTopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblTenGhe)))))
+                                .addComponent(lblTenGhe))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel8))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblTenPhim1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(pnlTopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +304,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTenPhim1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlTopping, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlTopping, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -328,11 +321,26 @@ public class Form_ThanhToan extends javax.swing.JPanel {
 
         String a = UUID.randomUUID().toString();
         System.out.println(a);
-        daoHD.Insert(new HoaDon(a, daoVe.findMaxId(), java.time.LocalDate.now() + "", tt.getGiaGhe() * 1.05 + temp));
+        if (tt.getListTopping() != null) {
+            for (Topping s : tt.getListTopping()) {
+                temp += s.getGia() * s.getSoLuongMua();
+            }
+            daoHD.Insert(new HoaDon(a, daoVe.findMaxId(), java.time.LocalDate.now() + "", tt.getGiaGhe() * 1.05 + temp));
+
+            tt.getListTopping().forEach(s -> {
+                new ToppingDao().InsertCT(new ChiTietTopping(a, s.getMaTopping(), s.getSoLuongMua()));
+
+            });
+        } else {
+            daoHD.Insert(new HoaDon(a, daoVe.findMaxId(), java.time.LocalDate.now() + "", tt.getGiaGhe() * 1.05 + temp));
+
+        }
         Hashtable map = new Hashtable();
         map.put("maHD", a);
         ConnectDB.inHoaDon(map);
-
+        Hashtable mapT = new Hashtable();
+        mapT.put("idVe", daoVe.findMaxId());
+        ConnectDB.inTP(mapT);
         Main.mainF.removeAll();
         Main.mainF.add(new Form_Home());
         Main.mainF.repaint();
