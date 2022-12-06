@@ -225,11 +225,11 @@ public boolean CheckValidate(int id, String text){
             new ThongBao("Không được bỏ trống số điện thoại", 1).show();
             return false;
         }
-        if(!text.matches("//d{10}")){
+        if(!text.matches("[0-9]{9,10}")){
             new ThongBao("Không đúng định dạng điện thoại",1).show();
             return false;
         }
-    }else{
+    }else if(id ==2){
         if(text.equals("")){
             new ThongBao("Không được bỏ trống mật khẩu", 1).show();
             return false;
