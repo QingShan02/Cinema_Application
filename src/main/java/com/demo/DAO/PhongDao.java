@@ -54,6 +54,22 @@ public class PhongDao {
         }
         return list;
     }
+    
+    public List<PhongChieu> SelectTenPhong() {
+        List<PhongChieu> list = new ArrayList<>();
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery("select distinct tenphong from PhongChieu order by tenphong");
+            while (rs.next()) {
+                list.add(new PhongChieu(rs.getString(1)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhongDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return list;
+    }
+    
     public PhongChieu SelectPhong(String MaPhim, int Ngay){
         PhongChieu phg = null;
         try {

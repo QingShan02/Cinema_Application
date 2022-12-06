@@ -20,4 +20,8 @@ import lombok.NoArgsConstructor;
 public class PhongChieu implements Serializable{
     private String MaPhong;
     private String TenPhong;
+    
+    public PhongChieu(String TenPhong) {
+        this.TenPhong = TenPhong;
+    } 
 }

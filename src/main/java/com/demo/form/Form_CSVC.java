@@ -90,7 +90,7 @@ public class Form_CSVC extends javax.swing.JPanel {
     public void fillToCbxPhong() {
         cboModel = (DefaultComboBoxModel) cboPhong.getModel();
         cboModel.removeAllElements();
-        phong_list = phongDAO.Select();
+        phong_list = phongDAO.SelectTenPhong();
 
         phong_list.stream().forEach(p -> {
             cboPhong.addItem(p.getTenPhong());
