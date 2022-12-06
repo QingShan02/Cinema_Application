@@ -270,6 +270,10 @@ public boolean CheckValidate(int id, String text){
                 return;
             }
         });
+        if(tb.getNoidung().equals("")){
+            tb = new ThongBao("Đăng nhập thất bại vui lòng kiểm tra mật khẩu", 1);
+            tb.show();
+        }
     }//GEN-LAST:event_btnDNActionPerformed
 
     private void txtEmailSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailSDTActionPerformed
