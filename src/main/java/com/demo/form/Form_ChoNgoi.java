@@ -46,6 +46,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     public Form_ChoNgoi() {
         initComponents();
     }
+    
+    double giaVe = 0;
     Color cl;
     List<ChiTietGhe> List;
     List<ChiTietGhe> List2;
@@ -76,6 +78,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
         @Override
         public void mouseClicked(MouseEvent e) {
             try {
+                giaVe += s.getGia();
+                System.out.println(giaVe);
                 ThanhToan tt = (ThanhToan) readObj("temp.txt");
                 tt.setMaCTGhe(s.getMaCTGhe());
                 tt.setGiaGhe(s.getGia());
@@ -83,7 +87,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                 tt.setMaGhe(s.getMaGhe());
                 new PrintWriter("temp.txt").close();
                 writeObj("temp.txt", tt);
-                lblGiaGhe.setText(lblGiaGhe.getText() + s.getGia());
+                lblGiaGhe.setText(lblGiaGhe.getText() + giaVe);
                 System.out.println(tt.getMaPhong());
             } catch (IOException ex) {
                 Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);

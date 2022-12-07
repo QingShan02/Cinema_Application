@@ -12,7 +12,10 @@ import com.raven.DAO.PhongDao;
 import com.raven.model.PhongChieu;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -90,11 +93,15 @@ public class Form_CSVC extends javax.swing.JPanel {
     public void fillToCbxPhong() {
         cboModel = (DefaultComboBoxModel) cboPhong.getModel();
         cboModel.removeAllElements();
-        phong_list = phongDAO.SelectTenPhong();
-
-        phong_list.stream().forEach(p -> {
-            cboPhong.addItem(p.getTenPhong());
-        });
+        phong_list = phongDAO.Select();
+        HashMap<String, Integer> phong = new HashMap<String, Integer>();
+        Set<String> phongKey = phong.keySet();
+        for (int i = 0; i < phong_list.size(); i++) {
+            phong.put(phong_list.get(i).getTenPhong(), i);
+        }
+        for (String i : phongKey) {
+            cboPhong.addItem(i);
+        }
     }
 
     public void showDetails() {
