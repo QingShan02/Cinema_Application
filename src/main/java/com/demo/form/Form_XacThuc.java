@@ -54,20 +54,21 @@ public class Form_XacThuc extends javax.swing.JPanel {
 //        }
     }
 
-    public void checkVailidate() {
+    public boolean checkVailidate() {
         String name = txtMaXacThuc.getText();
         if (txtMaXacThuc.getText().isEmpty()) {
             txtMaXacThuc.setBackground(Color.yellow);
             lblMXT.setText("Chưa nhập mã xác thực");
-            return;
+            return false;
         } else {
             if (!name.equalsIgnoreCase(maXacThuc)) {
                 txtMaXacThuc.setBackground(Color.yellow);
-                lblMaXacThuc.setText("Mã xác thực không đúng");
-                return;
+                lblMXT.setText("Mã xác thực không đúng");
+                return false;
             } else {
                 txtMaXacThuc.setBackground(Color.white);
-                lblMaXacThuc.setText("");
+                lblMXT.setText("");
+                return true;
             }
 
         }
@@ -182,7 +183,9 @@ public class Form_XacThuc extends javax.swing.JPanel {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-        checkVailidate();
+        if(!checkVailidate()){
+            return;
+        };
         mainJPanel.removeAll();
         mainJPanel.add(new Form_DoiMatKhau());
         mainJPanel.repaint();

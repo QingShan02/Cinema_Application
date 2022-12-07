@@ -93,7 +93,7 @@ public class NguoiDungDao {
     }
 
     public static void UpdateNV(String MK) throws SQLException {
-        PreparedStatement pt = con.prepareStatement("UPDATE NhanVien SET MatKhau = ? WHERE MaNV = '" + MaNV + "'");
+        PreparedStatement pt = con.prepareStatement("UPDATE NguoiDung SET MatKhau = ? WHERE MaNguoiDUng = '" + MaNV + "'");
         pt.setString(1, MK);
         pt.executeUpdate();
         System.out.println(MaNV);
