@@ -137,6 +137,11 @@ public class Form_Topping extends javax.swing.JPanel {
         btnTimKiem.setBackground(new java.awt.Color(130, 0, 0));
         btnTimKiem.setForeground(new java.awt.Color(255, 255, 255));
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         btnTimKiem1.setBackground(new java.awt.Color(130, 0, 0));
         btnTimKiem1.setForeground(new java.awt.Color(242, 242, 242));
@@ -345,6 +350,10 @@ public class Form_Topping extends javax.swing.JPanel {
         // TODO add your handling code here:
         ChonAnh();
     }//GEN-LAST:event_btnTimKiem1ActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

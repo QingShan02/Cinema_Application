@@ -8,6 +8,7 @@ import com.demo.helper.ReportHelper;
 import com.demo.model.Model_CTopping;
 import com.raven.DAO.ToppingDao;
 import com.raven.main.Main;
+import com.raven.model.ThanhToan;
 import com.raven.model.Topping;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,6 +18,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.jfree.chart.block.Arrangement;
 
 /**
  *
@@ -48,8 +52,16 @@ public class Form_ChonTopping extends javax.swing.JPanel {
         initComponents();
         dao = new ToppingDao();
         FillTopping();
-
-        List<Topping> list = new ArrayList<>();
+        try {
+            ThanhToan tt = (ThanhToan) readObj("temp.txt");
+            tt.setListTopping(null);
+            writeObj("temp.txt", tt);
+        } catch (IOException ex) {
+            Logger.getLogger(Form_ChonTopping.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Form_ChonTopping.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        List<Topping> list = new ArrayList<>();
     }
 
     public void FillTopping() {
@@ -117,10 +129,10 @@ public class Form_ChonTopping extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
                 .addComponent(btnThanhToan)
-                .addGap(152, 152, 152))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +147,9 @@ public class Form_ChonTopping extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlTopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

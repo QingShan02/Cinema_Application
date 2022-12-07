@@ -64,7 +64,6 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable, Thr
         initComponents();
         dao = new VeDao();
         daoHD = new HoaDonDao();
-        list = dao.SelectVeOnline();
         FillToTable();
         daoTP = new ToppingDao();
     }
@@ -90,6 +89,9 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable, Thr
     }
 
     void FillTopping() {
+        list.clear();
+        list = dao.SelectVeOnline();
+
         modelTP.setRowCount(0);
         listTP.forEach(s -> {
             modelTP.addRow(new Object[]{s.getTenTopping(), s.getSoLuongMua(), s.getGia()});
@@ -220,6 +222,10 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable, Thr
         Hashtable map = new Hashtable();
         map.put("maHD", a);
         ConnectDB.inHoaDon(map);
+        Hashtable mapT = new Hashtable();
+        map.put("idVe", idve);
+        ConnectDB.inTP(mapT);
+        FillToTable();
     }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -246,13 +252,13 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable, Thr
             }
         }
     }//GEN-LAST:event_jTextField1KeyReleased
-DefaultTableModel modelTP;
+    DefaultTableModel modelTP;
     private void tblVeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVeMouseClicked
         // TODO add your handling code here:
-        modelTP = (DefaultTableModel)tblTopping.getModel();
+        modelTP = (DefaultTableModel) tblTopping.getModel();
         modelTP.setRowCount(0);
         listTP = daoTP.SelectTPofVe((int) list.get(tblVe.getSelectedRow())[0]);
-        if(listTP.size()!=0){
+        if (listTP.size() != 0) {
             FillTopping();
         }
     }//GEN-LAST:event_tblVeMouseClicked

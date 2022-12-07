@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChiTietTopping {
-    private int IdVe;
+    private String MaHD;
     private String MaTopping;
     private int SoLuongMua;
 }

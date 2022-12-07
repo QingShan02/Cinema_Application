@@ -20,13 +20,13 @@ public class NguoiDung implements Serializable{
     private String MaNguoiDung;
     private String TenNguoiDung;
     private String MatKhau;
-    private String SoDT;
+    private String Email;
     private String MaCN;
    
 
-    public NguoiDung(String MatKhau, String SoDT) {
+    public NguoiDung(String MatKhau, String Email) {
         this.MatKhau = MatKhau;
-        this.SoDT = SoDT;
+        this.Email = Email;
     }
     
 }

@@ -141,7 +141,6 @@
             <artifactId>bridj</artifactId>
             <version>0.6.2</version>
         </dependency>
-
     </dependencies>
     <name>App</name>
     <repositories>

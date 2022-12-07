@@ -27,10 +27,10 @@ public class NguoiDungDao {
     static ResultSet rs;
     static String MaNV;
 
-    public static void setMaNV(String MaNV){
+    public static void setMaNV(String MaNV) {
         NguoiDungDao.MaNV = MaNV;
-        }
-    
+    }
+
     public void Insert(NguoiDung nv) {
         try {
             pst = con.prepareStatement("insert into NguoiDung values(?,?,?,?,?)");
@@ -55,8 +55,23 @@ public class NguoiDungDao {
         return list;
     }
 
+    public NguoiDung findById() {
+        NguoiDung nd = new NguoiDung();
+        try {
+            pst = con.prepareStatement("select * from nguoidung where manguoidung = ?");
+            pst.setString(1, MaNV);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                nd = new NguoiDung(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NguoiDungDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nd;
+    }
+
     public static void UpdateNhanVien(String HoTen, int GioiTinh, String MatKhau, String NgaySinh, String SoDT, String MaCV, String MaNV) throws SQLException {
-        PreparedStatement st = con.prepareStatement("update NguoiDung set TenNguoiDung = ?, MatKhau = ?, SoDT = ?, MaCN = ? where MaNguoiDung =?");
+        PreparedStatement st = con.prepareStatement("update NguoiDung set TenNguoiDung = ?, MatKhau = ?, Email = ?, MaCN = ? where MaNguoiDung =?");
         st.setString(1, HoTen);
         st.setInt(2, GioiTinh);
         st.setString(3, MatKhau);
@@ -66,8 +81,8 @@ public class NguoiDungDao {
         st.setString(7, MaNV);
         st.executeUpdate();
     }
-    
-    public static void DeleteNhanVien(String MaNV){
+
+    public static void DeleteNhanVien(String MaNV) {
         try {
             PreparedStatement pt = con.prepareStatement("delete from NguoiDung where MaNguoiDung = ?");
             pt.setString(1, MaNV);
@@ -77,8 +92,8 @@ public class NguoiDungDao {
         }
     }
 
-     public static void UpdateNV(String MK) throws SQLException {
-        PreparedStatement pt = con.prepareStatement("UPDATE NhanVien SET MatKhau = ? WHERE MaNV = '" + MaNV + "'");
+    public static void UpdateNV(String MK) throws SQLException {
+        PreparedStatement pt = con.prepareStatement("UPDATE NguoiDung SET MatKhau = ? WHERE MaNguoiDUng = '" + MaNV + "'");
         pt.setString(1, MK);
         pt.executeUpdate();
         System.out.println(MaNV);

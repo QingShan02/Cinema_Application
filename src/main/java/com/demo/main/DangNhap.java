@@ -30,7 +30,6 @@ public class DangNhap extends javax.swing.JFrame {
      */
     NguoiDungDao dao;
     ThongBao tb;
-
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
@@ -143,7 +142,7 @@ dao = new NguoiDungDao();
         lblEmailSDT.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblEmailSDT.setText("Email hoặc số điện thoại ");
 
-        txtEmailSDT.setText("0123456778");
+        txtEmailSDT.setText("ND01@gmail.com");
         txtEmailSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailSDTActionPerformed(evt);
@@ -219,15 +218,41 @@ dao = new NguoiDungDao();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+public boolean CheckValidate(int id, String text){
+    if(id ==1){
+        if(text.equals("")){
+            new ThongBao("Không được bỏ trống Email", 1).show();
+            return false;
+        }
+//        if(!text.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")){
+//            new ThongBao("Không đúng định dạng Email",1).show();
+//            return false;
+//        }
+    }else if(id ==2){
+        if(text.equals("")){
+            new ThongBao("Không được bỏ trống mật khẩu", 1).show();
+            return false;
+        }
+        if(text.length()<8){
+            new ThongBao("Mật khẩu phải từ 8 kí tự trở lên",1).show();
+            return false;
+        }
+    }
+    return true;
+}
     private void btnDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDNActionPerformed
         // TODO add your handling code here:
         String username = txtEmailSDT.getText();
         String pass = txtPass.getText();
+        if(!CheckValidate(1, username)){
+            return;
+        }else if(!CheckValidate(2, pass)){
+            return;
+        }
         System.out.println(username + "," + pass);
         tb = new ThongBao("", 0);
         dao.Select().stream().forEach(s -> {
-            if (username.equalsIgnoreCase(s.getSoDT()) && pass.equalsIgnoreCase(s.getMatKhau())) {
+            if (username.equalsIgnoreCase(s.getEmail()) && pass.equalsIgnoreCase(s.getMatKhau())) {
                 tb = new ThongBao("Đăng nhập thành công", 0);
                 tb.show();
                 try {
@@ -244,8 +269,8 @@ dao = new NguoiDungDao();
                 return;
             }
         });
-        if (tb.getNoidung().equalsIgnoreCase("")) {
-            tb = new ThongBao("Sai mật khẩu", 1);
+        if(tb.getNoidung().equals("")){
+            tb = new ThongBao("Đăng nhập thất bại vui lòng kiểm tra mật khẩu", 1);
             tb.show();
         }
     }//GEN-LAST:event_btnDNActionPerformed
