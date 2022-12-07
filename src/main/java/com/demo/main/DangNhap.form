@@ -176,7 +176,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmailSDT">
           <Properties>
-            <Property name="text" type="java.lang.String" value="0123456778"/>
+            <Property name="text" type="java.lang.String" value="ND01@gmail.com"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailSDTActionPerformed"/>

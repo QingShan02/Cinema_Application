@@ -30,7 +30,6 @@ public class DangNhap extends javax.swing.JFrame {
      */
     NguoiDungDao dao;
     ThongBao tb;
-
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
@@ -143,7 +142,7 @@ dao = new NguoiDungDao();
         lblEmailSDT.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblEmailSDT.setText("Email hoặc số điện thoại ");
 
-        txtEmailSDT.setText("0123456778");
+        txtEmailSDT.setText("ND01@gmail.com");
         txtEmailSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailSDTActionPerformed(evt);
@@ -222,13 +221,13 @@ dao = new NguoiDungDao();
 public boolean CheckValidate(int id, String text){
     if(id ==1){
         if(text.equals("")){
-            new ThongBao("Không được bỏ trống số điện thoại", 1).show();
+            new ThongBao("Không được bỏ trống Email", 1).show();
             return false;
         }
-        if(!text.matches("[0-9]{9,10}")){
-            new ThongBao("Không đúng định dạng điện thoại",1).show();
-            return false;
-        }
+//        if(!text.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")){
+//            new ThongBao("Không đúng định dạng Email",1).show();
+//            return false;
+//        }
     }else if(id ==2){
         if(text.equals("")){
             new ThongBao("Không được bỏ trống mật khẩu", 1).show();
@@ -253,7 +252,7 @@ public boolean CheckValidate(int id, String text){
         System.out.println(username + "," + pass);
         tb = new ThongBao("", 0);
         dao.Select().stream().forEach(s -> {
-            if (username.equalsIgnoreCase(s.getSoDT()) && pass.equalsIgnoreCase(s.getMatKhau())) {
+            if (username.equalsIgnoreCase(s.getEmail()) && pass.equalsIgnoreCase(s.getMatKhau())) {
                 tb = new ThongBao("Đăng nhập thành công", 0);
                 tb.show();
                 try {

@@ -4,6 +4,8 @@
  */
 package com.raven.form;
 
+import com.raven.DAO.NguoiDungDao;
+import com.raven.main.DangNhap;
 import com.raven.main.Main;
 import com.raven.sendEmail.EmailMain;
 import java.awt.Color;
@@ -20,22 +22,23 @@ public class Form_XacThuc extends javax.swing.JPanel {
      * Creates new form Form_XacThuc
      */
     String maXacThuc;
+
     public Form_XacThuc() {
         initComponents();
-        EmailMain.GuiEmail("");
+        EmailMain.GuiEmail(new NguoiDungDao().findById());
+        maXacThuc = EmailMain.RanDom() + "";
         this.mainJPanel = Main.mainF;
     }
     JPanel mainJPanel;
 
     public Form_XacThuc(JPanel mainpJPanel) {
         initComponents();
-        EmailMain.GuiEmail("");
         this.mainJPanel = mainpJPanel;
     }
 
     public static void DoiMatKhau() {
 //        com.raven.sendEmail.EmailMain.GuiEmail("phamthitra1507@gmail.com");
-       
+
 //        String maXacThuc = JOptionPane.showInputDialog(null, "Nhập mã xác thực email");
 //
 //        if (maXacThuc.equals("")) {
@@ -49,20 +52,27 @@ public class Form_XacThuc extends javax.swing.JPanel {
 //                JOptionPane.showMessageDialog(null, "Nhập không chính xác!");
 //            }
 //        }
+    }
+
+    public void checkVailidate() {
+        String name = txtMaXacThuc.getText();
+        if (txtMaXacThuc.getText().isEmpty()) {
+            txtMaXacThuc.setBackground(Color.yellow);
+            lblMXT.setText("Chưa nhập mã xác thực");
+            return;
+        } else {
+            if (!name.equalsIgnoreCase(maXacThuc)) {
+                txtMaXacThuc.setBackground(Color.yellow);
+                lblMaXacThuc.setText("Mã xác thực không đúng");
+                return;
+            } else {
+                txtMaXacThuc.setBackground(Color.white);
+                lblMaXacThuc.setText("");
+            }
+
+        }
 
     }
-//    public void checkVailidate() {
-//        
-//             if(String.valueOf(txtMaXacThuc).length()==0){
-//                 txtMaXacThuc.setBackground(Color.yellow);
-//                 lblMXT.setText("Chưa nhập mã xác thực");
-//                 
-//             }else{
-//                 txtMaXacThuc.setBackground(Color.white);
-//                 lblMaXacThuc.setText("");
-//             }
-//
-//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -172,6 +182,7 @@ public class Form_XacThuc extends javax.swing.JPanel {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
+        checkVailidate();
         mainJPanel.removeAll();
         mainJPanel.add(new Form_DoiMatKhau());
         mainJPanel.repaint();

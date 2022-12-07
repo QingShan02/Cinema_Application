@@ -65,7 +65,7 @@ public class Form_Loading extends javax.swing.JFrame implements Runnable {
                                 return;
                             } else {
                                 NguoiDung list_temp = (NguoiDung) DangNhap.readObj("savetk.txt");
-                                dao.Select().stream().filter(s -> s.getSoDT().equalsIgnoreCase(list_temp.getSoDT())).forEach(s -> NguoiDungDao.setMaNV(s.getMaNguoiDung()));
+                                dao.Select().stream().filter(s -> s.getEmail().equalsIgnoreCase(list_temp.getEmail())).forEach(s -> NguoiDungDao.setMaNV(s.getMaNguoiDung()));
                                 ThanhToan tt = (ThanhToan) DangNhap.readObj("temp.txt");
                                 Main main = new Main(tt.getMaCN());
                                 main.show();

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.raven.sendEmail;
-
+import com.raven.model.NguoiDung;
 import com.raven.form.Form_DoiMatKhau;
 import java.util.Properties;
 import javax.mail.Message;
@@ -32,7 +32,7 @@ public class EmailMain {
         return random_int;
     }
 
-    public static void GuiEmail(String toEmail) {
+    public static void GuiEmail(NguoiDung nd) {
         final String username = "ngobakha2t4@gmail.com";
         final String password = "tsopgjhvyuygyygt";
         System.out.println(username);
