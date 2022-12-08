@@ -83,6 +83,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                 ThanhToan tt = (ThanhToan) readObj("temp.txt");
                 tt.setMaCTGhe(s.getMaCTGhe());
                 tt.setGiaGhe(s.getGia());
+                                btnNext.setEnabled(true);
 //                SetOpenButton(ghe, false);
                 tt.setMaGhe(s.getMaGhe());
                 new PrintWriter("temp.txt").close();
@@ -95,6 +96,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                 Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+                                btnNext.setEnabled(false);
+
                 if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                     e.getComponent().setBackground(Color.PINK);
                 } else {
@@ -106,6 +109,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                 
             } else {
                 e.getComponent().setBackground(Color.YELLOW);
+                                btnNext.setEnabled(true);
+
             }
         }
     }
@@ -140,7 +145,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
         listGheCV = daoPhong.Selectghecove(stt_xc);
 //        System.out.println(">>>" + gio);
         SoVe = listGheCV.stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size();
-        
+                        btnNext.setEnabled(false);
+
         SodoGhe();
         t = new Thread(this);
         t.start();
@@ -200,6 +206,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (e.getComponent().getBackground().equals(Color.YELLOW)) {
+                                            btnNext.setEnabled(false);
+
                             if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                                 e.getComponent().setBackground(Color.PINK);
                             } else if (Character.compare(s.getTenGhe().charAt(0), 'J') == 0) {
@@ -209,6 +217,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                             }
                         } else {
                             e.getComponent().setBackground(Color.YELLOW);
+                                            btnNext.setEnabled(true);
+
                         }
                     }
                 });

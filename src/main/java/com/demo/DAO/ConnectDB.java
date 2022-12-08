@@ -61,16 +61,14 @@ public class ConnectDB {
     }
         public static void inTP(Hashtable tp){
         try {
-            Class.forName("org.apache.batik.dom.svg.SVGDocumentFactory");
+//            Class.forName("org.apache.batik.dom.svg.SVGDocumentFactory");
             File path = new File("src/main/java/com/demo/form/hdTP.jrxml");
-            JasperDesign jdesign = JRXmlLoader.load(path.getAbsoluteFile());
-            JasperReport rpt = JasperCompileManager.compileReport(jdesign);
-            JasperPrint jprint = JasperFillManager.fillReport(rpt, tp, con);
+            JasperDesign jdesign1 = JRXmlLoader.load(path.getAbsoluteFile());
+            JasperReport rpt1 = JasperCompileManager.compileReport(jdesign1);
+            JasperPrint jprint1 = JasperFillManager.fillReport(rpt1, tp, con);
 //            JasperViewer.viewReport(jprint);
-            JasperPrintManager.printReport(jprint, false);
+            JasperPrintManager.printReport(jprint1, false);
         } catch (JRException ex) {
-            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         

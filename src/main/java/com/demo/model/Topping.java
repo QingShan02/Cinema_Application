@@ -24,10 +24,9 @@ public class Topping implements Serializable{
     private String hinh;
     private int SoLuongMua;
 
-    public Topping(String MaTopping, String TenTopping, int SoLuongDangCo, double Gia, String hinh) {
+    public Topping(String MaTopping, String TenTopping, double Gia, String hinh) {
         this.MaTopping = MaTopping;
         this.TenTopping = TenTopping;
-        this.SoLuongDangCo = SoLuongDangCo;
         this.Gia = Gia;
         this.hinh = hinh;
     }
@@ -42,7 +41,7 @@ public class Topping implements Serializable{
         this.MaTopping = MaTopping;
         this.TenTopping = TenTopping;
         this.Gia = Gia;
-        this.SoLuongMua = SoLuongMua;
+    this.SoLuongMua = SoLuongMua;
     }
 
  

@@ -49,7 +49,7 @@ public class ToppingDao {
             st = con.createStatement();
             rs = st.executeQuery("select * from Topping");
             while (rs.next()) {
-                list.add(new Topping(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4),rs.getString(5)));
+                list.add(new Topping(rs.getString(1), rs.getString(2), rs.getDouble(3),rs.getString(4)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ToppingDao.class.getName()).log(Level.SEVERE, null, ex);
