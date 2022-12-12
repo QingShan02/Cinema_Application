@@ -96,6 +96,7 @@ com\raven\model\Model_Card.class
 com\demo\form\Form_CSVC$7.class
 com\raven\main\Main$7.class
 com\raven\DAO\TheLoaiDao.class
+com\raven\form\Form_Home$3.class
 com\raven\main\DangKy.class
 com\demo\model\HoaDon.class
 com\raven\DAO\XuatChieuDao.class

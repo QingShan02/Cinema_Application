@@ -359,7 +359,7 @@ public class Form_CSVC extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnCapNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhapActionPerformed
-        String macn = (String) cboChiNhanh.getSelectedItem();
+        String macn = "cn" + (cboChiNhanh.getSelectedIndex() + 1);
         try {
             // TODO add your handling code here:
 
@@ -385,7 +385,6 @@ public class Form_CSVC extends javax.swing.JPanel {
 
             csvcDAO.Update(macsvc, tencsvc, macsvc + ".png");
             csvcDAO.UpdateCTCSVC(macsvc, maphong, soluong, trangthai);
-
         } catch (SQLException ex) {
             Logger.getLogger(Form_CSVC.class.getName()).log(Level.SEVERE, null, ex);
         }
