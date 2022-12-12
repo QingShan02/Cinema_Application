@@ -150,22 +150,32 @@ int n;
         String text = txtSearch.getText();
 
         listP.get(n).removeAll();
-        listPhim.forEach(s -> {
-            if (s.getTenPhim().equalsIgnoreCase(text)) {
+        listPhim.clear();
+        listPhim = daoPhim.SelectPhimByTenPhim(name, text);
+        System.out.println(listPhim.size());
+        if (listPhim.size() ==0) {
+            if (text.isEmpty()) {
+                listPhim.clear();
+                listPhim = daoPhim.SelectTenPhim(name);
+                listPhim.forEach(s -> {
+                    listP.get(n).add(new TablePhim(s, s.getStt_xc(), name));
+                });
+                listP.get(n).repaint();
+                listP.get(n).validate();
+            } else {
+                listP.get(n).setBackground(Color.black);
+                JLabel label = new JLabel("Không thể tìm thấy bộ phim");
+                label.setForeground(Color.white);
+                listP.get(n).add(label);
+            }
+        } else if (listPhim.size()>0) {
+            listPhim.forEach(s -> {
                 listP.get(n).add(new TablePhim(s, s.getStt_xc(), name));
                 listP.get(n).repaint();
-                listP.get(n).revalidate();
-                return;
-            }
-
-        });
-        if(text.isEmpty()){
-                    listPhim.forEach(s -> {
-            listP.get(n).add(new TablePhim(s, s.getStt_xc(), name));
-            listP.get(n).repaint();
-            listP.get(n).validate();
-        });
+                listP.get(n).validate();
+            });
         }
+
 
     }//GEN-LAST:event_txtSearchKeyReleased
 

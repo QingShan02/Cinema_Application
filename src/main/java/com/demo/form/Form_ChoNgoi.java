@@ -46,7 +46,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     public Form_ChoNgoi() {
         initComponents();
     }
-    
+
     double giaVe = 0;
     Color cl;
     List<ChiTietGhe> List;
@@ -61,34 +61,32 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
     String maPhongChieu, maPhimChieu;
     List<ChiTietGhe> listT = new ArrayList<>();
     int stt_xc;
-    
+
     class Mouse extends MouseAdapter {
-        
+
         Model_Ghe ghe;
         ChiTietGhe s;
-        
+
         public Mouse() {
         }
-        
+
         public Mouse(Model_Ghe ghe, ChiTietGhe s) {
             this.ghe = ghe;
             this.s = s;
         }
-        
+
         @Override
         public void mouseClicked(MouseEvent e) {
             try {
-                giaVe += s.getGia();
-                System.out.println(giaVe);
                 ThanhToan tt = (ThanhToan) readObj("temp.txt");
                 tt.setMaCTGhe(s.getMaCTGhe());
                 tt.setGiaGhe(s.getGia());
-                                btnNext.setEnabled(true);
+                btnNext.setEnabled(true);
 //                SetOpenButton(ghe, false);
                 tt.setMaGhe(s.getMaGhe());
                 new PrintWriter("temp.txt").close();
                 writeObj("temp.txt", tt);
-                lblGiaGhe.setText(lblGiaGhe.getText() + giaVe);
+                lblGiaGhe.setText(lblGiaGhe.getText() + s.getGia());
                 System.out.println(tt.getMaPhong());
             } catch (IOException ex) {
                 Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
@@ -96,7 +94,8 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                 Logger.getLogger(Form_ChoNgoi.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-                                btnNext.setEnabled(false);
+
+                btnNext.setEnabled(false);
 
                 if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                     e.getComponent().setBackground(Color.PINK);
@@ -105,28 +104,29 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                 }
 //                                new PrintWriter("temp.txt").close();
                 lblGiaGhe.setText("Giá:");
-//                SetOpenButton(ghe, true);
-                
+                SetOpenButton(ghe, true);
+
             } else {
                 e.getComponent().setBackground(Color.YELLOW);
-                                btnNext.setEnabled(true);
+                SetOpenButton(ghe, false);
+                btnNext.setEnabled(true);
 
             }
         }
     }
-    
+
     public static Object readObj(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
-        
+
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
         if (ois == null) {
             return null;
         }
         return ois.readObject();
     }
-    
+
     public static void writeObj(String path, Object data) throws FileNotFoundException, IOException {
         try (
-                 FileOutputStream fos = new FileOutputStream(path);  ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+                FileOutputStream fos = new FileOutputStream(path); ObjectOutputStream oos = new ObjectOutputStream(fos);) {
             oos.writeObject(data);
         }
     }
@@ -145,28 +145,39 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
         listGheCV = daoPhong.Selectghecove(stt_xc);
 //        System.out.println(">>>" + gio);
         SoVe = listGheCV.stream().filter(s -> s.getIdVe() != 0).collect(Collectors.toList()).size();
-                        btnNext.setEnabled(false);
+        btnNext.setEnabled(false);
 
         SodoGhe();
         t = new Thread(this);
         t.start();
-        
+
     }
-    
-//    public void SetOpenButton(Model_Ghe t, boolean check) {
-//        lModelGhe.stream().forEach(s -> {
-//            if (!t.equals(s)) {
-//                s.removeMouseListener(s.getMouseListeners()[0]);
-//            }
-//        });
-//        Sodochongoi3.repaint();
-//        Sodochongoi3.revalidate();
-//    }
-    
+
+    public void SetOpenButton(Model_Ghe t, boolean check) {
+        if (!check) {
+            lModelGhe.stream().forEach(s -> {
+                if (!t.equals(s)) {
+                    s.removeMouseListener(s.getMouseListeners()[0]);
+                }
+            });
+        } else {
+            for (int i = 0; i < List.size(); i++) {
+                ChiTietGhe ctg = List.get(i);
+                Model_Ghe g = lModelGhe.get(i);
+                if (ctg.getIdVe() == 0) {
+                    g.addMouseListener(new Mouse(g, ctg));
+                }
+            };
+        }
+
+        Sodochongoi3.repaint();
+        Sodochongoi3.revalidate();
+    }
+
     public void SodoGhe() {
         List = listGheCV.stream().limit(96).collect(Collectors.toList());
         for (ChiTietGhe s : List) {
-            
+
             if (s.getIdVe() != 0) {
                 ghe = new Model_Ghe(Color.GRAY, s.getTenGhe());
             } else {
@@ -178,10 +189,10 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                 ghe = new Model_Ghe(cl, s.getTenGhe());
                 ghe.addMouseListener(new Mouse(ghe, s));
             }
-            
+
             Sodochongoi3.add(ghe);
             lModelGhe.add(ghe);
-            
+
         }
         if (listGheCV.size() > 96) {
             List2 = listGheCV.stream().skip(96).collect(Collectors.toList());
@@ -206,7 +217,7 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (e.getComponent().getBackground().equals(Color.YELLOW)) {
-                                            btnNext.setEnabled(false);
+                            btnNext.setEnabled(false);
 
                             if (Character.compare(s.getTenGhe().charAt(0), 'H') == 0) {
                                 e.getComponent().setBackground(Color.PINK);
@@ -217,17 +228,17 @@ public class Form_ChoNgoi extends javax.swing.JPanel implements Runnable {
                             }
                         } else {
                             e.getComponent().setBackground(Color.YELLOW);
-                                            btnNext.setEnabled(true);
+                            btnNext.setEnabled(true);
 
                         }
                     }
                 });
                 Sodochongoivip.add(ghe);
                 lModelGhe.add(ghe);
-                
+
             }
         }
-        
+
         Sodochongoivip.repaint();
         Sodochongoivip.revalidate();
         Sodochongoi3.repaint();
