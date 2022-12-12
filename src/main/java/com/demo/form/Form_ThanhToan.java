@@ -339,7 +339,7 @@ public class Form_ThanhToan extends javax.swing.JPanel {
         map.put("maHD", a);
         ConnectDB.inHoaDon(map);
         Hashtable mapT = new Hashtable();
-        mapT.put("idVe", daoVe.findMaxId());
+        mapT.put("maHD", a);
         ConnectDB.inTP(mapT);
         Main.mainF.removeAll();
         Main.mainF.add(new Form_Home());

@@ -3,13 +3,13 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="idVe" class="java.lang.Integer">
+	<parameter name="maHD" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select Topping.maTopping, Topping.tenTopping,ordertopping.soluongmua, topping.gia
-						from Topping join ordertopping on Topping.maTopping = ordertopping.maTopping
-where idve = $P{idVe}]]>
+		<![CDATA[select Topping.maTopping, Topping.tenTopping,chitiettopping.soluongmua, topping.gia
+						from Topping join chitiettopping on Topping.maTopping = chitiettopping.maTopping
+where maHD = $P{maHD}]]>
 	</queryString>
 	<field name="matopping" class="java.lang.String"/>
 	<field name="tentopping" class="java.lang.String"/>
@@ -37,14 +37,14 @@ where idve = $P{idVe}]]>
 			</staticText>
 			<textField>
 				<reportElement x="73" y="15" width="100" height="20" />
-				<textFieldExpression><![CDATA[$P{idVe}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{maHD}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="14" y="41" width="59" height="20"/>
+				<reportElement x="14" y="41" width="59" height="20" />
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Topping]]></text>
 			</staticText>

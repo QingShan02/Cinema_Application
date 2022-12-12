@@ -20,6 +20,7 @@ import com.raven.DAO.ConnectDB;
 import com.raven.DAO.ToppingDao;
 import com.raven.DAO.VeDao;
 import com.raven.main.Main;
+import com.raven.model.ChiTietTopping;
 import com.raven.model.Topping;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -219,11 +220,15 @@ public class Form_QLVeOnline extends javax.swing.JPanel implements Runnable, Thr
         int idve = (int) list.get(tblVe.getSelectedRow())[0];
         double gia = (double) list.get(tblVe.getSelectedRow())[5];
         daoHD.Insert(new HoaDon(a, idve, java.time.LocalDate.now() + "", gia));
+        listTP.forEach(s->{
+             new ToppingDao().InsertCT(new ChiTietTopping(a, s.getMaTopping(), s.getSoLuongMua()));
+        });
+
         Hashtable map = new Hashtable();
         map.put("maHD", a);
         ConnectDB.inHoaDon(map);
         Hashtable mapT = new Hashtable();
-        map.put("idVe", idve);
+        mapT.put("maHD", a);
         ConnectDB.inTP(mapT);
         FillToTable();
     }//GEN-LAST:event_btnXuatHoaDonActionPerformed

@@ -150,7 +150,6 @@ int n;
         String text = txtSearch.getText();
 
         listP.get(n).removeAll();
-        System.out.println("1");
         listPhim.forEach(s -> {
             if (s.getTenPhim().equalsIgnoreCase(text)) {
                 listP.get(n).add(new TablePhim(s, s.getStt_xc(), name));
