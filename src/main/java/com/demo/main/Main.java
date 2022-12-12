@@ -72,10 +72,10 @@ public class Main extends javax.swing.JFrame {
 //                    setForm(new );
 //                }
                 else if (index == 6) {
-                    setForm(new Setting());
+                    setForm(new Form_XacThuc());
                 }
                 else if (index == 7) {
-                    setForm(new Form_XacThuc());
+                   DangXuat();
                 } else if (index == 8) {
                     DangXuat();
                 }
